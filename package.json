@@ -1,0 +1,26 @@
+{
+	"name": "collisions",
+	"version": "0.0.1",
+	"description": "Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection",
+	"main": "src/collisions.js",
+	"scripts": {
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Sinova/Collisions.git"
+	},
+	"keywords": [
+		"Collision",
+		"SAT",
+		"Separating Axis Theorem",
+		"Separating",
+		"Axis",
+		"Theorem"
+	],
+	"author": "Samuel Hodge",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Sinova/Collisions/issues"
+	},
+	"homepage": "https://github.com/Sinova/Collisions#readme"
+}
