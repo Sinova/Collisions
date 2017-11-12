@@ -2,7 +2,7 @@
 	"name": "collisions",
 	"version": "0.0.1",
 	"description": "Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection",
-	"main": "src/collisions.js",
+	"main": "src/Collisions.js",
 	"scripts": {
 	},
 	"repository": {
