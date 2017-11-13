@@ -25,31 +25,18 @@ export default class Polygon {
 
 	setPoints(new_points) {
 		const points  = this._points;
-		const coords  = this._coords;
-		const edges   = this._edges;
-		const normals = this._normals;
 		const count   = new_points.length;
 
-		let sign = false;
+		points.length        =
+		this._coords.length  =
+		this._edges.length   =
+		this._normals.length = count * 2;
 
-		points.length  =
-		coords.length  =
-		edges.length   =
-		normals.length = count;
-
-		for(let i = 0; i < count; ++i) {
-			if(!points[i]) {
-				points[i]  = [0, 0];
-				coords[i]  = [0, 0];
-				edges[i]   = [0, 0];
-				normals[i] = [0, 0];
-			}
-
-			const point     = points[i];
+		for(let i = 0, ix = 0, iy = 1; i < count; ++i, ix += 2, iy += 2) {
 			const new_point = new_points[i];
 
-			point[0] = new_point[0];
-			point[1] = new_point[1];
+			points[ix] = new_point[0];
+			points[iy] = new_point[1];
 		}
 
 		this._dirty_coords = true;
@@ -68,33 +55,29 @@ export default class Polygon {
 		const angle  = this._angle;
 		const count  = points.length;
 
-		let min_x = null;
-		let max_x = null;
-		let min_y = null;
-		let max_y = null;
+		let min_x;
+		let max_x;
+		let min_y;
+		let max_y;
 
-		for(let i = 0; i < count; ++i) {
-			const point = points[i];
-			const coord = coords[i];
-			const raw_x = point[0];
-			const raw_y = point[1];
+		for(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {
+			let x = points[ix];
+			let y = points[iy];
 
 			if(angle) {
-				const cos = Math.cos(angle);
-				const sin = Math.sin(angle);
+				const cos   = Math.cos(angle);
+				const sin   = Math.sin(angle);
+				const tmp_x = x;
+				const tmp_y = y;
 
-				coord[0] = raw_x * cos - raw_y * sin;
-				coord[1] = raw_x * sin + raw_y * cos;
-			}
-			else {
-				coord[0] = raw_x;
-				coord[1] = raw_y;
+				x = tmp_x * cos - tmp_y * sin;
+				y = tmp_x * sin + tmp_y * cos;
 			}
 
-			const x = coord[0];
-			const y = coord[1];
+			coords[ix] = x;
+			coords[iy] = y;
 
-			if(i === 0) {
+			if(ix === 0) {
 				min_x = max_x = x;
 				min_y = max_y = y;
 			}
@@ -132,20 +115,16 @@ export default class Polygon {
 			this._calculateCoords();
 		}
 
-		for(let i = 0; i < count; ++i) {
-			const next   = i + 1;
-			const edge   = edges[i];
-			const normal = normals[i];
-			const a      = coords[i];
-			const b      = next < count ? coords[next] : coords[0];
-			const x      = b[0] - a[0];
-			const y      = b[1] - a[1];
-			const length = Math.sqrt(x * x + y * y);
+		for(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {
+			const next   = ix + 2 < count ? ix + 2 : 0;
+			const x      = coords[next] - coords[ix];
+			const y      = coords[next + 1] - coords[iy];
+			const length = x || y ? Math.sqrt(x * x + y * y) : 0;
 
-			edge[0]   = x;
-			edge[1]   = y;
-			normal[0] = length ? y / length : 0;
-			normal[1] = length ? -x / length : 0;
+			edges[ix]   = x;
+			edges[iy]   = y;
+			normals[ix] = length ? y / length : 0;
+			normals[iy] = length ? -x / length : 0;
 		}
 
 		this._dirty_axes = false;

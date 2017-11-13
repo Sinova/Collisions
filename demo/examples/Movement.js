@@ -90,18 +90,18 @@ export default class Movement {
 			}
 
 			// Keep the player in bounds
-			if(this.player.x - this.player._radius < 0) {
-				this.player.x = this.player._radius;
+			if(this.player.x < 0) {
+				this.player.x = 0;
 			}
-			else if(this.player.x + this.player._radius > 400) {
-				this.player.x = 400 - this.player._radius;
+			else if(this.player.x > 400) {
+				this.player.x = 400;
 			}
 
-			if(this.player.y - this.player._radius < 0) {
-				this.player.y = this.player._radius;
+			if(this.player.y < 0) {
+				this.player.y = 0;
 			}
-			else if(this.player.y + this.player._radius > 400) {
-				this.player.y = 400 - this.player._radius;
+			else if(this.player.y > 400) {
+				this.player.y = 400;
 			}
 		}
 

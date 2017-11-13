@@ -4,9 +4,9 @@ import Utils      from '../classes/Utils.js';
 const collision  = {};
 const tmp_vector = [0, 0];
 
-const count = 200
+const count = 1000
 const speed = 2;
-const size  = count / 10;
+const size  = 10;
 
 export default class Stress {
 	constructor() {
