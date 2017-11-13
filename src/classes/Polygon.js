@@ -1,20 +1,26 @@
 import Collisions from '../Collisions.js';
 
 export default class Polygon {
-	constructor(x = 0, y = 0, points = [], angle = 0) {
-		this.x             = x;
-		this.y             = y;
-		this._angle        = angle;
-		this._points       = new Float64Array(0);
-		this._coords       = new Float64Array(0);
-		this._edges        = new Float64Array(0);
-		this._normals      = new Float64Array(0);
-		this._min_x        = 0;
-		this._min_y        = 0;
-		this._max_x        = 0;
-		this._max_y        = 0;
-		this._dirty_coords = true;
-		this._dirty_axes   = true;
+	constructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1) {
+		this.x       = x;
+		this.y       = y;
+		this.angle   = angle;
+		this.scale_x = scale_x;
+		this.scale_y = scale_y;
+
+		this._angle         = angle;
+		this._scale_x       = scale_x;
+		this._scale_y       = scale_y;
+		this._min_x         = 0;
+		this._min_y         = 0;
+		this._max_x         = 0;
+		this._max_y         = 0;
+		this._points        = new Float64Array(0);
+		this._coords        = new Float64Array(0);
+		this._edges         = new Float64Array(0);
+		this._normals       = new Float64Array(0);
+		this._dirty_coords  = true;
+		this._dirty_normals = true;
 
 		this.setPoints(points);
 	}
@@ -41,20 +47,15 @@ export default class Polygon {
 		}
 
 		this._dirty_coords = true;
-		this._dirty_axes   = true;
-	}
-
-	setAngle(angle = 0) {
-		this._angle        = angle;
-		this._dirty_coords = true;
-		this._dirty_axes   = true;
 	}
 
 	_calculateCoords() {
-		const points = this._points;
-		const coords = this._coords;
-		const angle  = this._angle;
-		const count  = points.length;
+		const angle   = this.angle;
+		const scale_x = this.scale_x;
+		const scale_y = this.scale_y;
+		const points  = this._points;
+		const coords  = this._coords;
+		const count   = points.length;
 
 		let min_x;
 		let max_x;
@@ -62,8 +63,8 @@ export default class Polygon {
 		let max_y;
 
 		for(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {
-			let x = points[ix];
-			let y = points[iy];
+			let x = points[ix] * scale_x;
+			let y = points[iy] * scale_y;
 
 			if(angle) {
 				const cos   = Math.cos(angle);
@@ -99,22 +100,22 @@ export default class Polygon {
 			}
 		}
 
-		this._min_x        = min_x;
-		this._min_y        = min_y;
-		this._max_x        = max_x;
-		this._max_y        = max_y;
-		this._dirty_coords = false;
+		this._angle         = angle;
+		this._scale_x       = scale_x;
+		this._scale_y       = scale_y;
+		this._min_x         = min_x;
+		this._min_y         = min_y;
+		this._max_x         = max_x;
+		this._max_y         = max_y;
+		this._dirty_coords  = false;
+		this._dirty_normals = true;
 	}
 
-	_calculateAxes() {
+	_calculateNormals() {
 		const coords  = this._coords;
 		const edges   = this._edges;
 		const normals = this._normals;
 		const count   = coords.length;
-
-		if(this._dirty_coords) {
-			this._calculateCoords();
-		}
 
 		for(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {
 			const next   = ix + 2 < count ? ix + 2 : 0;
@@ -128,6 +129,6 @@ export default class Polygon {
 			normals[iy] = length ? -x / length : 0;
 		}
 
-		this._dirty_axes = false;
+		this._dirty_normals = false;
 	}
 }

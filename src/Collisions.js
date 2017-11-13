@@ -15,36 +15,44 @@ let project_x = 0;
 let project_y = 0;
 
 function collides(a, b, out, aabb = true) {
+	const a_polygon = a.radius === undefined;
+	const b_polygon = b.radius === undefined;
+
+	if(a_polygon && a._dirty_coords || a.angle !== a._angle || a.scale_x !== a._scale_x || a.scale_y !== a._scale_y) {
+		a._calculateCoords();
+	}
+
+	if(b_polygon && b._dirty_coords || b.angle !== b._angle || b.scale_x !== b._scale_x || b.scale_y !== b._scale_y) {
+		b._calculateCoords();
+	}
+
 	if(aabb && !aabbAABB(a, b)) {
 		return false;
 	}
 
-	const a_polygon = a.radius === undefined;
-	const b_polygon = b.radius === undefined;
+	if(a_polygon && a._dirty_normals) {
+		a._calculateNormals();
+	}
+
+	if(b_polygon && b._dirty_normals) {
+		b._calculateNormals();
+	}
 
 	return (
 		a_polygon && b_polygon ? polygonPolygon(a, b, out) :
-		a_polygon ? polygonCircle(a, b, out) :
-		b_polygon ? circlePolygon(a, b, out) :
+		a_polygon ? polygonCircle(a, b, out, false) :
+		b_polygon ? polygonCircle(b, a, out, true) :
 		circleCircle(a, b, out)
 	);
 }
 
 function aabbAABB(a, b) {
-	const a_radius  = a.radius;
-	const b_radius  = b.radius;
-	const a_polygon = a_radius === undefined;
-	const b_polygon = b_radius === undefined;
+	const a_polygon = a.radius === undefined;
+	const b_polygon = b.radius === undefined;
+	const a_radius  = a_polygon ? 0 : a.radius * a.scale;
+	const b_radius  = b_polygon ? 0 : b.radius * b.scale;
 	const x_diff    = b.x - a.x;
 	const y_diff    = b.y - a.y;
-
-	if(a_polygon && a._dirty_coords) {
-		a._calculateCoords();
-	}
-
-	if(b_polygon && b._dirty_coords) {
-		b._calculateCoords();
-	}
 
 	if(
 		(a_polygon ? a._min_x : -a_radius) > (b_polygon ? b._max_x : b_radius) + x_diff ||
@@ -74,20 +82,6 @@ function polygonPolygon(a, b, out) {
 		out.overlap_y = 0;
 	}
 
-	if(a._dirty_axes) {
-		a._calculateAxes();
-	}
-	else if(a._dirty_coords) {
-		a._calculateCoords();
-	}
-
-	if(b._dirty_axes) {
-		b._calculateAxes();
-	}
-	else if(b._dirty_coords) {
-		b._calculateCoords();
-	}
-
 	if(a_count > 2) {
 		for(let ix = 0, iy = 1; ix < a_count; ix += 2, iy += 2) {
 			if(separatingAxis(a, b, a_normals[ix], a_normals[iy], out)) {
@@ -107,7 +101,7 @@ function polygonPolygon(a, b, out) {
 	return true;
 }
 
-function polygonCircle(a, b, out) {
+function polygonCircle(a, b, out, reverse) {
 	const a_coords       = a._coords;
 	const a_edges        = a._edges;
 	const a_normals      = a._normals;
@@ -123,13 +117,6 @@ function polygonCircle(a, b, out) {
 	let overlap   = Number.MAX_VALUE;
 	let overlap_x = 0;
 	let overlap_y = 0;
-
-	if(a._dirty_axes) {
-		a._calculateAxes();
-	}
-	else if(a._dirty_coords) {
-		a._calculateCoords();
-	}
 
 	for(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {
 		const edge_x  = a_edges[ix];
@@ -209,33 +196,13 @@ function polygonCircle(a, b, out) {
 	}
 
 	if(out) {
-		out.a         = a;
-		out.b         = b;
-		out.a_in_b    = a_in_b;
-		out.b_in_a    = b_in_a;
+		out.a         = reverse ? b : a;
+		out.b         = reverse ? a : b;
+		out.a_in_b    = reverse ? b_in_a : a_in_b;
+		out.b_in_a    = reverse ? a_in_b : b_in_a;
 		out.overlap   = overlap;
-		out.overlap_x = overlap_x;
-		out.overlap_y = overlap_y;
-	}
-
-	return true;
-}
-
-function circlePolygon(circle, polygon, out) {
-	if(!polygonCircle(polygon, circle, out)) {
-		return false;
-	}
-
-	if(out) {
-		const a      = out.a;
-		const a_in_b = out.a_in_b;
-
-		out.a         = out.b;
-		out.b         = a;
-		out.a_in_b    = out.b_in_a;
-		out.b_in_a    = a_in_b;
-		out.overlap_x = -out.overlap_x;
-		out.overlap_y = -out.overlap_y;
+		out.overlap_x = reverse ? -overlap_x : overlap_x;
+		out.overlap_y = reverse ? -overlap_y : overlap_y;
 	}
 
 	return true;

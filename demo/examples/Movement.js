@@ -21,7 +21,10 @@ export default class Movement {
 				<b>W, A, S, D</b> - Move
 			</div>
 			<div>
-				<b>Q</b> - Change Shape
+				<b>Q, E</b> - Rotate
+			</div>
+			<div>
+				<b>R</b> - Change Shape
 			</div>
 		`;
 
@@ -29,7 +32,7 @@ export default class Movement {
 		this.createPlayer(200, 200);
 
 		document.addEventListener('keyup', (e) => {
-			if(e.key === 'q') {
+			if(e.key === 'r') {
 				this.createPlayer(this.player.x, this.player.y);
 			}
 		});
@@ -76,6 +79,14 @@ export default class Movement {
 
 		if(Utils.keyIsDown('s')) {
 			this.player.y += 2;
+		}
+
+		if(this.player.radius === undefined && Utils.keyIsDown('q')) {
+			this.player.angle -= 0.05;
+		}
+
+		if(this.player.radius === undefined && Utils.keyIsDown('e')) {
+			this.player.angle += 0.05;
 		}
 
 		for(const body of this.bodies) {

@@ -124,7 +124,7 @@ Collisions.collides(Object a, Object b[, Object out, Boolean aabb = true])
 ## Collisions.Polygon
 
 ```JavaScript
-new Collisions.Polygon(Number x, Number y, Array points [, Number angle])
+new Collisions.Polygon(Number x, Number y, Array points [, Number angle = 0, Number scale_x = 1, Number scale_y = 1])
 ```
 
 <table>
@@ -138,32 +138,44 @@ new Collisions.Polygon(Number x, Number y, Array points [, Number angle])
 		<th>Number</th>
 		<th>x</th>
 		<th></th>
-		<td>The starting X coordinate</td>
+		<td>The polygon's X coordinate</td>
 	</tr>
 	<tr>
 		<th>Number</th>
 		<th>y</th>
 		<th></th>
-		<td>The starting Y coordinate</td>
+		<td>The polygon's Y coordinate</td>
 	</tr>
 	<tr>
 		<th>Array</th>
 		<th>points</th>
 		<th></th>
-		<td>An array of coordinate pairs that make up the polygon. For example: <code>[[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]</code>. Points and Lines can be made by supplying only one or two coordinate pairs, respectively.</td>
+		<td>The polygon's coordinate pairs. Example: <code>[[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]</code>. Points and Lines can be made by supplying only one or two coordinate pairs, respectively.</td>
 	</tr>
 	<tr>
 		<th>Number</th>
 		<th>angle</th>
 		<th>0</th>
-		<td>The starting rotation of the polygon in radians</td>
+		<td>The polygon's rotation in radians</td>
+	</tr>
+	<tr>
+		<th>Number</th>
+		<th>scale_x</th>
+		<th>1</th>
+		<td>The polygon's scale along the X axis</td>
+	</tr>
+	<tr>
+		<th>Number</th>
+		<th>scale_y</th>
+		<th>1</th>
+		<td>The polygon's scale along the Y axis</td>
 	</tr>
 </table>
 
 ## Collisions.Circle
 
 ```JavaScript
-new Collisions.Circle(Number x, Number y, Number radius)
+new Collisions.Circle(Number x, Number y, Number radius [, Number scale = 1])
 ```
 
 <table>
@@ -177,19 +189,25 @@ new Collisions.Circle(Number x, Number y, Number radius)
 		<th>Number</th>
 		<th>x</th>
 		<th></th>
-		<td>The starting X coordinate</td>
+		<td>The circle's X coordinate</td>
 	</tr>
 	<tr>
 		<th>Number</th>
 		<th>y</th>
 		<th></th>
-		<td>The starting Y coordinate</td>
+		<td>The circle's Y coordinate</td>
 	</tr>
 	<tr>
 		<th>Number</th>
 		<th>radius</th>
 		<th></th>
-		<td>The radius</td>
+		<td>The circle's radius</td>
+	</tr>
+	<tr>
+		<th>Number</th>
+		<th>scale</th>
+		<th>1</th>
+		<td>The circle's scale</td>
 	</tr>
 </table>
 
