@@ -14,7 +14,7 @@ export default {
 let project_x = 0;
 let project_y = 0;
 
-function collides(a, b, out, aabb = true) {
+function collides(a, b, out = null, aabb = true) {
 	const a_polygon = a.radius === undefined;
 	const b_polygon = b.radius === undefined;
 
@@ -126,10 +126,10 @@ function polygonCircle(a, b, out, reverse) {
 		const dot     = edge_x * coord_x + edge_y * coord_y;
 		const region  = dot < 0 ? -1 : dot > edge_x * edge_x + edge_y * edge_y ? 1 : 0;
 
-		let found         = false;
-		let tmp_overlap   = 0;
-		let tmp_overlap_x = 0;
-		let tmp_overlap_y = 0;
+		let tmp_overlapping = false;
+		let tmp_overlap     = 0;
+		let tmp_overlap_x   = 0;
+		let tmp_overlap_y   = 0;
 
 		if(out && a_in_b && coord_x * coord_x + coord_y * coord_y > radius_squared) {
 			a_in_b = false;
@@ -141,14 +141,14 @@ function polygonCircle(a, b, out, reverse) {
 			const other_y  = other_x + 1;
 			const edge2_x  = a_edges[other_x];
 			const edge2_y  = a_edges[other_y];
-			const point2_x = difference_x - a_coords[other_x];
-			const point2_y = difference_y - a_coords[other_y];
-			const dot2     = edge2_x * point2_x + edge2_y * point2_y;
+			const coord2_x = difference_x - a_coords[other_x];
+			const coord2_y = difference_y - a_coords[other_y];
+			const dot2     = edge2_x * coord2_x + edge2_y * coord2_y;
 			const region2  = dot2 < 0 ? -1 : dot2 > edge2_x * edge2_x + edge2_y * edge2_y ? 1 : 0;
 
 			if(region2 === -region) {
-				const target_x       = left ? coord_x : point2_x;
-				const target_y       = left ? coord_y : point2_y;
+				const target_x       = left ? coord_x : coord2_x;
+				const target_y       = left ? coord_y : coord2_y;
 				const length_squared = target_x * target_x + target_y * target_y;
 
 				if(length_squared > radius_squared) {
@@ -158,11 +158,11 @@ function polygonCircle(a, b, out, reverse) {
 				if(out) {
 					const length = Math.sqrt(length_squared);
 
-					b_in_a        = false;
-					found = true;
-					tmp_overlap   = b_radius - length;
-					tmp_overlap_x = target_x / length;
-					tmp_overlap_y = target_y / length;
+					b_in_a          = false;
+					tmp_overlapping = true;
+					tmp_overlap     = b_radius - length;
+					tmp_overlap_x   = target_x / length;
+					tmp_overlap_y   = target_y / length;
 				}
 			}
 		}
@@ -177,10 +177,10 @@ function polygonCircle(a, b, out, reverse) {
 			}
 
 			if(out) {
-				found = true;
-				tmp_overlap   = b_radius - length;
-				tmp_overlap_x = normal_x;
-				tmp_overlap_y = normal_y;
+				tmp_overlapping = true;
+				tmp_overlap     = b_radius - length;
+				tmp_overlap_x   = normal_x;
+				tmp_overlap_y   = normal_y;
 
 				if(b_in_a && length >= 0 || tmp_overlap < b_radius2) {
 					b_in_a = false;
@@ -188,7 +188,7 @@ function polygonCircle(a, b, out, reverse) {
 			}
 		}
 
-		if(found && tmp_overlap < overlap) {
+		if(tmp_overlapping && tmp_overlap < overlap) {
 			overlap   = tmp_overlap;
 			overlap_x = tmp_overlap_x;
 			overlap_y = tmp_overlap_y;

@@ -53,7 +53,7 @@ if(player.collides(shape, out)) {
 ## Collisions.collides
 
 ```JavaScript
-Collisions.collides(Object a, Object b[, Object out, Boolean aabb = true])
+Collisions.collides(Object a, Object b[, Object out = null, Boolean aabb = true])
 ```
 
 <table>

@@ -25,10 +25,6 @@ export default class Polygon {
 		this.setPoints(points);
 	}
 
-	collides(target, out) {
-		return Collisions.collides(this, target, out);
-	}
-
 	setPoints(new_points) {
 		const count = new_points.length;
 

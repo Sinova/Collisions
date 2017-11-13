@@ -7,8 +7,4 @@ export default class Circle {
 		this.radius = radius;
 		this.scale  = scale;
 	}
-
-	collides(target, out) {
-		return Collisions.collides(this, target, out);
-	}
 }
