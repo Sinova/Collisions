@@ -2,20 +2,11 @@ export default {
 	keyIsDown,
 	keyPress,
 	random,
-	reflect,
 	render,
 }
 
 function random(min, max) {
 	return Math.floor(Math.random() * max) + min;
-}
-
-function reflect(vector, normal) {
-	const dot    = vector[0] * normal[0] + vector[1] * normal[1];
-	const length = normal[0] * normal[0] + normal[1] * normal[1];
-
-	vector[0] = 2 * dot * normal[0] - vector[0];
-	vector[1] = 2 * dot * normal[1] - vector[1];
 }
 
 function render(context, bodies, player) {

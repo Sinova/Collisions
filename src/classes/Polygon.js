@@ -5,10 +5,10 @@ export default class Polygon {
 		this.x             = x;
 		this.y             = y;
 		this._angle        = angle;
-		this._points       = [];
-		this._coords       = [];
-		this._edges        = [];
-		this._normals      = [];
+		this._points       = new Float64Array(0);
+		this._coords       = new Float64Array(0);
+		this._edges        = new Float64Array(0);
+		this._normals      = new Float64Array(0);
 		this._min_x        = 0;
 		this._min_y        = 0;
 		this._max_x        = 0;
@@ -24,13 +24,14 @@ export default class Polygon {
 	}
 
 	setPoints(new_points) {
-		const points  = this._points;
-		const count   = new_points.length;
+		const count = new_points.length;
 
-		points.length        =
-		this._coords.length  =
-		this._edges.length   =
-		this._normals.length = count * 2;
+		this._points  = new Float64Array(count * 2);
+		this._coords  = new Float64Array(count * 2);
+		this._edges   = new Float64Array(count * 2);
+		this._normals = new Float64Array(count * 2);
+
+		const points = this._points;
 
 		for(let i = 0, ix = 0, iy = 1; i < count; ++i, ix += 2, iy += 2) {
 			const new_point = new_points[i];

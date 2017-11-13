@@ -1,12 +1,13 @@
 import Collisions from '../../src/Collisions.js';
 import Utils      from '../classes/Utils.js';
 
-const collision  = {};
-const tmp_vector = [0, 0];
+const collision = {};
+const count     = 200
+const speed     = 2;
+const size      = 20;
 
-const count = 1000
-const speed = 2;
-const size  = 10;
+let frame     = 0;
+let fps_total = 0;
 
 export default class Stress {
 	constructor() {
@@ -19,13 +20,25 @@ export default class Stress {
 
 		this.canvas.width  = 800;
 		this.canvas.height = 600;
-		this.context.font  = '16px Arial';
-
-		this.element.appendChild(this.canvas);
+		this.context.font  = '24px Arial';
 
 		for(let i = 0; i < count; ++i) {
 			this.createShape();
 		}
+
+		this.element.innerHTML = `
+			<div>
+				<b>Total:</b> ${count}
+			</div>
+			<div>
+				<b>Polygons</b> - ${this.polygons.length}
+			</div>
+			<div>
+				<b>Circles</b> - ${this.circles.length}
+			</div>
+		`;
+
+		this.element.appendChild(this.canvas);
 	}
 
 	start() {
@@ -35,10 +48,10 @@ export default class Stress {
 
 		const self = this;
 
-		let time = performance.now();
+		let time = 0;
 
 		this.frame = requestAnimationFrame(function frame(current_time) {
-			self.update(Math.round(10000 / (current_time - time)) / 10);
+			self.update(1000 / (current_time - time));
 			self.frame = requestAnimationFrame(frame);
 
 			time = current_time;
@@ -46,11 +59,21 @@ export default class Stress {
 	}
 
 	update(fps) {
+		++frame;
+		fps_total += fps;
+
+		const average_fps = Math.round(fps_total / frame);
+
+		if(frame > 100) {
+			frame     = 1;
+			fps_total = average_fps;
+		}
+
 		for(let i = 0; i < this.bodies.length; ++i) {
 			const body = this.bodies[i];
 
-			body.x += body.direction[0] * speed;
-			body.y += body.direction[1] * speed;
+			body.x += body.direction_x * speed;
+			body.y += body.direction_y * speed;
 
 			for(let j = i + 1; j < this.bodies.length; ++j) {
 				const body2 = this.bodies[j];
@@ -59,31 +82,35 @@ export default class Stress {
 					body.x -= collision.overlap * collision.overlap_x;
 					body.y -= collision.overlap * collision.overlap_y;
 
-					tmp_vector[0] = collision.overlap_y;
-					tmp_vector[1] = -collision.overlap_x;
+					let dot = body.direction_x * collision.overlap_y + body.direction_y * -collision.overlap_x;
 
-					Utils.reflect(body.direction, tmp_vector);
-					Utils.reflect(body2.direction, tmp_vector);
+					body.direction_x = 2 * dot * collision.overlap_y - body.direction_x;
+					body.direction_y = 2 * dot * -collision.overlap_x - body.direction_y;
+
+					dot = body2.direction_x * collision.overlap_y + body2.direction_y * -collision.overlap_x;
+
+					body2.direction_x = 2 * dot * collision.overlap_y - body2.direction_x;
+					body2.direction_y = 2 * dot * -collision.overlap_x - body2.direction_y;
 				}
 			}
 
 			// Keep the shape in bounds
 			if(body.x < 0) {
-				body.x             = 0;
-				body.direction[0] *= -1;
+				body.x            = 0;
+				body.direction_x *= -1;
 			}
 			else if(body.x > 800) {
 				body.x             = 800;
-				body.direction[0] *= -1;
+				body.direction_x *= -1;
 			}
 
 			if(body.y < 0) {
-				body.y             = 0;
-				body.direction[1] *= -1;
+				body.y            = 0;
+				body.direction_y *= -1;
 			}
 			else if(body.y > 600) {
-				body.y             = 600;
-				body.direction[1] *= -1;
+				body.y            = 600;
+				body.direction_y *= -1;
 			}
 		}
 
@@ -97,7 +124,7 @@ export default class Stress {
 		Utils.render(this.context, this.bodies);
 
 		this.context.fillStyle = '#FC0';
-		this.context.fillText(fps, 10, 20);
+		this.context.fillText(average_fps, 10, 30);
 	}
 
 	createShape() {
@@ -123,7 +150,9 @@ export default class Stress {
 			this.polygons.push(body);
 		}
 
-		body.direction = [Math.cos(direction), Math.sin(direction)];
+		body.direction_x = Math.cos(direction);
+		body.direction_y = Math.sin(direction);
+
 		this.bodies.push(body);
 	}
 }
