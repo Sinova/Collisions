@@ -2,6 +2,11 @@
 
 **Collisions** is a JavaScript implementation of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) used to detect collisions between Polygons, Circles, Lines, and Points. One common use-case for SAT is in video games and physics simulations.
 
+Check out the demos:
+
+[Movement Demo](sinova.github.com/Collisions/demo)
+[Stress Test](sinova.github.com/Collisions/demo?stress)
+
 # Installation
 
 ```bash
