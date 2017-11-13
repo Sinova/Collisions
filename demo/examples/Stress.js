@@ -78,7 +78,7 @@ export default class Stress {
 			for(let j = i + 1; j < this.bodies.length; ++j) {
 				const body2 = this.bodies[j];
 
-				if(body.collides(body2, collision)) {
+				if(Collisions.collides(body, body2, collision)) {
 					body.x -= collision.overlap * collision.overlap_x;
 					body.y -= collision.overlap * collision.overlap_y;
 

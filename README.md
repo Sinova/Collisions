@@ -31,7 +31,7 @@ const player = new Collisions.Circle(30, 30, 10);
 const shape  = new Collisions.Polygon(40, 40, points);
 const out    = {};
 
-if(player.collides(shape, out)) {
+if(Collisions.collides(player, shape, out)) {
 	console.log(out);
 	/*
 	Output:
@@ -218,7 +218,7 @@ When the **out** parameter is supplied to **Collisions.collides**, three of the 
 These values can be used to "push" one object out of another using the minimum distance required. Effectively, subtracting this vector from an object's position will cause the objects to no longer collide. Here's a simple example:
 
 ```JavaScript
-if(player.collides(wall, out)) {
+if(Collisions.collides(player, wall, out)) {
 	player.x -= out.overlap * out.overlap_x;
 	player.y -= out.overlap * out.overlap_y;
 }

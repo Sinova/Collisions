@@ -95,7 +95,7 @@ export default class Movement {
 			}
 
 			// Negate any collisions
-			if(this.player.collides(body, collision)) {
+			if(Collisions.collides(this.player, body, collision)) {
 				this.player.x -= collision.overlap * collision.overlap_x;
 				this.player.y -= collision.overlap * collision.overlap_y;
 			}
