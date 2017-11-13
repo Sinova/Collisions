@@ -227,3 +227,7 @@ if(Collisions.collides(player, wall, out)) {
 # Limitations
 
 SAT assumes all tested polygons are convex. Handling concave shapes requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. Check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).
+
+# Acknowledgements
+
+This library is heavily based on [SAT.js](https://github.com/jriecken/sat-js), which was an invaluable guide to understanding the SAT algorithm and its implementation.
