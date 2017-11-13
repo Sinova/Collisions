@@ -1,10 +1,9 @@
 {
 	"name": "collisions",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection",
 	"main": "src/Collisions.js",
-	"scripts": {
-	},
+	"scripts": {},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Sinova/Collisions.git"
