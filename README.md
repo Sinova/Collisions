@@ -2,10 +2,11 @@
 
 **Collisions** is a JavaScript implementation of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) used to detect collisions between Polygons, Circles, Lines, and Points. One common use-case for SAT is in video games and physics simulations.
 
-Check out the demos:
+Demos:
 
-[Movement Demo](sinova.github.com/Collisions/demo)
-[Stress Test](sinova.github.com/Collisions/demo?stress)
+[Movement Demo](https://sinova.github.com/Collisions/demo)
+
+[Stress Test](https://sinova.github.com/Collisions/demo?stress)
 
 # Installation
 
@@ -141,7 +142,7 @@ new Collisions.Polygon(Number x, Number y, Array points [, Number angle])
 	</tr>
 	<tr>
 		<th>Number</th>
-		<th>x</th>
+		<th>y</th>
 		<th></th>
 		<td>The starting Y coordinate</td>
 	</tr>
@@ -180,7 +181,7 @@ new Collisions.Circle(Number x, Number y, Number radius)
 	</tr>
 	<tr>
 		<th>Number</th>
-		<th>x</th>
+		<th>y</th>
 		<th></th>
 		<td>The starting Y coordinate</td>
 	</tr>
@@ -194,7 +195,7 @@ new Collisions.Circle(Number x, Number y, Number radius)
 
 <h1 id="overlap">Overlap</h1>
 
-When the **out** parameter is supplied to Collisions.collides, three of the properties set on the object are **overlap**, **overlap_x**, and **overlap_y**. Together, these values describe how much and in what direction an object is overlapping another object. More specifically, **overlap_x** and **overlap_y** make up the direction vector and **overlap** is the magnitude of that vector.
+When the **out** parameter is supplied to **Collisions.collides**, three of the properties set on the object are **overlap**, **overlap\_x**, and **overlap\_y**. Together, these values describe how much and in what direction an object is overlapping another object. More specifically, **overlap\_x** and **overlap\_y** make up the direction vector and **overlap** is the magnitude of that vector.
 
 These values can be used to "push" one object out of another using the minimum distance required. Effectively, subtracting this vector from an object's position will cause the objects to no longer collide. Here's a simple example:
 
@@ -207,4 +208,4 @@ if(player.collides(wall, out)) {
 
 # Limitations
 
-SAT assumes all tested polygons are convex. Handling concave shapes requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually.
+SAT assumes all tested polygons are convex. Handling concave shapes requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. Check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).
