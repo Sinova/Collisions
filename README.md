@@ -69,7 +69,7 @@ if(player.collides(shape, out)) {
 Collisions.collides(Object a, Object b [, Object out = null, Boolean aabb = true])
 ```
 
-Returns two if the two supplied bodies are colliding
+Returns true if the two supplied bodies are colliding
 
 <table>
 	<tr>
