@@ -43,7 +43,10 @@ export default class Movement {
 			new Collisions.Polygon(350, 100, [[-30, -40], [60, -60], [50, 20], [20, 50], [-50, 50]], Utils.random(0, 360) * Math.PI / 180),
 			new Collisions.Polygon(40, 200, [[-20, -40], [30, -60], [70, 20], [20, 50], [-50, 30]], Utils.random(0, 360) * Math.PI / 180),
 			new Collisions.Polygon(100, 350, [[-20, -40], [30, -60], [70, 20], [20, 50], [-50, 30]], Utils.random(0, 360) * Math.PI / 180),
-			new Collisions.Polygon(300, 300, [[-20, -40], [30, -60], [70, 20], [20, 50], [-50, 30]], Utils.random(0, 360) * Math.PI / 180),
+			new Collisions.Polygon(300, 300, [[-20, -40], [60, 60]], Utils.random(0, 360) * Math.PI / 180),
+			new Collisions.Polygon(320, 320, [[0, 0]], Utils.random(0, 360) * Math.PI / 180),
+			new Collisions.Polygon(290, 280, [[0, 0]], Utils.random(0, 360) * Math.PI / 180),
+			new Collisions.Polygon(250, 250, [[0, 0]], Utils.random(0, 360) * Math.PI / 180),
 		);
 	}
 
@@ -122,6 +125,7 @@ export default class Movement {
 
 		// Render the bodies
 		this.context.fillStyle = '#FFFFFF';
+		this.context.strokeStyle = '#FFFFFF';
 
 		Utils.render(this.context, this.bodies);
 
