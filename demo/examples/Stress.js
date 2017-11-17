@@ -48,9 +48,11 @@ export default class Stress {
 
 		const self = this;
 
-		let time = 0;
+		let time = performance.now();
 
-		this.frame = requestAnimationFrame(function frame(current_time) {
+		this.frame = requestAnimationFrame(function frame() {
+			const current_time = performance.now();
+
 			self.update(1000 / (current_time - time));
 			self.frame = requestAnimationFrame(frame);
 
@@ -78,7 +80,7 @@ export default class Stress {
 			for(let j = i + 1; j < this.bodies.length; ++j) {
 				const body2 = this.bodies[j];
 
-				if(Collisions.collides(body, body2, collision)) {
+				if(body.collides(body2, collision)) {
 					body.x -= collision.overlap * collision.overlap_x;
 					body.y -= collision.overlap * collision.overlap_y;
 

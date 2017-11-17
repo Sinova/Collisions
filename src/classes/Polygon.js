@@ -1,7 +1,9 @@
-import Collisions from '../Collisions.js';
+import Body from './Body.js';
 
-export default class Polygon {
+export default class Polygon extends Body {
 	constructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1) {
+		super();
+
 		this.x       = x;
 		this.y       = y;
 		this.angle   = angle;
@@ -127,4 +129,4 @@ export default class Polygon {
 
 		this._dirty_normals = false;
 	}
-}
+};
