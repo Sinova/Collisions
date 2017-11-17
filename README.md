@@ -69,7 +69,7 @@ if(player.collides(shape, out)) {
 Collisions.collides(Object a, Object b [, Object out = null, Boolean aabb = true])
 ```
 
-Checks if two bodies are colliding. If an object is passed as the **out** parameter, properties describing the collision are set on it.
+Returns two if the two supplied bodies are colliding
 
 <table>
 	<tr>
@@ -112,7 +112,7 @@ Checks if two bodies are colliding. If an object is passed as the **out** parame
 new Collisions.Circle(Number x, Number y, Number radius [, Number scale = 1])
 ```
 
-Creates a new Circle body to be used for testing collisions
+Creates a new circle to be used for testing collisions
 
 <table>
 	<tr>
@@ -188,7 +188,7 @@ Returns true if the circle is colliding with the target
 new Collisions.Polygon(Number x, Number y, Array points [, Number angle = 0, Number scale_x = 1, Number scale_y = 1])
 ```
 
-Creates a new Polygon body to be used for testing collisions
+Creates a new polygon to be used for testing collisions
 
 <table>
 	<tr>
@@ -274,6 +274,8 @@ Returns true if the polygon is colliding with the target
 Polygon.prototype.setPoints(Array points)
 ```
 
+Sets new points for a polygon
+
 <table>
 	<tr>
 		<th>Type</th>
@@ -299,7 +301,9 @@ Points can be constructed by creating a polygon with only one coordinate pair
 
 # Collision Information
 
-All collision testing functions accept an **out** parameter. If an object is passed as the **out** parameter, properties will be set on the object describing the collision (if one occurs). The following properties are set:
+All collision testing functions accept an **out** parameter. If an object is passed as the **out** parameter, properties will be set on the object describing the collision (if one occurs).
+
+The following properties are set on the object:
 
 <table>
 	<tr>
@@ -307,42 +311,44 @@ All collision testing functions accept an **out** parameter. If an object is pas
 		<th>Name</th>
 		<th>Description</th>
 	</tr>
-	<td>
+	<tr>
 		<td>Object</td>
 		<td>a</td>
 		<td>The source body tested</td>
 	</tr>
-	<td>
+	<tr>
 		<td>Object</td>
 		<td>b</td>
 		<td>The targe body tested against</td>
 	</tr>
-	<td>
+	<tr>
 		<td>Boolean</td>
 		<td>a_in_b</td>
 		<td>True if A is completely contained within B</td>
 	</tr>
-	<td>
+	<tr>
 		<td>Boolean</td>
 		<td>b_in_a</td>
 		<td>True if B is completely contained within A</td>
 	</tr>
-	<td>
+	<tr>
 		<td>Number</td>
 		<td>overlap</td>
 		<td>The magnitude of the shortest axis of overlap (see <a href="#overlap">Overlap</a>)</td>
 	</tr>
-	<td>
+	<tr>
 		<td>Number</td>
 		<td>overlap_x</td>
 		<td>The X direction of the shortest axis of overlap</td>
 	</tr>
-	<td>
+	<tr>
 		<td>Number</td>
 		<td>overlap_y</td>
 		<td>The Y direction of the shortest axis of overlap</td>
 	</tr>
 </table>
+
+> **Note:** Some properties may be initialized to certain values even if a collision does not occur. Do not rely on the presence/absence of certain properties as an indicator of whether a collision was found. Use the return value of the collision testing function itself.
 
 # Overlap
 
@@ -351,7 +357,7 @@ When the **out** parameter is supplied to a collision testing function, three of
 These values can be used to "push" one object out of another using the minimum distance required. Effectively, subtracting this vector from an object's position will cause the objects to no longer collide. Here's a simple example:
 
 ```JavaScript
-if(Collisions.collides(player, wall, out)) {
+if(player.collides(wall, out)) {
 	player.x -= out.overlap * out.overlap_x;
 	player.y -= out.overlap * out.overlap_y;
 }
