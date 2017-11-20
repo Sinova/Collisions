@@ -38,7 +38,7 @@ function render(context, bodies, player) {
 				}
 
 				context.lineTo(x + coords[0], y + coords[1]);
-				context.fill();
+				context.stroke();
 			}
 		}
 		else {

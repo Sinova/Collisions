@@ -37,17 +37,59 @@ export default class Movement {
 			}
 		});
 
-		this.bodies.push(
-			new Collisions.Circle(60, 60, Utils.random(20, 40)),
-			new Collisions.Polygon(200, 80, [[-30, -40], [60, -60], [20, 40], [-40, 50]], Utils.random(0, 360) * Math.PI / 180),
-			new Collisions.Polygon(350, 100, [[-30, -40], [60, -60], [50, 20], [20, 50], [-50, 50]], Utils.random(0, 360) * Math.PI / 180),
-			new Collisions.Polygon(40, 200, [[-20, -40], [30, -60], [70, 20], [20, 50], [-50, 30]], Utils.random(0, 360) * Math.PI / 180),
-			new Collisions.Polygon(100, 350, [[-20, -40], [30, -60], [70, 20], [20, 50], [-50, 30]], Utils.random(0, 360) * Math.PI / 180),
-			new Collisions.Polygon(300, 300, [[-20, -40], [60, 60]], Utils.random(0, 360) * Math.PI / 180),
-			new Collisions.Polygon(320, 320, [[0, 0]], Utils.random(0, 360) * Math.PI / 180),
-			new Collisions.Polygon(290, 280, [[0, 0]], Utils.random(0, 360) * Math.PI / 180),
-			new Collisions.Polygon(250, 250, [[0, 0]], Utils.random(0, 360) * Math.PI / 180),
-		);
+		// this.bodies.push(
+		// 	new Collisions.Circle(60, 60, Utils.random(20, 40)),
+		// 	new Collisions.Polygon(200, 80, [[-30, -40], [60, -60], [20, 40], [-40, 50]], Utils.random(0, 360) * Math.PI / 180),
+		// 	new Collisions.Polygon(350, 100, [[-30, -40], [60, -60], [50, 20], [20, 50], [-50, 50]], Utils.random(0, 360) * Math.PI / 180),
+		// 	new Collisions.Polygon(40, 200, [[-20, -40], [30, -60], [70, 20], [20, 50], [-50, 30]], Utils.random(0, 360) * Math.PI / 180),
+		// 	new Collisions.Polygon(100, 350, [[-20, -40], [30, -60], [70, 20], [20, 50], [-50, 30]], Utils.random(0, 360) * Math.PI / 180),
+		// 	new Collisions.Polygon(300, 300, [[-20, -40], [60, 60]], Utils.random(0, 360) * Math.PI / 180),
+		// 	new Collisions.Polygon(320, 320, [[0, 0]], Utils.random(0, 360) * Math.PI / 180),
+		// 	new Collisions.Polygon(290, 280, [[0, 0]], Utils.random(0, 360) * Math.PI / 180),
+		// 	new Collisions.Polygon(250, 250, [[0, 0]], Utils.random(0, 360) * Math.PI / 180),
+		// );
+
+		/////////////////////////
+		const manager = new Collisions.Manager();
+
+		const shapes = [
+			new Collisions.Circle(100, 100, 10),
+			new Collisions.Circle(150, 130, 10),
+			new Collisions.Circle(100, 200, 10),
+			// new Collisions.Circle(10, 10, 10),
+			// new Collisions.Circle(10, 210, 10),
+			// new Collisions.Circle(0, 0, 10),
+			// new Collisions.Circle(200, 100, 10),
+			// new Collisions.Circle(200, 300, 10),
+		];
+
+		for(const shape of shapes) {
+			manager.add(shape);
+		}
+		console.log(manager._tree);
+
+		const bar = (node) => {
+			this.bodies.push(new Collisions.Polygon(0, 0, [
+				[node._min_x, node._min_y],
+				[node._max_x, node._min_y],
+				[node._max_x, node._max_y],
+				[node._min_x, node._max_y],
+			]));
+
+			if(node.left) {
+				bar(node.left);
+			}
+
+			if(node.right) {
+				bar(node.right);
+			}
+
+			if(node.body) {
+				this.bodies.push(node.body);
+			}
+		};
+		bar(manager._tree);
+		/////////////////////////
 	}
 
 	start() {
