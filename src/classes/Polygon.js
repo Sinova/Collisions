@@ -10,6 +10,7 @@ export default class Polygon extends Body {
 		this.scale_x = scale_x;
 		this.scale_y = scale_y;
 
+		this._polygon       = true;
 		this._angle         = angle;
 		this._scale_x       = scale_x;
 		this._scale_y       = scale_y;

@@ -1,7 +1,21 @@
 export default class Body {
+	constructor() {
+		this._bvh_branch = false;
+		this._bvh_parent = null;
+		this._bvh_sort   = 0;
+		this._bvh_min_x  = 0;
+		this._bvh_min_y  = 0;
+		this._bvh_max_x  = 0;
+		this._bvh_max_y  = 0;
+	}
+
+	collides(target, out = null, aabb = true) {
+		return Body.collides(this, target, out, aabb);
+	}
+
 	static collides(a, b, out = null, aabb = true) {
-		const a_polygon = a.radius === undefined;
-		const b_polygon = b.radius === undefined;
+		const a_polygon = a._polygon;
+		const b_polygon = b._polygon;
 
 		if(a_polygon && a._dirty_coords || a.angle !== a._angle || a.scale_x !== a._scale_x || a.scale_y !== a._scale_y) {
 			a._calculateCoords();
@@ -30,15 +44,11 @@ export default class Body {
 			circleCircle(a, b, out)
 		);
 	}
-
-	collides(target, out = null, aabb = true) {
-		return Body.collides(this, target, out, aabb);
-	}
 }
 
 function aabbAABB(a, b) {
-	const a_polygon = a.radius === undefined;
-	const b_polygon = b.radius === undefined;
+	const a_polygon = a._polygon;
+	const b_polygon = b._polygon;
 	const a_radius  = a_polygon ? 0 : a.radius * a.scale;
 	const b_radius  = b_polygon ? 0 : b.radius * b.scale;
 	const x_diff    = b.x - a.x;
@@ -95,7 +105,7 @@ function polygonCircle(a, b, out, reverse) {
 	const a_coords       = a._coords;
 	const a_edges        = a._edges;
 	const a_normals      = a._normals;
-	const b_radius       = b.radius;
+	const b_radius       = b.radius * b.scale;
 	const b_radius2      = b_radius * 2;
 	const difference_x   = b.x - a.x;
 	const difference_y   = b.y - a.y;
@@ -220,8 +230,8 @@ function polygonCircle(a, b, out, reverse) {
 }
 
 function circleCircle(a, b, out) {
-	const a_radius       = a.radius;
-	const b_radius       = b.radius;
+	const a_radius       = a.radius * a.scale;
+	const b_radius       = b.radius * b.scale;
 	const difference_x   = b.x - a.x;
 	const difference_y   = b.y - a.y;
 	const radius_sum     = a_radius + b_radius;

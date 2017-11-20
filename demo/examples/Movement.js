@@ -50,45 +50,51 @@ export default class Movement {
 		// );
 
 		/////////////////////////
-		const manager = new Collisions.Manager();
+		const bvh = new Collisions.BVH();
 
 		const shapes = [
 			new Collisions.Circle(100, 100, 10),
-			new Collisions.Circle(150, 130, 10),
 			new Collisions.Circle(100, 200, 10),
-			// new Collisions.Circle(10, 10, 10),
-			// new Collisions.Circle(10, 210, 10),
-			// new Collisions.Circle(0, 0, 10),
-			// new Collisions.Circle(200, 100, 10),
-			// new Collisions.Circle(200, 300, 10),
+			new Collisions.Circle(10, 10, 10),
+			new Collisions.Circle(150, 130, 10),
+			new Collisions.Circle(10, 210, 10),
+			new Collisions.Circle(0, 0, 10),
+			new Collisions.Circle(200, 100, 10),
+			new Collisions.Circle(200, 300, 10),
 		];
 
 		for(const shape of shapes) {
-			manager.add(shape);
+			bvh.insert(shape);
 		}
-		console.log(manager._tree);
+
+		// bvh.remove(shapes[0]);
+		// bvh.remove(shapes[6]);
+		// bvh.remove(shapes[7]);
+		bvh.update();
+
+		console.log(bvh._tree);
 
 		const bar = (node) => {
 			this.bodies.push(new Collisions.Polygon(0, 0, [
-				[node._min_x, node._min_y],
-				[node._max_x, node._min_y],
-				[node._max_x, node._max_y],
-				[node._min_x, node._max_y],
+				[node._bvh_min_x, node._bvh_min_y],
+				[node._bvh_max_x, node._bvh_min_y],
+				[node._bvh_max_x, node._bvh_max_y],
+				[node._bvh_min_x, node._bvh_max_y],
 			]));
 
-			if(node.left) {
-				bar(node.left);
+			if(node._bvh_left) {
+				bar(node._bvh_left);
 			}
 
-			if(node.right) {
-				bar(node.right);
+			if(node._bvh_right) {
+				bar(node._bvh_right);
 			}
 
-			if(node.body) {
-				this.bodies.push(node.body);
+			if(!node._bvh_branch) {
+				this.bodies.push(node);
 			}
 		};
-		bar(manager._tree);
+		bar(bvh._tree);
 		/////////////////////////
 	}
 
@@ -126,11 +132,11 @@ export default class Movement {
 			this.player.y += 2;
 		}
 
-		if(this.player.radius === undefined && Utils.keyIsDown('q')) {
+		if(this.player._polygon && Utils.keyIsDown('q')) {
 			this.player.angle -= 0.05;
 		}
 
-		if(this.player.radius === undefined && Utils.keyIsDown('e')) {
+		if(this.player._polygon && Utils.keyIsDown('e')) {
 			this.player.angle += 0.05;
 		}
 

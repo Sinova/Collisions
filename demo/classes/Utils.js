@@ -11,11 +11,9 @@ function random(min, max) {
 
 function render(context, bodies, player) {
 	for(const body of bodies) {
-		const radius = body.radius;
-
 		context.beginPath();
 
-		if(radius === undefined) {
+		if(body._polygon) {
 			const x      = body.x;
 			const y      = body.y;
 			const coords = body._coords;
@@ -42,8 +40,8 @@ function render(context, bodies, player) {
 			}
 		}
 		else {
-			context.moveTo(body.x + radius, body.y);
-			context.arc(body.x, body.y, radius, 0, Math.PI * 2);
+			context.moveTo(body.x + body.radius, body.y);
+			context.arc(body.x, body.y, body.radius, 0, Math.PI * 2);
 			context.fill();
 		}
 	}

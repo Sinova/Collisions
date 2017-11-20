@@ -122,6 +122,7 @@ export default class Stress {
 
 		// Render the bodies
 		this.context.fillStyle = '#FFFFFF';
+		this.context.strokeStyle = '#FFFFFF';
 
 		Utils.render(this.context, this.bodies);
 
