@@ -1,8 +1,4 @@
-export default {
-	collides,
-};
-
-function collides(a, b, out = null, aabb = true) {
+export default function SAT(a, b, out = null, aabb = true) {
 	const a_polygon = a._polygon;
 	const b_polygon = b._polygon;
 

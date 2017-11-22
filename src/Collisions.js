@@ -110,25 +110,10 @@ export default class Collisions {
 	}
 
 	collides(a, b, out = null) {
-		const aabb = this.padding !== 0;
-
-		let quick_check = false;
-
-		if(b._bvh_potential_cache) {
-			const collisions = b._bvh_potentials;
-
-			quick_check = collisions.length && collisions.includes(a);
-		}
-		else {
-			const collisions = a._bvh_potential_cache ? a._bvh_potentials : this.potentials(a);
-
-			quick_check = collisions.length && collisions.includes(b);
-		}
-
-		return quick_check && SAT.collides(a, b, out, aabb);
+		return SAT(a, b, out, this.padding !== 0);
 	}
 
-	potentials(node) {
+	*potentials(node) {
 		const collisions = node._bvh_potentials;
 
 		if(!node._bvh_potential_cache) {
@@ -155,7 +140,7 @@ export default class Collisions {
 					}
 
 					if(!current._bvh_branch) {
-						collisions.push(current);
+						yield current;
 					}
 				}
 
@@ -283,15 +268,14 @@ export default class Collisions {
 				// Branch
 				if(current._bvh_branch) {
 					const left_node        = current._bvh_left;
-					const left_min_x       = left_node._bvh_min_x;
 					const left_min_y       = left_node._bvh_min_y;
 					const left_max_x       = left_node._bvh_max_x;
 					const left_max_y       = left_node._bvh_max_y;
-					const left_new_min_x   = node_min_x < left_min_x ? node_min_x : left_min_x;
+					const left_new_min_x   = node_min_x < left_node._bvh_min_x ? node_min_x : left_node._bvh_min_x;
 					const left_new_min_y   = node_min_y < left_min_y ? node_min_y : left_min_y;
 					const left_new_max_x   = node_max_x > left_max_x ? node_max_x : left_max_x;
 					const left_new_max_y   = node_max_y > left_max_y ? node_max_y : left_max_y;
-					const left_volume      = (left_max_x - left_min_x) * (left_max_y - left_min_y);
+					const left_volume      = (left_max_x - left_node._bvh_min_x) * (left_max_y - left_min_y);
 					const left_new_volume  = (left_new_max_x - left_new_min_x) * (left_new_max_y - left_new_min_y);
 					const left_difference  = left_new_volume - left_volume;
 

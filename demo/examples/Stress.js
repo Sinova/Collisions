@@ -2,8 +2,8 @@ import Collisions from '../../src/Collisions.js';
 
 const collision = {};
 const width     = 1024;
-const height    = 1768;
-const count     = 2000
+const height    = 768;
+const count     = 1000
 const speed     = 1;
 const size      = 5;
 
@@ -71,9 +71,7 @@ export default class Stress {
 
 			const potentials = body.potentials();
 
-			for(let i = 0; i < potentials.length; ++i) {
-				const body2 = potentials[i];
-
+			for(const body2 of potentials) {
 				if(body.collides(body2, collision)) {
 					body.x -= collision.overlap * collision.overlap_x;
 					body.y -= collision.overlap * collision.overlap_y;
@@ -130,9 +128,9 @@ export default class Stress {
 		this.context.fillStyle   = '#AAAAAA';
 		this.context.strokeStyle = '#AAAAAA';
 
-		// this.context.beginPath();
-		// this.collisions.render(this.context);
-		// this.context.stroke();
+		this.context.beginPath();
+		this.collisions.render(this.context);
+		this.context.stroke();
 
 		// Render the FPS
 		this.context.fillStyle = '#FC0';
