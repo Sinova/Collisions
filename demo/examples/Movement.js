@@ -142,7 +142,7 @@ export default class Movement {
 	createPlayer(x, y) {
 		const size = 15;
 
-		let body = null;
+		let body;
 
 		if(this.player) {
 			this.collisions.remove(this.player);

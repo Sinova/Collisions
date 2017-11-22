@@ -1,7 +1,7 @@
 import Movement from './examples/Movement.js';
 import Stress from './examples/Stress.js';
 
-let example = null;
+let example;
 
 switch(window.location.search) {
 	case '?stress':

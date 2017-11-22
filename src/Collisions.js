@@ -2,9 +2,8 @@ import Circle  from './classes/Circle.js';
 import Polygon from './classes/Polygon.js';
 import SAT     from './classes/SAT.js';
 
-const sortNodes      = (a, b) => a.sort > b.sort ? -1 : 1;
-const traverse_stack = [];
-const branch_pool    = [];
+const sortNodes   = (a, b) => a.sort > b.sort ? -1 : 1;
+const branch_pool = [];
 
 export default class Collisions {
 	constructor(padding = 0) {
@@ -39,11 +38,80 @@ export default class Collisions {
 	}
 
 	update() {
-		this._updateBodies();
-		this._resizeNodes();
+		let nodes;
+		let count;
+
+		// Updated moved bodies
+		nodes = this._bodies;
+		count = nodes.length;
+
+		for(let i = 0; i < count; ++i) {
+			const node    = nodes[i];
+			const polygon = node._polygon;
+			const x       = node.x;
+			const y       = node.y;
+			const radius  = polygon ? 0 : node.radius * node.scale;
+			const min_x   = polygon ? node._min_x : x - radius;
+			const min_y   = polygon ? node._min_y : y - radius;
+			const max_x   = polygon ? node._max_x : x + radius;
+			const max_y   = polygon ? node._max_y : y + radius;
+
+			node._bvh_potential_cache = false;
+
+			if(
+				min_x < node._bvh_min_x ||
+				min_y < node._bvh_min_y ||
+				max_x > node._bvh_max_x ||
+				max_y > node._bvh_max_y
+			) {
+				this._remove(node, true);
+				this._insert(node, true);
+			}
+		}
+
+		// Resize nodes
+		nodes = this._dirty;
+		count = nodes.length;
+
+		nodes.sort(sortNodes);
+
+		for(let i = 0; i < count; ++i) {
+			let node = nodes[i];
+
+			while(node) {
+				const left_node  = node._bvh_left;
+				const left_min_x = left_node._bvh_min_x;
+				const left_min_y = left_node._bvh_min_y;
+				const left_max_x = left_node._bvh_max_x;
+				const left_max_y = left_node._bvh_max_y;
+
+				const right_node  = node._bvh_right;
+				const right_min_x = right_node._bvh_min_x;
+				const right_min_y = right_node._bvh_min_y;
+				const right_max_x = right_node._bvh_max_x;
+				const right_max_y = right_node._bvh_max_y;
+
+				node._bvh_dirty = false;
+				node._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;
+				node._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;
+				node._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;
+				node._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;
+
+				node = node._bvh_parent;
+
+				// If the parent is dirty, it should be coming up in the for() loop anyway, so bail out
+				if(node && node._bvh_dirty) {
+					break;
+				}
+			}
+		}
+
+		nodes.length = 0;
 	}
 
 	collides(a, b, out = null) {
+		const aabb = this.padding !== 0;
+
 		let quick_check = false;
 
 		if(b._bvh_potential_cache) {
@@ -57,49 +125,63 @@ export default class Collisions {
 			quick_check = collisions.length && collisions.includes(b);
 		}
 
-		return quick_check && SAT.collides(a, b, out, true);
+		return quick_check && SAT.collides(a, b, out, aabb);
 	}
 
 	potentials(node) {
 		const collisions = node._bvh_potentials;
 
 		if(!node._bvh_potential_cache) {
-			let current = this._tree;
+			const tree = this._tree;
+
+			let current = tree;
 
 			node._bvh_potential_cache = true;
 			collisions.length         = 0;
 
-			while(
-				current &&
-				node._bvh_min_x < current._bvh_max_x &&
-				node._bvh_min_y < current._bvh_max_y &&
-				node._bvh_max_x > current._bvh_min_x &&
-				node._bvh_max_y > current._bvh_min_y
-			) {
-				traverse_stack.push(current);
-				current = current._bvh_left;
-			}
+			while(current) {
+				if(!current._bvh_iterated) {
+					current._bvh_iterated = true;
 
-			while(traverse_stack.length) {
-				current = traverse_stack.pop();
-
-				if(current._bvh_branch) {
-					current = current._bvh_right;
-
-					while(
-						current &&
-						node._bvh_min_x < current._bvh_max_x &&
-						node._bvh_min_y < current._bvh_max_y &&
-						node._bvh_max_x > current._bvh_min_x &&
-						node._bvh_max_y > current._bvh_min_y
+					if(
+						current === node ||
+						current._bvh_max_x < node._bvh_min_x ||
+						current._bvh_max_y < node._bvh_min_y ||
+						current._bvh_min_x > node._bvh_max_x ||
+						current._bvh_min_y > node._bvh_max_y
 					) {
-						traverse_stack.push(current);
-						current = current._bvh_left;
+						current = current._bvh_parent;
+						continue;
+					}
+
+					if(!current._bvh_branch) {
+						collisions.push(current);
 					}
 				}
-				else if(current !== node) {
-					collisions.push(current);
+
+				const left_node = current._bvh_left;
+
+				if(left_node && !left_node._bvh_iterated) {
+					current = left_node;
+					continue;
 				}
+
+				const right_node = current._bvh_right;
+
+				if(right_node && !right_node._bvh_iterated) {
+					current = right_node;
+					continue;
+				}
+
+				if(left_node) {
+					left_node._bvh_iterated = false;
+				}
+
+				if(right_node) {
+					right_node._bvh_iterated = false;
+				}
+
+				current = current._bvh_parent;
 			}
 		}
 
@@ -110,32 +192,44 @@ export default class Collisions {
 		let current = this._tree;
 
 		while(current) {
-			traverse_stack.push(current);
-			current = current._bvh_left;
-		}
+			if(!current._bvh_iterated) {
+				current._bvh_iterated = true;
 
-		while(traverse_stack.length) {
-			current = traverse_stack.pop();
+				const min_x = current._bvh_min_x;
+				const min_y = current._bvh_min_y;
+				const max_x = current._bvh_max_x;
+				const max_y = current._bvh_max_y;
 
-			const min_x = current._bvh_min_x;
-			const min_y = current._bvh_min_y;
-			const max_x = current._bvh_max_x;
-			const max_y = current._bvh_max_y;
-
-			context.moveTo(min_x, min_y);
-			context.lineTo(max_x, min_y);
-			context.lineTo(max_x, max_y);
-			context.lineTo(min_x, max_y);
-			context.lineTo(min_x, min_y);
-
-			if(current._bvh_branch) {
-				current = current._bvh_right;
-
-				while(current) {
-					traverse_stack.push(current);
-					current = current._bvh_left;
-				}
+				context.moveTo(min_x, min_y);
+				context.lineTo(max_x, min_y);
+				context.lineTo(max_x, max_y);
+				context.lineTo(min_x, max_y);
+				context.lineTo(min_x, min_y);
 			}
+
+			const left_node = current._bvh_left;
+
+			if(left_node && !left_node._bvh_iterated) {
+				current = left_node;
+				continue;
+			}
+
+			const right_node = current._bvh_right;
+
+			if(right_node && !right_node._bvh_iterated) {
+				current = right_node;
+				continue;
+			}
+
+			if(left_node) {
+				left_node._bvh_iterated = false;
+			}
+
+			if(right_node) {
+				right_node._bvh_iterated = false;
+			}
+
+			current = current._bvh_parent;
 		}
 	}
 
@@ -313,75 +407,6 @@ export default class Collisions {
 
 		branch_pool.push(parent);
 	}
-
-	_updateBodies() {
-		const nodes = this._bodies;
-		const count = nodes.length;
-
-		for(let i = 0; i < count; ++i) {
-			const node    = nodes[i];
-			const polygon = node._polygon;
-			const x       = node.x;
-			const y       = node.y;
-			const radius  = polygon ? 0 : node.radius * node.scale;
-			const min_x   = polygon ? node._min_x : x - radius;
-			const min_y   = polygon ? node._min_y : y - radius;
-			const max_x   = polygon ? node._max_x : x + radius;
-			const max_y   = polygon ? node._max_y : y + radius;
-
-			node._bvh_potential_cache = false;
-
-			if(
-				min_x < node._bvh_min_x ||
-				min_y < node._bvh_min_y ||
-				max_x > node._bvh_max_x ||
-				max_y > node._bvh_max_y
-			) {
-				this._remove(node, true);
-				this._insert(node, true);
-			}
-		}
-	}
-
-	_resizeNodes() {
-		const nodes = this._dirty;
-		const count = nodes.length;
-
-		nodes.sort(sortNodes);
-
-		for(let i = 0; i < count; ++i) {
-			let node = nodes[i];
-
-			while(node) {
-				const left_node  = node._bvh_left;
-				const left_min_x = left_node._bvh_min_x;
-				const left_min_y = left_node._bvh_min_y;
-				const left_max_x = left_node._bvh_max_x;
-				const left_max_y = left_node._bvh_max_y;
-
-				const right_node  = node._bvh_right;
-				const right_min_x = right_node._bvh_min_x;
-				const right_min_y = right_node._bvh_min_y;
-				const right_max_x = right_node._bvh_max_x;
-				const right_max_y = right_node._bvh_max_y;
-
-				node._bvh_dirty = false;
-				node._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;
-				node._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;
-				node._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;
-				node._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;
-
-				node = node._bvh_parent;
-
-				// If the parent is nodes, it should be coming up anyway in the for() loop so bail out
-				if(node && node._bvh_dirty) {
-					break;
-				}
-			}
-		}
-
-		nodes.length = 0;
-	}
 };
 
 Collisions.Circle   = Circle;
@@ -394,15 +419,16 @@ function getBranch() {
 	}
 
 	return {
-		_bvh_parent : null,
-		_bvh_branch : true,
-		_bvh_dirty  : false,
-		_bvh_left   : null,
-		_bvh_right  : null,
-		_bvh_sort   : 0,
-		_bvh_min_x  : 0,
-		_bvh_min_y  : 0,
-		_bvh_max_x  : 0,
-		_bvh_max_y  : 0,
+		_bvh_parent   : null,
+		_bvh_branch   : true,
+		_bvh_dirty    : false,
+		_bvh_iterated : false,
+		_bvh_left     : null,
+		_bvh_right    : null,
+		_bvh_sort     : 0,
+		_bvh_min_x    : 0,
+		_bvh_min_y    : 0,
+		_bvh_max_x    : 0,
+		_bvh_max_y    : 0,
 	};
 }

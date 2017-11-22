@@ -2,8 +2,8 @@ import Collisions from '../../src/Collisions.js';
 
 const collision = {};
 const width     = 1024;
-const height    = 768;
-const count     = 1000
+const height    = 1768;
+const count     = 2000
 const speed     = 1;
 const size      = 5;
 
@@ -17,21 +17,21 @@ export default class Stress {
 		this.context    = this.canvas.getContext('2d');
 		this.collisions = new Collisions();
 		this.bodies     = [];
-		this.polygons   = [];
-		this.circles    = [];
+		this.polygons   = 0;
+		this.circles    = 0;
 
 		this.canvas.width  = width;
 		this.canvas.height = height;
 		this.context.font  = '24px Arial';
 
 		for(let i = 0; i < count; ++i) {
-			this.createShape();
+			this.createShape(!random(0, 49));
 		}
 
 		this.element.innerHTML = `
 			<div><b>Total:</b> ${count}</div>
-			<div><b>Polygons:</b> ${this.polygons.length}</div>
-			<div><b>Circles:</b> ${this.circles.length}</div>
+			<div><b>Polygons:</b> ${this.polygons}</div>
+			<div><b>Circles:</b> ${this.circles}</div>
 		`;
 
 		this.element.appendChild(this.canvas);
@@ -130,34 +130,38 @@ export default class Stress {
 		this.context.fillStyle   = '#AAAAAA';
 		this.context.strokeStyle = '#AAAAAA';
 
+		// this.context.beginPath();
 		// this.collisions.render(this.context);
+		// this.context.stroke();
 
 		// Render the FPS
 		this.context.fillStyle = '#FC0';
 		this.context.fillText(average_fps, 10, 30);
 	}
 
-	createShape() {
+	createShape(large) {
+		const min_size  = size * 0.75 * (large ? 3 : 1);
+		const max_size  = size * 1.25 * (large ? 5 : 1);
 		const x         = random(0, width);
 		const y         = random(0, height);
 		const direction = random(0, 360) * Math.PI / 180;
 
-		let body = null;
+		let body;
 
 		if(random(0, 2)) {
-			body = this.collisions.createCircle(x, y, random(3, size));
+			body = this.collisions.createCircle(x, y, random(min_size, max_size));
 
-			this.circles.push(body);
+			++this.circles;
 		}
 		else {
 			body = this.collisions.createPolygon(x, y, [
-				[-random(3, size), -random(3, size)],
-				[random(3, size), -random(3, size)],
-				[random(3, size), random(3, size)],
-				[-random(3, size), random(3, size)],
+				[-random(min_size, max_size), -random(min_size, max_size)],
+				[random(min_size, max_size), -random(min_size, max_size)],
+				[random(min_size, max_size), random(min_size, max_size)],
+				[-random(min_size, max_size), random(3, size)],
 			], random(0, 360) * Math.PI / 180);
 
-			this.polygons.push(body);
+			++this.polygons;
 		}
 
 		body.direction_x = Math.cos(direction);

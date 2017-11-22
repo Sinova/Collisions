@@ -5,7 +5,6 @@ export default class Body {
 		this._bvh_branch          = false;
 		this._bvh_potential_cache = false;
 		this._bvh_potentials      = [];
-		this._bvh_collisions      = [];
 		this._bvh_sort            = 0;
 		this._bvh_min_x           = 0;
 		this._bvh_min_y           = 0;
