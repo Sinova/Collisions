@@ -4,6 +4,7 @@ import SAT     from './classes/SAT.js';
 
 const sortNodes      = (a, b) => a.sort > b.sort ? -1 : 1;
 const traverse_stack = [];
+const branch_pool    = [];
 
 export default class Collisions {
 	constructor(padding = 0) {
@@ -237,19 +238,17 @@ export default class Collisions {
 					const parent_min_y = current._bvh_min_y;
 					const parent_max_x = current._bvh_max_x;
 					const parent_max_y = current._bvh_max_y;
+					const new_parent   = current._bvh_parent = node._bvh_parent = getBranch();
 
-					const new_parent = current._bvh_parent = node._bvh_parent = {
-						_bvh_parent : grandparent,
-						_bvh_branch : true,
-						_bvh_dirty  : false,
-						_bvh_left   : current,
-						_bvh_right  : node,
-						_bvh_sort   : sort++,
-						_bvh_min_x  : node_min_x < parent_min_x ? node_min_x : parent_min_x,
-						_bvh_min_y  : node_min_y < parent_min_y ? node_min_y : parent_min_y,
-						_bvh_max_x  : node_max_x > parent_max_x ? node_max_x : parent_max_x,
-						_bvh_max_y  : node_max_y > parent_max_y ? node_max_y : parent_max_y,
-					};
+					new_parent._bvh_parent = grandparent;
+					new_parent._bvh_dirty  = false;
+					new_parent._bvh_left   = current;
+					new_parent._bvh_right  = node;
+					new_parent._bvh_sort   = sort++;
+					new_parent._bvh_min_x  = node_min_x < parent_min_x ? node_min_x : parent_min_x;
+					new_parent._bvh_min_y  = node_min_y < parent_min_y ? node_min_y : parent_min_y;
+					new_parent._bvh_max_x  = node_max_x > parent_max_x ? node_max_x : parent_max_x;
+					new_parent._bvh_max_y  = node_max_y > parent_max_y ? node_max_y : parent_max_y;
 
 					current._bvh_sort = node._bvh_sort = sort;
 
@@ -311,6 +310,8 @@ export default class Collisions {
 		else {
 			this._tree = sibling;
 		}
+
+		branch_pool.push(parent);
 	}
 
 	_updateBodies() {
@@ -386,3 +387,22 @@ export default class Collisions {
 Collisions.Circle   = Circle;
 Collisions.Polygon  = Polygon;
 Collisions.SAT      = SAT;
+
+function getBranch() {
+	if(branch_pool.length) {
+		return branch_pool.pop();
+	}
+
+	return {
+		_bvh_parent : null,
+		_bvh_branch : true,
+		_bvh_dirty  : false,
+		_bvh_left   : null,
+		_bvh_right  : null,
+		_bvh_sort   : 0,
+		_bvh_min_x  : 0,
+		_bvh_min_y  : 0,
+		_bvh_max_x  : 0,
+		_bvh_max_y  : 0,
+	};
+}
