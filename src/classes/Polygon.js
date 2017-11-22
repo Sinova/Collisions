@@ -11,6 +11,8 @@ export default class Polygon extends Body {
 		this.scale_y = scale_y;
 
 		this._polygon       = true;
+		this._x             = x;
+		this._y             = y;
 		this._angle         = angle;
 		this._scale_x       = scale_x;
 		this._scale_y       = scale_y;
@@ -48,7 +50,42 @@ export default class Polygon extends Body {
 		this._dirty_coords = true;
 	}
 
+	render(context) {
+		if(
+			this._dirty_coords ||
+			this.x !== this._x ||
+			this.y !== this._y ||
+			this.angle !== this._angle ||
+			this.scale_x !== this._scale_x ||
+			this.scale_y !== this._scale_y
+		) {
+			this._calculateCoords();
+		}
+
+		const coords = this._coords;
+
+		if(coords.length === 2) {
+			context.moveTo(coords[0], coords[1]);
+			context.arc(coords[0], coords[1], 1, 0, Math.PI * 2);
+		}
+		else if(coords.length === 4) {
+			context.moveTo(coords[0], coords[1]);
+			context.lineTo(coords[2], coords[3]);
+		}
+		else {
+			context.moveTo(coords[0], coords[1]);
+
+			for(let i = 2; i < coords.length; i += 2) {
+				context.lineTo(coords[i], coords[i + 1]);
+			}
+
+			context.lineTo(coords[0], coords[1]);
+		}
+	}
+
 	_calculateCoords() {
+		const x       = this.x;
+		const y       = this.y;
 		const angle   = this.angle;
 		const scale_x = this.scale_x;
 		const scale_y = this.scale_y;
@@ -62,43 +99,48 @@ export default class Polygon extends Body {
 		let max_y;
 
 		for(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {
-			let x = points[ix] * scale_x;
-			let y = points[iy] * scale_y;
+			let coord_x = points[ix] * scale_x;
+			let coord_y = points[iy] * scale_y;
 
 			if(angle) {
 				const cos   = Math.cos(angle);
 				const sin   = Math.sin(angle);
-				const tmp_x = x;
-				const tmp_y = y;
+				const tmp_x = coord_x;
+				const tmp_y = coord_y;
 
-				x = tmp_x * cos - tmp_y * sin;
-				y = tmp_x * sin + tmp_y * cos;
+				coord_x = tmp_x * cos - tmp_y * sin;
+				coord_y = tmp_x * sin + tmp_y * cos;
 			}
 
-			coords[ix] = x;
-			coords[iy] = y;
+			coord_x += x;
+			coord_y += y;
+
+			coords[ix] = coord_x;
+			coords[iy] = coord_y;
 
 			if(ix === 0) {
-				min_x = max_x = x;
-				min_y = max_y = y;
+				min_x = max_x = coord_x;
+				min_y = max_y = coord_y;
 			}
 			else {
-				if(x < min_x) {
-					min_x = x;
+				if(coord_x < min_x) {
+					min_x = coord_x;
 				}
-				else if(x > max_x) {
-					max_x = x;
+				else if(coord_x > max_x) {
+					max_x = coord_x;
 				}
 
-				if(y < min_y) {
-					min_y = y;
+				if(coord_y < min_y) {
+					min_y = coord_y;
 				}
-				else if(y > max_y) {
-					max_y = y;
+				else if(coord_y > max_y) {
+					max_y = coord_y;
 				}
 			}
 		}
 
+		this._x             = x;
+		this._y             = y;
 		this._angle         = angle;
 		this._scale_x       = scale_x;
 		this._scale_y       = scale_y;

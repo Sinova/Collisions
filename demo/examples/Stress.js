@@ -1,25 +1,27 @@
 import Collisions from '../../src/Collisions.js';
-import Utils      from '../classes/Utils.js';
 
 const collision = {};
-const count     = 200
-const speed     = 2;
-const size      = 20;
+const width     = 1024;
+const height    = 768;
+const count     = 1000
+const speed     = 1;
+const size      = 5;
 
 let frame     = 0;
 let fps_total = 0;
 
 export default class Stress {
 	constructor() {
-		this.element  = document.createElement('div');
-		this.canvas   = document.createElement('canvas');
-		this.context  = this.canvas.getContext('2d');
-		this.bodies   = [];
-		this.polygons = [];
-		this.circles  = [];
+		this.element    = document.createElement('div');
+		this.canvas     = document.createElement('canvas');
+		this.context    = this.canvas.getContext('2d');
+		this.collisions = new Collisions();
+		this.bodies     = [];
+		this.polygons   = [];
+		this.circles    = [];
 
-		this.canvas.width  = 800;
-		this.canvas.height = 600;
+		this.canvas.width  = width;
+		this.canvas.height = height;
 		this.context.font  = '24px Arial';
 
 		for(let i = 0; i < count; ++i) {
@@ -27,24 +29,12 @@ export default class Stress {
 		}
 
 		this.element.innerHTML = `
-			<div>
-				<b>Total:</b> ${count}
-			</div>
-			<div>
-				<b>Polygons</b> - ${this.polygons.length}
-			</div>
-			<div>
-				<b>Circles</b> - ${this.circles.length}
-			</div>
+			<div><b>Total:</b> ${count}</div>
+			<div><b>Polygons:</b> ${this.polygons.length}</div>
+			<div><b>Circles:</b> ${this.circles.length}</div>
 		`;
 
 		this.element.appendChild(this.canvas);
-	}
-
-	start() {
-		if(this.frame) {
-			return;
-		}
 
 		const self = this;
 
@@ -61,6 +51,8 @@ export default class Stress {
 	}
 
 	update(fps) {
+		this.collisions.update();
+
 		++frame;
 		fps_total += fps;
 
@@ -77,8 +69,10 @@ export default class Stress {
 			body.x += body.direction_x * speed;
 			body.y += body.direction_y * speed;
 
-			for(let j = i + 1; j < this.bodies.length; ++j) {
-				const body2 = this.bodies[j];
+			const potentials = body.potentials();
+
+			for(let i = 0; i < potentials.length; ++i) {
+				const body2 = potentials[i];
 
 				if(body.collides(body2, collision)) {
 					body.x -= collision.overlap * collision.overlap_x;
@@ -101,8 +95,8 @@ export default class Stress {
 				body.x            = 0;
 				body.direction_x *= -1;
 			}
-			else if(body.x > 800) {
-				body.x             = 800;
+			else if(body.x > width) {
+				body.x             = width;
 				body.direction_x *= -1;
 			}
 
@@ -110,45 +104,58 @@ export default class Stress {
 				body.y            = 0;
 				body.direction_y *= -1;
 			}
-			else if(body.y > 600) {
-				body.y            = 600;
+			else if(body.y > height) {
+				body.y            = height;
 				body.direction_y *= -1;
 			}
 		}
 
 		// Clear the canvas
 		this.context.fillStyle = '#000000';
-		this.context.fillRect(0, 0, 800, 600);
+		this.context.fillRect(0, 0, width, height);
 
 		// Render the bodies
-		this.context.fillStyle = '#FFFFFF';
+		this.context.fillStyle   = '#FFFFFF';
 		this.context.strokeStyle = '#FFFFFF';
 
-		Utils.render(this.context, this.bodies);
+		this.context.beginPath();
 
+		for(const body of this.bodies) {
+			body.render(this.context);
+		}
+
+		this.context.stroke();
+
+		// Render the collision system
+		this.context.fillStyle   = '#AAAAAA';
+		this.context.strokeStyle = '#AAAAAA';
+
+		// this.collisions.render(this.context);
+
+		// Render the FPS
 		this.context.fillStyle = '#FC0';
 		this.context.fillText(average_fps, 10, 30);
 	}
 
 	createShape() {
-		const x         = Utils.random(0, 800);
-		const y         = Utils.random(0, 600);
-		const direction = Utils.random(0, 360) * Math.PI / 180;
+		const x         = random(0, width);
+		const y         = random(0, height);
+		const direction = random(0, 360) * Math.PI / 180;
 
 		let body = null;
 
-		if(Utils.random(0, 2)) {
-			body = new Collisions.Circle(x, y, Utils.random(3, size));
+		if(random(0, 2)) {
+			body = this.collisions.createCircle(x, y, random(3, size));
 
 			this.circles.push(body);
 		}
 		else {
-			body = new Collisions.Polygon(x, y, [
-				[-Utils.random(3, size), -Utils.random(3, size)],
-				[Utils.random(3, size), -Utils.random(3, size)],
-				[Utils.random(3, size), Utils.random(3, size)],
-				[-Utils.random(3, size), Utils.random(3, size)],
-			], Utils.random(0, 360) * Math.PI / 180);
+			body = this.collisions.createPolygon(x, y, [
+				[-random(3, size), -random(3, size)],
+				[random(3, size), -random(3, size)],
+				[random(3, size), random(3, size)],
+				[-random(3, size), random(3, size)],
+			], random(0, 360) * Math.PI / 180);
 
 			this.polygons.push(body);
 		}
@@ -158,4 +165,8 @@ export default class Stress {
 
 		this.bodies.push(body);
 	}
+}
+
+function random(min, max) {
+	return Math.floor(Math.random() * max) + min;
 }

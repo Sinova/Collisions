@@ -14,4 +14,3 @@ switch(window.location.search) {
 }
 
 document.body.appendChild(example.element);
-example.start();

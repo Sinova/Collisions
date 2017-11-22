@@ -11,4 +11,13 @@ export default class Circle extends Body {
 
 		this._polygon = false;
 	}
+
+	render(context) {
+		const x      = this.x;
+		const y      = this.y;
+		const radius = this.radius * this.scale;
+
+		context.moveTo(x + radius, y);
+		context.arc(x, y, radius, 0, Math.PI * 2);
+	}
 };
