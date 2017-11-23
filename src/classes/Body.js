@@ -3,17 +3,21 @@ import SAT from './SAT.js';
 export default class Body {
 	/**
 	 * Parent class for bodies used to detect collisions
+	 * @param {Number} padding The amount to pad the bounding volume when checking for potential collisions
 	 * @constructor
 	 */
-	constructor() {
-		this._bvh        = null;
-		this._bvh_parent = null;
-		this._bvh_branch = false;
-		this._bvh_sort   = 0;
-		this._bvh_min_x  = 0;
-		this._bvh_min_y  = 0;
-		this._bvh_max_x  = 0;
-		this._bvh_max_y  = 0;
+	constructor(padding = 0) {
+		this.padding = padding;
+
+		this._bvh         = null;
+		this._bvh_parent  = null;
+		this._bvh_branch  = false;
+		this._bvh_padding = padding;
+		this._bvh_sort    = 0;
+		this._bvh_min_x   = 0;
+		this._bvh_min_y   = 0;
+		this._bvh_max_x   = 0;
+		this._bvh_max_y   = 0;
 	}
 
 	/**

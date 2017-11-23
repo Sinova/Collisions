@@ -8,8 +8,8 @@ export default class Collisions {
 	 * Creates a collision system that tracks bodies to improve collision detection performance
 	 * @constructor
 	 */
-	constructor(padding = 0) {
-		const bvh = this._bvh = new BVH(padding);
+	constructor() {
+		const bvh = this._bvh = new BVH();
 	}
 
 	/**

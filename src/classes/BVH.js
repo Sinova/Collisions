@@ -3,13 +3,11 @@ const branch_pool = [];
 export default class BVH {
 	/**
 	 * Creates a Bounding Volume Hierarchy for finding potential collisions quickly
-	 * @param {Number} padding The amount of padding around objects to minimize the number of removals/insertions when a body moves
 	 */
-	constructor(padding = 0) {
-		this._padding = padding;
-		this._tree    = null;
-		this._bodies  = [];
-		this._dirty   = [];
+	constructor() {
+		this._tree   = null;
+		this._bodies = [];
+		this._dirty  = [];
 	}
 
 	/**
@@ -38,7 +36,7 @@ export default class BVH {
 			body._calculateCoords();
 		}
 
-		const padding    = this._padding;
+		const padding    = body._bvh_padding;
 		const radius     = polygon ? 0 : body.radius * body.scale;
 		const body_min_x = (polygon ? body._min_x : body_x - radius) - padding;
 		const body_min_y = (polygon ? body._min_y : body_y - radius) - padding;
@@ -192,28 +190,35 @@ export default class BVH {
 	update() {
 		let count;
 
-		// Updated moved bodies
+		// Update moved bodies
 		const bodies = this._bodies;
 
 		count = bodies.length;
 
 		for(let i = 0; i < count; ++i) {
-			const body    = bodies[i];
-			const polygon = body._polygon;
-			const x       = body.x;
-			const y       = body.y;
-			const radius  = polygon ? 0 : body.radius * body.scale;
-			const min_x   = polygon ? body._min_x : x - radius;
-			const min_y   = polygon ? body._min_y : y - radius;
-			const max_x   = polygon ? body._max_x : x + radius;
-			const max_y   = polygon ? body._max_y : y + radius;
+			const body = bodies[i];
 
-			if(
-				min_x < body._bvh_min_x ||
-				min_y < body._bvh_min_y ||
-				max_x > body._bvh_max_x ||
-				max_y > body._bvh_max_y
-			) {
+			let update = false;
+
+			if(!update && body.padding !== body._bvh_padding) {
+				body._bvh_padding = body.padding;
+				update = true;
+			}
+
+			if(!update) {
+				const polygon = body._polygon;
+				const x       = body.x;
+				const y       = body.y;
+				const radius  = polygon ? 0 : body.radius * body.scale;
+				const min_x   = polygon ? body._min_x : x - radius;
+				const min_y   = polygon ? body._min_y : y - radius;
+				const max_x   = polygon ? body._max_x : x + radius;
+				const max_y   = polygon ? body._max_y : y + radius;
+
+				update = min_x < body._bvh_min_x || min_y < body._bvh_min_y || max_x > body._bvh_max_x || max_y > body._bvh_max_y;
+			}
+
+			if(update) {
 				this.remove(body, true);
 				this.insert(body, true);
 			}

@@ -7,9 +7,10 @@ export default class Circle extends Body {
 	 * @param {Number} y The starting Y coordinate
 	 * @param {Number} radius The radius
 	 * @param {Number} scale The scale
+	 * @param {Number} padding The amount to pad the bounding volume when checking for potential collisions
 	 * @constructor
 	 */
-	constructor(x = 0, y = 0, radius = 0, scale = 1) {
+	constructor(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
 		super();
 
 		this.x       = x;

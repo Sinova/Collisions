@@ -1,4 +1,5 @@
-# Collisions
+Collisions
+===============================================================================
 
 **Collisions** is a JavaScript implementation of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) used to detect collisions between Polygons, Circles, Lines, and Points. One common use-case for SAT is in video games and physics simulations.
 
@@ -16,18 +17,21 @@
 * [Limitations](#limitations)
 * [Acknowledgements](#acknowledgements)
 
-# Installation
+Installation
+===============================================================================
 
 ```bash
 npm install collisions
 ```
 
-# Demos:
+Demos:
+===============================================================================
 
 * [Movement](https://sinova.github.com/Collisions/demo)
 * [Stress Test](https://sinova.github.com/Collisions/demo?stress)
 
-# Usage
+Usage
+===============================================================================
 
 ```JavaScript
 import Collisions from 'collisions';
@@ -40,30 +44,29 @@ const points = [
 	[-30, 20],
 ];
 
-const player = new Collisions.Circle(30, 30, 10);
-const shape  = new Collisions.Polygon(40, 40, points);
+const player = collisions.createCircle(30, 30, 10);
+const shape  = collisions.createPolygon(40, 40, points);
 const out    = {};
 
 if(player.collides(shape, out)) {
 	console.log(out);
-	/*
-	Output:
-	{
-		a         : player,
-		b         : shape,
-		a_in_b    : true,
-		b_in_a    : false,
-		overlap   : 24.795908857482157,
-		overlap_x : 0.9863939238321437,
-		overlap_y : 0.1643989873053573,
-	}
-	*/
+	// {
+	// 	a         : player,
+	// 	b         : shape,
+	// 	a_in_b    : true,
+	// 	b_in_a    : false,
+	// 	overlap   : 24.795908857482157,
+	// 	overlap_x : 0.9863939238321437,
+	// 	overlap_y : 0.1643989873053573,
+	// }
 }
 ```
 
-# API Documentation
+API Documentation
+===============================================================================
 
-## Collisions
+Collisions
+-------------------------------------------------------------------------------
 
 ```JavaScript
 Collisions.collides(Object a, Object b [, Object out = null, Boolean aabb = true])
@@ -106,7 +109,8 @@ Returns true if the two supplied bodies are colliding
 	</tr>
 </table>
 
-## Circle
+Circle
+-------------------------------------------------------------------------------
 
 ```JavaScript
 new Collisions.Circle(Number x, Number y, Number radius [, Number scale = 1])
@@ -182,7 +186,8 @@ Returns true if the circle is colliding with the target
 	</tr>
 </table>
 
-## Polygon
+Polygon
+-------------------------------------------------------------------------------
 
 ```JavaScript
 new Collisions.Polygon(Number x, Number y, Array points [, Number angle = 0, Number scale_x = 1, Number scale_y = 1])
@@ -291,15 +296,18 @@ Sets new points for a polygon
 	</tr>
 </table>
 
-## Line
+Line
+-------------------------------------------------------------------------------
 
 Lines can be constructed by creating a polygon with only two coordinate pairs
 
-## Point
+Point
+-------------------------------------------------------------------------------
 
 Points can be constructed by creating a polygon with only one coordinate pair
 
-# Collision Information
+Collision Information
+===============================================================================
 
 All collision testing functions accept an **out** parameter. If an object is passed as the **out** parameter, properties will be set on the object describing the collision (if one occurs).
 
@@ -350,7 +358,8 @@ The following properties are set on the object:
 
 > **Note:** Some properties may be initialized to certain values even if a collision does not occur. Do not rely on the presence/absence of certain properties as an indicator of whether a collision was found. Use the return value of the collision testing function itself.
 
-# Overlap
+Overlap
+===============================================================================
 
 When the **out** parameter is supplied to a collision testing function, three of the properties set on the object are **overlap**, **overlap\_x**, and **overlap\_y**. Together, these values describe how much and in what direction an object is overlapping another object. More specifically, **overlap\_x** and **overlap\_y** make up the direction vector and **overlap** is the magnitude of that vector.
 
@@ -363,10 +372,12 @@ if(player.collides(wall, out)) {
 }
 ```
 
-# Limitations
+Limitations
+===============================================================================
 
 SAT assumes all tested polygons are convex. Handling concave shapes requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. Check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).
 
-# Acknowledgements
+Acknowledgements
+===============================================================================
 
 This library is heavily based on [SAT.js](https://github.com/jriecken/sat-js), which was an invaluable guide to understanding the SAT algorithm and its implementation.

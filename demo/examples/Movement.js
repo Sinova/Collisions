@@ -68,7 +68,7 @@ export default class Movement {
 			self.frame = requestAnimationFrame(frame);
 		});
 
-		console.log(this.collisions._tree)
+		window.foo = this.player;
 	}
 
 	update() {
@@ -115,29 +115,11 @@ export default class Movement {
 		this.context.fillRect(0, 0, 800, 600);
 
 		// Render the bodies
+		this.context.fillStyle   = '#FFFFFF';
 		this.context.strokeStyle = '#FFFFFF';
 
 		this.context.beginPath();
-
-		for(const body of this.bodies) {
-			body.render(this.context);
-		}
-
-		this.context.stroke();
-
-		// Render the character
-		this.context.strokeStyle = '#FC0';
-
-		this.context.beginPath();
-		this.player.render(this.context);
-		this.context.stroke();
-
-		// Render the collision system
-		this.context.fillStyle   = '#AAAAAA';
-		this.context.strokeStyle = '#AAAAAA';
-
-		this.context.beginPath();
-		this.collisions.render(this.context);
+		this.collisions._bvh.render(this.context, true);
 		this.context.stroke();
 	}
 

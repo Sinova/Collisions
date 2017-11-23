@@ -9,10 +9,11 @@ export default class Polygon extends Body {
 	 * @param {Number} angle The starting rotation in radians
 	 * @param {Number} scale_x The starting scale along the X axis
 	 * @param {Number} scale_y The starting scale long the Y axis
+	 * @param {Number} padding The amount to pad the bounding volume when checking for potential collisions
 	 * @constructor
 	 */
-	constructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1) {
-		super();
+	constructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
+		super(padding);
 
 		this.x       = x;
 		this.y       = y;
