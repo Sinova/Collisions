@@ -1,38 +1,41 @@
+import SAT from './SAT.js';
+
 export default class Body {
+	/**
+	 * Parent class for bodies used to detect collisions
+	 * @constructor
+	 */
 	constructor() {
-		this._system              = null;
-		this._bvh_parent          = null;
-		this._bvh_branch          = false;
-		this._bvh_potential_cache = false;
-		this._bvh_potentials      = [];
-		this._bvh_sort            = 0;
-		this._bvh_min_x           = 0;
-		this._bvh_min_y           = 0;
-		this._bvh_max_x           = 0;
-		this._bvh_max_y           = 0;
+		this._bvh        = null;
+		this._bvh_parent = null;
+		this._bvh_branch = false;
+		this._bvh_sort   = 0;
+		this._bvh_min_x  = 0;
+		this._bvh_min_y  = 0;
+		this._bvh_max_x  = 0;
+		this._bvh_max_y  = 0;
 	}
 
-	collides(target, out = null) {
-		const system = this._system;
-
-		if(!system) {
-			throw new Error('Body does not belong to a collision system');
-		}
-
-		if(system !== target._system) {
-			throw new Error('Bodies do not belong to the same collision system');
-		}
-
-		return system.collides(this, target, out);
+	/**
+	 *
+	 * @param {Body} target The target body to test against
+	 * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
+	 * @param {Boolean} aabb Set to false to skip the AABB check (useful if you use your own potential collision heuristic)
+	 * @returns Boolean
+	 */
+	collides(target, out = null, aabb = true) {
+		return SAT(this, target, out, aabb);
 	}
 
+	/**
+	 * Returns a list of potential collisions
+	 * @returns Iterator
+	 */
 	potentials() {
-		const system = this._system;
-
-		if(!system) {
+		if(this._bvh === null) {
 			throw new Error('Body does not belong to a collision system');
 		}
 
-		return system.potentials(this);
+		return this._bvh.potentials(this);
 	}
 };

@@ -1,4 +1,4 @@
-import Collisions from '../../src/Collisions.js';
+import {Collisions, Circle, Polygon} from '../../src/Collisions.js';
 
 const collision = {};
 
@@ -6,10 +6,12 @@ let circle = true;
 
 export default class Movement {
 	constructor() {
+		const collisions = new Collisions();
+
 		this.element    = document.createElement('div');
 		this.canvas     = document.createElement('canvas');
 		this.context    = this.canvas.getContext('2d');
-		this.collisions = new Collisions();
+		this.collisions = collisions;
 		this.bodies     = [];
 
 		this.canvas.width  = 400;

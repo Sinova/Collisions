@@ -117,18 +117,6 @@ export default class Stress {
 		this.context.strokeStyle = '#FFFFFF';
 
 		this.context.beginPath();
-
-		for(const body of this.bodies) {
-			body.render(this.context);
-		}
-
-		this.context.stroke();
-
-		// Render the collision system
-		this.context.fillStyle   = '#AAAAAA';
-		this.context.strokeStyle = '#AAAAAA';
-
-		this.context.beginPath();
 		this.collisions.render(this.context);
 		this.context.stroke();
 

@@ -1,6 +1,16 @@
 import Body from './Body.js';
 
 export default class Polygon extends Body {
+	/**
+	 * Creates a polygon used to detect collisions
+	 * @param {Number} x The starting X coordinate
+	 * @param {Number} y The starting Y coordinate
+	 * @param {Array} points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 * @param {Number} angle The starting rotation in radians
+	 * @param {Number} scale_x The starting scale along the X axis
+	 * @param {Number} scale_y The starting scale long the Y axis
+	 * @constructor
+	 */
 	constructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1) {
 		super();
 
@@ -30,26 +40,10 @@ export default class Polygon extends Body {
 		this.setPoints(points);
 	}
 
-	setPoints(new_points) {
-		const count = new_points.length;
-
-		this._points  = new Float64Array(count * 2);
-		this._coords  = new Float64Array(count * 2);
-		this._edges   = new Float64Array(count * 2);
-		this._normals = new Float64Array(count * 2);
-
-		const points = this._points;
-
-		for(let i = 0, ix = 0, iy = 1; i < count; ++i, ix += 2, iy += 2) {
-			const new_point = new_points[i];
-
-			points[ix] = new_point[0];
-			points[iy] = new_point[1];
-		}
-
-		this._dirty_coords = true;
-	}
-
+	/**
+	 * Adds lines representing the polygon to a canvas context's current path
+	 * @param {CanvasRenderingContext2D} context The context to add the shape to
+	 */
 	render(context) {
 		if(
 			this._dirty_coords ||
@@ -83,6 +77,34 @@ export default class Polygon extends Body {
 		}
 	}
 
+	/**
+	 * Sets the points that make up the polygon
+	 * It's important to use this function when changing the polygon's shape to ensure internal data is also updated.
+	 * @param {Array} new_points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 */
+	setPoints(new_points) {
+		const count = new_points.length;
+
+		this._points  = new Float64Array(count * 2);
+		this._coords  = new Float64Array(count * 2);
+		this._edges   = new Float64Array(count * 2);
+		this._normals = new Float64Array(count * 2);
+
+		const points = this._points;
+
+		for(let i = 0, ix = 0, iy = 1; i < count; ++i, ix += 2, iy += 2) {
+			const new_point = new_points[i];
+
+			points[ix] = new_point[0];
+			points[iy] = new_point[1];
+		}
+
+		this._dirty_coords = true;
+	}
+
+	/**
+	 * Calculates and caches the polygon's world coordinates based on its points, angle, and scale
+	 */
 	_calculateCoords() {
 		const x       = this.x;
 		const y       = this.y;
@@ -152,6 +174,9 @@ export default class Polygon extends Body {
 		this._dirty_normals = true;
 	}
 
+	/**
+	 * Calculates the normals and edges of the polygon's sides
+	 */
 	_calculateNormals() {
 		const coords  = this._coords;
 		const edges   = this._edges;

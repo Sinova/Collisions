@@ -1,3 +1,22 @@
+/**
+ * Determines if two bodies are colliding
+ *
+ * If an object is passed as the "out" parameter, properties will be set on the object describing the collision (if one occurs).
+ * The following properties are set on the "out" object:
+ *     {Object}  a         The source body tested
+ *     {Object}  b         The target body tested against
+ *     {Boolean} a_in_b    True if A is completely contained within B
+ *     {Boolean} b_in_a    True if B is completely contained within A
+ *     {Number}  overlap   The magnitude of the shortest axis of overlap
+ *     {Number}  overlap_x The X direction of the shortest axis of overlap
+ *     {Number}  overlap_y The Y direction of the shortest axis of overlap
+ *
+ * @param {Body} a The source body to test
+ * @param {Body} b The target body to test against
+ * @param {Object} out An object on which to store information about the collision
+ * @param {Boolean} aabb Set to false to skip the AABB check (useful if you use your own collision heuristic)
+ * @returns Boolean
+ */
 export default function SAT(a, b, out = null, aabb = true) {
 	const a_polygon = a._polygon;
 	const b_polygon = b._polygon;
@@ -44,6 +63,11 @@ export default function SAT(a, b, out = null, aabb = true) {
 	);
 }
 
+/**
+ * Determines if two bodies' axis aligned bounding boxes are colliding
+ * @param {Body} a The source body to test
+ * @param {Body} b The target body to test against
+ */
 function aabbAABB(a, b) {
 	const a_polygon = a._polygon;
 	const a_x       = a_polygon ? 0 : a.x;
@@ -66,7 +90,14 @@ function aabbAABB(a, b) {
 	return a_min_x < b_max_x && a_min_y < b_max_y && a_max_x > b_min_x && a_max_y > b_min_y;
 }
 
-function polygonPolygon(a, b, out) {
+/**
+ * Determines if two polygons are colliding
+ * @param {Body} a The source polygon to test
+ * @param {Body} b The target polygon to test against
+ * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
+ * @returns Boolean
+ */
+function polygonPolygon(a, b, out = null) {
 	const a_normals = a._normals;
 	const b_normals = b._normals;
 	const a_count   = a._coords.length;
@@ -101,7 +132,15 @@ function polygonPolygon(a, b, out) {
 	return true;
 }
 
-function polygonCircle(a, b, out, reverse) {
+/**
+ * Determines if a polygon and a circle are colliding
+ * @param {Body} a The source polygon to test
+ * @param {Body} b The target circle to test against
+ * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
+ * @param {Boolean} reverse Set to true to reverse a and b in the out parameter when testing circle->polygon instead of polygon->circle
+ * @returns Boolean
+ */
+function polygonCircle(a, b, out = null, reverse = false) {
 	const a_coords       = a._coords;
 	const a_edges        = a._edges;
 	const a_normals      = a._normals;
@@ -229,7 +268,14 @@ function polygonCircle(a, b, out, reverse) {
 	return true;
 }
 
-function circleCircle(a, b, out) {
+/**
+ * Determines if two circles are colliding
+ * @param {Body} a The source circle to test
+ * @param {Body} b The target circle to test against
+ * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
+ * @returns Boolean
+ */
+function circleCircle(a, b, out = null) {
 	const a_radius       = a.radius * a.scale;
 	const b_radius       = b.radius * b.scale;
 	const difference_x   = b.x - a.x;
@@ -256,7 +302,16 @@ function circleCircle(a, b, out) {
 	return true;
 }
 
-function separatingAxis(a, b, x, y, out) {
+/**
+ * Determines if two polygons are separated by an axis
+ * @param {Body} a The source polygon to test
+ * @param {Body} b The target polygon to test against
+ * @param {Number} x The X direction of the axis
+ * @param {Number} y The Y direction of the axis
+ * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
+ * @returns Boolean
+ */
+function separatingAxis(a, b, x, y, out = null) {
 	const a_coords = a._coords;
 	const a_count  = a_coords.length;
 	const b_coords = b._coords;

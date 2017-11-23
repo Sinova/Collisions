@@ -95,7 +95,7 @@ Returns true if the two supplied bodies are colliding
 		<td>out</td>
 		<td>null</td>
 		<td>
-			An object on which to store information about the collision (see <a href="#collision-information">Collision Information</a>).
+			An object on which to store information about the collision (see SAT.collides for more information) (see <a href="#collision-information">Collision Information</a>).
 		</td>
 	</tr>
 	<tr>
@@ -171,7 +171,7 @@ Returns true if the circle is colliding with the target
 		<td>out</td>
 		<td>null</td>
 		<td>
-			An object on which to store information about the collision (see <a href="#collision-information">Collision Information</a>).
+			An object on which to store information about the collision (see SAT.collides for more information) (see <a href="#collision-information">Collision Information</a>).
 		</td>
 	</tr>
 	<tr>
@@ -259,7 +259,7 @@ Returns true if the polygon is colliding with the target
 		<td>out</td>
 		<td>null</td>
 		<td>
-			An object on which to store information about the collision (see <a href="#collision-information">Collision Information</a>).
+			An object on which to store information about the collision (see SAT.collides for more information) (see <a href="#collision-information">Collision Information</a>).
 		</td>
 	</tr>
 	<tr>
@@ -319,7 +319,7 @@ The following properties are set on the object:
 	<tr>
 		<td>Object</td>
 		<td>b</td>
-		<td>The targe body tested against</td>
+		<td>The target body tested against</td>
 	</tr>
 	<tr>
 		<td>Boolean</td>
