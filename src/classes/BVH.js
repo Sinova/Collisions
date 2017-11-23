@@ -1,6 +1,6 @@
 export default class BVH {
 	/**
-	 * Creates a Bounding Volume Hierarchy for finding potential collisions quickly
+	 * Creates a Bounding Volume Hierarchy used to find potential collisions quickly
 	 */
 	constructor() {
 		this._tree           = null;
