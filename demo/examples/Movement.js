@@ -83,6 +83,7 @@ export default class Movement {
 		this.clockwise        && polygon && (this.player.angle += 0.05);
 		this.counterclockwise && polygon && (this.player.angle -= 0.05);
 
+		const potentials = this.player.potentials();
 		for(const body of this.bodies) {
 			if(body === this.player) {
 				continue;

@@ -18,7 +18,7 @@ export default class Collisions {
 	 * @param {Number} y The starting Y coordinate
 	 * @param {Number} radius The radius
 	 * @param {Number} scale The scale
-	 * @returns Circle
+	 * @returns {Circle}
 	 */
 	createCircle(x = 0, y = 0, radius = 0, scale = 1) {
 		const body = new Circle(x, y, radius, scale);
@@ -30,11 +30,11 @@ export default class Collisions {
 	 * Creates a polygon used to detect collisions and inserts it into the collision system
 	 * @param {Number} x The starting X coordinate
 	 * @param {Number} y The starting Y coordinate
-	 * @param {Array} points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 * @param {...[Number, Number]} points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
 	 * @param {Number} angle The starting rotation in radians
 	 * @param {Number} scale_x The starting scale along the X axis
 	 * @param {Number} scale_y The starting scale long the Y axis
-	 * @returns Polygon
+	 * @returns {Polygon}
 	 */
 	createPolygon(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1) {
 		const body = new Polygon(x, y, points, angle, scale_x, scale_y);
@@ -77,7 +77,7 @@ export default class Collisions {
 	/**
 	 * Returns a list of potential collisions for a body
 	 * @param {Body} body The body to test for potential collisions against
-	 * @returns Iterator
+	 * @returns {Iterator<Body>}
 	 */
 	potentials(body) {
 		return this._bvh.potentials(body);
@@ -88,7 +88,7 @@ export default class Collisions {
 	 * @param {Body} target The target body to test against
 	 * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
 	 * @param {Boolean} aabb Set to false to skip the AABB check (useful if you use your own potential collision heuristic)
-	 * @returns Boolean
+	 * @returns {Boolean}
 	 */
 	collides(source, target, out = null, aabb = true) {
 		return SAT(source, target, out, aabb);

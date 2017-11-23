@@ -15,7 +15,7 @@
  * @param {Body} b The target body to test against
  * @param {Object} out An object on which to store information about the collision
  * @param {Boolean} aabb Set to false to skip the AABB check (useful if you use your own collision heuristic)
- * @returns Boolean
+ * @returns {Boolean}
  */
 export default function SAT(a, b, out = null, aabb = true) {
 	const a_polygon = a._polygon;
@@ -95,7 +95,7 @@ function aabbAABB(a, b) {
  * @param {Body} a The source polygon to test
  * @param {Body} b The target polygon to test against
  * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
- * @returns Boolean
+ * @returns {Boolean}
  */
 function polygonPolygon(a, b, out = null) {
 	const a_normals = a._normals;
@@ -138,7 +138,7 @@ function polygonPolygon(a, b, out = null) {
  * @param {Body} b The target circle to test against
  * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
  * @param {Boolean} reverse Set to true to reverse a and b in the out parameter when testing circle->polygon instead of polygon->circle
- * @returns Boolean
+ * @returns {Boolean}
  */
 function polygonCircle(a, b, out = null, reverse = false) {
 	const a_coords       = a._coords;
@@ -273,7 +273,7 @@ function polygonCircle(a, b, out = null, reverse = false) {
  * @param {Body} a The source circle to test
  * @param {Body} b The target circle to test against
  * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
- * @returns Boolean
+ * @returns {Boolean}
  */
 function circleCircle(a, b, out = null) {
 	const a_radius       = a.radius * a.scale;
@@ -309,7 +309,7 @@ function circleCircle(a, b, out = null) {
  * @param {Number} x The X direction of the axis
  * @param {Number} y The Y direction of the axis
  * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
- * @returns Boolean
+ * @returns {Boolean}
  */
 function separatingAxis(a, b, x, y, out = null) {
 	const a_coords = a._coords;

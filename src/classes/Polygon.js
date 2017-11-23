@@ -5,7 +5,7 @@ export default class Polygon extends Body {
 	 * Creates a polygon used to detect collisions
 	 * @param {Number} x The starting X coordinate
 	 * @param {Number} y The starting Y coordinate
-	 * @param {Array} points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 * @param {...[Number, Number]} points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
 	 * @param {Number} angle The starting rotation in radians
 	 * @param {Number} scale_x The starting scale along the X axis
 	 * @param {Number} scale_y The starting scale long the Y axis
@@ -81,7 +81,7 @@ export default class Polygon extends Body {
 	/**
 	 * Sets the points that make up the polygon
 	 * It's important to use this function when changing the polygon's shape to ensure internal data is also updated.
-	 * @param {Array} new_points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 * @param {...[Number, Number]} new_points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
 	 */
 	setPoints(new_points) {
 		const count = new_points.length;

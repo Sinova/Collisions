@@ -1,17 +1,15 @@
-const branch_pool = [];
-
 export default class BVH {
 	/**
 	 * Creates a Bounding Volume Hierarchy for finding potential collisions quickly
 	 */
 	constructor() {
-		this._tree   = null;
-		this._bodies = [];
-		this._dirty  = [];
+		this._tree           = null;
+		this._bodies         = [];
+		this._dirty_branches = [];
 	}
 
 	/**
-	 * Inserts a node into the BVH
+	 * Inserts a body into the BVH
 	 * @param {Body} body The body to insert
 	 * @param {Boolean} updating Set to true if the body already exists in the BVH
 	 */
@@ -58,23 +56,23 @@ export default class BVH {
 			while(true) {
 				// Branch
 				if(current._bvh_branch) {
-					const left_node        = current._bvh_left;
-					const left_min_y       = left_node._bvh_min_y;
-					const left_max_x       = left_node._bvh_max_x;
-					const left_max_y       = left_node._bvh_max_y;
-					const left_new_min_x   = body_min_x < left_node._bvh_min_x ? body_min_x : left_node._bvh_min_x;
-					const left_new_min_y   = body_min_y < left_min_y ? body_min_y : left_min_y;
-					const left_new_max_x   = body_max_x > left_max_x ? body_max_x : left_max_x;
-					const left_new_max_y   = body_max_y > left_max_y ? body_max_y : left_max_y;
-					const left_volume      = (left_max_x - left_node._bvh_min_x) * (left_max_y - left_min_y);
-					const left_new_volume  = (left_new_max_x - left_new_min_x) * (left_new_max_y - left_new_min_y);
-					const left_difference  = left_new_volume - left_volume;
+					const left            = current._bvh_left;
+					const left_min_y      = left._bvh_min_y;
+					const left_max_x      = left._bvh_max_x;
+					const left_max_y      = left._bvh_max_y;
+					const left_new_min_x  = body_min_x < left._bvh_min_x ? body_min_x : left._bvh_min_x;
+					const left_new_min_y  = body_min_y < left_min_y ? body_min_y : left_min_y;
+					const left_new_max_x  = body_max_x > left_max_x ? body_max_x : left_max_x;
+					const left_new_max_y  = body_max_y > left_max_y ? body_max_y : left_max_y;
+					const left_volume     = (left_max_x - left._bvh_min_x) * (left_max_y - left_min_y);
+					const left_new_volume = (left_new_max_x - left_new_min_x) * (left_new_max_y - left_new_min_y);
+					const left_difference = left_new_volume - left_volume;
 
-					const right_node       = current._bvh_right;
-					const right_min_x      = right_node._bvh_min_x;
-					const right_min_y      = right_node._bvh_min_y;
-					const right_max_x      = right_node._bvh_max_x;
-					const right_max_y      = right_node._bvh_max_y;
+					const right            = current._bvh_right;
+					const right_min_x      = right._bvh_min_x;
+					const right_min_y      = right._bvh_min_y;
+					const right_max_x      = right._bvh_max_x;
+					const right_max_y      = right._bvh_max_y;
 					const right_new_min_x  = body_min_x < right_min_x ? body_min_x : right_min_x;
 					const right_new_min_y  = body_min_y < right_min_y ? body_min_y : right_min_y;
 					const right_new_max_x  = body_max_x > right_max_x ? body_max_x : right_max_x;
@@ -90,15 +88,15 @@ export default class BVH {
 					current._bvh_max_y = left_new_max_y > right_new_max_y ? left_new_max_y : right_new_max_y;
 
 					// If we're in the middle of an "update" insertion,
-					// we've just resized this node so it's no longer dirty
+					// we've just resized this branch so it's no longer dirty
 					if(updating && current._bvh_dirty) {
-						const dirty = this._dirty;
+						const dirty_branches = this._dirty_branches;
 
 						current._bvh_dirty = false;
-						dirty.splice(dirty.indexOf(current), 1);
+						dirty_branches.splice(dirty_branches.indexOf(current), 1);
 					}
 
-					current = left_difference <= right_difference ? left_node : right_node;
+					current = left_difference <= right_difference ? left : right;
 				}
 				// Leaf
 				else {
@@ -107,7 +105,7 @@ export default class BVH {
 					const parent_min_y = current._bvh_min_y;
 					const parent_max_x = current._bvh_max_x;
 					const parent_max_y = current._bvh_max_y;
-					const new_parent   = current._bvh_parent = body._bvh_parent = getBranch();
+					const new_parent   = current._bvh_parent = body._bvh_parent = Branch.getBranch();
 
 					new_parent._bvh_parent = grandparent;
 					new_parent._bvh_dirty  = false;
@@ -118,8 +116,6 @@ export default class BVH {
 					new_parent._bvh_min_y  = body_min_y < parent_min_y ? body_min_y : parent_min_y;
 					new_parent._bvh_max_x  = body_max_x > parent_max_x ? body_max_x : parent_max_x;
 					new_parent._bvh_max_y  = body_max_y > parent_max_y ? body_max_y : parent_max_y;
-
-					current._bvh_sort = body._bvh_sort = sort;
 
 					if(!grandparent) {
 						this._tree = new_parent;
@@ -138,7 +134,7 @@ export default class BVH {
 	}
 
 	/**
-	 * Removes a node from the BVH
+	 * Removes a body from the BVH
 	 * @param {Body} body The body to remove
 	 * @param {Boolean} updating Set to true if this is a temporary removal just to update the body's position
 	 */
@@ -160,7 +156,10 @@ export default class BVH {
 		const sibling      = parent_left === body ? parent._bvh_right : parent_left;
 
 		sibling._bvh_parent = grandparent;
-		sibling._bvh_sort   = parent._bvh_sort;
+
+		if(sibling._bvh_branch) {
+			sibling._bvh_sort = parent._bvh_sort;
+		}
 
 		if(grandparent) {
 			if(grandparent._bvh_left === parent) {
@@ -173,19 +172,19 @@ export default class BVH {
 			if(!grandparent._bvh_dirty) {
 				grandparent._bvh_dirty = true;
 
-				this._dirty.push(grandparent);
+				this._dirty_branches.push(grandparent);
 			}
 		}
 		else {
 			this._tree = sibling;
 		}
 
-		branch_pool.push(parent);
+		Branch.pool.push(parent);
 	}
 
 	/**
 	 * Updates the BVH
-	 * Moved bodies are removed and inserted, and their parent nodes are resized
+	 * Moved bodies are removed and inserted, and their parent branches are resized
 	 */
 	update() {
 		let count;
@@ -224,51 +223,51 @@ export default class BVH {
 			}
 		}
 
-		// Resize nodes
-		const nodes = this._dirty;
+		// Resize dirty branches
+		const dirty_branches = this._dirty_branches;
 
-		count = nodes.length;
+		count = dirty_branches.length;
 
-		nodes.sort(sortNodes);
+		dirty_branches.sort(Branch.sortBranches);
 
 		for(let i = 0; i < count; ++i) {
-			let node = nodes[i];
+			let branch = dirty_branches[i];
 
-			while(node) {
-				const left_node  = node._bvh_left;
-				const left_min_x = left_node._bvh_min_x;
-				const left_min_y = left_node._bvh_min_y;
-				const left_max_x = left_node._bvh_max_x;
-				const left_max_y = left_node._bvh_max_y;
+			while(branch) {
+				const left       = branch._bvh_left;
+				const left_min_x = left._bvh_min_x;
+				const left_min_y = left._bvh_min_y;
+				const left_max_x = left._bvh_max_x;
+				const left_max_y = left._bvh_max_y;
 
-				const right_node  = node._bvh_right;
-				const right_min_x = right_node._bvh_min_x;
-				const right_min_y = right_node._bvh_min_y;
-				const right_max_x = right_node._bvh_max_x;
-				const right_max_y = right_node._bvh_max_y;
+				const right       = branch._bvh_right;
+				const right_min_x = right._bvh_min_x;
+				const right_min_y = right._bvh_min_y;
+				const right_max_x = right._bvh_max_x;
+				const right_max_y = right._bvh_max_y;
 
-				node._bvh_dirty = false;
-				node._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;
-				node._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;
-				node._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;
-				node._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;
+				branch._bvh_dirty = false;
+				branch._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;
+				branch._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;
+				branch._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;
+				branch._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;
 
-				node = node._bvh_parent;
+				branch = branch._bvh_parent;
 
 				// If the parent is dirty, it should be coming up in the for() loop anyway, so bail out
-				if(node && node._bvh_dirty) {
+				if(branch && branch._bvh_dirty) {
 					break;
 				}
 			}
 		}
 
-		nodes.length = 0;
+		dirty_branches.length = 0;
 	}
 
 	/**
 	 * Returns a list of potential collisions for a body
 	 * @param {Body} body The body to test for potential collisions against
-	 * @returns Iterator
+	 * @returns {Iterator<Body>}
 	 */
 	*potentials(body) {
 		const tree  = this._tree;
@@ -296,29 +295,30 @@ export default class BVH {
 
 				if(!current._bvh_branch) {
 					yield current;
+					current = current._bvh_parent;
 				}
 			}
 
-			const left_node = current._bvh_left;
+			const left = current._bvh_left;
 
-			if(left_node && !left_node._bvh_iterated) {
-				current = left_node;
+			if(left && !left._bvh_iterated) {
+				current = left;
 				continue;
 			}
 
-			const right_node = current._bvh_right;
+			const right = current._bvh_right;
 
-			if(right_node && !right_node._bvh_iterated) {
-				current = right_node;
+			if(right && !right._bvh_iterated) {
+				current = right;
 				continue;
 			}
 
-			if(left_node) {
-				left_node._bvh_iterated = false;
+			if(left) {
+				left._bvh_iterated = false;
 			}
 
-			if(right_node) {
-				right_node._bvh_iterated = false;
+			if(right) {
+				right._bvh_iterated = false;
 			}
 
 			current = current._bvh_parent;
@@ -355,28 +355,32 @@ export default class BVH {
 					context.lineTo(max_x, max_y);
 					context.lineTo(min_x, max_y);
 					context.lineTo(min_x, min_y);
+
+					if(!current._bvh_branch) {
+						current = current._bvh_parent;
+					}
 				}
 
-				const left_node = current._bvh_left;
+				const left = current._bvh_left;
 
-				if(left_node && !left_node._bvh_iterated) {
-					current = left_node;
+				if(left && !left._bvh_iterated) {
+					current = left;
 					continue;
 				}
 
-				const right_node = current._bvh_right;
+				const right = current._bvh_right;
 
-				if(right_node && !right_node._bvh_iterated) {
-					current = right_node;
+				if(right && !right._bvh_iterated) {
+					current = right;
 					continue;
 				}
 
-				if(left_node) {
-					left_node._bvh_iterated = false;
+				if(left) {
+					left._bvh_iterated = false;
 				}
 
-				if(right_node) {
-					right_node._bvh_iterated = false;
+				if(right) {
+					right._bvh_iterated = false;
 				}
 
 				current = current._bvh_parent;
@@ -385,36 +389,47 @@ export default class BVH {
 	}
 }
 
-/**
- * Sorts nodes by deepest first
- * @param {Object} a The first node
- * @param {Object} b The second node
- * @returns Number
- */
-function sortNodes(a, b) {
-	return a.sort > b.sort ? -1 : 1;
-}
-
-/**
- * Returns a branch from the branch pool or creates a new branch
- * @returns Object
- */
-function getBranch() {
-	if(branch_pool.length) {
-		return branch_pool.pop();
+class Branch {
+	/**
+	 * Creates a new branch to be inserted into a BVH
+	 */
+	constructor() {
+		this._bvh_parent   = null;
+		this._bvh_branch   = true;
+		this._bvh_iterated = false;
+		this._bvh_dirty    = false;
+		this._bvh_left     = null;
+		this._bvh_right    = null;
+		this._bvh_sort     = 0;
+		this._bvh_min_x    = 0;
+		this._bvh_min_y    = 0;
+		this._bvh_max_x    = 0;
+		this._bvh_max_y    = 0;
 	}
 
-	return {
-		_bvh_parent   : null,
-		_bvh_branch   : true,
-		_bvh_dirty    : false,
-		_bvh_iterated : false,
-		_bvh_left     : null,
-		_bvh_right    : null,
-		_bvh_sort     : 0,
-		_bvh_min_x    : 0,
-		_bvh_min_y    : 0,
-		_bvh_max_x    : 0,
-		_bvh_max_y    : 0,
-	};
+	/**
+	 * Returns a branch from the branch pool or creates a new branch
+	 * @returns {Object}
+	 */
+	static getBranch() {
+		const pool = Branch.pool;
+
+		if(pool.length) {
+			return pool.pop();
+		}
+
+		return new Branch();
+	}
+
+	/**
+	 * Sorts branches by deepest first
+	 * @param {Branch} a The first branch
+	 * @param {Branch} b The second branch
+	 * @returns {Number}
+	 */
+	static sortBranches(a, b) {
+		return a.sort > b.sort ? -1 : 1;
+	}
 }
+
+Branch.pool = [];

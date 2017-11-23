@@ -9,15 +9,15 @@ export default class Body {
 	constructor(padding = 0) {
 		this.padding = padding;
 
-		this._bvh         = null;
-		this._bvh_parent  = null;
-		this._bvh_branch  = false;
-		this._bvh_padding = padding;
-		this._bvh_sort    = 0;
-		this._bvh_min_x   = 0;
-		this._bvh_min_y   = 0;
-		this._bvh_max_x   = 0;
-		this._bvh_max_y   = 0;
+		this._bvh          = null;
+		this._bvh_parent   = null;
+		this._bvh_branch   = false;
+		this._bvh_iterated = false;
+		this._bvh_padding  = padding;
+		this._bvh_min_x    = 0;
+		this._bvh_min_y    = 0;
+		this._bvh_max_x    = 0;
+		this._bvh_max_y    = 0;
 	}
 
 	/**
@@ -25,7 +25,7 @@ export default class Body {
 	 * @param {Body} target The target body to test against
 	 * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
 	 * @param {Boolean} aabb Set to false to skip the AABB check (useful if you use your own potential collision heuristic)
-	 * @returns Boolean
+	 * @returns {Boolean}
 	 */
 	collides(target, out = null, aabb = true) {
 		return SAT(this, target, out, aabb);
@@ -33,7 +33,7 @@ export default class Body {
 
 	/**
 	 * Returns a list of potential collisions
-	 * @returns Iterator
+	 * @returns {Iterator<Body>}
 	 */
 	potentials() {
 		if(this._bvh === null) {
