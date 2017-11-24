@@ -1,6 +1,6 @@
-import {Collisions, Circle, Polygon} from '../../src/Collisions.js';
+import Collisions from '../../src/Collisions.js';
 
-const collision = {};
+const result = Collisions.createResult();
 
 let circle = true;
 
@@ -90,9 +90,9 @@ export default class Movement {
 			}
 
 			// Negate any collisions
-			if(this.player.collides(body, collision)) {
-				this.player.x -= collision.overlap * collision.overlap_x;
-				this.player.y -= collision.overlap * collision.overlap_y;
+			if(this.player.collides(body, result)) {
+				this.player.x -= result.overlap * result.overlap_x;
+				this.player.y -= result.overlap * result.overlap_y;
 			}
 
 			// Keep the player in bounds
@@ -120,7 +120,8 @@ export default class Movement {
 		this.context.strokeStyle = '#FFFFFF';
 
 		this.context.beginPath();
-		this.collisions._bvh.render(this.context, true);
+		this.collisions.renderBodies(this.context);
+		this.collisions.renderBVH(this.context);
 		this.context.stroke();
 	}
 

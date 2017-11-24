@@ -1,82 +1,124 @@
-import Circle  from './classes/Circle.js';
-import Polygon from './classes/Polygon.js';
-import BVH     from './classes/BVH.js';
-import SAT     from './classes/SAT.js';
+import BVH     from './modules/BVH.js';
+import Circle  from './modules/Circle.js';
+import Polygon from './modules/Polygon.js';
+import Result  from './modules/Result.js';
+import SAT     from './modules/SAT.js';
 
-export default class Collisions {
+/**
+ * A collision system used to track bodies to improve collision detection performance
+ * @class
+ */
+class Collisions {
 	/**
-	 * Creates a collision system that tracks bodies to improve collision detection performance
 	 * @constructor
 	 */
 	constructor() {
-		const bvh = this._bvh = new BVH();
+		/** @private */
+		this._bvh = new BVH();
 	}
 
 	/**
-	 * Creates a circle used to detect collisions and inserts it into the collision system
-	 * @param {Number} x The starting X coordinate
-	 * @param {Number} y The starting Y coordinate
-	 * @param {Number} radius The radius
-	 * @param {Number} scale The scale
+	 * Creates a {@link Circle} and inserts it into the collision system
+	 * @param {Number} [x = 0] The starting X coordinate
+	 * @param {Number} [y = 0] The starting Y coordinate
+	 * @param {Number} [radius = 0] The radius
+	 * @param {Number} [scale = 1] The scale
+	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 * @returns {Circle}
 	 */
-	createCircle(x = 0, y = 0, radius = 0, scale = 1) {
-		const body = new Circle(x, y, radius, scale);
+	createCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
+		const body = new Circle(x, y, radius, scale, padding);
 
-		return (this._bvh.insert(body), body);
+		this._bvh.insert(body);
+
+		return body;
 	}
 
 	/**
-	 * Creates a polygon used to detect collisions and inserts it into the collision system
-	 * @param {Number} x The starting X coordinate
-	 * @param {Number} y The starting Y coordinate
-	 * @param {...[Number, Number]} points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
-	 * @param {Number} angle The starting rotation in radians
-	 * @param {Number} scale_x The starting scale along the X axis
-	 * @param {Number} scale_y The starting scale long the Y axis
+	 * Creates a {@link Polygon} and inserts it into the collision system
+	 * @param {Number} [x = 0] The starting X coordinate
+	 * @param {Number} [y = 0] The starting Y coordinate
+	 * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 * @param {Number} [angle = 0] The starting rotation in radians
+	 * @param {Number} [scale_x = 1] The starting scale along the X axis
+	 * @param {Number} [scale_y = 1] The starting scale long the Y axis
+	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 * @returns {Polygon}
 	 */
-	createPolygon(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1) {
-		const body = new Polygon(x, y, points, angle, scale_x, scale_y);
+	createPolygon(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
+		const body = new Polygon(x, y, points, angle, scale_x, scale_y, padding);
 
-		return (this._bvh.insert(body), body);
+		this._bvh.insert(body);
+
+		return body;
 	}
 
 	/**
-	 * Inserts a body into the collision system
-	 * @param {Body} body
+	 * Creates a {@link Result} used to collect the detailed results of a collision test
 	 */
-	insert(body) {
-		return this._bvh.insert(body, false);
+	createResult() {
+		return new Result();
 	}
 
 	/**
-	 * Removes a body from the collision system
-	 * @param {Body} body
+	 * Creates a Result used to collect the detailed results of a collision test
 	 */
-	remove(body) {
-		return this._bvh.remove(body, false);
+	static createResult() {
+		return new Result();
 	}
 
 	/**
-	 * Updates the collision system
-	 * This should be called BEFORE any collisions are checked
+	 * Inserts bodies into the collision system
+	 * @param {Circle|Polygon} bodies
+	 */
+	insert(...bodies) {
+		for(const body of bodies) {
+			this._bvh.insert(body, false);
+		}
+
+		return this;
+	}
+
+	/**
+	 * Removes bodies from the collision system
+	 * @param {Circle|Polygon} bodies
+	 */
+	remove(...bodies) {
+		for(const body of bodies) {
+			this._bvh.remove(body, false);
+		}
+
+		return this;
+	}
+
+	/**
+	 * Updates the collision system. This should be called before any collisions are tested.
 	 */
 	update() {
-		return this._bvh.update();
+		this._bvh.update();
+
+		return this;
 	}
 
 	/**
-	 * Adds lines and arcs representing the bodies within the BVH to a canvas context's current path
+	 * Adds lines and arcs representing the bodies within the BVH to a CanvasRenderingContext2D's current path
 	 * @param {CanvasRenderingContext2D} context The context to add lines and arcs to
 	 */
-	render(context) {
-		return this._bvh.render(context, false);
+	renderBodies(context) {
+		return this._bvh.renderBodies(context);
+	}
+
+	/**
+	 * Adds lines representing the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.
+	 * @param {CanvasRenderingContext2D} context The context to add lines and arcs to
+	 */
+	renderBVH(context) {
+		return this._bvh.render(context);
 	}
 
 	/**
 	 * Returns a list of potential collisions for a body
-	 * @param {Body} body The body to test for potential collisions against
+	 * @param {Circle|Polygon} body The body to test for potential collisions against
 	 * @returns {Iterator<Body>}
 	 */
 	potentials(body) {
@@ -84,20 +126,21 @@ export default class Collisions {
 	}
 
 	/**
-	 *
-	 * @param {Body} target The target body to test against
-	 * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
-	 * @param {Boolean} aabb Set to false to skip the AABB check (useful if you use your own potential collision heuristic)
+	 * Determines if two bodies are colliding
+	 * @param {Circle|Polygon} target The target body to test against
+	 * @param {Result} [result = null] A Result object on which to store information about the collision
+	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 * @returns {Boolean}
 	 */
-	collides(source, target, out = null, aabb = true) {
-		return SAT(source, target, out, aabb);
+	collides(source, target, result = null, aabb = true) {
+		return SAT(source, target, result, aabb);
 	}
 };
 
 export {
+	Collisions as default,
 	Collisions,
 	Circle,
 	Polygon,
-	SAT,
-};
+	Result,
+}

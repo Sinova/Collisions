@@ -1,21 +1,7 @@
 Collisions
 ===============================================================================
 
-**Collisions** is a JavaScript implementation of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) used to detect collisions between Polygons, Circles, Lines, and Points. One common use-case for SAT is in video games and physics simulations.
-
-* [Installation](#installation)
-* [Demos](#demos)
-* [Usage](#usage)
-* [API Documentation](#api-documentation)
-	* [Collisions](#collisions-1)
-	* [Circle](#circle)
-	* [Polygon](#polygon)
-	* [Line](#line)
-	* [Point](#point)
-* [Collision Information](#collision-information)
-* [Overlap](#overlap)
-* [Limitations](#limitations)
-* [Acknowledgements](#acknowledgements)
+**Collisions** is a JavaScript library used to quickly and accurately detect collisions between Polygons, Circles, Lines, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching with the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.
 
 Installation
 ===============================================================================
@@ -24,7 +10,12 @@ Installation
 npm install collisions
 ```
 
-Demos:
+Documentation
+===============================================================================
+
+[Click here](https://sinova.github.com/Collisions/docs/) to view the documentation (this README is also there).
+
+Demos
 ===============================================================================
 
 * [Movement](https://sinova.github.com/Collisions/demo)
@@ -36,348 +27,106 @@ Usage
 ```JavaScript
 import Collisions from 'collisions';
 
-const points = [
-	[-20, -40],
-	[-10, -70],
-	[30, -40],
-	[20, 30],
-	[-30, 20],
-];
+// Create the collision system
+const system = new Collisions();
 
-const player = collisions.createCircle(30, 30, 10);
-const shape  = collisions.createPolygon(40, 40, points);
-const out    = {};
+// Create a Result object for collecting information about the collisions
+const result = system.createResult();
 
-if(player.collides(shape, out)) {
-	console.log(out);
-	// {
-	// 	a         : player,
-	// 	b         : shape,
-	// 	a_in_b    : true,
-	// 	b_in_a    : false,
-	// 	overlap   : 24.795908857482157,
-	// 	overlap_x : 0.9863939238321437,
-	// 	overlap_y : 0.1643989873053573,
-	// }
+// Add the player (represented by a Circle)
+const player = system.createCircle(0, 0, 10);
+
+// Create some walls (represented by Polygons)
+const wall1 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);
+const wall2 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);
+const wall3 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);
+
+// Get any potential collisions (this quickly rules out walls that have no chance of colliding with the player)
+const potentials = player.potentials();
+
+// Loop through the potential collisions
+for(const wall of potentials) {
+	// Test if the player collides with the wall
+	if(player.collides(wall, result)) {
+		// Push the player out of the wall
+		player.x -= result.overlap * result.overlap_x;
+		player.y -= result.overlap * result.overlap_y;
+	}
 }
 ```
 
-API Documentation
+Getting Started
 ===============================================================================
 
-Collisions
--------------------------------------------------------------------------------
+**Collisions** provides functions to perform both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, all bodies need to be tracked within a collision system.
+
+To create a collision system, simply instantiate the Collisions class:
 
 ```JavaScript
-Collisions.collides(Object a, Object b [, Object out = null, Boolean aabb = true])
+import Collisions from 'collisions';
+
+const system = new Collisions();
 ```
 
-Returns true if the two supplied bodies are colliding
-
-<table>
-	<tr>
-		<th>Type</th>
-		<th>Name</th>
-		<th>Default</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>Object</td>
-		<td>a</td>
-		<td></td>
-		<td>The source body to test</td>
-	</tr>
-	<tr>
-		<td>Object</td>
-		<td>b</td>
-		<td></td>
-		<td>The target body to test against</td>
-	</tr>
-	<tr>
-		<td>Object</td>
-		<td>out</td>
-		<td>null</td>
-		<td>
-			An object on which to store information about the collision (see SAT.collides for more information) (see <a href="#collision-information">Collision Information</a>).
-		</td>
-	</tr>
-	<tr>
-		<td>Boolean</td>
-		<td>aabb</td>
-		<td>true</td>
-		<td>Set to false to skip the inital Axis Aligned Bounding Box (AABB) check. This check is performed to quickly rule out bodies that are too far away for a collision to occur, but some applications may want to use their own heuristic or spatial indexing solution, thus making the AABB check unnecessary.</td>
-	</tr>
-</table>
-
-Circle
--------------------------------------------------------------------------------
+The resulting system exposes several functions for creating bodies:
 
 ```JavaScript
-new Collisions.Circle(Number x, Number y, Number radius [, Number scale = 1])
+const circle  = system.createCircle(100, 100, 10);
+const polygon = system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const line    = system.createLine(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);
+const point   = system.createPoint(10, 10);
 ```
 
-Creates a new circle to be used for testing collisions
-
-<table>
-	<tr>
-		<th>Type</th>
-		<th>Name</th>
-		<th>Default</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>x</td>
-		<td></td>
-		<td>The circle's X coordinate</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>y</td>
-		<td></td>
-		<td>The circle's Y coordinate</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>radius</td>
-		<td></td>
-		<td>The circle's radius</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>scale</td>
-		<td>1</td>
-		<td>The circle's scale</td>
-	</tr>
-</table>
+Those functions create their respective body and automatically insert it into the system. However, it's possible to create bodies separately and insert them into the system manually:
 
 ```JavaScript
-Circle.prototype.collides(Object target [, Object out = null, Boolean aabb = true])
+import {Collisions, Circle, Polygon, Line, Point} from 'collisions';
+
+const system  = new Collisions();
+const circle  = new Circle(100, 100, 10);
+const polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const line    = new Line(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);
+const point   = new Point(10, 10);
+
+system.insert(circle, polygon, line, point);
 ```
 
-Returns true if the circle is colliding with the target
-
-<table>
-	<tr>
-		<th>Type</th>
-		<th>Name</th>
-		<th>Default</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>Object</td>
-		<td>target</td>
-		<td></td>
-		<td>The target body to test against</td>
-	</tr>
-	<tr>
-		<td>Object</td>
-		<td>out</td>
-		<td>null</td>
-		<td>
-			An object on which to store information about the collision (see SAT.collides for more information) (see <a href="#collision-information">Collision Information</a>).
-		</td>
-	</tr>
-	<tr>
-		<td>Boolean</td>
-		<td>aabb</td>
-		<td>true</td>
-		<td>Set to false to skip the inital Axis Aligned Bounding Box (AABB) check. This check is performed to quickly rule out bodies that are too far away for a collision to occur, but some applications may want to use their own heuristic or spatial indexing solution, thus making the AABB check unnecessary.</td>
-	</tr>
-</table>
-
-Polygon
--------------------------------------------------------------------------------
+Bodies can be removed also:
 
 ```JavaScript
-new Collisions.Polygon(Number x, Number y, Array points [, Number angle = 0, Number scale_x = 1, Number scale_y = 1])
+system.remove(polygon, point);
 ```
 
-Creates a new polygon to be used for testing collisions
+When the **result** parameter is supplied to a collision function, three of the properties set on the object are **overlap**, **overlap\_x**, and **overlap\_y**. Together, these values describe how much and in what direction a body is overlapping another body. More specifically, **overlap\_x** and **overlap\_y** make up the direction vector and **overlap** is the magnitude of that vector.
 
-<table>
-	<tr>
-		<th>Type</th>
-		<th>Name</th>
-		<th>Default</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>x</td>
-		<td></td>
-		<td>The polygon's X coordinate</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>y</td>
-		<td></td>
-		<td>The polygon's Y coordinate</td>
-	</tr>
-	<tr>
-		<td>Array</td>
-		<td>points</td>
-		<td></td>
-		<td>The polygon's coordinate pairs. Example: <code>[[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]</code>. Points and Lines can be made by supplying only one or two coordinate pairs, respectively.</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>angle</td>
-		<td>0</td>
-		<td>The polygon's rotation in radians</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>scale_x</td>
-		<td>1</td>
-		<td>The polygon's scale along the X axis</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>scale_y</td>
-		<td>1</td>
-		<td>The polygon's scale along the Y axis</td>
-	</tr>
-</table>
+These values can be used to "push" one body out of another using the minimum distance required. Effectively, subtracting this vector from an body's position will cause the objects to no longer collide. Here's a simple example:
 
 ```JavaScript
-Polygon.prototype.collides(Object target [, Object out = null, Boolean aabb = true])
-```
 
-Returns true if the polygon is colliding with the target
+const result = system.createResult();
 
-<table>
-	<tr>
-		<th>Type</th>
-		<th>Name</th>
-		<th>Default</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>Object</td>
-		<td>target</td>
-		<td></td>
-		<td>The target body to test against</td>
-	</tr>
-	<tr>
-		<td>Object</td>
-		<td>out</td>
-		<td>null</td>
-		<td>
-			An object on which to store information about the collision (see SAT.collides for more information) (see <a href="#collision-information">Collision Information</a>).
-		</td>
-	</tr>
-	<tr>
-		<td>Boolean</td>
-		<td>aabb</td>
-		<td>true</td>
-		<td>Set to false to skip the inital Axis Aligned Bounding Box (AABB) check. This check is performed to quickly rule out bodies that are too far away for a collision to occur, but some applications may want to use their own heuristic or spatial indexing solution, thus making the AABB check unnecessary.</td>
-	</tr>
-</table>
-
-```JavaScript
-Polygon.prototype.setPoints(Array points)
-```
-
-Sets new points for a polygon
-
-<table>
-	<tr>
-		<th>Type</th>
-		<th>Name</th>
-		<th>Default</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>Array</td>
-		<td>points</td>
-		<td></td>
-		<td>An array of coordinate pairs [[0, 0], [100, 100], ...] that make up the polygon</td>
-	</tr>
-</table>
-
-Line
--------------------------------------------------------------------------------
-
-Lines can be constructed by creating a polygon with only two coordinate pairs
-
-Point
--------------------------------------------------------------------------------
-
-Points can be constructed by creating a polygon with only one coordinate pair
-
-Collision Information
-===============================================================================
-
-All collision testing functions accept an **out** parameter. If an object is passed as the **out** parameter, properties will be set on the object describing the collision (if one occurs).
-
-The following properties are set on the object:
-
-<table>
-	<tr>
-		<th>Type</th>
-		<th>Name</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>Object</td>
-		<td>a</td>
-		<td>The source body tested</td>
-	</tr>
-	<tr>
-		<td>Object</td>
-		<td>b</td>
-		<td>The target body tested against</td>
-	</tr>
-	<tr>
-		<td>Boolean</td>
-		<td>a_in_b</td>
-		<td>True if A is completely contained within B</td>
-	</tr>
-	<tr>
-		<td>Boolean</td>
-		<td>b_in_a</td>
-		<td>True if B is completely contained within A</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>overlap</td>
-		<td>The magnitude of the shortest axis of overlap (see <a href="#overlap">Overlap</a>)</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>overlap_x</td>
-		<td>The X direction of the shortest axis of overlap</td>
-	</tr>
-	<tr>
-		<td>Number</td>
-		<td>overlap_y</td>
-		<td>The Y direction of the shortest axis of overlap</td>
-	</tr>
-</table>
-
-> **Note:** Some properties may be initialized to certain values even if a collision does not occur. Do not rely on the presence/absence of certain properties as an indicator of whether a collision was found. Use the return value of the collision testing function itself.
-
-Overlap
-===============================================================================
-
-When the **out** parameter is supplied to a collision testing function, three of the properties set on the object are **overlap**, **overlap\_x**, and **overlap\_y**. Together, these values describe how much and in what direction an object is overlapping another object. More specifically, **overlap\_x** and **overlap\_y** make up the direction vector and **overlap** is the magnitude of that vector.
-
-These values can be used to "push" one object out of another using the minimum distance required. Effectively, subtracting this vector from an object's position will cause the objects to no longer collide. Here's a simple example:
-
-```JavaScript
-if(player.collides(wall, out)) {
-	player.x -= out.overlap * out.overlap_x;
-	player.y -= out.overlap * out.overlap_y;
+if(player.collides(wall, result)) {
+	player.x -= result.overlap * result.overlap_x;
+	player.y -= result.overlap * result.overlap_y;
 }
 ```
+
+FAQ
+===============================================================================
+
+#### Why shouldn't I just use a physics engine?
+
+Projects requiring physics are enthusiastically recommended to use one of the many physics engines that are out there (e.g. [Matter.js](https://github.com/liabru/matter-js) or [Planck.js](https://github.com/shakiba/planck.js)). However, many projects use physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that are made by these engines (gravity, velocity, friction, etc.). **Collisions** was written to fill this need.
+
+#### Why does potentials() return an Iterator instead of an Array?
+
+Populating an array with references to potential collisions can take up quite a bit of memory when done for thousands of bodies (even if each body has an array that it recycles). For instance, if the system has 1,000 bodies and each one is potentially colliding with five bodies on average, that's 5,000 references in total. Do this every frame and the garbage collector can start to get noticeably bogged down. Iterators solve this problem by only detecting and yielding a single potential collision at a time as you loop through them. Memory profiles showed the allocations per frame drop from 50 kilobytes to 10 bytes. The reduction in garbage collection far outweighs the small peformance cost of using Iterators.
+
+#### Why does the source code seem to have a lot of copy/paste?
+
+**Collisions** was written with performance as its primary focus. Conscious choices were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.
 
 Limitations
 ===============================================================================
 
-SAT assumes all tested polygons are convex. Handling concave shapes requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. Check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).
-
-Acknowledgements
-===============================================================================
-
-This library is heavily based on [SAT.js](https://github.com/jriecken/sat-js), which was an invaluable guide to understanding the SAT algorithm and its implementation.
+SAT assumes all tested polygons are convex. Handling concave shapes requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).

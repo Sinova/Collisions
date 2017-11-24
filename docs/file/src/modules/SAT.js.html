@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/modules/SAT.js | collisions</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Sinova/Collisions"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/modules/SAT.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Determines if two convex bodies are colliding using the Separating Axis Theorem
+ * @private
+ * @param {Circle|Polygon} a The source body to test
+ * @param {Circle|Polygon} b The target body to test against
+ * @param {Result} [result = null] A Result object on which to store information about the collision
+ * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own collision heuristic)
+ * @returns {Boolean}
+ */
+export default function SAT(a, b, result = null, aabb = true) {
+	const a_polygon = a._polygon;
+	const b_polygon = b._polygon;
+
+	if(a_polygon &amp;&amp; (
+		a._dirty_coords ||
+		a.x !== a._x ||
+		a.y !== a._y ||
+		a.angle !== a._angle ||
+		a.scale_x !== a._scale_x ||
+		a.scale_y !== a._scale_y
+	)) {
+		a._calculateCoords();
+	}
+
+	if(b_polygon &amp;&amp; (
+		b._dirty_coords ||
+		b.x !== b._x ||
+		b.y !== b._y ||
+		b.angle !== b._angle ||
+		b.scale_x !== b._scale_x ||
+		b.scale_y !== b._scale_y
+	)) {
+		b._calculateCoords();
+	}
+
+	if(aabb &amp;&amp; !aabbAABB(a, b)) {
+		return false;
+	}
+
+	if(a_polygon &amp;&amp; a._dirty_normals) {
+		a._calculateNormals();
+	}
+
+	if(b_polygon &amp;&amp; b._dirty_normals) {
+		b._calculateNormals();
+	}
+
+	return (
+		a_polygon &amp;&amp; b_polygon ? polygonPolygon(a, b, result) :
+		a_polygon ? polygonCircle(a, b, result, false) :
+		b_polygon ? polygonCircle(b, a, result, true) :
+		circleCircle(a, b, result)
+	);
+}
+
+/**
+ * Determines if two bodies&apos; axis aligned bounding boxes are colliding
+ * @param {Circle|Polygon} a The source body to test
+ * @param {Circle|Polygon} b The target body to test against
+ */
+function aabbAABB(a, b) {
+	const a_polygon = a._polygon;
+	const a_x       = a_polygon ? 0 : a.x;
+	const a_y       = a_polygon ? 0 : a.y;
+	const a_radius  = a_polygon ? 0 : a.radius * a.scale;
+	const a_min_x   = a_polygon ? a._min_x : a_x - a_radius;
+	const a_min_y   = a_polygon ? a._min_y : a_y - a_radius;
+	const a_max_x   = a_polygon ? a._max_x : a_x + a_radius;
+	const a_max_y   = a_polygon ? a._max_y : a_y + a_radius;
+
+	const b_polygon = b._polygon;
+	const b_x       = b_polygon ? 0 : b.x;
+	const b_y       = b_polygon ? 0 : b.y;
+	const b_radius  = b_polygon ? 0 : b.radius * b.scale;
+	const b_min_x   = b_polygon ? b._min_x : b_x - b_radius;
+	const b_min_y   = b_polygon ? b._min_y : b_y - b_radius;
+	const b_max_x   = b_polygon ? b._max_x : b_x + b_radius;
+	const b_max_y   = b_polygon ? b._max_y : b_y + b_radius;
+
+	return a_min_x &lt; b_max_x &amp;&amp; a_min_y &lt; b_max_y &amp;&amp; a_max_x &gt; b_min_x &amp;&amp; a_max_y &gt; b_min_y;
+}
+
+/**
+ * Determines if two polygons are colliding
+ * @param {Polygon} a The source polygon to test
+ * @param {Polygon} b The target polygon to test against
+ * @param {Result} [result = null] A Result object on which to store information about the collision
+ * @returns {Boolean}
+ */
+function polygonPolygon(a, b, result = null) {
+	const a_normals = a._normals;
+	const b_normals = b._normals;
+	const a_count   = a._coords.length;
+	const b_count   = b._coords.length;
+
+	if(result) {
+		result.a         = a;
+		result.b         = b;
+		result.a_in_b    = true;
+		result.b_in_a    = true;
+		result.overlap   = a_count === 2 &amp;&amp; b_count === 2 ? 0 : Number.MAX_VALUE;
+		result.overlap_x = 0;
+		result.overlap_y = 0;
+	}
+
+	if(a_count &gt; 2) {
+		for(let ix = 0, iy = 1; ix &lt; a_count; ix += 2, iy += 2) {
+			if(separatingAxis(a, b, a_normals[ix], a_normals[iy], result)) {
+				return false;
+			}
+		}
+	}
+
+	if(b_count &gt; 2) {
+		for(let ix = 0, iy = 1; ix &lt; b_count; ix += 2, iy += 2) {
+			if(separatingAxis(a, b, b_normals[ix], b_normals[iy], result)) {
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+/**
+ * Determines if a polygon and a circle are colliding
+ * @param {Polygon} a The source polygon to test
+ * @param {Circle} b The target circle to test against
+ * @param {Result} [result = null] A Result object on which to store information about the collision
+ * @param {Boolean} [reverse = false] Set to true to reverse a and b in the result parameter when testing circle-&gt;polygon instead of polygon-&gt;circle
+ * @returns {Boolean}
+ */
+function polygonCircle(a, b, result = null, reverse = false) {
+	const a_coords       = a._coords;
+	const a_edges        = a._edges;
+	const a_normals      = a._normals;
+	const b_x            = b.x;
+	const b_y            = b.y;
+	const b_radius       = b.radius * b.scale;
+	const b_radius2      = b_radius * 2;
+	const radius_squared = b_radius * b_radius;
+	const count          = a_coords.length;
+
+	let a_in_b    = true;
+	let b_in_a    = true;
+	let overlap   = Number.MAX_VALUE;
+	let overlap_x = 0;
+	let overlap_y = 0;
+
+	// Handle single points specially
+	if(count === 2) {
+		const coord_x        = b_x - a_coords[0];
+		const coord_y        = b_y - a_coords[1];
+		const length_squared = coord_x * coord_x + coord_y * coord_y;
+
+		if(length_squared &gt; radius_squared) {
+			return false;
+		}
+
+		if(result) {
+			const length = Math.sqrt(length_squared);
+
+			overlap   = b_radius - length;
+			overlap_x = coord_x / length;
+			overlap_y = coord_y / length;
+			b_in_a    = false;
+		}
+	}
+	else {
+		for(let ix = 0, iy = 1; ix &lt; count; ix += 2, iy += 2) {
+			const edge_x  = a_edges[ix];
+			const edge_y  = a_edges[iy];
+			const coord_x = b_x - a_coords[ix];
+			const coord_y = b_y - a_coords[iy];
+			const dot     = edge_x * coord_x + edge_y * coord_y;
+			const region  = dot &lt; 0 ? -1 : dot &gt; edge_x * edge_x + edge_y * edge_y ? 1 : 0;
+
+			let tmp_overlapping = false;
+			let tmp_overlap     = 0;
+			let tmp_overlap_x   = 0;
+			let tmp_overlap_y   = 0;
+
+			if(result &amp;&amp; a_in_b &amp;&amp; coord_x * coord_x + coord_y * coord_y &gt; radius_squared) {
+				a_in_b = false;
+			}
+
+			if(region) {
+				const left     = region === -1;
+				const other_x  = left ? (ix === 0 ? count - 2 : ix - 2) : (ix === count - 2 ? 0 : ix + 2);
+				const other_y  = other_x + 1;
+				const edge2_x  = a_edges[other_x];
+				const edge2_y  = a_edges[other_y];
+				const coord2_x = b_x - a_coords[other_x];
+				const coord2_y = b_y - a_coords[other_y];
+				const dot2     = edge2_x * coord2_x + edge2_y * coord2_y;
+				const region2  = dot2 &lt; 0 ? -1 : dot2 &gt; edge2_x * edge2_x + edge2_y * edge2_y ? 1 : 0;
+
+				if(region2 === -region) {
+					const target_x       = left ? coord_x : coord2_x;
+					const target_y       = left ? coord_y : coord2_y;
+					const length_squared = target_x * target_x + target_y * target_y;
+
+					if(length_squared &gt; radius_squared) {
+						return false;
+					}
+
+					if(result) {
+						const length = Math.sqrt(length_squared);
+
+						tmp_overlapping = true;
+						tmp_overlap     = b_radius - length;
+						tmp_overlap_x   = target_x / length;
+						tmp_overlap_y   = target_y / length;
+						b_in_a          = false;
+					}
+				}
+			}
+			else {
+				const normal_x        = a_normals[ix];
+				const normal_y        = a_normals[iy];
+				const length          = coord_x * normal_x + coord_y * normal_y;
+				const absolute_length = length &lt; 0 ? -length : length;
+
+				if(length &gt; 0 &amp;&amp; absolute_length &gt; b_radius) {
+					return false;
+				}
+
+				if(result) {
+					tmp_overlapping = true;
+					tmp_overlap     = b_radius - length;
+					tmp_overlap_x   = normal_x;
+					tmp_overlap_y   = normal_y;
+
+					if(b_in_a &amp;&amp; length &gt;= 0 || tmp_overlap &lt; b_radius2) {
+						b_in_a = false;
+					}
+				}
+			}
+
+			if(tmp_overlapping &amp;&amp; tmp_overlap &lt; overlap) {
+				overlap   = tmp_overlap;
+				overlap_x = tmp_overlap_x;
+				overlap_y = tmp_overlap_y;
+			}
+		}
+	}
+
+	if(result) {
+		result.a         = reverse ? b : a;
+		result.b         = reverse ? a : b;
+		result.a_in_b    = reverse ? b_in_a : a_in_b;
+		result.b_in_a    = reverse ? a_in_b : b_in_a;
+		result.overlap   = overlap;
+		result.overlap_x = reverse ? -overlap_x : overlap_x;
+		result.overlap_y = reverse ? -overlap_y : overlap_y;
+	}
+
+	return true;
+}
+
+/**
+ * Determines if two circles are colliding
+ * @param {Circle} a The source circle to test
+ * @param {Circle} b The target circle to test against
+ * @param {Result} [result = null] A Result object on which to store information about the collision
+ * @returns {Boolean}
+ */
+function circleCircle(a, b, result = null) {
+	const a_radius       = a.radius * a.scale;
+	const b_radius       = b.radius * b.scale;
+	const difference_x   = b.x - a.x;
+	const difference_y   = b.y - a.y;
+	const radius_sum     = a_radius + b_radius;
+	const length_squared = difference_x * difference_x + difference_y * difference_y;
+
+	if(length_squared &gt; radius_sum * radius_sum) {
+		return false;
+	}
+
+	if(result) {
+		const length = Math.sqrt(length_squared);
+
+		result.a         = a;
+		result.b         = b;
+		result.a_in_b    = a_radius &lt;= b_radius &amp;&amp; length &lt;= b_radius - a_radius;
+		result.b_in_a    = b_radius &lt;= a_radius &amp;&amp; length &lt;= a_radius - b_radius;
+		result.overlap   = radius_sum - length;
+		result.overlap_x = difference_x / length;
+		result.overlap_y = difference_y / length;
+	}
+
+	return true;
+}
+
+/**
+ * Determines if two polygons are separated by an axis
+ * @param {Polygon} a The source polygon to test
+ * @param {Polygon} b The target polygon to test against
+ * @param {Number} x The X direction of the axis
+ * @param {Number} y The Y direction of the axis
+ * @param {Result} [result = null] A Result object on which to store information about the collision
+ * @returns {Boolean}
+ */
+function separatingAxis(a, b, x, y, result = null) {
+	const a_coords = a._coords;
+	const a_count  = a_coords.length;
+	const b_coords = b._coords;
+	const b_count  = b_coords.length;
+
+	let a_start = Number.MAX_VALUE;
+	let a_end   = -Number.MAX_VALUE;
+	let b_start = Number.MAX_VALUE;
+	let b_end   = -Number.MAX_VALUE;
+
+	for(let ix = 0, iy = 1; ix &lt; a_count; ix += 2, iy += 2) {
+		const dot = a_coords[ix] * x + a_coords[iy] * y;
+
+		if(dot &lt; a_start) {
+			a_start = dot;
+		}
+
+		if(dot &gt; a_end) {
+			a_end = dot;
+		}
+	}
+
+	for(let ix = 0, iy = 1; ix &lt; b_count; ix += 2, iy += 2) {
+		const dot = b_coords[ix] * x + b_coords[iy] * y;
+
+		if(dot &lt; b_start) {
+			b_start = dot;
+		}
+
+		if(dot &gt; b_end) {
+			b_end = dot;
+		}
+	}
+
+	if(a_start &gt; b_end || a_end &lt; b_start) {
+		return true;
+	}
+
+	if(result) {
+		let overlap = 0;
+
+		if(a_start &lt; b_start) {
+			result.a_in_b = false;
+
+			if(a_end &lt; b_end) {
+				overlap    = a_end - b_start;
+				result.b_in_a = false;
+			}
+			else {
+				const option1 = a_end - b_start;
+				const option2 = b_end - a_start;
+
+				overlap = option1 &lt; option2 ? option1 : -option2;
+			}
+		}
+		else {
+			result.b_in_a = false;
+
+			if(a_end &gt; b_end) {
+				overlap    = a_start - b_end;
+				result.a_in_b = false;
+			}
+			else {
+				const option1 = a_end - b_start;
+				const option2 = b_end - a_start;
+
+				overlap = option1 &lt; option2 ? option1 : -option2;
+			}
+		}
+
+		const absolute_overlap = overlap &lt; 0 ? -overlap : overlap;
+
+		if(absolute_overlap &lt; result.overlap) {
+			const sign = overlap &lt; 0 ? -1 : 1;
+
+			result.overlap   = absolute_overlap;
+			result.overlap_x = x * sign;
+			result.overlap_y = y * sign;
+		}
+	}
+
+	return false;
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

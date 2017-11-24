@@ -1,0 +1,82 @@
+import SAT from './SAT.js';
+
+/**
+ * The base class for bodies used to detect collisions
+ */
+export default class Body {
+	/**
+	 * @constructor
+	 * @param {Number} [x = 0] The starting X coordinate
+	 * @param {Number} [y = 0] The starting Y coordinate
+	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
+	 */
+	constructor(x = 0, y = 0, padding = 0) {
+		/**
+		 * @desc The X coordinate of the body
+		 * @type {Number}
+		 */
+		this.x = x;
+
+		/**
+		 * @desc The Y coordinate of the body
+		 * @type {Number}
+		 */
+		this.y = y;
+
+		/**
+		 * @desc The amount to pad the bounding volume when testing for potential collisions
+		 * @type {Number}
+		 */
+		this.padding = padding;
+
+		/** @private */
+		this._bvh = null;
+
+		/** @private */
+		this._bvh_parent = null;
+
+		/** @private */
+		this._bvh_branch = false;
+
+		/** @private */
+		this._bvh_iterated = false;
+
+		/** @private */
+		this._bvh_padding = padding;
+
+		/** @private */
+		this._bvh_min_x = 0;
+
+		/** @private */
+		this._bvh_min_y = 0;
+
+		/** @private */
+		this._bvh_max_x = 0;
+
+		/** @private */
+		this._bvh_max_y = 0;
+	}
+
+	/**
+	 * Determines if the body is colliding with another body
+	 * @param {Circle|Polygon} target The target body to test against
+	 * @param {Result} [result = null] A Result object on which to store information about the collision
+	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
+	 * @returns {Boolean}
+	 */
+	collides(target, result = null, aabb = true) {
+		return SAT(this, target, result, aabb);
+	}
+
+	/**
+	 * Returns a list of potential collisions
+	 * @returns {Iterator<Body>}
+	 */
+	potentials() {
+		if(this._bvh === null) {
+			throw new Error('Body does not belong to a collision system');
+		}
+
+		return this._bvh.potentials(this);
+	}
+};

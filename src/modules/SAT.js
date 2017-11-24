@@ -1,23 +1,13 @@
 /**
- * Determines if two bodies are colliding
- *
- * If an object is passed as the "out" parameter, properties will be set on the object describing the collision (if one occurs).
- * The following properties are set on the "out" object:
- *     {Object}  a         The source body tested
- *     {Object}  b         The target body tested against
- *     {Boolean} a_in_b    True if A is completely contained within B
- *     {Boolean} b_in_a    True if B is completely contained within A
- *     {Number}  overlap   The magnitude of the shortest axis of overlap
- *     {Number}  overlap_x The X direction of the shortest axis of overlap
- *     {Number}  overlap_y The Y direction of the shortest axis of overlap
- *
- * @param {Body} a The source body to test
- * @param {Body} b The target body to test against
- * @param {Object} out An object on which to store information about the collision
- * @param {Boolean} aabb Set to false to skip the AABB check (useful if you use your own collision heuristic)
+ * Determines if two convex bodies are colliding using the Separating Axis Theorem
+ * @private
+ * @param {Circle|Polygon} a The source body to test
+ * @param {Circle|Polygon} b The target body to test against
+ * @param {Result} [result = null] A Result object on which to store information about the collision
+ * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own collision heuristic)
  * @returns {Boolean}
  */
-export default function SAT(a, b, out = null, aabb = true) {
+export default function SAT(a, b, result = null, aabb = true) {
 	const a_polygon = a._polygon;
 	const b_polygon = b._polygon;
 
@@ -56,17 +46,17 @@ export default function SAT(a, b, out = null, aabb = true) {
 	}
 
 	return (
-		a_polygon && b_polygon ? polygonPolygon(a, b, out) :
-		a_polygon ? polygonCircle(a, b, out, false) :
-		b_polygon ? polygonCircle(b, a, out, true) :
-		circleCircle(a, b, out)
+		a_polygon && b_polygon ? polygonPolygon(a, b, result) :
+		a_polygon ? polygonCircle(a, b, result, false) :
+		b_polygon ? polygonCircle(b, a, result, true) :
+		circleCircle(a, b, result)
 	);
 }
 
 /**
  * Determines if two bodies' axis aligned bounding boxes are colliding
- * @param {Body} a The source body to test
- * @param {Body} b The target body to test against
+ * @param {Circle|Polygon} a The source body to test
+ * @param {Circle|Polygon} b The target body to test against
  */
 function aabbAABB(a, b) {
 	const a_polygon = a._polygon;
@@ -92,30 +82,30 @@ function aabbAABB(a, b) {
 
 /**
  * Determines if two polygons are colliding
- * @param {Body} a The source polygon to test
- * @param {Body} b The target polygon to test against
- * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
+ * @param {Polygon} a The source polygon to test
+ * @param {Polygon} b The target polygon to test against
+ * @param {Result} [result = null] A Result object on which to store information about the collision
  * @returns {Boolean}
  */
-function polygonPolygon(a, b, out = null) {
+function polygonPolygon(a, b, result = null) {
 	const a_normals = a._normals;
 	const b_normals = b._normals;
 	const a_count   = a._coords.length;
 	const b_count   = b._coords.length;
 
-	if(out) {
-		out.a         = a;
-		out.b         = b;
-		out.a_in_b    = true;
-		out.b_in_a    = true;
-		out.overlap   = a_count === 2 && b_count === 2 ? 0 : Number.MAX_VALUE;
-		out.overlap_x = 0;
-		out.overlap_y = 0;
+	if(result) {
+		result.a         = a;
+		result.b         = b;
+		result.a_in_b    = true;
+		result.b_in_a    = true;
+		result.overlap   = a_count === 2 && b_count === 2 ? 0 : Number.MAX_VALUE;
+		result.overlap_x = 0;
+		result.overlap_y = 0;
 	}
 
 	if(a_count > 2) {
 		for(let ix = 0, iy = 1; ix < a_count; ix += 2, iy += 2) {
-			if(separatingAxis(a, b, a_normals[ix], a_normals[iy], out)) {
+			if(separatingAxis(a, b, a_normals[ix], a_normals[iy], result)) {
 				return false;
 			}
 		}
@@ -123,7 +113,7 @@ function polygonPolygon(a, b, out = null) {
 
 	if(b_count > 2) {
 		for(let ix = 0, iy = 1; ix < b_count; ix += 2, iy += 2) {
-			if(separatingAxis(a, b, b_normals[ix], b_normals[iy], out)) {
+			if(separatingAxis(a, b, b_normals[ix], b_normals[iy], result)) {
 				return false;
 			}
 		}
@@ -134,13 +124,13 @@ function polygonPolygon(a, b, out = null) {
 
 /**
  * Determines if a polygon and a circle are colliding
- * @param {Body} a The source polygon to test
- * @param {Body} b The target circle to test against
- * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
- * @param {Boolean} reverse Set to true to reverse a and b in the out parameter when testing circle->polygon instead of polygon->circle
+ * @param {Polygon} a The source polygon to test
+ * @param {Circle} b The target circle to test against
+ * @param {Result} [result = null] A Result object on which to store information about the collision
+ * @param {Boolean} [reverse = false] Set to true to reverse a and b in the result parameter when testing circle->polygon instead of polygon->circle
  * @returns {Boolean}
  */
-function polygonCircle(a, b, out = null, reverse = false) {
+function polygonCircle(a, b, result = null, reverse = false) {
 	const a_coords       = a._coords;
 	const a_edges        = a._edges;
 	const a_normals      = a._normals;
@@ -167,7 +157,7 @@ function polygonCircle(a, b, out = null, reverse = false) {
 			return false;
 		}
 
-		if(out) {
+		if(result) {
 			const length = Math.sqrt(length_squared);
 
 			overlap   = b_radius - length;
@@ -190,7 +180,7 @@ function polygonCircle(a, b, out = null, reverse = false) {
 			let tmp_overlap_x   = 0;
 			let tmp_overlap_y   = 0;
 
-			if(out && a_in_b && coord_x * coord_x + coord_y * coord_y > radius_squared) {
+			if(result && a_in_b && coord_x * coord_x + coord_y * coord_y > radius_squared) {
 				a_in_b = false;
 			}
 
@@ -214,7 +204,7 @@ function polygonCircle(a, b, out = null, reverse = false) {
 						return false;
 					}
 
-					if(out) {
+					if(result) {
 						const length = Math.sqrt(length_squared);
 
 						tmp_overlapping = true;
@@ -235,7 +225,7 @@ function polygonCircle(a, b, out = null, reverse = false) {
 					return false;
 				}
 
-				if(out) {
+				if(result) {
 					tmp_overlapping = true;
 					tmp_overlap     = b_radius - length;
 					tmp_overlap_x   = normal_x;
@@ -255,14 +245,14 @@ function polygonCircle(a, b, out = null, reverse = false) {
 		}
 	}
 
-	if(out) {
-		out.a         = reverse ? b : a;
-		out.b         = reverse ? a : b;
-		out.a_in_b    = reverse ? b_in_a : a_in_b;
-		out.b_in_a    = reverse ? a_in_b : b_in_a;
-		out.overlap   = overlap;
-		out.overlap_x = reverse ? -overlap_x : overlap_x;
-		out.overlap_y = reverse ? -overlap_y : overlap_y;
+	if(result) {
+		result.a         = reverse ? b : a;
+		result.b         = reverse ? a : b;
+		result.a_in_b    = reverse ? b_in_a : a_in_b;
+		result.b_in_a    = reverse ? a_in_b : b_in_a;
+		result.overlap   = overlap;
+		result.overlap_x = reverse ? -overlap_x : overlap_x;
+		result.overlap_y = reverse ? -overlap_y : overlap_y;
 	}
 
 	return true;
@@ -270,12 +260,12 @@ function polygonCircle(a, b, out = null, reverse = false) {
 
 /**
  * Determines if two circles are colliding
- * @param {Body} a The source circle to test
- * @param {Body} b The target circle to test against
- * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
+ * @param {Circle} a The source circle to test
+ * @param {Circle} b The target circle to test against
+ * @param {Result} [result = null] A Result object on which to store information about the collision
  * @returns {Boolean}
  */
-function circleCircle(a, b, out = null) {
+function circleCircle(a, b, result = null) {
 	const a_radius       = a.radius * a.scale;
 	const b_radius       = b.radius * b.scale;
 	const difference_x   = b.x - a.x;
@@ -287,16 +277,16 @@ function circleCircle(a, b, out = null) {
 		return false;
 	}
 
-	if(out) {
+	if(result) {
 		const length = Math.sqrt(length_squared);
 
-		out.a         = a;
-		out.b         = b;
-		out.a_in_b    = a_radius <= b_radius && length <= b_radius - a_radius;
-		out.b_in_a    = b_radius <= a_radius && length <= a_radius - b_radius;
-		out.overlap   = radius_sum - length;
-		out.overlap_x = difference_x / length;
-		out.overlap_y = difference_y / length;
+		result.a         = a;
+		result.b         = b;
+		result.a_in_b    = a_radius <= b_radius && length <= b_radius - a_radius;
+		result.b_in_a    = b_radius <= a_radius && length <= a_radius - b_radius;
+		result.overlap   = radius_sum - length;
+		result.overlap_x = difference_x / length;
+		result.overlap_y = difference_y / length;
 	}
 
 	return true;
@@ -304,14 +294,14 @@ function circleCircle(a, b, out = null) {
 
 /**
  * Determines if two polygons are separated by an axis
- * @param {Body} a The source polygon to test
- * @param {Body} b The target polygon to test against
+ * @param {Polygon} a The source polygon to test
+ * @param {Polygon} b The target polygon to test against
  * @param {Number} x The X direction of the axis
  * @param {Number} y The Y direction of the axis
- * @param {Object} out An object on which to store information about the collision (see SAT.collides for more information)
+ * @param {Result} [result = null] A Result object on which to store information about the collision
  * @returns {Boolean}
  */
-function separatingAxis(a, b, x, y, out = null) {
+function separatingAxis(a, b, x, y, result = null) {
 	const a_coords = a._coords;
 	const a_count  = a_coords.length;
 	const b_coords = b._coords;
@@ -350,15 +340,15 @@ function separatingAxis(a, b, x, y, out = null) {
 		return true;
 	}
 
-	if(out) {
+	if(result) {
 		let overlap = 0;
 
 		if(a_start < b_start) {
-			out.a_in_b = false;
+			result.a_in_b = false;
 
 			if(a_end < b_end) {
 				overlap    = a_end - b_start;
-				out.b_in_a = false;
+				result.b_in_a = false;
 			}
 			else {
 				const option1 = a_end - b_start;
@@ -368,11 +358,11 @@ function separatingAxis(a, b, x, y, out = null) {
 			}
 		}
 		else {
-			out.b_in_a = false;
+			result.b_in_a = false;
 
 			if(a_end > b_end) {
 				overlap    = a_start - b_end;
-				out.a_in_b = false;
+				result.a_in_b = false;
 			}
 			else {
 				const option1 = a_end - b_start;
@@ -384,12 +374,12 @@ function separatingAxis(a, b, x, y, out = null) {
 
 		const absolute_overlap = overlap < 0 ? -overlap : overlap;
 
-		if(absolute_overlap < out.overlap) {
+		if(absolute_overlap < result.overlap) {
 			const sign = overlap < 0 ? -1 : 1;
 
-			out.overlap   = absolute_overlap;
-			out.overlap_x = x * sign;
-			out.overlap_y = y * sign;
+			result.overlap   = absolute_overlap;
+			result.overlap_x = x * sign;
+			result.overlap_y = y * sign;
 		}
 	}
 

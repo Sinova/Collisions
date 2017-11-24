@@ -1,16 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/BVH.js | collisions</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Sinova/Collisions"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/BVH.js~BVH.html">BVH</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/BVHBranch.js~BVHBranch.html">BVHBranch</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Body.js~Body.html">Body</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Circle.js~Circle.html">Circle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Polygon.js~Polygon.html">Polygon</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Result.js~Result.html">Result</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SAT">SAT</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/BVH.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import BVHBranch from &apos;./BVHBranch.js&apos;;
+
+/**
+ * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly
+ */
 export default class BVH {
 	/**
-	 * Creates a Bounding Volume Hierarchy used to find potential collisions quickly
+	 * @constructor
 	 */
 	constructor() {
-		this._tree           = null;
+		this._hierarchy      = null;
 		this._bodies         = [];
 		this._dirty_branches = [];
 	}
 
 	/**
 	 * Inserts a body into the BVH
-	 * @param {Body} body The body to insert
+	 * @param {Circle|Polygon} body The body to insert
 	 * @param {Boolean} updating Set to true if the body already exists in the BVH
 	 */
 	insert(body, updating = false) {
@@ -23,7 +72,7 @@ export default class BVH {
 		const body_x  = body.x;
 		const body_y  = body.y;
 
-		if(polygon && (
+		if(polygon &amp;&amp; (
 			body._dirty_coords ||
 			body_x !== body._x ||
 			body_y !== body._y ||
@@ -46,11 +95,11 @@ export default class BVH {
 		body._bvh_max_x = body_max_x;
 		body._bvh_max_y = body_max_y;
 
-		let current = this._tree;
+		let current = this._hierarchy;
 		let sort    = 0;
 
 		if(!current) {
-			this._tree = body;
+			this._hierarchy = body;
 		}
 		else {
 			while(true) {
@@ -60,10 +109,10 @@ export default class BVH {
 					const left_min_y      = left._bvh_min_y;
 					const left_max_x      = left._bvh_max_x;
 					const left_max_y      = left._bvh_max_y;
-					const left_new_min_x  = body_min_x < left._bvh_min_x ? body_min_x : left._bvh_min_x;
-					const left_new_min_y  = body_min_y < left_min_y ? body_min_y : left_min_y;
-					const left_new_max_x  = body_max_x > left_max_x ? body_max_x : left_max_x;
-					const left_new_max_y  = body_max_y > left_max_y ? body_max_y : left_max_y;
+					const left_new_min_x  = body_min_x &lt; left._bvh_min_x ? body_min_x : left._bvh_min_x;
+					const left_new_min_y  = body_min_y &lt; left_min_y ? body_min_y : left_min_y;
+					const left_new_max_x  = body_max_x &gt; left_max_x ? body_max_x : left_max_x;
+					const left_new_max_y  = body_max_y &gt; left_max_y ? body_max_y : left_max_y;
 					const left_volume     = (left_max_x - left._bvh_min_x) * (left_max_y - left_min_y);
 					const left_new_volume = (left_new_max_x - left_new_min_x) * (left_new_max_y - left_new_min_y);
 					const left_difference = left_new_volume - left_volume;
@@ -73,30 +122,30 @@ export default class BVH {
 					const right_min_y      = right._bvh_min_y;
 					const right_max_x      = right._bvh_max_x;
 					const right_max_y      = right._bvh_max_y;
-					const right_new_min_x  = body_min_x < right_min_x ? body_min_x : right_min_x;
-					const right_new_min_y  = body_min_y < right_min_y ? body_min_y : right_min_y;
-					const right_new_max_x  = body_max_x > right_max_x ? body_max_x : right_max_x;
-					const right_new_max_y  = body_max_y > right_max_y ? body_max_y : right_max_y;
+					const right_new_min_x  = body_min_x &lt; right_min_x ? body_min_x : right_min_x;
+					const right_new_min_y  = body_min_y &lt; right_min_y ? body_min_y : right_min_y;
+					const right_new_max_x  = body_max_x &gt; right_max_x ? body_max_x : right_max_x;
+					const right_new_max_y  = body_max_y &gt; right_max_y ? body_max_y : right_max_y;
 					const right_volume     = (right_max_x - right_min_x) * (right_max_y - right_min_y);
 					const right_new_volume = (right_new_max_x - right_new_min_x) * (right_new_max_y - right_new_min_y);
 					const right_difference = right_new_volume - right_volume;
 
 					current._bvh_sort  = sort++;
-					current._bvh_min_x = left_new_min_x < right_new_min_x ? left_new_min_x : right_new_min_x;
-					current._bvh_min_y = left_new_min_y < right_new_min_y ? left_new_min_y : right_new_min_y;
-					current._bvh_max_x = left_new_max_x > right_new_max_x ? left_new_max_x : right_new_max_x;
-					current._bvh_max_y = left_new_max_y > right_new_max_y ? left_new_max_y : right_new_max_y;
+					current._bvh_min_x = left_new_min_x &lt; right_new_min_x ? left_new_min_x : right_new_min_x;
+					current._bvh_min_y = left_new_min_y &lt; right_new_min_y ? left_new_min_y : right_new_min_y;
+					current._bvh_max_x = left_new_max_x &gt; right_new_max_x ? left_new_max_x : right_new_max_x;
+					current._bvh_max_y = left_new_max_y &gt; right_new_max_y ? left_new_max_y : right_new_max_y;
 
-					// If we're in the middle of an "update" insertion,
-					// we've just resized this branch so it's no longer dirty
-					if(updating && current._bvh_dirty) {
+					// If we&apos;re in the middle of an &quot;update&quot; insertion,
+					// we&apos;ve just resized this branch so it&apos;s no longer dirty
+					if(updating &amp;&amp; current._bvh_dirty) {
 						const dirty_branches = this._dirty_branches;
 
 						current._bvh_dirty = false;
 						dirty_branches.splice(dirty_branches.indexOf(current), 1);
 					}
 
-					current = left_difference <= right_difference ? left : right;
+					current = left_difference &lt;= right_difference ? left : right;
 				}
 				// Leaf
 				else {
@@ -105,20 +154,20 @@ export default class BVH {
 					const parent_min_y = current._bvh_min_y;
 					const parent_max_x = current._bvh_max_x;
 					const parent_max_y = current._bvh_max_y;
-					const new_parent   = current._bvh_parent = body._bvh_parent = Branch.getBranch();
+					const new_parent   = current._bvh_parent = body._bvh_parent = BVHBranch.getBranch();
 
 					new_parent._bvh_parent = grandparent;
 					new_parent._bvh_dirty  = false;
 					new_parent._bvh_left   = current;
 					new_parent._bvh_right  = body;
 					new_parent._bvh_sort   = sort++;
-					new_parent._bvh_min_x  = body_min_x < parent_min_x ? body_min_x : parent_min_x;
-					new_parent._bvh_min_y  = body_min_y < parent_min_y ? body_min_y : parent_min_y;
-					new_parent._bvh_max_x  = body_max_x > parent_max_x ? body_max_x : parent_max_x;
-					new_parent._bvh_max_y  = body_max_y > parent_max_y ? body_max_y : parent_max_y;
+					new_parent._bvh_min_x  = body_min_x &lt; parent_min_x ? body_min_x : parent_min_x;
+					new_parent._bvh_min_y  = body_min_y &lt; parent_min_y ? body_min_y : parent_min_y;
+					new_parent._bvh_max_x  = body_max_x &gt; parent_max_x ? body_max_x : parent_max_x;
+					new_parent._bvh_max_y  = body_max_y &gt; parent_max_y ? body_max_y : parent_max_y;
 
 					if(!grandparent) {
-						this._tree = new_parent;
+						this._hierarchy = new_parent;
 					}
 					else if(grandparent._bvh_left === current) {
 						grandparent._bvh_left = new_parent;
@@ -135,8 +184,8 @@ export default class BVH {
 
 	/**
 	 * Removes a body from the BVH
-	 * @param {Body} body The body to remove
-	 * @param {Boolean} updating Set to true if this is a temporary removal just to update the body's position
+	 * @param {Circle|Polygon} body The body to remove
+	 * @param {Boolean} updating Set to true if this is a temporary removal just to update the body&apos;s position
 	 */
 	remove(body, updating = false) {
 		if(!updating) {
@@ -144,8 +193,8 @@ export default class BVH {
 			this._bodies.splice(this._bodies.indexOf(body), 1);
 		}
 
-		if(this._tree === body) {
-			this._tree = null;
+		if(this._hierarchy === body) {
+			this._hierarchy = null;
 
 			return;
 		}
@@ -176,10 +225,10 @@ export default class BVH {
 			}
 		}
 		else {
-			this._tree = sibling;
+			this._hierarchy = sibling;
 		}
 
-		Branch.pool.push(parent);
+		BVHBranch.releaseBranch(parent);
 	}
 
 	/**
@@ -194,12 +243,12 @@ export default class BVH {
 
 		count = bodies.length;
 
-		for(let i = 0; i < count; ++i) {
+		for(let i = 0; i &lt; count; ++i) {
 			const body = bodies[i];
 
 			let update = false;
 
-			if(!update && body.padding !== body._bvh_padding) {
+			if(!update &amp;&amp; body.padding !== body._bvh_padding) {
 				body._bvh_padding = body.padding;
 				update = true;
 			}
@@ -214,7 +263,7 @@ export default class BVH {
 				const max_x   = polygon ? body._max_x : x + radius;
 				const max_y   = polygon ? body._max_y : y + radius;
 
-				update = min_x < body._bvh_min_x || min_y < body._bvh_min_y || max_x > body._bvh_max_x || max_y > body._bvh_max_y;
+				update = min_x &lt; body._bvh_min_x || min_y &lt; body._bvh_min_y || max_x &gt; body._bvh_max_x || max_y &gt; body._bvh_max_y;
 			}
 
 			if(update) {
@@ -228,9 +277,9 @@ export default class BVH {
 
 		count = dirty_branches.length;
 
-		dirty_branches.sort(Branch.sortBranches);
+		dirty_branches.sort(BVHBranch.sortBranches);
 
-		for(let i = 0; i < count; ++i) {
+		for(let i = 0; i &lt; count; ++i) {
 			let branch = dirty_branches[i];
 
 			while(branch) {
@@ -247,15 +296,15 @@ export default class BVH {
 				const right_max_y = right._bvh_max_y;
 
 				branch._bvh_dirty = false;
-				branch._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;
-				branch._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;
-				branch._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;
-				branch._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;
+				branch._bvh_min_x = left_min_x &lt; right_min_x ? left_min_x : right_min_x;
+				branch._bvh_min_y = left_min_y &lt; right_min_y ? left_min_y : right_min_y;
+				branch._bvh_max_x = left_max_x &gt; right_max_x ? left_max_x : right_max_x;
+				branch._bvh_max_y = left_max_y &gt; right_max_y ? left_max_y : right_max_y;
 
 				branch = branch._bvh_parent;
 
 				// If the parent is dirty, it should be coming up in the for() loop anyway, so bail out
-				if(branch && branch._bvh_dirty) {
+				if(branch &amp;&amp; branch._bvh_dirty) {
 					break;
 				}
 			}
@@ -266,11 +315,11 @@ export default class BVH {
 
 	/**
 	 * Returns a list of potential collisions for a body
-	 * @param {Body} body The body to test for potential collisions against
-	 * @returns {Iterator<Body>}
+	 * @param {Circle|Polygon} body The body to test for potential collisions against
+	 * @returns {Iterator&lt;Body&gt;}
 	 */
-	*potentials(body) {
-		const tree  = this._tree;
+	* potentials(body) {
+		const tree  = this._hierarchy;
 		const min_x = body._bvh_min_x;
 		const min_y = body._bvh_min_y;
 		const max_x = body._bvh_max_x;
@@ -284,10 +333,10 @@ export default class BVH {
 
 				if(
 					current === body ||
-					current._bvh_max_x < min_x ||
-					current._bvh_max_y < min_y ||
-					current._bvh_min_x > max_x ||
-					current._bvh_min_y > max_y
+					current._bvh_max_x &lt; min_x ||
+					current._bvh_max_y &lt; min_y ||
+					current._bvh_min_x &gt; max_x ||
+					current._bvh_min_y &gt; max_y
 				) {
 					current = current._bvh_parent;
 					continue;
@@ -301,14 +350,14 @@ export default class BVH {
 
 			const left = current._bvh_left;
 
-			if(left && !left._bvh_iterated) {
+			if(left &amp;&amp; !left._bvh_iterated) {
 				current = left;
 				continue;
 			}
 
 			const right = current._bvh_right;
 
-			if(right && !right._bvh_iterated) {
+			if(right &amp;&amp; !right._bvh_iterated) {
 				current = right;
 				continue;
 			}
@@ -326,7 +375,7 @@ export default class BVH {
 	}
 
 	/**
-	 * Adds lines and arcs representing the bodies within the BVH to a canvas context's current path
+	 * Adds lines and arcs representing the bodies within the BVH to a canvas context&apos;s current path
 	 * @param {CanvasRenderingContext2D} context The context to add lines and arcs to
 	 * @param {Boolean} debug Set to true to draw the BVH itself
 	 */
@@ -334,12 +383,12 @@ export default class BVH {
 		const bodies = this._bodies;
 		const count  = bodies.length;
 
-		for(let i = 0; i < count; ++i) {
+		for(let i = 0; i &lt; count; ++i) {
 			bodies[i].render(context);
 		}
 
 		if(debug) {
-			let current = this._tree;
+			let current = this._hierarchy;
 
 			while(current) {
 				if(!current._bvh_iterated) {
@@ -363,14 +412,14 @@ export default class BVH {
 
 				const left = current._bvh_left;
 
-				if(left && !left._bvh_iterated) {
+				if(left &amp;&amp; !left._bvh_iterated) {
 					current = left;
 					continue;
 				}
 
 				const right = current._bvh_right;
 
-				if(right && !right._bvh_iterated) {
+				if(right &amp;&amp; !right._bvh_iterated) {
 					current = right;
 					continue;
 				}
@@ -388,48 +437,20 @@ export default class BVH {
 		}
 	}
 }
+</code></pre>
 
-class Branch {
-	/**
-	 * Creates a new branch to be inserted into a BVH
-	 */
-	constructor() {
-		this._bvh_parent   = null;
-		this._bvh_branch   = true;
-		this._bvh_iterated = false;
-		this._bvh_dirty    = false;
-		this._bvh_left     = null;
-		this._bvh_right    = null;
-		this._bvh_sort     = 0;
-		this._bvh_min_x    = 0;
-		this._bvh_min_y    = 0;
-		this._bvh_max_x    = 0;
-		this._bvh_max_y    = 0;
-	}
+</div>
 
-	/**
-	 * Returns a branch from the branch pool or creates a new branch
-	 * @returns {Object}
-	 */
-	static getBranch() {
-		const pool = Branch.pool;
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
 
-		if(pool.length) {
-			return pool.pop();
-		}
-
-		return new Branch();
-	}
-
-	/**
-	 * Sorts branches by deepest first
-	 * @param {Branch} a The first branch
-	 * @param {Branch} b The second branch
-	 * @returns {Number}
-	 */
-	static sortBranches(a, b) {
-		return a.sort > b.sort ? -1 : 1;
-	}
-}
-
-Branch.pool = [];
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

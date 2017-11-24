@@ -1,0 +1,3235 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/Collisions.js",
+    "content": "import BVH     from './modules/BVH.js';\nimport Circle  from './modules/Circle.js';\nimport Polygon from './modules/Polygon.js';\nimport Result  from './modules/Result.js';\nimport SAT     from './modules/SAT.js';\n\n/**\n * A collision system used to track bodies to improve collision detection performance\n * @class\n */\nclass Collisions {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/** @private */\n\t\tthis._bvh = new BVH();\n\t}\n\n\t/**\n\t * Creates a {@link Circle} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Number} [radius = 0] The radius\n\t * @param {Number} [scale = 1] The scale\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Circle}\n\t */\n\tcreateCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {\n\t\tconst body = new Circle(x, y, radius, scale, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Polygon} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]\n\t * @param {Number} [angle = 0] The starting rotation in radians\n\t * @param {Number} [scale_x = 1] The starting scale along the X axis\n\t * @param {Number} [scale_y = 1] The starting scale long the Y axis\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Polygon}\n\t */\n\tcreatePolygon(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tconst body = new Polygon(x, y, points, angle, scale_x, scale_y, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Result} used to collect the detailed results of a collision test\n\t */\n\tcreateResult() {\n\t\treturn new Result();\n\t}\n\n\t/**\n\t * Creates a Result used to collect the detailed results of a collision test\n\t */\n\tstatic createResult() {\n\t\treturn new Result();\n\t}\n\n\t/**\n\t * Inserts bodies into the collision system\n\t * @param {Circle|Polygon} bodies\n\t */\n\tinsert(...bodies) {\n\t\tfor(const body of bodies) {\n\t\t\tthis._bvh.insert(body, false);\n\t\t}\n\n\t\treturn this;\n\t}\n\n\t/**\n\t * Removes bodies from the collision system\n\t * @param {Circle|Polygon} bodies\n\t */\n\tremove(...bodies) {\n\t\tfor(const body of bodies) {\n\t\t\tthis._bvh.remove(body, false);\n\t\t}\n\n\t\treturn this;\n\t}\n\n\t/**\n\t * Updates the collision system. This should be called before any collisions are tested.\n\t */\n\tupdate() {\n\t\tthis._bvh.update();\n\n\t\treturn this;\n\t}\n\n\t/**\n\t * Adds lines and arcs representing the bodies within the BVH to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to add lines and arcs to\n\t */\n\trenderBodies(context) {\n\t\treturn this._bvh.renderBodies(context);\n\t}\n\n\t/**\n\t * Adds lines representing the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.\n\t * @param {CanvasRenderingContext2D} context The context to add lines and arcs to\n\t */\n\trenderBVH(context) {\n\t\treturn this._bvh.render(context);\n\t}\n\n\t/**\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon} body The body to test for potential collisions against\n\t * @returns {Iterator<Body>}\n\t */\n\tpotentials(body) {\n\t\treturn this._bvh.potentials(body);\n\t}\n\n\t/**\n\t * Determines if two bodies are colliding\n\t * @param {Circle|Polygon} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t */\n\tcollides(source, target, result = null, aabb = true) {\n\t\treturn SAT(source, target, result, aabb);\n\t}\n};\n\nexport {\n\tCollisions as default,\n\tCollisions,\n\tCircle,\n\tPolygon,\n\tResult,\n}\n",
+    "static": true,
+    "longname": "C:/Users/sam/projects/Collisions/src/Collisions.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "class",
+    "name": "Collisions",
+    "memberof": "src/Collisions.js",
+    "static": true,
+    "longname": "src/Collisions.js~Collisions",
+    "access": "public",
+    "export": true,
+    "importPath": "collisions",
+    "importStyle": "{Collisions}",
+    "description": "A collision system used to track bodies to improve collision detection performance",
+    "lineNumber": 11,
+    "unknown": [
+      {
+        "tagName": "@class",
+        "tagValue": ""
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 50,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 15,
+    "unknown": [
+      {
+        "tagName": "@constructor",
+        "tagValue": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 51,
+    "kind": "member",
+    "name": "_bvh",
+    "memberof": "src/Collisions.js~Collisions",
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#_bvh",
+    "access": "private",
+    "description": null,
+    "lineNumber": 17,
+    "ignore": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "method",
+    "name": "createCircle",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#createCircle",
+    "access": "public",
+    "description": "Creates a {@link Circle} and inserts it into the collision system",
+    "lineNumber": 29,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Circle}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "x",
+        "description": "The starting X coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "y",
+        "description": "The starting Y coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "radius",
+        "description": "The radius"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 1",
+        "defaultRaw": 1,
+        "name": "scale",
+        "description": "The scale"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "padding",
+        "description": "The amount to pad the bounding volume when testing for potential collisions"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Circle"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "method",
+    "name": "createPolygon",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#createPolygon",
+    "access": "public",
+    "description": "Creates a {@link Polygon} and inserts it into the collision system",
+    "lineNumber": 48,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Polygon}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "x",
+        "description": "The starting X coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "y",
+        "description": "The starting Y coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Array<Number[]>"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " []",
+        "defaultRaw": [],
+        "name": "points",
+        "description": "An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "angle",
+        "description": "The starting rotation in radians"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 1",
+        "defaultRaw": 1,
+        "name": "scale_x",
+        "description": "The starting scale along the X axis"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 1",
+        "defaultRaw": 1,
+        "name": "scale_y",
+        "description": "The starting scale long the Y axis"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "padding",
+        "description": "The amount to pad the bounding volume when testing for potential collisions"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Polygon"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
+    "name": "createResult",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#createResult",
+    "access": "public",
+    "description": "Creates a {@link Result} used to collect the detailed results of a collision test",
+    "lineNumber": 59
+  },
+  {
+    "__docId__": 55,
+    "kind": "method",
+    "name": "createResult",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/Collisions.js~Collisions.createResult",
+    "access": "public",
+    "description": "Creates a Result used to collect the detailed results of a collision test",
+    "lineNumber": 66
+  },
+  {
+    "__docId__": 56,
+    "kind": "method",
+    "name": "insert",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#insert",
+    "access": "public",
+    "description": "Inserts bodies into the collision system",
+    "lineNumber": 74,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "bodies",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 57,
+    "kind": "method",
+    "name": "remove",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#remove",
+    "access": "public",
+    "description": "Removes bodies from the collision system",
+    "lineNumber": 86,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "bodies",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 58,
+    "kind": "method",
+    "name": "update",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#update",
+    "access": "public",
+    "description": "Updates the collision system. This should be called before any collisions are tested.",
+    "lineNumber": 97
+  },
+  {
+    "__docId__": 59,
+    "kind": "method",
+    "name": "renderBodies",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#renderBodies",
+    "access": "public",
+    "description": "Adds lines and arcs representing the bodies within the BVH to a CanvasRenderingContext2D's current path",
+    "lineNumber": 107,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "CanvasRenderingContext2D"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "context",
+        "description": "The context to add lines and arcs to"
+      }
+    ]
+  },
+  {
+    "__docId__": 60,
+    "kind": "method",
+    "name": "renderBVH",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#renderBVH",
+    "access": "public",
+    "description": "Adds lines representing the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.",
+    "lineNumber": 115,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "CanvasRenderingContext2D"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "context",
+        "description": "The context to add lines and arcs to"
+      }
+    ]
+  },
+  {
+    "__docId__": 61,
+    "kind": "method",
+    "name": "potentials",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#potentials",
+    "access": "public",
+    "description": "Returns a list of potential collisions for a body",
+    "lineNumber": 124,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Iterator<Body>}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "body",
+        "description": "The body to test for potential collisions against"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Iterator<Body>"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "method",
+    "name": "collides",
+    "memberof": "src/Collisions.js~Collisions",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/Collisions.js~Collisions#collides",
+    "access": "public",
+    "description": "Determines if two bodies are colliding",
+    "lineNumber": 135,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "The target body to test against"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Result"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " null",
+        "defaultRaw": null,
+        "name": "result",
+        "description": "A Result object on which to store information about the collision"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " true",
+        "defaultRaw": true,
+        "name": "aabb",
+        "description": "Set to false to skip the AABB test (useful if you use your own potential collision heuristic)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "file",
+    "name": "src/modules/Body.js",
+    "content": "import SAT from './SAT.js';\n\n/**\n * The base class for bodies used to detect collisions\n */\nexport default class Body {\n\t/**\n\t * @constructor\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t */\n\tconstructor(x = 0, y = 0, padding = 0) {\n\t\t/**\n\t\t * @desc The X coordinate of the body\n\t\t * @type {Number}\n\t\t */\n\t\tthis.x = x;\n\n\t\t/**\n\t\t * @desc The Y coordinate of the body\n\t\t * @type {Number}\n\t\t */\n\t\tthis.y = y;\n\n\t\t/**\n\t\t * @desc The amount to pad the bounding volume when testing for potential collisions\n\t\t * @type {Number}\n\t\t */\n\t\tthis.padding = padding;\n\n\t\t/** @private */\n\t\tthis._bvh = null;\n\n\t\t/** @private */\n\t\tthis._bvh_parent = null;\n\n\t\t/** @private */\n\t\tthis._bvh_branch = false;\n\n\t\t/** @private */\n\t\tthis._bvh_iterated = false;\n\n\t\t/** @private */\n\t\tthis._bvh_padding = padding;\n\n\t\t/** @private */\n\t\tthis._bvh_min_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_min_y = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_y = 0;\n\t}\n\n\t/**\n\t * Determines if the body is colliding with another body\n\t * @param {Circle|Polygon} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t */\n\tcollides(target, result = null, aabb = true) {\n\t\treturn SAT(this, target, result, aabb);\n\t}\n\n\t/**\n\t * Returns a list of potential collisions\n\t * @returns {Iterator<Body>}\n\t */\n\tpotentials() {\n\t\tif(this._bvh === null) {\n\t\t\tthrow new Error('Body does not belong to a collision system');\n\t\t}\n\n\t\treturn this._bvh.potentials(this);\n\t}\n};\n",
+    "static": true,
+    "longname": "C:/Users/sam/projects/Collisions/src/modules/Body.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 64,
+    "kind": "class",
+    "name": "Body",
+    "memberof": "src/modules/Body.js",
+    "static": true,
+    "longname": "src/modules/Body.js~Body",
+    "access": "public",
+    "export": true,
+    "importPath": "collisions/src/modules/Body.js",
+    "importStyle": "Body",
+    "description": "The base class for bodies used to detect collisions",
+    "lineNumber": 6,
+    "interface": false
+  },
+  {
+    "__docId__": 65,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/modules/Body.js~Body",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Body.js~Body#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 13,
+    "unknown": [
+      {
+        "tagName": "@constructor",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "x",
+        "description": "The starting X coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "y",
+        "description": "The starting Y coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "padding",
+        "description": "The amount to pad the bounding volume when testing for potential collisions"
+      }
+    ]
+  },
+  {
+    "__docId__": 66,
+    "kind": "member",
+    "name": "x",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#x",
+    "access": "public",
+    "description": "The X coordinate of the body",
+    "lineNumber": 18,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "member",
+    "name": "y",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#y",
+    "access": "public",
+    "description": "The Y coordinate of the body",
+    "lineNumber": 24,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "member",
+    "name": "padding",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#padding",
+    "access": "public",
+    "description": "The amount to pad the bounding volume when testing for potential collisions",
+    "lineNumber": 30,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "member",
+    "name": "_bvh",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#_bvh",
+    "access": "private",
+    "description": null,
+    "lineNumber": 33,
+    "ignore": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "member",
+    "name": "_bvh_parent",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#_bvh_parent",
+    "access": "private",
+    "description": null,
+    "lineNumber": 36,
+    "ignore": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "member",
+    "name": "_bvh_branch",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#_bvh_branch",
+    "access": "private",
+    "description": null,
+    "lineNumber": 39,
+    "ignore": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "member",
+    "name": "_bvh_iterated",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#_bvh_iterated",
+    "access": "private",
+    "description": null,
+    "lineNumber": 42,
+    "ignore": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "member",
+    "name": "_bvh_padding",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#_bvh_padding",
+    "access": "private",
+    "description": null,
+    "lineNumber": 45,
+    "ignore": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "member",
+    "name": "_bvh_min_x",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#_bvh_min_x",
+    "access": "private",
+    "description": null,
+    "lineNumber": 48,
+    "ignore": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "member",
+    "name": "_bvh_min_y",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#_bvh_min_y",
+    "access": "private",
+    "description": null,
+    "lineNumber": 51,
+    "ignore": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "member",
+    "name": "_bvh_max_x",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#_bvh_max_x",
+    "access": "private",
+    "description": null,
+    "lineNumber": 54,
+    "ignore": true
+  },
+  {
+    "__docId__": 77,
+    "kind": "member",
+    "name": "_bvh_max_y",
+    "memberof": "src/modules/Body.js~Body",
+    "static": false,
+    "longname": "src/modules/Body.js~Body#_bvh_max_y",
+    "access": "private",
+    "description": null,
+    "lineNumber": 57,
+    "ignore": true
+  },
+  {
+    "__docId__": 78,
+    "kind": "method",
+    "name": "collides",
+    "memberof": "src/modules/Body.js~Body",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Body.js~Body#collides",
+    "access": "public",
+    "description": "Determines if the body is colliding with another body",
+    "lineNumber": 67,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "The target body to test against"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Result"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " null",
+        "defaultRaw": null,
+        "name": "result",
+        "description": "A Result object on which to store information about the collision"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " true",
+        "defaultRaw": true,
+        "name": "aabb",
+        "description": "Set to false to skip the AABB test (useful if you use your own potential collision heuristic)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 79,
+    "kind": "method",
+    "name": "potentials",
+    "memberof": "src/modules/Body.js~Body",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Body.js~Body#potentials",
+    "access": "public",
+    "description": "Returns a list of potential collisions",
+    "lineNumber": 75,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Iterator<Body>}"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Iterator<Body>"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 80,
+    "kind": "file",
+    "name": "src/modules/BVH.js",
+    "content": "import BVHBranch from './BVHBranch.js';\n\n/**\n * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly\n * @private\n */\nexport default class BVH {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/** @private */\n\t\tthis._hierarchy = null;\n\n\t\t/** @private */\n\t\tthis._bodies = [];\n\n\t\t/** @private */\n\t\tthis._dirty_branches = [];\n\t}\n\n\t/**\n\t * Inserts a body into the BVH\n\t * @param {Circle|Polygon} body The body to insert\n\t * @param {Boolean} [updating = false] Set to true if the body already exists in the BVH (used internally when updating the body's position)\n\t */\n\tinsert(body, updating = false) {\n\t\tif(!updating) {\n\t\t\tbody._bvh = this;\n\t\t\tthis._bodies.push(body);\n\t\t}\n\n\t\tconst polygon = body._polygon;\n\t\tconst body_x  = body.x;\n\t\tconst body_y  = body.y;\n\n\t\tif(polygon && (\n\t\t\tbody._dirty_coords ||\n\t\t\tbody_x !== body._x ||\n\t\t\tbody_y !== body._y ||\n\t\t\tbody.angle !== body._angle ||\n\t\t\tbody.scale_x !== body._scale_x ||\n\t\t\tbody.scale_y !== body._scale_y\n\t\t)) {\n\t\t\tbody._calculateCoords();\n\t\t}\n\n\t\tconst padding    = body._bvh_padding;\n\t\tconst radius     = polygon ? 0 : body.radius * body.scale;\n\t\tconst body_min_x = (polygon ? body._min_x : body_x - radius) - padding;\n\t\tconst body_min_y = (polygon ? body._min_y : body_y - radius) - padding;\n\t\tconst body_max_x = (polygon ? body._max_x : body_x + radius) + padding;\n\t\tconst body_max_y = (polygon ? body._max_y : body_y + radius) + padding;\n\n\t\tbody._bvh_min_x = body_min_x;\n\t\tbody._bvh_min_y = body_min_y;\n\t\tbody._bvh_max_x = body_max_x;\n\t\tbody._bvh_max_y = body_max_y;\n\n\t\tlet current = this._hierarchy;\n\t\tlet sort    = 0;\n\n\t\tif(!current) {\n\t\t\tthis._hierarchy = body;\n\t\t}\n\t\telse {\n\t\t\twhile(true) {\n\t\t\t\t// Branch\n\t\t\t\tif(current._bvh_branch) {\n\t\t\t\t\tconst left            = current._bvh_left;\n\t\t\t\t\tconst left_min_y      = left._bvh_min_y;\n\t\t\t\t\tconst left_max_x      = left._bvh_max_x;\n\t\t\t\t\tconst left_max_y      = left._bvh_max_y;\n\t\t\t\t\tconst left_new_min_x  = body_min_x < left._bvh_min_x ? body_min_x : left._bvh_min_x;\n\t\t\t\t\tconst left_new_min_y  = body_min_y < left_min_y ? body_min_y : left_min_y;\n\t\t\t\t\tconst left_new_max_x  = body_max_x > left_max_x ? body_max_x : left_max_x;\n\t\t\t\t\tconst left_new_max_y  = body_max_y > left_max_y ? body_max_y : left_max_y;\n\t\t\t\t\tconst left_volume     = (left_max_x - left._bvh_min_x) * (left_max_y - left_min_y);\n\t\t\t\t\tconst left_new_volume = (left_new_max_x - left_new_min_x) * (left_new_max_y - left_new_min_y);\n\t\t\t\t\tconst left_difference = left_new_volume - left_volume;\n\n\t\t\t\t\tconst right            = current._bvh_right;\n\t\t\t\t\tconst right_min_x      = right._bvh_min_x;\n\t\t\t\t\tconst right_min_y      = right._bvh_min_y;\n\t\t\t\t\tconst right_max_x      = right._bvh_max_x;\n\t\t\t\t\tconst right_max_y      = right._bvh_max_y;\n\t\t\t\t\tconst right_new_min_x  = body_min_x < right_min_x ? body_min_x : right_min_x;\n\t\t\t\t\tconst right_new_min_y  = body_min_y < right_min_y ? body_min_y : right_min_y;\n\t\t\t\t\tconst right_new_max_x  = body_max_x > right_max_x ? body_max_x : right_max_x;\n\t\t\t\t\tconst right_new_max_y  = body_max_y > right_max_y ? body_max_y : right_max_y;\n\t\t\t\t\tconst right_volume     = (right_max_x - right_min_x) * (right_max_y - right_min_y);\n\t\t\t\t\tconst right_new_volume = (right_new_max_x - right_new_min_x) * (right_new_max_y - right_new_min_y);\n\t\t\t\t\tconst right_difference = right_new_volume - right_volume;\n\n\t\t\t\t\tcurrent._bvh_sort  = sort++;\n\t\t\t\t\tcurrent._bvh_min_x = left_new_min_x < right_new_min_x ? left_new_min_x : right_new_min_x;\n\t\t\t\t\tcurrent._bvh_min_y = left_new_min_y < right_new_min_y ? left_new_min_y : right_new_min_y;\n\t\t\t\t\tcurrent._bvh_max_x = left_new_max_x > right_new_max_x ? left_new_max_x : right_new_max_x;\n\t\t\t\t\tcurrent._bvh_max_y = left_new_max_y > right_new_max_y ? left_new_max_y : right_new_max_y;\n\n\t\t\t\t\t// If we're in the middle of an \"update\" insertion,\n\t\t\t\t\t// we've just resized this branch so it's no longer dirty\n\t\t\t\t\tif(updating && current._bvh_dirty) {\n\t\t\t\t\t\tconst dirty_branches = this._dirty_branches;\n\n\t\t\t\t\t\tcurrent._bvh_dirty = false;\n\t\t\t\t\t\tdirty_branches.splice(dirty_branches.indexOf(current), 1);\n\t\t\t\t\t}\n\n\t\t\t\t\tcurrent = left_difference <= right_difference ? left : right;\n\t\t\t\t}\n\t\t\t\t// Leaf\n\t\t\t\telse {\n\t\t\t\t\tconst grandparent  = current._bvh_parent;\n\t\t\t\t\tconst parent_min_x = current._bvh_min_x;\n\t\t\t\t\tconst parent_min_y = current._bvh_min_y;\n\t\t\t\t\tconst parent_max_x = current._bvh_max_x;\n\t\t\t\t\tconst parent_max_y = current._bvh_max_y;\n\t\t\t\t\tconst new_parent   = current._bvh_parent = body._bvh_parent = BVHBranch.getBranch();\n\n\t\t\t\t\tnew_parent._bvh_parent = grandparent;\n\t\t\t\t\tnew_parent._bvh_dirty  = false;\n\t\t\t\t\tnew_parent._bvh_left   = current;\n\t\t\t\t\tnew_parent._bvh_right  = body;\n\t\t\t\t\tnew_parent._bvh_sort   = sort++;\n\t\t\t\t\tnew_parent._bvh_min_x  = body_min_x < parent_min_x ? body_min_x : parent_min_x;\n\t\t\t\t\tnew_parent._bvh_min_y  = body_min_y < parent_min_y ? body_min_y : parent_min_y;\n\t\t\t\t\tnew_parent._bvh_max_x  = body_max_x > parent_max_x ? body_max_x : parent_max_x;\n\t\t\t\t\tnew_parent._bvh_max_y  = body_max_y > parent_max_y ? body_max_y : parent_max_y;\n\n\t\t\t\t\tif(!grandparent) {\n\t\t\t\t\t\tthis._hierarchy = new_parent;\n\t\t\t\t\t}\n\t\t\t\t\telse if(grandparent._bvh_left === current) {\n\t\t\t\t\t\tgrandparent._bvh_left = new_parent;\n\t\t\t\t\t}\n\t\t\t\t\telse {\n\t\t\t\t\t\tgrandparent._bvh_right = new_parent;\n\t\t\t\t\t}\n\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\t/**\n\t * Removes a body from the BVH\n\t * @param {Circle|Polygon} body The body to remove\n\t * @param {Boolean} [updating = false] Set to true if this is a temporary removal (used internally when updating the body's position)\n\t */\n\tremove(body, updating = false) {\n\t\tif(!updating) {\n\t\t\tbody._bvh = null;\n\t\t\tthis._bodies.splice(this._bodies.indexOf(body), 1);\n\t\t}\n\n\t\tif(this._hierarchy === body) {\n\t\t\tthis._hierarchy = null;\n\n\t\t\treturn;\n\t\t}\n\n\t\tconst parent       = body._bvh_parent;\n\t\tconst grandparent  = parent._bvh_parent;\n\t\tconst parent_left  = parent._bvh_left;\n\t\tconst sibling      = parent_left === body ? parent._bvh_right : parent_left;\n\n\t\tsibling._bvh_parent = grandparent;\n\n\t\tif(sibling._bvh_branch) {\n\t\t\tsibling._bvh_sort = parent._bvh_sort;\n\t\t}\n\n\t\tif(grandparent) {\n\t\t\tif(grandparent._bvh_left === parent) {\n\t\t\t\tgrandparent._bvh_left = sibling;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tgrandparent._bvh_right = sibling;\n\t\t\t}\n\n\t\t\tif(!grandparent._bvh_dirty) {\n\t\t\t\tgrandparent._bvh_dirty = true;\n\n\t\t\t\tthis._dirty_branches.push(grandparent);\n\t\t\t}\n\t\t}\n\t\telse {\n\t\t\tthis._hierarchy = sibling;\n\t\t}\n\n\t\tBVHBranch.releaseBranch(parent);\n\t}\n\n\t/**\n\t * Updates the BVH. Moved bodies are removed/inserted and their parent branches are resized.\n\t */\n\tupdate() {\n\t\tlet count;\n\n\t\t// Update moved bodies\n\t\tconst bodies = this._bodies;\n\n\t\tcount = bodies.length;\n\n\t\tfor(let i = 0; i < count; ++i) {\n\t\t\tconst body = bodies[i];\n\n\t\t\tlet update = false;\n\n\t\t\tif(!update && body.padding !== body._bvh_padding) {\n\t\t\t\tbody._bvh_padding = body.padding;\n\t\t\t\tupdate = true;\n\t\t\t}\n\n\t\t\tif(!update) {\n\t\t\t\tconst polygon = body._polygon;\n\t\t\t\tconst x       = body.x;\n\t\t\t\tconst y       = body.y;\n\t\t\t\tconst radius  = polygon ? 0 : body.radius * body.scale;\n\t\t\t\tconst min_x   = polygon ? body._min_x : x - radius;\n\t\t\t\tconst min_y   = polygon ? body._min_y : y - radius;\n\t\t\t\tconst max_x   = polygon ? body._max_x : x + radius;\n\t\t\t\tconst max_y   = polygon ? body._max_y : y + radius;\n\n\t\t\t\tupdate = min_x < body._bvh_min_x || min_y < body._bvh_min_y || max_x > body._bvh_max_x || max_y > body._bvh_max_y;\n\t\t\t}\n\n\t\t\tif(update) {\n\t\t\t\tthis.remove(body, true);\n\t\t\t\tthis.insert(body, true);\n\t\t\t}\n\t\t}\n\n\t\t// Resize dirty branches\n\t\tconst dirty_branches = this._dirty_branches;\n\n\t\tcount = dirty_branches.length;\n\n\t\tdirty_branches.sort(BVHBranch.sortBranches);\n\n\t\tfor(let i = 0; i < count; ++i) {\n\t\t\tlet branch = dirty_branches[i];\n\n\t\t\twhile(branch) {\n\t\t\t\tconst left       = branch._bvh_left;\n\t\t\t\tconst left_min_x = left._bvh_min_x;\n\t\t\t\tconst left_min_y = left._bvh_min_y;\n\t\t\t\tconst left_max_x = left._bvh_max_x;\n\t\t\t\tconst left_max_y = left._bvh_max_y;\n\n\t\t\t\tconst right       = branch._bvh_right;\n\t\t\t\tconst right_min_x = right._bvh_min_x;\n\t\t\t\tconst right_min_y = right._bvh_min_y;\n\t\t\t\tconst right_max_x = right._bvh_max_x;\n\t\t\t\tconst right_max_y = right._bvh_max_y;\n\n\t\t\t\tbranch._bvh_dirty = false;\n\t\t\t\tbranch._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;\n\t\t\t\tbranch._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;\n\t\t\t\tbranch._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;\n\t\t\t\tbranch._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;\n\n\t\t\t\tbranch = branch._bvh_parent;\n\n\t\t\t\t// If the parent is dirty, it should be coming up in the for() loop anyway, so bail out\n\t\t\t\tif(branch && branch._bvh_dirty) {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tdirty_branches.length = 0;\n\t}\n\n\t/**\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon} body The body to test\n\t * @returns {Iterator<Body>}\n\t */\n\t* potentials(body) {\n\t\tconst tree  = this._hierarchy;\n\t\tconst min_x = body._bvh_min_x;\n\t\tconst min_y = body._bvh_min_y;\n\t\tconst max_x = body._bvh_max_x;\n\t\tconst max_y = body._bvh_max_y;\n\n\t\tlet current = tree;\n\n\t\twhile(current) {\n\t\t\tif(!current._bvh_iterated) {\n\t\t\t\tcurrent._bvh_iterated = true;\n\n\t\t\t\tif(\n\t\t\t\t\tcurrent === body ||\n\t\t\t\t\tcurrent._bvh_max_x < min_x ||\n\t\t\t\t\tcurrent._bvh_max_y < min_y ||\n\t\t\t\t\tcurrent._bvh_min_x > max_x ||\n\t\t\t\t\tcurrent._bvh_min_y > max_y\n\t\t\t\t) {\n\t\t\t\t\tcurrent = current._bvh_parent;\n\t\t\t\t\tcontinue;\n\t\t\t\t}\n\n\t\t\t\tif(!current._bvh_branch) {\n\t\t\t\t\tyield current;\n\t\t\t\t\tcurrent = current._bvh_parent;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tconst left = current._bvh_left;\n\n\t\t\tif(left && !left._bvh_iterated) {\n\t\t\t\tcurrent = left;\n\t\t\t\tcontinue;\n\t\t\t}\n\n\t\t\tconst right = current._bvh_right;\n\n\t\t\tif(right && !right._bvh_iterated) {\n\t\t\t\tcurrent = right;\n\t\t\t\tcontinue;\n\t\t\t}\n\n\t\t\tif(left) {\n\t\t\t\tleft._bvh_iterated = false;\n\t\t\t}\n\n\t\t\tif(right) {\n\t\t\t\tright._bvh_iterated = false;\n\t\t\t}\n\n\t\t\tcurrent = current._bvh_parent;\n\t\t}\n\t}\n\n\t/**\n\t * Draws the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trender(context) {\n\t\tlet current = this._hierarchy;\n\n\t\twhile(current) {\n\t\t\tif(!current._bvh_iterated) {\n\t\t\t\tcurrent._bvh_iterated = true;\n\n\t\t\t\tconst min_x = current._bvh_min_x;\n\t\t\t\tconst min_y = current._bvh_min_y;\n\t\t\t\tconst max_x = current._bvh_max_x;\n\t\t\t\tconst max_y = current._bvh_max_y;\n\n\t\t\t\tcontext.moveTo(min_x, min_y);\n\t\t\t\tcontext.lineTo(max_x, min_y);\n\t\t\t\tcontext.lineTo(max_x, max_y);\n\t\t\t\tcontext.lineTo(min_x, max_y);\n\t\t\t\tcontext.lineTo(min_x, min_y);\n\n\t\t\t\tif(!current._bvh_branch) {\n\t\t\t\t\tcurrent = current._bvh_parent;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tconst left = current._bvh_left;\n\n\t\t\tif(left && !left._bvh_iterated) {\n\t\t\t\tcurrent = left;\n\t\t\t\tcontinue;\n\t\t\t}\n\n\t\t\tconst right = current._bvh_right;\n\n\t\t\tif(right && !right._bvh_iterated) {\n\t\t\t\tcurrent = right;\n\t\t\t\tcontinue;\n\t\t\t}\n\n\t\t\tif(left) {\n\t\t\t\tleft._bvh_iterated = false;\n\t\t\t}\n\n\t\t\tif(right) {\n\t\t\t\tright._bvh_iterated = false;\n\t\t\t}\n\n\t\t\tcurrent = current._bvh_parent;\n\t\t}\n\t}\n\n\t/**\n\t * Draaws the bodies within the BVH to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trenderBodies(context) {\n\t\tconst bodies = this._bodies;\n\t\tconst count  = bodies.length;\n\n\t\tfor(let i = 0; i < count; ++i) {\n\t\t\tbodies[i].render(context);\n\t\t}\n\t}\n}\n",
+    "static": true,
+    "longname": "C:/Users/sam/projects/Collisions/src/modules/BVH.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 81,
+    "kind": "class",
+    "name": "BVH",
+    "memberof": "src/modules/BVH.js",
+    "static": true,
+    "longname": "src/modules/BVH.js~BVH",
+    "access": "private",
+    "export": true,
+    "importPath": "collisions/src/modules/BVH.js",
+    "importStyle": "BVH",
+    "description": "A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly",
+    "lineNumber": 7,
+    "interface": false,
+    "ignore": true
+  },
+  {
+    "__docId__": 82,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/modules/BVH.js~BVH",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 11,
+    "unknown": [
+      {
+        "tagName": "@constructor",
+        "tagValue": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 83,
+    "kind": "member",
+    "name": "_hierarchy",
+    "memberof": "src/modules/BVH.js~BVH",
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#_hierarchy",
+    "access": "private",
+    "description": null,
+    "lineNumber": 13,
+    "ignore": true
+  },
+  {
+    "__docId__": 84,
+    "kind": "member",
+    "name": "_bodies",
+    "memberof": "src/modules/BVH.js~BVH",
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#_bodies",
+    "access": "private",
+    "description": null,
+    "lineNumber": 16,
+    "ignore": true
+  },
+  {
+    "__docId__": 85,
+    "kind": "member",
+    "name": "_dirty_branches",
+    "memberof": "src/modules/BVH.js~BVH",
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#_dirty_branches",
+    "access": "private",
+    "description": null,
+    "lineNumber": 19,
+    "ignore": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "method",
+    "name": "insert",
+    "memberof": "src/modules/BVH.js~BVH",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#insert",
+    "access": "public",
+    "description": "Inserts a body into the BVH",
+    "lineNumber": 27,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "body",
+        "description": "The body to insert"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " false",
+        "defaultRaw": false,
+        "name": "updating",
+        "description": "Set to true if the body already exists in the BVH (used internally when updating the body's position)"
+      }
+    ]
+  },
+  {
+    "__docId__": 89,
+    "kind": "method",
+    "name": "remove",
+    "memberof": "src/modules/BVH.js~BVH",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#remove",
+    "access": "public",
+    "description": "Removes a body from the BVH",
+    "lineNumber": 152,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "body",
+        "description": "The body to remove"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " false",
+        "defaultRaw": false,
+        "name": "updating",
+        "description": "Set to true if this is a temporary removal (used internally when updating the body's position)"
+      }
+    ]
+  },
+  {
+    "__docId__": 92,
+    "kind": "method",
+    "name": "update",
+    "memberof": "src/modules/BVH.js~BVH",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#update",
+    "access": "public",
+    "description": "Updates the BVH. Moved bodies are removed/inserted and their parent branches are resized.",
+    "lineNumber": 199
+  },
+  {
+    "__docId__": 93,
+    "kind": "method",
+    "name": "potentials",
+    "memberof": "src/modules/BVH.js~BVH",
+    "generator": true,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#potentials",
+    "access": "public",
+    "description": "Returns a list of potential collisions for a body",
+    "lineNumber": 282,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Iterator<Body>}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "body",
+        "description": "The body to test"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Iterator<Body>"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 94,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/modules/BVH.js~BVH",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#render",
+    "access": "public",
+    "description": "Draws the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.",
+    "lineNumber": 342,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "CanvasRenderingContext2D"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "context",
+        "description": "The context to draw to"
+      }
+    ]
+  },
+  {
+    "__docId__": 95,
+    "kind": "method",
+    "name": "renderBodies",
+    "memberof": "src/modules/BVH.js~BVH",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#renderBodies",
+    "access": "public",
+    "description": "Draaws the bodies within the BVH to a CanvasRenderingContext2D's current path",
+    "lineNumber": 395,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "CanvasRenderingContext2D"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "context",
+        "description": "The context to draw to"
+      }
+    ]
+  },
+  {
+    "__docId__": 96,
+    "kind": "file",
+    "name": "src/modules/BVHBranch.js",
+    "content": "/**\n * @private\n */\nconst branch_pool = [];\n\n/**\n * A branch within a BVH\n * @private\n */\nexport default class BVHBranch {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/** @private */\n\t\tthis._bvh_parent = null;\n\n\t\t/** @private */\n\t\tthis._bvh_branch = true;\n\n\t\t/** @private */\n\t\tthis._bvh_iterated = false;\n\n\t\t/** @private */\n\t\tthis._bvh_dirty = false;\n\n\t\t/** @private */\n\t\tthis._bvh_left = null;\n\n\t\t/** @private */\n\t\tthis._bvh_right = null;\n\n\t\t/** @private */\n\t\tthis._bvh_sort = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_min_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_min_y = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_y = 0;\n\t}\n\n\t/**\n\t * Returns a branch from the branch pool or creates a new branch\n\t * @returns {BVHBranch}\n\t */\n\tstatic getBranch() {\n\t\tif(branch_pool.length) {\n\t\t\treturn branch_pool.pop();\n\t\t}\n\n\t\treturn new BVHBranch();\n\t}\n\n\t/**\n\t * Releases a branch back into the branch pool\n\t * @param {BVHBranch} branch The branch to release\n\t */\n\tstatic releaseBranch(branch) {\n\t\tbranch_pool.push(branch);\n\t}\n\n\t/**\n\t * Sorting callback used to sort branches by deepest first\n\t * @param {BVHBranch} a The first branch\n\t * @param {BVHBranch} b The second branch\n\t * @returns {Number}\n\t */\n\tstatic sortBranches(a, b) {\n\t\treturn a.sort > b.sort ? -1 : 1;\n\t}\n}\n",
+    "static": true,
+    "longname": "C:/Users/sam/projects/Collisions/src/modules/BVHBranch.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 97,
+    "kind": "variable",
+    "name": "branch_pool",
+    "memberof": "src/modules/BVHBranch.js",
+    "static": true,
+    "longname": "src/modules/BVHBranch.js~branch_pool",
+    "access": "private",
+    "export": false,
+    "importPath": "collisions/src/modules/BVHBranch.js",
+    "importStyle": null,
+    "description": "",
+    "lineNumber": 4,
+    "ignore": true
+  },
+  {
+    "__docId__": 98,
+    "kind": "class",
+    "name": "BVHBranch",
+    "memberof": "src/modules/BVHBranch.js",
+    "static": true,
+    "longname": "src/modules/BVHBranch.js~BVHBranch",
+    "access": "private",
+    "export": true,
+    "importPath": "collisions/src/modules/BVHBranch.js",
+    "importStyle": "BVHBranch",
+    "description": "A branch within a BVH",
+    "lineNumber": 10,
+    "interface": false,
+    "ignore": true
+  },
+  {
+    "__docId__": 99,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 14,
+    "unknown": [
+      {
+        "tagName": "@constructor",
+        "tagValue": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 100,
+    "kind": "member",
+    "name": "_bvh_parent",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_parent",
+    "access": "private",
+    "description": null,
+    "lineNumber": 16,
+    "ignore": true
+  },
+  {
+    "__docId__": 101,
+    "kind": "member",
+    "name": "_bvh_branch",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_branch",
+    "access": "private",
+    "description": null,
+    "lineNumber": 19,
+    "ignore": true
+  },
+  {
+    "__docId__": 102,
+    "kind": "member",
+    "name": "_bvh_iterated",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_iterated",
+    "access": "private",
+    "description": null,
+    "lineNumber": 22,
+    "ignore": true
+  },
+  {
+    "__docId__": 103,
+    "kind": "member",
+    "name": "_bvh_dirty",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_dirty",
+    "access": "private",
+    "description": null,
+    "lineNumber": 25,
+    "ignore": true
+  },
+  {
+    "__docId__": 104,
+    "kind": "member",
+    "name": "_bvh_left",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_left",
+    "access": "private",
+    "description": null,
+    "lineNumber": 28,
+    "ignore": true
+  },
+  {
+    "__docId__": 105,
+    "kind": "member",
+    "name": "_bvh_right",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_right",
+    "access": "private",
+    "description": null,
+    "lineNumber": 31,
+    "ignore": true
+  },
+  {
+    "__docId__": 106,
+    "kind": "member",
+    "name": "_bvh_sort",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_sort",
+    "access": "private",
+    "description": null,
+    "lineNumber": 34,
+    "ignore": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "member",
+    "name": "_bvh_min_x",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_min_x",
+    "access": "private",
+    "description": null,
+    "lineNumber": 37,
+    "ignore": true
+  },
+  {
+    "__docId__": 108,
+    "kind": "member",
+    "name": "_bvh_min_y",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_min_y",
+    "access": "private",
+    "description": null,
+    "lineNumber": 40,
+    "ignore": true
+  },
+  {
+    "__docId__": 109,
+    "kind": "member",
+    "name": "_bvh_max_x",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_max_x",
+    "access": "private",
+    "description": null,
+    "lineNumber": 43,
+    "ignore": true
+  },
+  {
+    "__docId__": 110,
+    "kind": "member",
+    "name": "_bvh_max_y",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "static": false,
+    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_max_y",
+    "access": "private",
+    "description": null,
+    "lineNumber": 46,
+    "ignore": true
+  },
+  {
+    "__docId__": 111,
+    "kind": "method",
+    "name": "getBranch",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/BVHBranch.js~BVHBranch.getBranch",
+    "access": "public",
+    "description": "Returns a branch from the branch pool or creates a new branch",
+    "lineNumber": 53,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{BVHBranch}"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "BVHBranch"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 112,
+    "kind": "method",
+    "name": "releaseBranch",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/BVHBranch.js~BVHBranch.releaseBranch",
+    "access": "public",
+    "description": "Releases a branch back into the branch pool",
+    "lineNumber": 65,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "BVHBranch"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "branch",
+        "description": "The branch to release"
+      }
+    ]
+  },
+  {
+    "__docId__": 113,
+    "kind": "method",
+    "name": "sortBranches",
+    "memberof": "src/modules/BVHBranch.js~BVHBranch",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/BVHBranch.js~BVHBranch.sortBranches",
+    "access": "public",
+    "description": "Sorting callback used to sort branches by deepest first",
+    "lineNumber": 75,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Number}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "BVHBranch"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "a",
+        "description": "The first branch"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "BVHBranch"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "The second branch"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 114,
+    "kind": "file",
+    "name": "src/modules/Circle.js",
+    "content": "import Body from './Body.js';\n\n/**\n * A circle used to detect collisions\n */\nexport default class Circle extends Body {\n\t/**\n\t * @constructor\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Number} [radius = 0] The radius\n\t * @param {Number} [scale = 1] The scale\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t */\n\tconstructor(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {\n\t\tsuper(x, y, padding);\n\n\t\t/**\n\t\t * @desc\n\t\t * @type {Number}\n\t\t */\n\t\tthis.radius = radius;\n\n\t\t/**\n\t\t * @desc\n\t\t * @type {Number}\n\t\t */\n\t\tthis.scale = scale;\n\n\t\t/** @private */\n\t\tthis._polygon = false;\n\t}\n\n\t/**\n\t * Adds an arc representing the circle to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to add the arc to\n\t */\n\trender(context) {\n\t\tconst x      = this.x;\n\t\tconst y      = this.y;\n\t\tconst radius = this.radius * this.scale;\n\n\t\tcontext.moveTo(x + radius, y);\n\t\tcontext.arc(x, y, radius, 0, Math.PI * 2);\n\t}\n};\n",
+    "static": true,
+    "longname": "C:/Users/sam/projects/Collisions/src/modules/Circle.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 115,
+    "kind": "class",
+    "name": "Circle",
+    "memberof": "src/modules/Circle.js",
+    "static": true,
+    "longname": "src/modules/Circle.js~Circle",
+    "access": "public",
+    "export": true,
+    "importPath": "collisions/src/modules/Circle.js",
+    "importStyle": "Circle",
+    "description": "A circle used to detect collisions",
+    "lineNumber": 6,
+    "interface": false,
+    "extends": [
+      "src/modules/Body.js~Body"
+    ]
+  },
+  {
+    "__docId__": 116,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/modules/Circle.js~Circle",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Circle.js~Circle#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 15,
+    "unknown": [
+      {
+        "tagName": "@constructor",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "x",
+        "description": "The starting X coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "y",
+        "description": "The starting Y coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "radius",
+        "description": "The radius"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 1",
+        "defaultRaw": 1,
+        "name": "scale",
+        "description": "The scale"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "padding",
+        "description": "The amount to pad the bounding volume when testing for potential collisions"
+      }
+    ]
+  },
+  {
+    "__docId__": 117,
+    "kind": "member",
+    "name": "radius",
+    "memberof": "src/modules/Circle.js~Circle",
+    "static": false,
+    "longname": "src/modules/Circle.js~Circle#radius",
+    "access": "public",
+    "description": "",
+    "lineNumber": 22,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 118,
+    "kind": "member",
+    "name": "scale",
+    "memberof": "src/modules/Circle.js~Circle",
+    "static": false,
+    "longname": "src/modules/Circle.js~Circle#scale",
+    "access": "public",
+    "description": "",
+    "lineNumber": 28,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 119,
+    "kind": "member",
+    "name": "_polygon",
+    "memberof": "src/modules/Circle.js~Circle",
+    "static": false,
+    "longname": "src/modules/Circle.js~Circle#_polygon",
+    "access": "private",
+    "description": null,
+    "lineNumber": 31,
+    "ignore": true
+  },
+  {
+    "__docId__": 120,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/modules/Circle.js~Circle",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Circle.js~Circle#render",
+    "access": "public",
+    "description": "Adds an arc representing the circle to a CanvasRenderingContext2D's current path",
+    "lineNumber": 38,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "CanvasRenderingContext2D"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "context",
+        "description": "The context to add the arc to"
+      }
+    ]
+  },
+  {
+    "__docId__": 121,
+    "kind": "file",
+    "name": "src/modules/Polygon.js",
+    "content": "import Body from './Body.js';\n\n/**\n * A polygon used to detect collisions\n */\nexport default class Polygon extends Body {\n\t/**\n\t * @constructor\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]\n\t * @param {Number} [angle = 0] The starting rotation in radians\n\t * @param {Number} [scale_x = 1] The starting scale along the X axis\n\t * @param {Number} [scale_y = 1] The starting scale long the Y axis\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t */\n\tconstructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tsuper(x, y, padding);\n\n\t\t/**\n\t\t * @desc The angle of the body in radians\n\t\t * @type {Number}\n\t\t */\n\t\tthis.angle = angle;\n\n\t\t/**\n\t\t * @desc The scale of the body along the X axis\n\t\t * @type {Number}\n\t\t */\n\t\tthis.scale_x = scale_x;\n\n\t\t/**\n\t\t * @desc The scale of the body along the Y axis\n\t\t * @type {Number}\n\t\t */\n\t\tthis.scale_y = scale_y;\n\n\n\t\t/** @private */\n\t\tthis._polygon = true;\n\n\t\t/** @private */\n\t\tthis._x = x;\n\n\t\t/** @private */\n\t\tthis._y = y;\n\n\t\t/** @private */\n\t\tthis._angle = angle;\n\n\t\t/** @private */\n\t\tthis._scale_x = scale_x;\n\n\t\t/** @private */\n\t\tthis._scale_y = scale_y;\n\n\t\t/** @private */\n\t\tthis._min_x = 0;\n\n\t\t/** @private */\n\t\tthis._min_y = 0;\n\n\t\t/** @private */\n\t\tthis._max_x = 0;\n\n\t\t/** @private */\n\t\tthis._max_y = 0;\n\n\t\t/** @private */\n\t\tthis._points = null;\n\n\t\t/** @private */\n\t\tthis._coords = null;\n\n\t\t/** @private */\n\t\tthis._edges = null;\n\n\t\t/** @private */\n\t\tthis._normals = null;\n\n\t\t/** @private */\n\t\tthis._dirty_coords = true;\n\n\t\t/** @private */\n\t\tthis._dirty_normals = true;\n\n\t\tthis.setPoints(points);\n\t}\n\n\t/**\n\t * Adds lines representing the polygon to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to add the shape to\n\t */\n\trender(context) {\n\t\tif(\n\t\t\tthis._dirty_coords ||\n\t\t\tthis.x !== this._x ||\n\t\t\tthis.y !== this._y ||\n\t\t\tthis.angle !== this._angle ||\n\t\t\tthis.scale_x !== this._scale_x ||\n\t\t\tthis.scale_y !== this._scale_y\n\t\t) {\n\t\t\tthis._calculateCoords();\n\t\t}\n\n\t\tconst coords = this._coords;\n\n\t\tif(coords.length === 2) {\n\t\t\tcontext.moveTo(coords[0], coords[1]);\n\t\t\tcontext.arc(coords[0], coords[1], 1, 0, Math.PI * 2);\n\t\t}\n\t\telse if(coords.length === 4) {\n\t\t\tcontext.moveTo(coords[0], coords[1]);\n\t\t\tcontext.lineTo(coords[2], coords[3]);\n\t\t}\n\t\telse {\n\t\t\tcontext.moveTo(coords[0], coords[1]);\n\n\t\t\tfor(let i = 2; i < coords.length; i += 2) {\n\t\t\t\tcontext.lineTo(coords[i], coords[i + 1]);\n\t\t\t}\n\n\t\t\tcontext.lineTo(coords[0], coords[1]);\n\t\t}\n\t}\n\n\t/**\n\t * Sets the points making up the polygon. It's important to use this function when changing the polygon's shape to ensure internal data is also updated.\n\t * @param {Array<Number[]>} new_points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]\n\t */\n\tsetPoints(new_points) {\n\t\tconst count = new_points.length;\n\n\t\tthis._points  = new Float64Array(count * 2);\n\t\tthis._coords  = new Float64Array(count * 2);\n\t\tthis._edges   = new Float64Array(count * 2);\n\t\tthis._normals = new Float64Array(count * 2);\n\n\t\tconst points = this._points;\n\n\t\tfor(let i = 0, ix = 0, iy = 1; i < count; ++i, ix += 2, iy += 2) {\n\t\t\tconst new_point = new_points[i];\n\n\t\t\tpoints[ix] = new_point[0];\n\t\t\tpoints[iy] = new_point[1];\n\t\t}\n\n\t\tthis._dirty_coords = true;\n\t}\n\n\t/**\n\t * Calculates and caches the polygon's world coordinates based on its points, angle, and scale\n\t */\n\t_calculateCoords() {\n\t\tconst x       = this.x;\n\t\tconst y       = this.y;\n\t\tconst angle   = this.angle;\n\t\tconst scale_x = this.scale_x;\n\t\tconst scale_y = this.scale_y;\n\t\tconst points  = this._points;\n\t\tconst coords  = this._coords;\n\t\tconst count   = points.length;\n\n\t\tlet min_x;\n\t\tlet max_x;\n\t\tlet min_y;\n\t\tlet max_y;\n\n\t\tfor(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {\n\t\t\tlet coord_x = points[ix] * scale_x;\n\t\t\tlet coord_y = points[iy] * scale_y;\n\n\t\t\tif(angle) {\n\t\t\t\tconst cos   = Math.cos(angle);\n\t\t\t\tconst sin   = Math.sin(angle);\n\t\t\t\tconst tmp_x = coord_x;\n\t\t\t\tconst tmp_y = coord_y;\n\n\t\t\t\tcoord_x = tmp_x * cos - tmp_y * sin;\n\t\t\t\tcoord_y = tmp_x * sin + tmp_y * cos;\n\t\t\t}\n\n\t\t\tcoord_x += x;\n\t\t\tcoord_y += y;\n\n\t\t\tcoords[ix] = coord_x;\n\t\t\tcoords[iy] = coord_y;\n\n\t\t\tif(ix === 0) {\n\t\t\t\tmin_x = max_x = coord_x;\n\t\t\t\tmin_y = max_y = coord_y;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tif(coord_x < min_x) {\n\t\t\t\t\tmin_x = coord_x;\n\t\t\t\t}\n\t\t\t\telse if(coord_x > max_x) {\n\t\t\t\t\tmax_x = coord_x;\n\t\t\t\t}\n\n\t\t\t\tif(coord_y < min_y) {\n\t\t\t\t\tmin_y = coord_y;\n\t\t\t\t}\n\t\t\t\telse if(coord_y > max_y) {\n\t\t\t\t\tmax_y = coord_y;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tthis._x             = x;\n\t\tthis._y             = y;\n\t\tthis._angle         = angle;\n\t\tthis._scale_x       = scale_x;\n\t\tthis._scale_y       = scale_y;\n\t\tthis._min_x         = min_x;\n\t\tthis._min_y         = min_y;\n\t\tthis._max_x         = max_x;\n\t\tthis._max_y         = max_y;\n\t\tthis._dirty_coords  = false;\n\t\tthis._dirty_normals = true;\n\t}\n\n\t/**\n\t * Calculates the normals and edges of the polygon's sides\n\t */\n\t_calculateNormals() {\n\t\tconst coords  = this._coords;\n\t\tconst edges   = this._edges;\n\t\tconst normals = this._normals;\n\t\tconst count   = coords.length;\n\n\t\tfor(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {\n\t\t\tconst next   = ix + 2 < count ? ix + 2 : 0;\n\t\t\tconst x      = coords[next] - coords[ix];\n\t\t\tconst y      = coords[next + 1] - coords[iy];\n\t\t\tconst length = x || y ? Math.sqrt(x * x + y * y) : 0;\n\n\t\t\tedges[ix]   = x;\n\t\t\tedges[iy]   = y;\n\t\t\tnormals[ix] = length ? y / length : 0;\n\t\t\tnormals[iy] = length ? -x / length : 0;\n\t\t}\n\n\t\tthis._dirty_normals = false;\n\t}\n};\n",
+    "static": true,
+    "longname": "C:/Users/sam/projects/Collisions/src/modules/Polygon.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 122,
+    "kind": "class",
+    "name": "Polygon",
+    "memberof": "src/modules/Polygon.js",
+    "static": true,
+    "longname": "src/modules/Polygon.js~Polygon",
+    "access": "public",
+    "export": true,
+    "importPath": "collisions/src/modules/Polygon.js",
+    "importStyle": "Polygon",
+    "description": "A polygon used to detect collisions",
+    "lineNumber": 6,
+    "interface": false,
+    "extends": [
+      "src/modules/Body.js~Body"
+    ]
+  },
+  {
+    "__docId__": 123,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 17,
+    "unknown": [
+      {
+        "tagName": "@constructor",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "x",
+        "description": "The starting X coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "y",
+        "description": "The starting Y coordinate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Array<Number[]>"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " []",
+        "defaultRaw": [],
+        "name": "points",
+        "description": "An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "angle",
+        "description": "The starting rotation in radians"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 1",
+        "defaultRaw": 1,
+        "name": "scale_x",
+        "description": "The starting scale along the X axis"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 1",
+        "defaultRaw": 1,
+        "name": "scale_y",
+        "description": "The starting scale long the Y axis"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 0",
+        "defaultRaw": 0,
+        "name": "padding",
+        "description": "The amount to pad the bounding volume when testing for potential collisions"
+      }
+    ]
+  },
+  {
+    "__docId__": 124,
+    "kind": "member",
+    "name": "angle",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#angle",
+    "access": "public",
+    "description": "The angle of the body in radians",
+    "lineNumber": 24,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 125,
+    "kind": "member",
+    "name": "scale_x",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#scale_x",
+    "access": "public",
+    "description": "The scale of the body along the X axis",
+    "lineNumber": 30,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 126,
+    "kind": "member",
+    "name": "scale_y",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#scale_y",
+    "access": "public",
+    "description": "The scale of the body along the Y axis",
+    "lineNumber": 36,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 127,
+    "kind": "member",
+    "name": "_polygon",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_polygon",
+    "access": "private",
+    "description": null,
+    "lineNumber": 40,
+    "ignore": true
+  },
+  {
+    "__docId__": 128,
+    "kind": "member",
+    "name": "_x",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_x",
+    "access": "private",
+    "description": null,
+    "lineNumber": 43,
+    "ignore": true
+  },
+  {
+    "__docId__": 129,
+    "kind": "member",
+    "name": "_y",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_y",
+    "access": "private",
+    "description": null,
+    "lineNumber": 46,
+    "ignore": true
+  },
+  {
+    "__docId__": 130,
+    "kind": "member",
+    "name": "_angle",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_angle",
+    "access": "private",
+    "description": null,
+    "lineNumber": 49,
+    "ignore": true
+  },
+  {
+    "__docId__": 131,
+    "kind": "member",
+    "name": "_scale_x",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_scale_x",
+    "access": "private",
+    "description": null,
+    "lineNumber": 52,
+    "ignore": true
+  },
+  {
+    "__docId__": 132,
+    "kind": "member",
+    "name": "_scale_y",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_scale_y",
+    "access": "private",
+    "description": null,
+    "lineNumber": 55,
+    "ignore": true
+  },
+  {
+    "__docId__": 133,
+    "kind": "member",
+    "name": "_min_x",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_min_x",
+    "access": "private",
+    "description": null,
+    "lineNumber": 58,
+    "ignore": true
+  },
+  {
+    "__docId__": 134,
+    "kind": "member",
+    "name": "_min_y",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_min_y",
+    "access": "private",
+    "description": null,
+    "lineNumber": 61,
+    "ignore": true
+  },
+  {
+    "__docId__": 135,
+    "kind": "member",
+    "name": "_max_x",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_max_x",
+    "access": "private",
+    "description": null,
+    "lineNumber": 64,
+    "ignore": true
+  },
+  {
+    "__docId__": 136,
+    "kind": "member",
+    "name": "_max_y",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_max_y",
+    "access": "private",
+    "description": null,
+    "lineNumber": 67,
+    "ignore": true
+  },
+  {
+    "__docId__": 137,
+    "kind": "member",
+    "name": "_points",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_points",
+    "access": "private",
+    "description": null,
+    "lineNumber": 70,
+    "ignore": true
+  },
+  {
+    "__docId__": 138,
+    "kind": "member",
+    "name": "_coords",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_coords",
+    "access": "private",
+    "description": null,
+    "lineNumber": 73,
+    "ignore": true
+  },
+  {
+    "__docId__": 139,
+    "kind": "member",
+    "name": "_edges",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_edges",
+    "access": "private",
+    "description": null,
+    "lineNumber": 76,
+    "ignore": true
+  },
+  {
+    "__docId__": 140,
+    "kind": "member",
+    "name": "_normals",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_normals",
+    "access": "private",
+    "description": null,
+    "lineNumber": 79,
+    "ignore": true
+  },
+  {
+    "__docId__": 141,
+    "kind": "member",
+    "name": "_dirty_coords",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_dirty_coords",
+    "access": "private",
+    "description": null,
+    "lineNumber": 82,
+    "ignore": true
+  },
+  {
+    "__docId__": 142,
+    "kind": "member",
+    "name": "_dirty_normals",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_dirty_normals",
+    "access": "private",
+    "description": null,
+    "lineNumber": 85,
+    "ignore": true
+  },
+  {
+    "__docId__": 143,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#render",
+    "access": "public",
+    "description": "Adds lines representing the polygon to a CanvasRenderingContext2D's current path",
+    "lineNumber": 94,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "CanvasRenderingContext2D"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "context",
+        "description": "The context to add the shape to"
+      }
+    ]
+  },
+  {
+    "__docId__": 144,
+    "kind": "method",
+    "name": "setPoints",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#setPoints",
+    "access": "public",
+    "description": "Sets the points making up the polygon. It's important to use this function when changing the polygon's shape to ensure internal data is also updated.",
+    "lineNumber": 131,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array<Number[]>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "new_points",
+        "description": "An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]"
+      }
+    ]
+  },
+  {
+    "__docId__": 150,
+    "kind": "method",
+    "name": "_calculateCoords",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_calculateCoords",
+    "access": "private",
+    "description": "Calculates and caches the polygon's world coordinates based on its points, angle, and scale",
+    "lineNumber": 154,
+    "ignore": true
+  },
+  {
+    "__docId__": 162,
+    "kind": "method",
+    "name": "_calculateNormals",
+    "memberof": "src/modules/Polygon.js~Polygon",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Polygon.js~Polygon#_calculateNormals",
+    "access": "private",
+    "description": "Calculates the normals and edges of the polygon's sides",
+    "lineNumber": 226,
+    "ignore": true
+  },
+  {
+    "__docId__": 164,
+    "kind": "file",
+    "name": "src/modules/Result.js",
+    "content": "/**\n * An object used to collect the detailed results of a collision test\n *\n * > **Note:** It is highly recommended you recycle the same Result object if possible in order to avoid wasting memory.\n */\nexport default class Result {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/**\n\t\t * @desc True if a collision was detected\n\t\t * @type {Boolean}\n\t\t */\n\t\tthis.collision = false;\n\n\t\t/**\n\t\t * @desc The source body tested\n\t\t * @type {Circle|Polygon}\n\t\t */\n\t\tthis.a = null;\n\n\t\t/**\n\t\t * @desc The target body tested against\n\t\t * @type {Circle|Polygon}\n\t\t */\n\t\tthis.b = null;\n\n\t\t/**\n\t\t * @desc True if A is completely contained within B\n\t\t * @type {Boolean}\n\t\t */\n\t\tthis.a_in_b = false;\n\n\t\t/**\n\t\t * @desc True if B is completely contained within A\n\t\t * @type {Boolean}\n\t\t */\n\t\tthis.a_in_b = false;\n\n\t\t/**\n\t\t * @desc The magnitude of the shortest axis of overlap\n\t\t * @type {Number}\n\t\t */\n\t\tthis.overlap = 0;\n\n\t\t/**\n\t\t * @desc The X direction of the shortest axis of overlap\n\t\t * @type {Number}\n\t\t */\n\t\tthis.overlap_x = 0;\n\n\t\t/**\n\t\t * @desc The Y direction of the shortest axis of overlap\n\t\t * @type {Number}\n\t\t */\n\t\tthis.overlap_y = 0;\n\t}\n}\n",
+    "static": true,
+    "longname": "C:/Users/sam/projects/Collisions/src/modules/Result.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 165,
+    "kind": "class",
+    "name": "Result",
+    "memberof": "src/modules/Result.js",
+    "static": true,
+    "longname": "src/modules/Result.js~Result",
+    "access": "public",
+    "export": true,
+    "importPath": "collisions/src/modules/Result.js",
+    "importStyle": "Result",
+    "description": "An object used to collect the detailed results of a collision test\n\n> **Note:** It is highly recommended you recycle the same Result object if possible in order to avoid wasting memory.",
+    "lineNumber": 6,
+    "interface": false
+  },
+  {
+    "__docId__": 166,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/modules/Result.js~Result",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Result.js~Result#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 10,
+    "unknown": [
+      {
+        "tagName": "@constructor",
+        "tagValue": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 167,
+    "kind": "member",
+    "name": "collision",
+    "memberof": "src/modules/Result.js~Result",
+    "static": false,
+    "longname": "src/modules/Result.js~Result#collision",
+    "access": "public",
+    "description": "True if a collision was detected",
+    "lineNumber": 15,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 168,
+    "kind": "member",
+    "name": "a",
+    "memberof": "src/modules/Result.js~Result",
+    "static": false,
+    "longname": "src/modules/Result.js~Result#a",
+    "access": "public",
+    "description": "The source body tested",
+    "lineNumber": 21,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Circle",
+        "Polygon"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 169,
+    "kind": "member",
+    "name": "b",
+    "memberof": "src/modules/Result.js~Result",
+    "static": false,
+    "longname": "src/modules/Result.js~Result#b",
+    "access": "public",
+    "description": "The target body tested against",
+    "lineNumber": 27,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Circle",
+        "Polygon"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 170,
+    "kind": "member",
+    "name": "a_in_b",
+    "memberof": "src/modules/Result.js~Result",
+    "static": false,
+    "longname": "src/modules/Result.js~Result#a_in_b",
+    "access": "public",
+    "description": "True if A is completely contained within B",
+    "lineNumber": 33,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 172,
+    "kind": "member",
+    "name": "overlap",
+    "memberof": "src/modules/Result.js~Result",
+    "static": false,
+    "longname": "src/modules/Result.js~Result#overlap",
+    "access": "public",
+    "description": "The magnitude of the shortest axis of overlap",
+    "lineNumber": 45,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 173,
+    "kind": "member",
+    "name": "overlap_x",
+    "memberof": "src/modules/Result.js~Result",
+    "static": false,
+    "longname": "src/modules/Result.js~Result#overlap_x",
+    "access": "public",
+    "description": "The X direction of the shortest axis of overlap",
+    "lineNumber": 51,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 174,
+    "kind": "member",
+    "name": "overlap_y",
+    "memberof": "src/modules/Result.js~Result",
+    "static": false,
+    "longname": "src/modules/Result.js~Result#overlap_y",
+    "access": "public",
+    "description": "The Y direction of the shortest axis of overlap",
+    "lineNumber": 57,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 175,
+    "kind": "file",
+    "name": "src/modules/SAT.js",
+    "content": "/**\n * Determines if two convex bodies are colliding using the Separating Axis Theorem\n * @private\n * @param {Circle|Polygon} a The source body to test\n * @param {Circle|Polygon} b The target body to test against\n * @param {Result} [result = null] A Result object on which to store information about the collision\n * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own collision heuristic)\n * @returns {Boolean}\n */\nexport default function SAT(a, b, result = null, aabb = true) {\n\tconst a_polygon = a._polygon;\n\tconst b_polygon = b._polygon;\n\n\tif(a_polygon && (\n\t\ta._dirty_coords ||\n\t\ta.x !== a._x ||\n\t\ta.y !== a._y ||\n\t\ta.angle !== a._angle ||\n\t\ta.scale_x !== a._scale_x ||\n\t\ta.scale_y !== a._scale_y\n\t)) {\n\t\ta._calculateCoords();\n\t}\n\n\tif(b_polygon && (\n\t\tb._dirty_coords ||\n\t\tb.x !== b._x ||\n\t\tb.y !== b._y ||\n\t\tb.angle !== b._angle ||\n\t\tb.scale_x !== b._scale_x ||\n\t\tb.scale_y !== b._scale_y\n\t)) {\n\t\tb._calculateCoords();\n\t}\n\n\tif(aabb && !aabbAABB(a, b)) {\n\t\treturn false;\n\t}\n\n\tif(a_polygon && a._dirty_normals) {\n\t\ta._calculateNormals();\n\t}\n\n\tif(b_polygon && b._dirty_normals) {\n\t\tb._calculateNormals();\n\t}\n\n\treturn (\n\t\ta_polygon && b_polygon ? polygonPolygon(a, b, result) :\n\t\ta_polygon ? polygonCircle(a, b, result, false) :\n\t\tb_polygon ? polygonCircle(b, a, result, true) :\n\t\tcircleCircle(a, b, result)\n\t);\n}\n\n/**\n * Determines if two bodies' axis aligned bounding boxes are colliding\n * @param {Circle|Polygon} a The source body to test\n * @param {Circle|Polygon} b The target body to test against\n */\nfunction aabbAABB(a, b) {\n\tconst a_polygon = a._polygon;\n\tconst a_x       = a_polygon ? 0 : a.x;\n\tconst a_y       = a_polygon ? 0 : a.y;\n\tconst a_radius  = a_polygon ? 0 : a.radius * a.scale;\n\tconst a_min_x   = a_polygon ? a._min_x : a_x - a_radius;\n\tconst a_min_y   = a_polygon ? a._min_y : a_y - a_radius;\n\tconst a_max_x   = a_polygon ? a._max_x : a_x + a_radius;\n\tconst a_max_y   = a_polygon ? a._max_y : a_y + a_radius;\n\n\tconst b_polygon = b._polygon;\n\tconst b_x       = b_polygon ? 0 : b.x;\n\tconst b_y       = b_polygon ? 0 : b.y;\n\tconst b_radius  = b_polygon ? 0 : b.radius * b.scale;\n\tconst b_min_x   = b_polygon ? b._min_x : b_x - b_radius;\n\tconst b_min_y   = b_polygon ? b._min_y : b_y - b_radius;\n\tconst b_max_x   = b_polygon ? b._max_x : b_x + b_radius;\n\tconst b_max_y   = b_polygon ? b._max_y : b_y + b_radius;\n\n\treturn a_min_x < b_max_x && a_min_y < b_max_y && a_max_x > b_min_x && a_max_y > b_min_y;\n}\n\n/**\n * Determines if two polygons are colliding\n * @param {Polygon} a The source polygon to test\n * @param {Polygon} b The target polygon to test against\n * @param {Result} [result = null] A Result object on which to store information about the collision\n * @returns {Boolean}\n */\nfunction polygonPolygon(a, b, result = null) {\n\tconst a_normals = a._normals;\n\tconst b_normals = b._normals;\n\tconst a_count   = a._coords.length;\n\tconst b_count   = b._coords.length;\n\n\tif(result) {\n\t\tresult.a         = a;\n\t\tresult.b         = b;\n\t\tresult.a_in_b    = true;\n\t\tresult.b_in_a    = true;\n\t\tresult.overlap   = a_count === 2 && b_count === 2 ? 0 : Number.MAX_VALUE;\n\t\tresult.overlap_x = 0;\n\t\tresult.overlap_y = 0;\n\t}\n\n\tif(a_count > 2) {\n\t\tfor(let ix = 0, iy = 1; ix < a_count; ix += 2, iy += 2) {\n\t\t\tif(separatingAxis(a, b, a_normals[ix], a_normals[iy], result)) {\n\t\t\t\treturn false;\n\t\t\t}\n\t\t}\n\t}\n\n\tif(b_count > 2) {\n\t\tfor(let ix = 0, iy = 1; ix < b_count; ix += 2, iy += 2) {\n\t\t\tif(separatingAxis(a, b, b_normals[ix], b_normals[iy], result)) {\n\t\t\t\treturn false;\n\t\t\t}\n\t\t}\n\t}\n\n\treturn true;\n}\n\n/**\n * Determines if a polygon and a circle are colliding\n * @param {Polygon} a The source polygon to test\n * @param {Circle} b The target circle to test against\n * @param {Result} [result = null] A Result object on which to store information about the collision\n * @param {Boolean} [reverse = false] Set to true to reverse a and b in the result parameter when testing circle->polygon instead of polygon->circle\n * @returns {Boolean}\n */\nfunction polygonCircle(a, b, result = null, reverse = false) {\n\tconst a_coords       = a._coords;\n\tconst a_edges        = a._edges;\n\tconst a_normals      = a._normals;\n\tconst b_x            = b.x;\n\tconst b_y            = b.y;\n\tconst b_radius       = b.radius * b.scale;\n\tconst b_radius2      = b_radius * 2;\n\tconst radius_squared = b_radius * b_radius;\n\tconst count          = a_coords.length;\n\n\tlet a_in_b    = true;\n\tlet b_in_a    = true;\n\tlet overlap   = Number.MAX_VALUE;\n\tlet overlap_x = 0;\n\tlet overlap_y = 0;\n\n\t// Handle single points specially\n\tif(count === 2) {\n\t\tconst coord_x        = b_x - a_coords[0];\n\t\tconst coord_y        = b_y - a_coords[1];\n\t\tconst length_squared = coord_x * coord_x + coord_y * coord_y;\n\n\t\tif(length_squared > radius_squared) {\n\t\t\treturn false;\n\t\t}\n\n\t\tif(result) {\n\t\t\tconst length = Math.sqrt(length_squared);\n\n\t\t\toverlap   = b_radius - length;\n\t\t\toverlap_x = coord_x / length;\n\t\t\toverlap_y = coord_y / length;\n\t\t\tb_in_a    = false;\n\t\t}\n\t}\n\telse {\n\t\tfor(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {\n\t\t\tconst edge_x  = a_edges[ix];\n\t\t\tconst edge_y  = a_edges[iy];\n\t\t\tconst coord_x = b_x - a_coords[ix];\n\t\t\tconst coord_y = b_y - a_coords[iy];\n\t\t\tconst dot     = edge_x * coord_x + edge_y * coord_y;\n\t\t\tconst region  = dot < 0 ? -1 : dot > edge_x * edge_x + edge_y * edge_y ? 1 : 0;\n\n\t\t\tlet tmp_overlapping = false;\n\t\t\tlet tmp_overlap     = 0;\n\t\t\tlet tmp_overlap_x   = 0;\n\t\t\tlet tmp_overlap_y   = 0;\n\n\t\t\tif(result && a_in_b && coord_x * coord_x + coord_y * coord_y > radius_squared) {\n\t\t\t\ta_in_b = false;\n\t\t\t}\n\n\t\t\tif(region) {\n\t\t\t\tconst left     = region === -1;\n\t\t\t\tconst other_x  = left ? (ix === 0 ? count - 2 : ix - 2) : (ix === count - 2 ? 0 : ix + 2);\n\t\t\t\tconst other_y  = other_x + 1;\n\t\t\t\tconst edge2_x  = a_edges[other_x];\n\t\t\t\tconst edge2_y  = a_edges[other_y];\n\t\t\t\tconst coord2_x = b_x - a_coords[other_x];\n\t\t\t\tconst coord2_y = b_y - a_coords[other_y];\n\t\t\t\tconst dot2     = edge2_x * coord2_x + edge2_y * coord2_y;\n\t\t\t\tconst region2  = dot2 < 0 ? -1 : dot2 > edge2_x * edge2_x + edge2_y * edge2_y ? 1 : 0;\n\n\t\t\t\tif(region2 === -region) {\n\t\t\t\t\tconst target_x       = left ? coord_x : coord2_x;\n\t\t\t\t\tconst target_y       = left ? coord_y : coord2_y;\n\t\t\t\t\tconst length_squared = target_x * target_x + target_y * target_y;\n\n\t\t\t\t\tif(length_squared > radius_squared) {\n\t\t\t\t\t\treturn false;\n\t\t\t\t\t}\n\n\t\t\t\t\tif(result) {\n\t\t\t\t\t\tconst length = Math.sqrt(length_squared);\n\n\t\t\t\t\t\ttmp_overlapping = true;\n\t\t\t\t\t\ttmp_overlap     = b_radius - length;\n\t\t\t\t\t\ttmp_overlap_x   = target_x / length;\n\t\t\t\t\t\ttmp_overlap_y   = target_y / length;\n\t\t\t\t\t\tb_in_a          = false;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t\telse {\n\t\t\t\tconst normal_x        = a_normals[ix];\n\t\t\t\tconst normal_y        = a_normals[iy];\n\t\t\t\tconst length          = coord_x * normal_x + coord_y * normal_y;\n\t\t\t\tconst absolute_length = length < 0 ? -length : length;\n\n\t\t\t\tif(length > 0 && absolute_length > b_radius) {\n\t\t\t\t\treturn false;\n\t\t\t\t}\n\n\t\t\t\tif(result) {\n\t\t\t\t\ttmp_overlapping = true;\n\t\t\t\t\ttmp_overlap     = b_radius - length;\n\t\t\t\t\ttmp_overlap_x   = normal_x;\n\t\t\t\t\ttmp_overlap_y   = normal_y;\n\n\t\t\t\t\tif(b_in_a && length >= 0 || tmp_overlap < b_radius2) {\n\t\t\t\t\t\tb_in_a = false;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tif(tmp_overlapping && tmp_overlap < overlap) {\n\t\t\t\toverlap   = tmp_overlap;\n\t\t\t\toverlap_x = tmp_overlap_x;\n\t\t\t\toverlap_y = tmp_overlap_y;\n\t\t\t}\n\t\t}\n\t}\n\n\tif(result) {\n\t\tresult.a         = reverse ? b : a;\n\t\tresult.b         = reverse ? a : b;\n\t\tresult.a_in_b    = reverse ? b_in_a : a_in_b;\n\t\tresult.b_in_a    = reverse ? a_in_b : b_in_a;\n\t\tresult.overlap   = overlap;\n\t\tresult.overlap_x = reverse ? -overlap_x : overlap_x;\n\t\tresult.overlap_y = reverse ? -overlap_y : overlap_y;\n\t}\n\n\treturn true;\n}\n\n/**\n * Determines if two circles are colliding\n * @param {Circle} a The source circle to test\n * @param {Circle} b The target circle to test against\n * @param {Result} [result = null] A Result object on which to store information about the collision\n * @returns {Boolean}\n */\nfunction circleCircle(a, b, result = null) {\n\tconst a_radius       = a.radius * a.scale;\n\tconst b_radius       = b.radius * b.scale;\n\tconst difference_x   = b.x - a.x;\n\tconst difference_y   = b.y - a.y;\n\tconst radius_sum     = a_radius + b_radius;\n\tconst length_squared = difference_x * difference_x + difference_y * difference_y;\n\n\tif(length_squared > radius_sum * radius_sum) {\n\t\treturn false;\n\t}\n\n\tif(result) {\n\t\tconst length = Math.sqrt(length_squared);\n\n\t\tresult.a         = a;\n\t\tresult.b         = b;\n\t\tresult.a_in_b    = a_radius <= b_radius && length <= b_radius - a_radius;\n\t\tresult.b_in_a    = b_radius <= a_radius && length <= a_radius - b_radius;\n\t\tresult.overlap   = radius_sum - length;\n\t\tresult.overlap_x = difference_x / length;\n\t\tresult.overlap_y = difference_y / length;\n\t}\n\n\treturn true;\n}\n\n/**\n * Determines if two polygons are separated by an axis\n * @param {Polygon} a The source polygon to test\n * @param {Polygon} b The target polygon to test against\n * @param {Number} x The X direction of the axis\n * @param {Number} y The Y direction of the axis\n * @param {Result} [result = null] A Result object on which to store information about the collision\n * @returns {Boolean}\n */\nfunction separatingAxis(a, b, x, y, result = null) {\n\tconst a_coords = a._coords;\n\tconst a_count  = a_coords.length;\n\tconst b_coords = b._coords;\n\tconst b_count  = b_coords.length;\n\n\tlet a_start = Number.MAX_VALUE;\n\tlet a_end   = -Number.MAX_VALUE;\n\tlet b_start = Number.MAX_VALUE;\n\tlet b_end   = -Number.MAX_VALUE;\n\n\tfor(let ix = 0, iy = 1; ix < a_count; ix += 2, iy += 2) {\n\t\tconst dot = a_coords[ix] * x + a_coords[iy] * y;\n\n\t\tif(dot < a_start) {\n\t\t\ta_start = dot;\n\t\t}\n\n\t\tif(dot > a_end) {\n\t\t\ta_end = dot;\n\t\t}\n\t}\n\n\tfor(let ix = 0, iy = 1; ix < b_count; ix += 2, iy += 2) {\n\t\tconst dot = b_coords[ix] * x + b_coords[iy] * y;\n\n\t\tif(dot < b_start) {\n\t\t\tb_start = dot;\n\t\t}\n\n\t\tif(dot > b_end) {\n\t\t\tb_end = dot;\n\t\t}\n\t}\n\n\tif(a_start > b_end || a_end < b_start) {\n\t\treturn true;\n\t}\n\n\tif(result) {\n\t\tlet overlap = 0;\n\n\t\tif(a_start < b_start) {\n\t\t\tresult.a_in_b = false;\n\n\t\t\tif(a_end < b_end) {\n\t\t\t\toverlap    = a_end - b_start;\n\t\t\t\tresult.b_in_a = false;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tconst option1 = a_end - b_start;\n\t\t\t\tconst option2 = b_end - a_start;\n\n\t\t\t\toverlap = option1 < option2 ? option1 : -option2;\n\t\t\t}\n\t\t}\n\t\telse {\n\t\t\tresult.b_in_a = false;\n\n\t\t\tif(a_end > b_end) {\n\t\t\t\toverlap    = a_start - b_end;\n\t\t\t\tresult.a_in_b = false;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tconst option1 = a_end - b_start;\n\t\t\t\tconst option2 = b_end - a_start;\n\n\t\t\t\toverlap = option1 < option2 ? option1 : -option2;\n\t\t\t}\n\t\t}\n\n\t\tconst absolute_overlap = overlap < 0 ? -overlap : overlap;\n\n\t\tif(absolute_overlap < result.overlap) {\n\t\t\tconst sign = overlap < 0 ? -1 : 1;\n\n\t\t\tresult.overlap   = absolute_overlap;\n\t\t\tresult.overlap_x = x * sign;\n\t\t\tresult.overlap_y = y * sign;\n\t\t}\n\t}\n\n\treturn false;\n}\n",
+    "static": true,
+    "longname": "C:/Users/sam/projects/Collisions/src/modules/SAT.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 176,
+    "kind": "function",
+    "name": "SAT",
+    "memberof": "src/modules/SAT.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/SAT.js~SAT",
+    "access": "private",
+    "export": true,
+    "importPath": "collisions/src/modules/SAT.js",
+    "importStyle": "SAT",
+    "description": "Determines if two convex bodies are colliding using the Separating Axis Theorem",
+    "lineNumber": 10,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "a",
+        "description": "The source body to test"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "The target body to test against"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Result"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " null",
+        "defaultRaw": null,
+        "name": "result",
+        "description": "A Result object on which to store information about the collision"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " true",
+        "defaultRaw": true,
+        "name": "aabb",
+        "description": "Set to false to skip the AABB test (useful if you use your own collision heuristic)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 177,
+    "kind": "function",
+    "name": "aabbAABB",
+    "memberof": "src/modules/SAT.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/SAT.js~aabbAABB",
+    "access": "public",
+    "export": false,
+    "importPath": "collisions/src/modules/SAT.js",
+    "importStyle": null,
+    "description": "Determines if two bodies' axis aligned bounding boxes are colliding",
+    "lineNumber": 61,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "a",
+        "description": "The source body to test"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Circle",
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "The target body to test against"
+      }
+    ],
+    "ignore": true
+  },
+  {
+    "__docId__": 178,
+    "kind": "function",
+    "name": "polygonPolygon",
+    "memberof": "src/modules/SAT.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/SAT.js~polygonPolygon",
+    "access": "public",
+    "export": false,
+    "importPath": "collisions/src/modules/SAT.js",
+    "importStyle": null,
+    "description": "Determines if two polygons are colliding",
+    "lineNumber": 90,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "a",
+        "description": "The source polygon to test"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "The target polygon to test against"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Result"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " null",
+        "defaultRaw": null,
+        "name": "result",
+        "description": "A Result object on which to store information about the collision"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 179,
+    "kind": "function",
+    "name": "polygonCircle",
+    "memberof": "src/modules/SAT.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/SAT.js~polygonCircle",
+    "access": "public",
+    "export": false,
+    "importPath": "collisions/src/modules/SAT.js",
+    "importStyle": null,
+    "description": "Determines if a polygon and a circle are colliding",
+    "lineNumber": 133,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "a",
+        "description": "The source polygon to test"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Circle"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "The target circle to test against"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Result"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " null",
+        "defaultRaw": null,
+        "name": "result",
+        "description": "A Result object on which to store information about the collision"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " false",
+        "defaultRaw": false,
+        "name": "reverse",
+        "description": "Set to true to reverse a and b in the result parameter when testing circle->polygon instead of polygon->circle"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 180,
+    "kind": "function",
+    "name": "circleCircle",
+    "memberof": "src/modules/SAT.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/SAT.js~circleCircle",
+    "access": "public",
+    "export": false,
+    "importPath": "collisions/src/modules/SAT.js",
+    "importStyle": null,
+    "description": "Determines if two circles are colliding",
+    "lineNumber": 268,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Circle"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "a",
+        "description": "The source circle to test"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Circle"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "The target circle to test against"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Result"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " null",
+        "defaultRaw": null,
+        "name": "result",
+        "description": "A Result object on which to store information about the collision"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 181,
+    "kind": "function",
+    "name": "separatingAxis",
+    "memberof": "src/modules/SAT.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/SAT.js~separatingAxis",
+    "access": "public",
+    "export": false,
+    "importPath": "collisions/src/modules/SAT.js",
+    "importStyle": null,
+    "description": "Determines if two polygons are separated by an axis",
+    "lineNumber": 304,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Boolean}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "a",
+        "description": "The source polygon to test"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Polygon"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "b",
+        "description": "The target polygon to test against"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "x",
+        "description": "The X direction of the axis"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "y",
+        "description": "The Y direction of the axis"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Result"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " null",
+        "defaultRaw": null,
+        "name": "result",
+        "description": "A Result object on which to store information about the collision"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "ignore": true
+  },
+  {
+    "kind": "index",
+    "content": "Collisions\n===============================================================================\n\n**Collisions** is a JavaScript library used to quickly and accurately detect collisions between Polygons, Circles, Lines, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching with the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.\n\nInstallation\n===============================================================================\n\n```bash\nnpm install collisions\n```\n\nDocumentation\n===============================================================================\n\n[Click here](https://sinova.github.com/Collisions/docs/) to view the documentation (this README is also there).\n\nDemos\n===============================================================================\n\n* [Movement](https://sinova.github.com/Collisions/demo)\n* [Stress Test](https://sinova.github.com/Collisions/demo?stress)\n\nUsage\n===============================================================================\n\n```JavaScript\nimport Collisions from 'collisions';\n\n// Create the collision system\nconst system = new Collisions();\n\n// Create a Result object for collecting information about the collisions\nconst result = system.createResult();\n\n// Add the player (represented by a Circle)\nconst player = system.createCircle(0, 0, 10);\n\n// Create some walls (represented by Polygons)\nconst wall1 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);\nconst wall2 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);\nconst wall3 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);\n\n// Get the potential collisions (this quickly rules out walls that have no chance of colliding with the player)\nconst potentials = player.potentials();\n\n// Loop through the potential collisions\nfor(const wall of potentials) {\n\t// Test if the player collides with the wall\n\tif(player.collides(wall, result)) {\n\t\t// Push the player out of the wall\n\t\tplayer.x -= result.overlap * result.overlap_x;\n\t\tplayer.y -= result.overlap * result.overlap_y;\n\t}\n}\n```\n\nGetting Started\n===============================================================================\n\n**Collisions** provides functions to perform both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, all bodies need to be tracked within a collision system.\n\nTo create a collision system, simply instantiate the Collisions class:\n\n```JavaScript\nimport Collisions from 'collisions';\n\nconst system = new Collisions();\n```\n\nThe resulting system exposes several functions for creating bodies:\n\n```JavaScript\nconst circle  = system.createCircle(100, 100, 10);\nconst polygon = system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);\nconst line    = system.createLine(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);\nconst point   = system.createPoint(10, 10);\n```\n\nThose functions create their respective body and automatically insert it into the system. However, it's possible to create bodies separately and insert them into the system manually:\n\n```JavaScript\nimport {Collisions, Circle, Polygon, Line, Point} from 'collisions';\n\nconst system  = new Collisions();\nconst circle  = new Circle(100, 100, 10);\nconst polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);\nconst line    = new Line(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);\nconst point   = new Point(10, 10);\n\nsystem.insert(circle, polygon, line, point);\n```\n\nBodies can be removed also:\n\n```JavaScript\nsystem.remove(polygon, point);\n```\n\nWhen the **result** parameter is supplied to a collision function, three of the properties set on the object are **overlap**, **overlap\\_x**, and **overlap\\_y**. Together, these values describe how much and in what direction a body is overlapping another body. More specifically, **overlap\\_x** and **overlap\\_y** make up the direction vector and **overlap** is the magnitude of that vector.\n\nThese values can be used to \"push\" one body out of another using the minimum distance required. Effectively, subtracting this vector from an body's position will cause the objects to no longer collide. Here's a simple example:\n\n```JavaScript\n\nconst result = system.createResult();\n\nif(player.collides(wall, result)) {\n\tplayer.x -= result.overlap * result.overlap_x;\n\tplayer.y -= result.overlap * result.overlap_y;\n}\n```\n\nFAQ\n===============================================================================\n\n#### Why shouldn't I just use a physics engine?\n\nProjects requiring physics are enthusiastically recommended to use one of the many physics engines that are out there (e.g. [Matter.js](https://github.com/liabru/matter-js) or [Planck.js](https://github.com/shakiba/planck.js)). However, many projects use physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that are made by these engines (gravity, velocity, friction, etc.). **Collisions** was written to fill this need.\n\n#### Why does potentials() return an Iterator instead of an Array?\n\nPopulating an array with references to potential collisions can take up quite a bit of memory when done for thousands of bodies (even if each body has an array that it recycles). For instance, if the system has 1,000 bodies and each one is potentially colliding with five bodies on average, that's 5,000 references in total. Do this every frame and the garbage collector can start to get noticeably bogged down. Iterators solve this problem by only detecting and yielding a single potential collision at a time as you loop through them. Memory profiles showed the allocations per frame drop from 50 kilobytes to 10 bytes. The reduction in garbage collection far outweighs the small peformance cost of using Iterators.\n\n#### Why does the source code seem to have a lot of copy/paste?\n\n**Collisions** was written with performance as its primary focus. Conscious choices were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.\n\nLimitations\n===============================================================================\n\nSAT assumes all tested polygons are convex. Handling concave shapes requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).\n",
+    "longname": "C:\\Users\\sam\\projects\\Collisions\\README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n\t\"name\": \"collisions\",\n\t\"version\": \"1.2.1\",\n\t\"description\": \"Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection\",\n\t\"main\": \"src/Collisions.js\",\n\t\"scripts\": {},\n\t\"repository\": {\n\t\t\"type\": \"git\",\n\t\t\"url\": \"git+https://github.com/Sinova/Collisions.git\"\n\t},\n\t\"keywords\": [\n\t\t\"Collision\",\n\t\t\"SAT\",\n\t\t\"Separating Axis Theorem\",\n\t\t\"Separating\",\n\t\t\"Axis\",\n\t\t\"Theorem\"\n\t],\n\t\"author\": \"Samuel Hodge\",\n\t\"license\": \"MIT\",\n\t\"bugs\": {\n\t\t\"url\": \"https://github.com/Sinova/Collisions/issues\"\n\t},\n\t\"homepage\": \"https://github.com/Sinova/Collisions#readme\",\n\t\"devDependencies\": {\n\t\t\"esdoc\": \"^1.0.4\",\n\t\t\"esdoc-standard-plugin\": \"^1.0.0\"\n\t}\n}\n",
+    "longname": "C:\\Users\\sam\\projects\\Collisions\\package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

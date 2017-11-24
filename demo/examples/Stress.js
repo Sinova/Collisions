@@ -1,11 +1,11 @@
 import Collisions from '../../src/Collisions.js';
 
-const collision = {};
-const width     = 1024;
-const height    = 768;
-const count     = 1000
-const speed     = 1;
-const size      = 5;
+const result = Collisions.createResult();
+const width  = 1024;
+const height = 768;
+const count  = 1000
+const speed  = 1;
+const size   = 5;
 
 let frame     = 0;
 let fps_total = 0;
@@ -72,19 +72,19 @@ export default class Stress {
 			const potentials = body.potentials();
 
 			for(const body2 of potentials) {
-				if(body.collides(body2, collision)) {
-					body.x -= collision.overlap * collision.overlap_x;
-					body.y -= collision.overlap * collision.overlap_y;
+				if(body.collides(body2, result)) {
+					body.x -= result.overlap * result.overlap_x;
+					body.y -= result.overlap * result.overlap_y;
 
-					let dot = body.direction_x * collision.overlap_y + body.direction_y * -collision.overlap_x;
+					let dot = body.direction_x * result.overlap_y + body.direction_y * -result.overlap_x;
 
-					body.direction_x = 2 * dot * collision.overlap_y - body.direction_x;
-					body.direction_y = 2 * dot * -collision.overlap_x - body.direction_y;
+					body.direction_x = 2 * dot * result.overlap_y - body.direction_x;
+					body.direction_y = 2 * dot * -result.overlap_x - body.direction_y;
 
-					dot = body2.direction_x * collision.overlap_y + body2.direction_y * -collision.overlap_x;
+					dot = body2.direction_x * result.overlap_y + body2.direction_y * -result.overlap_x;
 
-					body2.direction_x = 2 * dot * collision.overlap_y - body2.direction_x;
-					body2.direction_y = 2 * dot * -collision.overlap_x - body2.direction_y;
+					body2.direction_x = 2 * dot * result.overlap_y - body2.direction_x;
+					body2.direction_y = 2 * dot * -result.overlap_x - body2.direction_y;
 				}
 			}
 
@@ -117,7 +117,7 @@ export default class Stress {
 		this.context.strokeStyle = '#FFFFFF';
 
 		this.context.beginPath();
-		this.collisions.render(this.context);
+		this.collisions.renderBodies(this.context);
 		this.context.stroke();
 
 		// Render the FPS
