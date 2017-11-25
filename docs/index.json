@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/Collisions.js",
-    "content": "import BVH     from './modules/BVH.js';\nimport Circle  from './modules/Circle.js';\nimport Polygon from './modules/Polygon.js';\nimport Path    from './modules/Path.js';\nimport Point   from './modules/Point.js';\nimport Result  from './modules/Result.js';\nimport SAT     from './modules/SAT.js';\n\n/**\n * A collision system used to track bodies in order to improve collision detection performance\n * @class\n */\nclass Collisions {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/** @private */\n\t\tthis._bvh = new BVH();\n\t}\n\n\t/**\n\t * Creates a {@link Circle} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Number} [radius = 0] The radius\n\t * @param {Number} [scale = 1] The scale\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Circle}\n\t */\n\tcreateCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {\n\t\tconst body = new Circle(x, y, radius, scale, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Polygon} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]\n\t * @param {Number} [angle = 0] The starting rotation in radians\n\t * @param {Number} [scale_x = 1] The starting scale along the X axis\n\t * @param {Number} [scale_y = 1] The starting scale long the Y axis\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Polygon}\n\t */\n\tcreatePolygon(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tconst body = new Polygon(x, y, points, angle, scale_x, scale_y, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Path} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the path's segments - [[x1, y1], [x2, y2], ...]\n\t * @param {Number} [angle = 0] The starting rotation in radians\n\t * @param {Number} [scale_x = 1] The starting scale along the X axis\n\t * @param {Number} [scale_y = 1] The starting scale long the Y axis\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Path}\n\t */\n\tcreatePath(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tconst body = new Path(x, y, points, angle, scale_x, scale_y, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Point} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Point}\n\t */\n\tcreatePoint(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tconst body = new Point(x, y, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Result} used to collect the detailed results of a collision test\n\t */\n\tcreateResult() {\n\t\treturn new Result();\n\t}\n\n\t/**\n\t * Creates a Result used to collect the detailed results of a collision test\n\t */\n\tstatic createResult() {\n\t\treturn new Result();\n\t}\n\n\t/**\n\t * Inserts bodies into the collision system\n\t * @param {...Circle|...Polygon|...Path|...Point} bodies\n\t */\n\tinsert(...bodies) {\n\t\tfor(const body of bodies) {\n\t\t\tthis._bvh.insert(body, false);\n\t\t}\n\n\t\treturn this;\n\t}\n\n\t/**\n\t * Removes bodies from the collision system\n\t * @param {...Circle|...Polygon|...Path|...Point} bodies\n\t */\n\tremove(...bodies) {\n\t\tfor(const body of bodies) {\n\t\t\tthis._bvh.remove(body, false);\n\t\t}\n\n\t\treturn this;\n\t}\n\n\t/**\n\t * Updates the collision system. This should be called before any collisions are tested.\n\t */\n\tupdate() {\n\t\tthis._bvh.update();\n\n\t\treturn this;\n\t}\n\n\t/**\n\t * Draws the bodies within the system to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trenderBodies(context) {\n\t\treturn this._bvh.renderBodies(context);\n\t}\n\n\t/**\n\t * Draws the system's BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trenderBVH(context) {\n\t\treturn this._bvh.render(context);\n\t}\n\n\t/**\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Iterator<Body>}\n\t */\n\tpotentials(body) {\n\t\treturn this._bvh.potentials(body);\n\t}\n\n\t/**\n\t * Determines if two bodies are colliding\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t */\n\tcollides(source, target, result = null, aabb = true) {\n\t\treturn SAT(source, target, result, aabb);\n\t}\n};\n\nexport {\n\tCollisions as default,\n\tCollisions,\n\tResult,\n\tCircle,\n\tPolygon,\n\tPath,\n\tPoint,\n}\n",
+    "content": "import BVH     from './modules/BVH.js';\nimport Circle  from './modules/Circle.js';\nimport Polygon from './modules/Polygon.js';\nimport Path    from './modules/Path.js';\nimport Point   from './modules/Point.js';\nimport Result  from './modules/Result.js';\nimport SAT     from './modules/SAT.js';\n\n/**\n * A collision system used to track bodies in order to improve collision detection performance\n * @class\n */\nclass Collisions {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/** @private */\n\t\tthis._bvh = new BVH();\n\t}\n\n\t/**\n\t * Creates a {@link Circle} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Number} [radius = 0] The radius\n\t * @param {Number} [scale = 1] The scale\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Circle}\n\t */\n\tcreateCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {\n\t\tconst body = new Circle(x, y, radius, scale, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Polygon} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]\n\t * @param {Number} [angle = 0] The starting rotation in radians\n\t * @param {Number} [scale_x = 1] The starting scale along the X axis\n\t * @param {Number} [scale_y = 1] The starting scale long the Y axis\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Polygon}\n\t */\n\tcreatePolygon(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tconst body = new Polygon(x, y, points, angle, scale_x, scale_y, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Path} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the path's segments - [[x1, y1], [x2, y2], ...]\n\t * @param {Number} [angle = 0] The starting rotation in radians\n\t * @param {Number} [scale_x = 1] The starting scale along the X axis\n\t * @param {Number} [scale_y = 1] The starting scale long the Y axis\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Path}\n\t */\n\tcreatePath(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tconst body = new Path(x, y, points, angle, scale_x, scale_y, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Point} and inserts it into the collision system\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t * @returns {Point}\n\t */\n\tcreatePoint(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tconst body = new Point(x, y, padding);\n\n\t\tthis._bvh.insert(body);\n\n\t\treturn body;\n\t}\n\n\t/**\n\t * Creates a {@link Result} used to collect the detailed results of a collision test\n\t */\n\tcreateResult() {\n\t\treturn new Result();\n\t}\n\n\t/**\n\t * Creates a Result used to collect the detailed results of a collision test\n\t */\n\tstatic createResult() {\n\t\treturn new Result();\n\t}\n\n\t/**\n\t * Inserts bodies into the collision system\n\t * @param {...Circle|...Polygon|...Path|...Point} bodies\n\t */\n\tinsert(...bodies) {\n\t\tfor(const body of bodies) {\n\t\t\tthis._bvh.insert(body, false);\n\t\t}\n\n\t\treturn this;\n\t}\n\n\t/**\n\t * Removes bodies from the collision system\n\t * @param {...Circle|...Polygon|...Path|...Point} bodies\n\t */\n\tremove(...bodies) {\n\t\tfor(const body of bodies) {\n\t\t\tthis._bvh.remove(body, false);\n\t\t}\n\n\t\treturn this;\n\t}\n\n\t/**\n\t * Updates the collision system. This should be called before any collisions are tested.\n\t */\n\tupdate() {\n\t\tthis._bvh.update();\n\n\t\treturn this;\n\t}\n\n\t/**\n\t * Draws the bodies within the system to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trenderBodies(context) {\n\t\treturn this._bvh.renderBodies(context);\n\t}\n\n\t/**\n\t * Draws the system's BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trenderBVH(context) {\n\t\treturn this._bvh.render(context);\n\t}\n\n\t/**\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Array<Body>}\n\t */\n\tpotentials(body) {\n\t\treturn this._bvh.potentials(body);\n\t}\n\n\t/**\n\t * Determines if two bodies are colliding\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t */\n\tcollides(source, target, result = null, aabb = true) {\n\t\treturn SAT(source, target, result, aabb);\n\t}\n};\n\nexport {\n\tCollisions as default,\n\tCollisions,\n\tResult,\n\tCircle,\n\tPolygon,\n\tPath,\n\tPoint,\n}\n",
     "static": true,
     "longname": "C:/Users/sam/projects/Collisions/src/Collisions.js",
     "access": "public",
@@ -1166,7 +1166,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Iterator<Body>}"
+        "tagValue": "{Array<Body>}"
       }
     ],
     "params": [
@@ -1187,7 +1187,7 @@
     "return": {
       "nullable": null,
       "types": [
-        "Iterator<Body>"
+        "Array<Body>"
       ],
       "spread": false,
       "description": ""
@@ -1263,7 +1263,7 @@
     "__docId__": 65,
     "kind": "file",
     "name": "src/modules/Body.js",
-    "content": "import SAT from './SAT.js';\n\n/**\n * The base class for bodies used to detect collisions\n * @class\n * @protected\n */\nexport default class Body {\n\t/**\n\t * @constructor\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t */\n\tconstructor(x = 0, y = 0, padding = 0) {\n\t\t/**\n\t\t * @desc The X coordinate of the body\n\t\t * @type {Number}\n\t\t */\n\t\tthis.x = x;\n\n\t\t/**\n\t\t * @desc The Y coordinate of the body\n\t\t * @type {Number}\n\t\t */\n\t\tthis.y = y;\n\n\t\t/**\n\t\t * @desc The amount to pad the bounding volume when testing for potential collisions\n\t\t * @type {Number}\n\t\t */\n\t\tthis.padding = padding;\n\n\t\t/** @private */\n\t\tthis._circle = false;\n\n\t\t/** @private */\n\t\tthis._polygon = false;\n\n\t\t/** @private */\n\t\tthis._path = false;\n\n\t\t/** @private */\n\t\tthis._point = false;\n\n\t\t/** @private */\n\t\tthis._bvh = null;\n\n\t\t/** @private */\n\t\tthis._bvh_parent = null;\n\n\t\t/** @private */\n\t\tthis._bvh_branch = false;\n\n\t\t/** @private */\n\t\tthis._bvh_iterated = false;\n\n\t\t/** @private */\n\t\tthis._bvh_padding = padding;\n\n\t\t/** @private */\n\t\tthis._bvh_min_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_min_y = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_y = 0;\n\t}\n\n\t/**\n\t * Determines if the body is colliding with another body\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t */\n\tcollides(target, result = null, aabb = true) {\n\t\treturn SAT(this, target, result, aabb);\n\t}\n\n\t/**\n\t * Returns a list of potential collisions\n\t * @returns {Iterator<Body>}\n\t */\n\tpotentials() {\n\t\tconst bvh = this._bvh;\n\n\t\tif(bvh === null) {\n\t\t\tthrow new Error('Body does not belong to a collision system');\n\t\t}\n\n\t\treturn bvh.potentials(this);\n\t}\n\n\t/**\n\t * Removes the body from its current collision system\n\t */\n\tremove() {\n\t\tconst bvh = this._bvh;\n\n\t\tif(bvh) {\n\t\t\tbvh.remove(this, false);\n\t\t}\n\t}\n};\n",
+    "content": "import Result from './Result.js';\nimport SAT from './SAT.js';\n\n/**\n * The base class for bodies used to detect collisions\n * @class\n * @protected\n */\nexport default class Body {\n\t/**\n\t * @constructor\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t */\n\tconstructor(x = 0, y = 0, padding = 0) {\n\t\t/**\n\t\t * @desc The X coordinate of the body\n\t\t * @type {Number}\n\t\t */\n\t\tthis.x = x;\n\n\t\t/**\n\t\t * @desc The Y coordinate of the body\n\t\t * @type {Number}\n\t\t */\n\t\tthis.y = y;\n\n\t\t/**\n\t\t * @desc The amount to pad the bounding volume when testing for potential collisions\n\t\t * @type {Number}\n\t\t */\n\t\tthis.padding = padding;\n\n\t\t/** @private */\n\t\tthis._circle = false;\n\n\t\t/** @private */\n\t\tthis._polygon = false;\n\n\t\t/** @private */\n\t\tthis._path = false;\n\n\t\t/** @private */\n\t\tthis._point = false;\n\n\t\t/** @private */\n\t\tthis._bvh = null;\n\n\t\t/** @private */\n\t\tthis._bvh_parent = null;\n\n\t\t/** @private */\n\t\tthis._bvh_branch = false;\n\n\t\t/** @private */\n\t\tthis._bvh_padding = padding;\n\n\t\t/** @private */\n\t\tthis._bvh_min_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_min_y = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_y = 0;\n\t}\n\n\t/**\n\t * Determines if the body is colliding with another body\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t */\n\tcollides(target, result = null, aabb = true) {\n\t\treturn SAT(this, target, result, aabb);\n\t}\n\n\t/**\n\t * Returns a list of potential collisions\n\t * @returns {Array<Body>}\n\t */\n\tpotentials() {\n\t\tconst bvh = this._bvh;\n\n\t\tif(bvh === null) {\n\t\t\tthrow new Error('Body does not belong to a collision system');\n\t\t}\n\n\t\treturn bvh.potentials(this);\n\t}\n\n\t/**\n\t * Removes the body from its current collision system\n\t */\n\tremove() {\n\t\tconst bvh = this._bvh;\n\n\t\tif(bvh) {\n\t\t\tbvh.remove(this, false);\n\t\t}\n\t}\n\n\t/**\n\t * Creates a {@link Result} used to collect the detailed results of a collision test\n\t */\n\tcreateResult() {\n\t\treturn new Result();\n\t}\n\n\t/**\n\t * Creates a Result used to collect the detailed results of a collision test\n\t */\n\tstatic createResult() {\n\t\treturn new Result();\n\t}\n};\n",
     "static": true,
     "longname": "C:/Users/sam/projects/Collisions/src/modules/Body.js",
     "access": "public",
@@ -1282,7 +1282,7 @@
     "importPath": "collisions/src/modules/Body.js",
     "importStyle": "Body",
     "description": "The base class for bodies used to detect collisions",
-    "lineNumber": 8,
+    "lineNumber": 9,
     "unknown": [
       {
         "tagName": "@class",
@@ -1302,7 +1302,7 @@
     "longname": "src/modules/Body.js~Body#constructor",
     "access": "public",
     "description": "",
-    "lineNumber": 15,
+    "lineNumber": 16,
     "unknown": [
       {
         "tagName": "@constructor",
@@ -1357,7 +1357,7 @@
     "longname": "src/modules/Body.js~Body#x",
     "access": "public",
     "description": "The X coordinate of the body",
-    "lineNumber": 20,
+    "lineNumber": 21,
     "type": {
       "nullable": null,
       "types": [
@@ -1376,7 +1376,7 @@
     "longname": "src/modules/Body.js~Body#y",
     "access": "public",
     "description": "The Y coordinate of the body",
-    "lineNumber": 26,
+    "lineNumber": 27,
     "type": {
       "nullable": null,
       "types": [
@@ -1395,7 +1395,7 @@
     "longname": "src/modules/Body.js~Body#padding",
     "access": "public",
     "description": "The amount to pad the bounding volume when testing for potential collisions",
-    "lineNumber": 32,
+    "lineNumber": 33,
     "type": {
       "nullable": null,
       "types": [
@@ -1414,7 +1414,7 @@
     "longname": "src/modules/Body.js~Body#_circle",
     "access": "private",
     "description": null,
-    "lineNumber": 35,
+    "lineNumber": 36,
     "ignore": true
   },
   {
@@ -1426,7 +1426,7 @@
     "longname": "src/modules/Body.js~Body#_polygon",
     "access": "private",
     "description": null,
-    "lineNumber": 38,
+    "lineNumber": 39,
     "ignore": true
   },
   {
@@ -1438,7 +1438,7 @@
     "longname": "src/modules/Body.js~Body#_path",
     "access": "private",
     "description": null,
-    "lineNumber": 41,
+    "lineNumber": 42,
     "ignore": true
   },
   {
@@ -1450,7 +1450,7 @@
     "longname": "src/modules/Body.js~Body#_point",
     "access": "private",
     "description": null,
-    "lineNumber": 44,
+    "lineNumber": 45,
     "ignore": true
   },
   {
@@ -1462,7 +1462,7 @@
     "longname": "src/modules/Body.js~Body#_bvh",
     "access": "private",
     "description": null,
-    "lineNumber": 47,
+    "lineNumber": 48,
     "ignore": true
   },
   {
@@ -1474,7 +1474,7 @@
     "longname": "src/modules/Body.js~Body#_bvh_parent",
     "access": "private",
     "description": null,
-    "lineNumber": 50,
+    "lineNumber": 51,
     "ignore": true
   },
   {
@@ -1486,23 +1486,11 @@
     "longname": "src/modules/Body.js~Body#_bvh_branch",
     "access": "private",
     "description": null,
-    "lineNumber": 53,
+    "lineNumber": 54,
     "ignore": true
   },
   {
     "__docId__": 78,
-    "kind": "member",
-    "name": "_bvh_iterated",
-    "memberof": "src/modules/Body.js~Body",
-    "static": false,
-    "longname": "src/modules/Body.js~Body#_bvh_iterated",
-    "access": "private",
-    "description": null,
-    "lineNumber": 56,
-    "ignore": true
-  },
-  {
-    "__docId__": 79,
     "kind": "member",
     "name": "_bvh_padding",
     "memberof": "src/modules/Body.js~Body",
@@ -1510,11 +1498,11 @@
     "longname": "src/modules/Body.js~Body#_bvh_padding",
     "access": "private",
     "description": null,
-    "lineNumber": 59,
+    "lineNumber": 57,
     "ignore": true
   },
   {
-    "__docId__": 80,
+    "__docId__": 79,
     "kind": "member",
     "name": "_bvh_min_x",
     "memberof": "src/modules/Body.js~Body",
@@ -1522,11 +1510,11 @@
     "longname": "src/modules/Body.js~Body#_bvh_min_x",
     "access": "private",
     "description": null,
-    "lineNumber": 62,
+    "lineNumber": 60,
     "ignore": true
   },
   {
-    "__docId__": 81,
+    "__docId__": 80,
     "kind": "member",
     "name": "_bvh_min_y",
     "memberof": "src/modules/Body.js~Body",
@@ -1534,11 +1522,11 @@
     "longname": "src/modules/Body.js~Body#_bvh_min_y",
     "access": "private",
     "description": null,
-    "lineNumber": 65,
+    "lineNumber": 63,
     "ignore": true
   },
   {
-    "__docId__": 82,
+    "__docId__": 81,
     "kind": "member",
     "name": "_bvh_max_x",
     "memberof": "src/modules/Body.js~Body",
@@ -1546,11 +1534,11 @@
     "longname": "src/modules/Body.js~Body#_bvh_max_x",
     "access": "private",
     "description": null,
-    "lineNumber": 68,
+    "lineNumber": 66,
     "ignore": true
   },
   {
-    "__docId__": 83,
+    "__docId__": 82,
     "kind": "member",
     "name": "_bvh_max_y",
     "memberof": "src/modules/Body.js~Body",
@@ -1558,11 +1546,11 @@
     "longname": "src/modules/Body.js~Body#_bvh_max_y",
     "access": "private",
     "description": null,
-    "lineNumber": 71,
+    "lineNumber": 69,
     "ignore": true
   },
   {
-    "__docId__": 84,
+    "__docId__": 83,
     "kind": "method",
     "name": "collides",
     "memberof": "src/modules/Body.js~Body",
@@ -1572,7 +1560,7 @@
     "longname": "src/modules/Body.js~Body#collides",
     "access": "public",
     "description": "Determines if the body is colliding with another body",
-    "lineNumber": 81,
+    "lineNumber": 79,
     "unknown": [
       {
         "tagName": "@returns",
@@ -1628,7 +1616,7 @@
     }
   },
   {
-    "__docId__": 85,
+    "__docId__": 84,
     "kind": "method",
     "name": "potentials",
     "memberof": "src/modules/Body.js~Body",
@@ -1638,24 +1626,24 @@
     "longname": "src/modules/Body.js~Body#potentials",
     "access": "public",
     "description": "Returns a list of potential collisions",
-    "lineNumber": 89,
+    "lineNumber": 87,
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Iterator<Body>}"
+        "tagValue": "{Array<Body>}"
       }
     ],
     "return": {
       "nullable": null,
       "types": [
-        "Iterator<Body>"
+        "Array<Body>"
       ],
       "spread": false,
       "description": ""
     }
   },
   {
-    "__docId__": 86,
+    "__docId__": 85,
     "kind": "method",
     "name": "remove",
     "memberof": "src/modules/Body.js~Body",
@@ -1665,13 +1653,39 @@
     "longname": "src/modules/Body.js~Body#remove",
     "access": "public",
     "description": "Removes the body from its current collision system",
-    "lineNumber": 102
+    "lineNumber": 100
+  },
+  {
+    "__docId__": 86,
+    "kind": "method",
+    "name": "createResult",
+    "memberof": "src/modules/Body.js~Body",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/Body.js~Body#createResult",
+    "access": "public",
+    "description": "Creates a {@link Result} used to collect the detailed results of a collision test",
+    "lineNumber": 111
   },
   {
     "__docId__": 87,
+    "kind": "method",
+    "name": "createResult",
+    "memberof": "src/modules/Body.js~Body",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/modules/Body.js~Body.createResult",
+    "access": "public",
+    "description": "Creates a Result used to collect the detailed results of a collision test",
+    "lineNumber": 118
+  },
+  {
+    "__docId__": 88,
     "kind": "file",
     "name": "src/modules/BVH.js",
-    "content": "import BVHBranch from './BVHBranch.js';\n\n/**\n * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly\n * @class\n * @private\n */\nexport default class BVH {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/** @private */\n\t\tthis._hierarchy = null;\n\n\t\t/** @private */\n\t\tthis._bodies = [];\n\n\t\t/** @private */\n\t\tthis._dirty_branches = [];\n\t}\n\n\t/**\n\t * Inserts a body into the BVH\n\t * @param {Circle|Polygon|Path|Point} body The body to insert\n\t * @param {Boolean} [updating = false] Set to true if the body already exists in the BVH (used internally when updating the body's position)\n\t */\n\tinsert(body, updating = false) {\n\t\t// Paths are actually collections of Polygons\n\t\tif(body._path) {\n\t\t\tconst polygons = body._polygons;\n\n\t\t\tbody._bvh = this;\n\n\t\t\tfor(let i = 0; i < polygons.length; ++i) {\n\t\t\t\tthis.insert(polygons[i], updating);\n\t\t\t}\n\n\t\t\treturn;\n\t\t}\n\n\t\tif(!updating) {\n\t\t\tconst bvh = body._bvh;\n\n\t\t\tif(bvh && bvh !== this) {\n\t\t\t\tthrow new Error('Body belongs to another collision system');\n\t\t\t}\n\n\t\t\tbody._bvh = this;\n\t\t\tthis._bodies.push(body);\n\t\t}\n\n\t\tconst polygon = body._polygon;\n\t\tconst body_x  = body.x;\n\t\tconst body_y  = body.y;\n\n\t\tif(polygon) {\n\t\t\tbody._calculateCoords();\n\t\t}\n\n\t\tconst padding    = body._bvh_padding;\n\t\tconst radius     = polygon ? 0 : body.radius * body.scale;\n\t\tconst body_min_x = (polygon ? body._min_x : body_x - radius) - padding;\n\t\tconst body_min_y = (polygon ? body._min_y : body_y - radius) - padding;\n\t\tconst body_max_x = (polygon ? body._max_x : body_x + radius) + padding;\n\t\tconst body_max_y = (polygon ? body._max_y : body_y + radius) + padding;\n\n\t\tbody._bvh_min_x = body_min_x;\n\t\tbody._bvh_min_y = body_min_y;\n\t\tbody._bvh_max_x = body_max_x;\n\t\tbody._bvh_max_y = body_max_y;\n\n\t\tlet current = this._hierarchy;\n\t\tlet sort    = 0;\n\n\t\tif(!current) {\n\t\t\tthis._hierarchy = body;\n\t\t}\n\t\telse {\n\t\t\twhile(true) {\n\t\t\t\t// Branch\n\t\t\t\tif(current._bvh_branch) {\n\t\t\t\t\tconst left            = current._bvh_left;\n\t\t\t\t\tconst left_min_y      = left._bvh_min_y;\n\t\t\t\t\tconst left_max_x      = left._bvh_max_x;\n\t\t\t\t\tconst left_max_y      = left._bvh_max_y;\n\t\t\t\t\tconst left_new_min_x  = body_min_x < left._bvh_min_x ? body_min_x : left._bvh_min_x;\n\t\t\t\t\tconst left_new_min_y  = body_min_y < left_min_y ? body_min_y : left_min_y;\n\t\t\t\t\tconst left_new_max_x  = body_max_x > left_max_x ? body_max_x : left_max_x;\n\t\t\t\t\tconst left_new_max_y  = body_max_y > left_max_y ? body_max_y : left_max_y;\n\t\t\t\t\tconst left_volume     = (left_max_x - left._bvh_min_x) * (left_max_y - left_min_y);\n\t\t\t\t\tconst left_new_volume = (left_new_max_x - left_new_min_x) * (left_new_max_y - left_new_min_y);\n\t\t\t\t\tconst left_difference = left_new_volume - left_volume;\n\n\t\t\t\t\tconst right            = current._bvh_right;\n\t\t\t\t\tconst right_min_x      = right._bvh_min_x;\n\t\t\t\t\tconst right_min_y      = right._bvh_min_y;\n\t\t\t\t\tconst right_max_x      = right._bvh_max_x;\n\t\t\t\t\tconst right_max_y      = right._bvh_max_y;\n\t\t\t\t\tconst right_new_min_x  = body_min_x < right_min_x ? body_min_x : right_min_x;\n\t\t\t\t\tconst right_new_min_y  = body_min_y < right_min_y ? body_min_y : right_min_y;\n\t\t\t\t\tconst right_new_max_x  = body_max_x > right_max_x ? body_max_x : right_max_x;\n\t\t\t\t\tconst right_new_max_y  = body_max_y > right_max_y ? body_max_y : right_max_y;\n\t\t\t\t\tconst right_volume     = (right_max_x - right_min_x) * (right_max_y - right_min_y);\n\t\t\t\t\tconst right_new_volume = (right_new_max_x - right_new_min_x) * (right_new_max_y - right_new_min_y);\n\t\t\t\t\tconst right_difference = right_new_volume - right_volume;\n\n\t\t\t\t\tcurrent._bvh_sort  = sort++;\n\t\t\t\t\tcurrent._bvh_min_x = left_new_min_x < right_new_min_x ? left_new_min_x : right_new_min_x;\n\t\t\t\t\tcurrent._bvh_min_y = left_new_min_y < right_new_min_y ? left_new_min_y : right_new_min_y;\n\t\t\t\t\tcurrent._bvh_max_x = left_new_max_x > right_new_max_x ? left_new_max_x : right_new_max_x;\n\t\t\t\t\tcurrent._bvh_max_y = left_new_max_y > right_new_max_y ? left_new_max_y : right_new_max_y;\n\n\t\t\t\t\t// If we're in the middle of an \"update\" insertion,\n\t\t\t\t\t// we've just resized this branch so it's no longer dirty\n\t\t\t\t\tif(updating && current._bvh_dirty) {\n\t\t\t\t\t\tconst dirty_branches = this._dirty_branches;\n\n\t\t\t\t\t\tcurrent._bvh_dirty = false;\n\t\t\t\t\t\tdirty_branches.splice(dirty_branches.indexOf(current), 1);\n\t\t\t\t\t}\n\n\t\t\t\t\tcurrent = left_difference <= right_difference ? left : right;\n\t\t\t\t}\n\t\t\t\t// Leaf\n\t\t\t\telse {\n\t\t\t\t\tconst grandparent  = current._bvh_parent;\n\t\t\t\t\tconst parent_min_x = current._bvh_min_x;\n\t\t\t\t\tconst parent_min_y = current._bvh_min_y;\n\t\t\t\t\tconst parent_max_x = current._bvh_max_x;\n\t\t\t\t\tconst parent_max_y = current._bvh_max_y;\n\t\t\t\t\tconst new_parent   = current._bvh_parent = body._bvh_parent = BVHBranch.getBranch();\n\n\t\t\t\t\tnew_parent._bvh_parent = grandparent;\n\t\t\t\t\tnew_parent._bvh_dirty  = false;\n\t\t\t\t\tnew_parent._bvh_left   = current;\n\t\t\t\t\tnew_parent._bvh_right  = body;\n\t\t\t\t\tnew_parent._bvh_sort   = sort++;\n\t\t\t\t\tnew_parent._bvh_min_x  = body_min_x < parent_min_x ? body_min_x : parent_min_x;\n\t\t\t\t\tnew_parent._bvh_min_y  = body_min_y < parent_min_y ? body_min_y : parent_min_y;\n\t\t\t\t\tnew_parent._bvh_max_x  = body_max_x > parent_max_x ? body_max_x : parent_max_x;\n\t\t\t\t\tnew_parent._bvh_max_y  = body_max_y > parent_max_y ? body_max_y : parent_max_y;\n\n\t\t\t\t\tif(!grandparent) {\n\t\t\t\t\t\tthis._hierarchy = new_parent;\n\t\t\t\t\t}\n\t\t\t\t\telse if(grandparent._bvh_left === current) {\n\t\t\t\t\t\tgrandparent._bvh_left = new_parent;\n\t\t\t\t\t}\n\t\t\t\t\telse {\n\t\t\t\t\t\tgrandparent._bvh_right = new_parent;\n\t\t\t\t\t}\n\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\t/**\n\t * Removes a body from the BVH\n\t * @param {Circle|Polygon|Path|Point} body The body to remove\n\t * @param {Boolean} [updating = false] Set to true if this is a temporary removal (used internally when updating the body's position)\n\t */\n\tremove(body, updating = false) {\n\t\t// Paths are actually collections of Polygons\n\t\tif(body._path) {\n\t\t\tconst polygons = body._polygons;\n\n\t\t\tbody._bvh = null;\n\n\t\t\tfor(let i = 0; i < polygons.length; ++i) {\n\t\t\t\tthis.remove(polygons[i], updating);\n\t\t\t}\n\n\t\t\treturn;\n\t\t}\n\n\t\tif(!updating) {\n\t\t\tconst bvh = body._bvh;\n\n\t\t\tif(bvh && bvh !== this) {\n\t\t\t\tthrow new Error('Body belongs to another collision system');\n\t\t\t}\n\n\t\t\tbody._bvh = null;\n\t\t\tthis._bodies.splice(this._bodies.indexOf(body), 1);\n\t\t}\n\n\t\tif(this._hierarchy === body) {\n\t\t\tthis._hierarchy = null;\n\n\t\t\treturn;\n\t\t}\n\n\t\tconst parent       = body._bvh_parent;\n\t\tconst grandparent  = parent._bvh_parent;\n\t\tconst parent_left  = parent._bvh_left;\n\t\tconst sibling      = parent_left === body ? parent._bvh_right : parent_left;\n\n\t\tsibling._bvh_parent = grandparent;\n\n\t\tif(sibling._bvh_branch) {\n\t\t\tsibling._bvh_sort = parent._bvh_sort;\n\t\t}\n\n\t\tif(grandparent) {\n\t\t\tif(grandparent._bvh_left === parent) {\n\t\t\t\tgrandparent._bvh_left = sibling;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tgrandparent._bvh_right = sibling;\n\t\t\t}\n\n\t\t\tif(!grandparent._bvh_dirty) {\n\t\t\t\tgrandparent._bvh_dirty = true;\n\n\t\t\t\tthis._dirty_branches.push(grandparent);\n\t\t\t}\n\t\t}\n\t\telse {\n\t\t\tthis._hierarchy = sibling;\n\t\t}\n\n\t\tBVHBranch.releaseBranch(parent);\n\t}\n\n\t/**\n\t * Updates the BVH. Moved bodies are removed/inserted and their parent branches are resized.\n\t */\n\tupdate() {\n\t\tlet count;\n\n\t\t// Update moved bodies\n\t\tconst bodies = this._bodies;\n\n\t\tcount = bodies.length;\n\n\t\tfor(let i = 0; i < count; ++i) {\n\t\t\tconst body = bodies[i];\n\n\t\t\tlet update = false;\n\n\t\t\tif(!update && body.padding !== body._bvh_padding) {\n\t\t\t\tbody._bvh_padding = body.padding;\n\t\t\t\tupdate = true;\n\t\t\t}\n\n\t\t\tif(!update) {\n\t\t\t\tconst polygon = body._polygon;\n\t\t\t\tconst x       = body.x;\n\t\t\t\tconst y       = body.y;\n\t\t\t\tconst radius  = polygon ? 0 : body.radius * body.scale;\n\t\t\t\tconst min_x   = polygon ? body._min_x : x - radius;\n\t\t\t\tconst min_y   = polygon ? body._min_y : y - radius;\n\t\t\t\tconst max_x   = polygon ? body._max_x : x + radius;\n\t\t\t\tconst max_y   = polygon ? body._max_y : y + radius;\n\n\t\t\t\tupdate = min_x < body._bvh_min_x || min_y < body._bvh_min_y || max_x > body._bvh_max_x || max_y > body._bvh_max_y;\n\t\t\t}\n\n\t\t\tif(update) {\n\t\t\t\tthis.remove(body, true);\n\t\t\t\tthis.insert(body, true);\n\t\t\t}\n\t\t}\n\n\t\t// Resize dirty branches\n\t\tconst dirty_branches = this._dirty_branches;\n\n\t\tcount = dirty_branches.length;\n\n\t\tdirty_branches.sort(BVHBranch.sortBranches);\n\n\t\tfor(let i = 0; i < count; ++i) {\n\t\t\tlet branch = dirty_branches[i];\n\n\t\t\twhile(branch) {\n\t\t\t\tconst left       = branch._bvh_left;\n\t\t\t\tconst left_min_x = left._bvh_min_x;\n\t\t\t\tconst left_min_y = left._bvh_min_y;\n\t\t\t\tconst left_max_x = left._bvh_max_x;\n\t\t\t\tconst left_max_y = left._bvh_max_y;\n\n\t\t\t\tconst right       = branch._bvh_right;\n\t\t\t\tconst right_min_x = right._bvh_min_x;\n\t\t\t\tconst right_min_y = right._bvh_min_y;\n\t\t\t\tconst right_max_x = right._bvh_max_x;\n\t\t\t\tconst right_max_y = right._bvh_max_y;\n\n\t\t\t\tbranch._bvh_dirty = false;\n\t\t\t\tbranch._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;\n\t\t\t\tbranch._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;\n\t\t\t\tbranch._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;\n\t\t\t\tbranch._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;\n\n\t\t\t\tbranch = branch._bvh_parent;\n\n\t\t\t\t// If the parent is dirty, it should be coming up in the for() loop anyway, so bail out\n\t\t\t\tif(branch && branch._bvh_dirty) {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tdirty_branches.length = 0;\n\t}\n\n\t/**\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test\n\t * @returns {Iterator<Body>}\n\t */\n\t* potentials(body) {\n\t\tconst hierarchy = this._hierarchy;\n\t\tconst min_x     = body._bvh_min_x;\n\t\tconst min_y     = body._bvh_min_y;\n\t\tconst max_x     = body._bvh_max_x;\n\t\tconst max_y     = body._bvh_max_y;\n\n\t\tlet current = hierarchy;\n\n\t\twhile(current) {\n\t\t\tif(!current._bvh_iterated) {\n\t\t\t\tcurrent._bvh_iterated = true;\n\n\t\t\t\tif(\n\t\t\t\t\tcurrent === body ||\n\t\t\t\t\tcurrent._bvh_max_x < min_x ||\n\t\t\t\t\tcurrent._bvh_max_y < min_y ||\n\t\t\t\t\tcurrent._bvh_min_x > max_x ||\n\t\t\t\t\tcurrent._bvh_min_y > max_y\n\t\t\t\t) {\n\t\t\t\t\tcurrent = current._bvh_parent;\n\n\t\t\t\t\tcontinue;\n\t\t\t\t}\n\n\t\t\t\tif(!current._bvh_branch) {\n\t\t\t\t\tyield current;\n\n\t\t\t\t\tcurrent = current._bvh_parent;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tconst left = current._bvh_left;\n\n\t\t\tif(left && !left._bvh_iterated) {\n\t\t\t\tcurrent = left;\n\n\t\t\t\tcontinue;\n\t\t\t}\n\n\t\t\tconst right = current._bvh_right;\n\n\t\t\tif(right && !right._bvh_iterated) {\n\t\t\t\tcurrent = right;\n\n\t\t\t\tcontinue;\n\t\t\t}\n\n\t\t\tif(left) {\n\t\t\t\tleft._bvh_iterated = false;\n\t\t\t}\n\n\t\t\tif(right) {\n\t\t\t\tright._bvh_iterated = false;\n\t\t\t}\n\n\t\t\tcurrent = current._bvh_parent;\n\t\t}\n\n\t\tif(hierarchy) {\n\t\t\thierarchy._bvh_iterated = false;\n\t\t}\n\t}\n\n\t/**\n\t * Draws the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trender(context) {\n\t\tconst hierarchy = this._hierarchy;\n\n\t\tlet current = hierarchy;\n\n\t\twhile(current) {\n\t\t\tif(!current._bvh_iterated) {\n\t\t\t\tcurrent._bvh_iterated = true;\n\n\t\t\t\tconst min_x = current._bvh_min_x;\n\t\t\t\tconst min_y = current._bvh_min_y;\n\t\t\t\tconst max_x = current._bvh_max_x;\n\t\t\t\tconst max_y = current._bvh_max_y;\n\n\t\t\t\tcontext.moveTo(min_x, min_y);\n\t\t\t\tcontext.lineTo(max_x, min_y);\n\t\t\t\tcontext.lineTo(max_x, max_y);\n\t\t\t\tcontext.lineTo(min_x, max_y);\n\t\t\t\tcontext.lineTo(min_x, min_y);\n\n\t\t\t\tif(!current._bvh_branch) {\n\t\t\t\t\tcurrent = current._bvh_parent;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tconst left = current._bvh_left;\n\n\t\t\tif(left && !left._bvh_iterated) {\n\t\t\t\tcurrent = left;\n\n\t\t\t\tcontinue;\n\t\t\t}\n\n\t\t\tconst right = current._bvh_right;\n\n\t\t\tif(right && !right._bvh_iterated) {\n\t\t\t\tcurrent = right;\n\n\t\t\t\tcontinue;\n\t\t\t}\n\n\t\t\tif(left) {\n\t\t\t\tleft._bvh_iterated = false;\n\t\t\t}\n\n\t\t\tif(right) {\n\t\t\t\tright._bvh_iterated = false;\n\t\t\t}\n\n\t\t\tcurrent = current._bvh_parent;\n\t\t}\n\n\t\tif(hierarchy) {\n\t\t\thierarchy._bvh_iterated = false;\n\t\t}\n\t}\n\n\t/**\n\t * Draws the bodies within the BVH to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trenderBodies(context) {\n\t\tconst bodies = this._bodies;\n\t\tconst count  = bodies.length;\n\n\t\tfor(let i = 0; i < count; ++i) {\n\t\t\tbodies[i].render(context);\n\t\t}\n\t}\n}\n",
+    "content": "import BVHBranch from './BVHBranch.js';\n\n/**\n * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly\n * @class\n * @private\n */\nexport default class BVH {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/** @private */\n\t\tthis._hierarchy = null;\n\n\t\t/** @private */\n\t\tthis._bodies = [];\n\n\t\t/** @private */\n\t\tthis._dirty_branches = [];\n\t}\n\n\t/**\n\t * Inserts a body into the BVH\n\t * @param {Circle|Polygon|Path|Point} body The body to insert\n\t * @param {Boolean} [updating = false] Set to true if the body already exists in the BVH (used internally when updating the body's position)\n\t */\n\tinsert(body, updating = false) {\n\t\t// Paths are actually collections of Polygons\n\t\tif(body._path) {\n\t\t\tconst polygons = body._polygons;\n\n\t\t\tbody._bvh = this;\n\n\t\t\tfor(let i = 0; i < polygons.length; ++i) {\n\t\t\t\tthis.insert(polygons[i], updating);\n\t\t\t}\n\n\t\t\treturn;\n\t\t}\n\n\t\tif(!updating) {\n\t\t\tconst bvh = body._bvh;\n\n\t\t\tif(bvh && bvh !== this) {\n\t\t\t\tthrow new Error('Body belongs to another collision system');\n\t\t\t}\n\n\t\t\tbody._bvh = this;\n\t\t\tthis._bodies.push(body);\n\t\t}\n\n\t\tconst polygon = body._polygon;\n\t\tconst body_x  = body.x;\n\t\tconst body_y  = body.y;\n\n\t\tif(polygon) {\n\t\t\tbody._calculateCoords();\n\t\t}\n\n\t\tconst padding    = body._bvh_padding;\n\t\tconst radius     = polygon ? 0 : body.radius * body.scale;\n\t\tconst body_min_x = (polygon ? body._min_x : body_x - radius) - padding;\n\t\tconst body_min_y = (polygon ? body._min_y : body_y - radius) - padding;\n\t\tconst body_max_x = (polygon ? body._max_x : body_x + radius) + padding;\n\t\tconst body_max_y = (polygon ? body._max_y : body_y + radius) + padding;\n\n\t\tbody._bvh_min_x = body_min_x;\n\t\tbody._bvh_min_y = body_min_y;\n\t\tbody._bvh_max_x = body_max_x;\n\t\tbody._bvh_max_y = body_max_y;\n\n\t\tlet current = this._hierarchy;\n\t\tlet sort    = 0;\n\n\t\tif(!current) {\n\t\t\tthis._hierarchy = body;\n\t\t}\n\t\telse {\n\t\t\twhile(true) {\n\t\t\t\t// Branch\n\t\t\t\tif(current._bvh_branch) {\n\t\t\t\t\tconst left            = current._bvh_left;\n\t\t\t\t\tconst left_min_y      = left._bvh_min_y;\n\t\t\t\t\tconst left_max_x      = left._bvh_max_x;\n\t\t\t\t\tconst left_max_y      = left._bvh_max_y;\n\t\t\t\t\tconst left_new_min_x  = body_min_x < left._bvh_min_x ? body_min_x : left._bvh_min_x;\n\t\t\t\t\tconst left_new_min_y  = body_min_y < left_min_y ? body_min_y : left_min_y;\n\t\t\t\t\tconst left_new_max_x  = body_max_x > left_max_x ? body_max_x : left_max_x;\n\t\t\t\t\tconst left_new_max_y  = body_max_y > left_max_y ? body_max_y : left_max_y;\n\t\t\t\t\tconst left_volume     = (left_max_x - left._bvh_min_x) * (left_max_y - left_min_y);\n\t\t\t\t\tconst left_new_volume = (left_new_max_x - left_new_min_x) * (left_new_max_y - left_new_min_y);\n\t\t\t\t\tconst left_difference = left_new_volume - left_volume;\n\n\t\t\t\t\tconst right            = current._bvh_right;\n\t\t\t\t\tconst right_min_x      = right._bvh_min_x;\n\t\t\t\t\tconst right_min_y      = right._bvh_min_y;\n\t\t\t\t\tconst right_max_x      = right._bvh_max_x;\n\t\t\t\t\tconst right_max_y      = right._bvh_max_y;\n\t\t\t\t\tconst right_new_min_x  = body_min_x < right_min_x ? body_min_x : right_min_x;\n\t\t\t\t\tconst right_new_min_y  = body_min_y < right_min_y ? body_min_y : right_min_y;\n\t\t\t\t\tconst right_new_max_x  = body_max_x > right_max_x ? body_max_x : right_max_x;\n\t\t\t\t\tconst right_new_max_y  = body_max_y > right_max_y ? body_max_y : right_max_y;\n\t\t\t\t\tconst right_volume     = (right_max_x - right_min_x) * (right_max_y - right_min_y);\n\t\t\t\t\tconst right_new_volume = (right_new_max_x - right_new_min_x) * (right_new_max_y - right_new_min_y);\n\t\t\t\t\tconst right_difference = right_new_volume - right_volume;\n\n\t\t\t\t\tcurrent._bvh_sort  = sort++;\n\t\t\t\t\tcurrent._bvh_min_x = left_new_min_x < right_new_min_x ? left_new_min_x : right_new_min_x;\n\t\t\t\t\tcurrent._bvh_min_y = left_new_min_y < right_new_min_y ? left_new_min_y : right_new_min_y;\n\t\t\t\t\tcurrent._bvh_max_x = left_new_max_x > right_new_max_x ? left_new_max_x : right_new_max_x;\n\t\t\t\t\tcurrent._bvh_max_y = left_new_max_y > right_new_max_y ? left_new_max_y : right_new_max_y;\n\n\t\t\t\t\t// If we're in the middle of an \"update\" insertion,\n\t\t\t\t\t// we've just resized this branch so it's no longer dirty\n\t\t\t\t\tif(updating && current._bvh_dirty) {\n\t\t\t\t\t\tconst dirty_branches = this._dirty_branches;\n\n\t\t\t\t\t\tcurrent._bvh_dirty = false;\n\t\t\t\t\t\tdirty_branches.splice(dirty_branches.indexOf(current), 1);\n\t\t\t\t\t}\n\n\t\t\t\t\tcurrent = left_difference <= right_difference ? left : right;\n\t\t\t\t}\n\t\t\t\t// Leaf\n\t\t\t\telse {\n\t\t\t\t\tconst grandparent  = current._bvh_parent;\n\t\t\t\t\tconst parent_min_x = current._bvh_min_x;\n\t\t\t\t\tconst parent_min_y = current._bvh_min_y;\n\t\t\t\t\tconst parent_max_x = current._bvh_max_x;\n\t\t\t\t\tconst parent_max_y = current._bvh_max_y;\n\t\t\t\t\tconst new_parent   = current._bvh_parent = body._bvh_parent = BVHBranch.getBranch();\n\n\t\t\t\t\tnew_parent._bvh_parent = grandparent;\n\t\t\t\t\tnew_parent._bvh_dirty  = false;\n\t\t\t\t\tnew_parent._bvh_left   = current;\n\t\t\t\t\tnew_parent._bvh_right  = body;\n\t\t\t\t\tnew_parent._bvh_sort   = sort++;\n\t\t\t\t\tnew_parent._bvh_min_x  = body_min_x < parent_min_x ? body_min_x : parent_min_x;\n\t\t\t\t\tnew_parent._bvh_min_y  = body_min_y < parent_min_y ? body_min_y : parent_min_y;\n\t\t\t\t\tnew_parent._bvh_max_x  = body_max_x > parent_max_x ? body_max_x : parent_max_x;\n\t\t\t\t\tnew_parent._bvh_max_y  = body_max_y > parent_max_y ? body_max_y : parent_max_y;\n\n\t\t\t\t\tif(!grandparent) {\n\t\t\t\t\t\tthis._hierarchy = new_parent;\n\t\t\t\t\t}\n\t\t\t\t\telse if(grandparent._bvh_left === current) {\n\t\t\t\t\t\tgrandparent._bvh_left = new_parent;\n\t\t\t\t\t}\n\t\t\t\t\telse {\n\t\t\t\t\t\tgrandparent._bvh_right = new_parent;\n\t\t\t\t\t}\n\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\t/**\n\t * Removes a body from the BVH\n\t * @param {Circle|Polygon|Path|Point} body The body to remove\n\t * @param {Boolean} [updating = false] Set to true if this is a temporary removal (used internally when updating the body's position)\n\t */\n\tremove(body, updating = false) {\n\t\t// Paths are actually collections of Polygons\n\t\tif(body._path) {\n\t\t\tconst polygons = body._polygons;\n\n\t\t\tbody._bvh = null;\n\n\t\t\tfor(let i = 0; i < polygons.length; ++i) {\n\t\t\t\tthis.remove(polygons[i], updating);\n\t\t\t}\n\n\t\t\treturn;\n\t\t}\n\n\t\tif(!updating) {\n\t\t\tconst bvh = body._bvh;\n\n\t\t\tif(bvh && bvh !== this) {\n\t\t\t\tthrow new Error('Body belongs to another collision system');\n\t\t\t}\n\n\t\t\tbody._bvh = null;\n\t\t\tthis._bodies.splice(this._bodies.indexOf(body), 1);\n\t\t}\n\n\t\tif(this._hierarchy === body) {\n\t\t\tthis._hierarchy = null;\n\n\t\t\treturn;\n\t\t}\n\n\t\tconst parent       = body._bvh_parent;\n\t\tconst grandparent  = parent._bvh_parent;\n\t\tconst parent_left  = parent._bvh_left;\n\t\tconst sibling      = parent_left === body ? parent._bvh_right : parent_left;\n\n\t\tsibling._bvh_parent = grandparent;\n\n\t\tif(sibling._bvh_branch) {\n\t\t\tsibling._bvh_sort = parent._bvh_sort;\n\t\t}\n\n\t\tif(grandparent) {\n\t\t\tif(grandparent._bvh_left === parent) {\n\t\t\t\tgrandparent._bvh_left = sibling;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tgrandparent._bvh_right = sibling;\n\t\t\t}\n\n\t\t\tif(!grandparent._bvh_dirty) {\n\t\t\t\tgrandparent._bvh_dirty = true;\n\n\t\t\t\tthis._dirty_branches.push(grandparent);\n\t\t\t}\n\t\t}\n\t\telse {\n\t\t\tthis._hierarchy = sibling;\n\t\t}\n\n\t\tBVHBranch.releaseBranch(parent);\n\t}\n\n\t/**\n\t * Updates the BVH. Moved bodies are removed/inserted and their parent branches are resized.\n\t */\n\tupdate() {\n\t\tlet count;\n\n\t\t// Update moved bodies\n\t\tconst bodies = this._bodies;\n\n\t\tcount = bodies.length;\n\n\t\tfor(let i = 0; i < count; ++i) {\n\t\t\tconst body = bodies[i];\n\n\t\t\tlet update = false;\n\n\t\t\tif(!update && body.padding !== body._bvh_padding) {\n\t\t\t\tbody._bvh_padding = body.padding;\n\t\t\t\tupdate = true;\n\t\t\t}\n\n\t\t\tif(!update) {\n\t\t\t\tconst polygon = body._polygon;\n\t\t\t\tconst x       = body.x;\n\t\t\t\tconst y       = body.y;\n\t\t\t\tconst radius  = polygon ? 0 : body.radius * body.scale;\n\t\t\t\tconst min_x   = polygon ? body._min_x : x - radius;\n\t\t\t\tconst min_y   = polygon ? body._min_y : y - radius;\n\t\t\t\tconst max_x   = polygon ? body._max_x : x + radius;\n\t\t\t\tconst max_y   = polygon ? body._max_y : y + radius;\n\n\t\t\t\tupdate = min_x < body._bvh_min_x || min_y < body._bvh_min_y || max_x > body._bvh_max_x || max_y > body._bvh_max_y;\n\t\t\t}\n\n\t\t\tif(update) {\n\t\t\t\tthis.remove(body, true);\n\t\t\t\tthis.insert(body, true);\n\t\t\t}\n\t\t}\n\n\t\t// Resize dirty branches\n\t\tconst dirty_branches = this._dirty_branches;\n\n\t\tcount = dirty_branches.length;\n\n\t\tdirty_branches.sort(BVHBranch.sortBranches);\n\n\t\tfor(let i = 0; i < count; ++i) {\n\t\t\tlet branch = dirty_branches[i];\n\n\t\t\twhile(branch) {\n\t\t\t\tconst left       = branch._bvh_left;\n\t\t\t\tconst left_min_x = left._bvh_min_x;\n\t\t\t\tconst left_min_y = left._bvh_min_y;\n\t\t\t\tconst left_max_x = left._bvh_max_x;\n\t\t\t\tconst left_max_y = left._bvh_max_y;\n\n\t\t\t\tconst right       = branch._bvh_right;\n\t\t\t\tconst right_min_x = right._bvh_min_x;\n\t\t\t\tconst right_min_y = right._bvh_min_y;\n\t\t\t\tconst right_max_x = right._bvh_max_x;\n\t\t\t\tconst right_max_y = right._bvh_max_y;\n\n\t\t\t\tbranch._bvh_dirty = false;\n\t\t\t\tbranch._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;\n\t\t\t\tbranch._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;\n\t\t\t\tbranch._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;\n\t\t\t\tbranch._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;\n\n\t\t\t\tbranch = branch._bvh_parent;\n\n\t\t\t\t// If the parent is dirty, it should be coming up in the for() loop anyway, so bail out\n\t\t\t\tif(branch && branch._bvh_dirty) {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tdirty_branches.length = 0;\n\t}\n\n\t/**\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test\n\t * @returns {Array<Body>}\n\t */\n\tpotentials(body) {\n\t\tconst results = [];\n\t\tconst min_x   = body._bvh_min_x;\n\t\tconst min_y   = body._bvh_min_y;\n\t\tconst max_x   = body._bvh_max_x;\n\t\tconst max_y   = body._bvh_max_y;\n\n\t\tlet current       = this._hierarchy;\n\t\tlet traverse_left = true;\n\n\t\tif(!current || !current._bvh_branch) {\n\t\t\treturn results;\n\t\t}\n\n\t\twhile(current) {\n\t\t\tif(traverse_left) {\n\t\t\t\ttraverse_left = false;\n\n\t\t\t\tlet left = current._bvh_branch ? current._bvh_left : null;\n\n\t\t\t\twhile(\n\t\t\t\t\tleft &&\n\t\t\t\t\tleft._bvh_max_x >= min_x &&\n\t\t\t\t\tleft._bvh_max_y >= min_y &&\n\t\t\t\t\tleft._bvh_min_x <= max_x &&\n\t\t\t\t\tleft._bvh_min_y <= max_y\n\t\t\t\t) {\n\t\t\t\t\tcurrent = left;\n\t\t\t\t\tleft    = current._bvh_branch ? current._bvh_left : null;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tconst branch = current._bvh_branch;\n\t\t\tconst right  = branch ? current._bvh_right : null;\n\n\t\t\tif(\n\t\t\t\tright &&\n\t\t\t\tright._bvh_max_x > min_x &&\n\t\t\t\tright._bvh_max_y > min_y &&\n\t\t\t\tright._bvh_min_x < max_x &&\n\t\t\t\tright._bvh_min_y < max_y\n\t\t\t) {\n\t\t\t\tcurrent       = right;\n\t\t\t\ttraverse_left = true;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tif(!branch && current !== body) {\n\t\t\t\t\tresults.push(current);\n\t\t\t\t}\n\n\t\t\t\tlet parent = current._bvh_parent;\n\n\t\t\t\tif(parent) {\n\t\t\t\t\twhile(parent && parent._bvh_right === current) {\n\t\t\t\t\t\tcurrent = parent;\n\t\t\t\t\t\tparent  = current._bvh_parent;\n\t\t\t\t\t}\n\n\t\t\t\t\tcurrent = parent;\n\t\t\t\t}\n\t\t\t\telse {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\treturn results;\n\t}\n\n\t/**\n\t * Draws the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trender(context) {\n\t\tlet current       = this._hierarchy;\n\t\tlet traverse_left = true;\n\n\t\twhile(current) {\n\t\t\tif(traverse_left) {\n\t\t\t\ttraverse_left = false;\n\n\t\t\t\tlet left = current._bvh_branch ? current._bvh_left : null;\n\n\t\t\t\twhile(left) {\n\t\t\t\t\tcurrent = left;\n\t\t\t\t\tleft    = current._bvh_branch ? current._bvh_left : null;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tconst branch = current._bvh_branch;\n\t\t\tconst min_x  = current._bvh_min_x;\n\t\t\tconst min_y  = current._bvh_min_y;\n\t\t\tconst max_x  = current._bvh_max_x;\n\t\t\tconst max_y  = current._bvh_max_y;\n\t\t\tconst right  = branch ? current._bvh_right : null;\n\n\t\t\tcontext.moveTo(min_x, min_y);\n\t\t\tcontext.lineTo(max_x, min_y);\n\t\t\tcontext.lineTo(max_x, max_y);\n\t\t\tcontext.lineTo(min_x, max_y);\n\t\t\tcontext.lineTo(min_x, min_y);\n\n\t\t\tif(right) {\n\t\t\t\tcurrent       = right;\n\t\t\t\ttraverse_left = true;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tlet parent = current._bvh_parent;\n\n\t\t\t\tif(parent) {\n\t\t\t\t\twhile(parent && parent._bvh_right === current) {\n\t\t\t\t\t\tcurrent = parent;\n\t\t\t\t\t\tparent  = current._bvh_parent;\n\t\t\t\t\t}\n\n\t\t\t\t\tcurrent = parent;\n\t\t\t\t}\n\t\t\t\telse {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\t/**\n\t * Draws the bodies within the BVH to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to draw to\n\t */\n\trenderBodies(context) {\n\t\tconst bodies = this._bodies;\n\t\tconst count  = bodies.length;\n\n\t\tfor(let i = 0; i < count; ++i) {\n\t\t\tbodies[i].render(context);\n\t\t}\n\t}\n}\n",
     "static": true,
     "longname": "C:/Users/sam/projects/Collisions/src/modules/BVH.js",
     "access": "public",
@@ -1679,7 +1693,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 88,
+    "__docId__": 89,
     "kind": "class",
     "name": "BVH",
     "memberof": "src/modules/BVH.js",
@@ -1701,7 +1715,7 @@
     "ignore": true
   },
   {
-    "__docId__": 89,
+    "__docId__": 90,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/modules/BVH.js~BVH",
@@ -1720,7 +1734,7 @@
     ]
   },
   {
-    "__docId__": 90,
+    "__docId__": 91,
     "kind": "member",
     "name": "_hierarchy",
     "memberof": "src/modules/BVH.js~BVH",
@@ -1732,7 +1746,7 @@
     "ignore": true
   },
   {
-    "__docId__": 91,
+    "__docId__": 92,
     "kind": "member",
     "name": "_bodies",
     "memberof": "src/modules/BVH.js~BVH",
@@ -1744,7 +1758,7 @@
     "ignore": true
   },
   {
-    "__docId__": 92,
+    "__docId__": 93,
     "kind": "member",
     "name": "_dirty_branches",
     "memberof": "src/modules/BVH.js~BVH",
@@ -1756,7 +1770,7 @@
     "ignore": true
   },
   {
-    "__docId__": 93,
+    "__docId__": 94,
     "kind": "method",
     "name": "insert",
     "memberof": "src/modules/BVH.js~BVH",
@@ -1796,7 +1810,7 @@
     ]
   },
   {
-    "__docId__": 96,
+    "__docId__": 97,
     "kind": "method",
     "name": "remove",
     "memberof": "src/modules/BVH.js~BVH",
@@ -1836,7 +1850,7 @@
     ]
   },
   {
-    "__docId__": 99,
+    "__docId__": 100,
     "kind": "method",
     "name": "update",
     "memberof": "src/modules/BVH.js~BVH",
@@ -1849,11 +1863,11 @@
     "lineNumber": 231
   },
   {
-    "__docId__": 100,
+    "__docId__": 101,
     "kind": "method",
     "name": "potentials",
     "memberof": "src/modules/BVH.js~BVH",
-    "generator": true,
+    "generator": false,
     "async": false,
     "static": false,
     "longname": "src/modules/BVH.js~BVH#potentials",
@@ -1863,7 +1877,7 @@
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Iterator<Body>}"
+        "tagValue": "{Array<Body>}"
       }
     ],
     "params": [
@@ -1884,14 +1898,14 @@
     "return": {
       "nullable": null,
       "types": [
-        "Iterator<Body>"
+        "Array<Body>"
       ],
       "spread": false,
       "description": ""
     }
   },
   {
-    "__docId__": 101,
+    "__docId__": 102,
     "kind": "method",
     "name": "render",
     "memberof": "src/modules/BVH.js~BVH",
@@ -1901,32 +1915,7 @@
     "longname": "src/modules/BVH.js~BVH#render",
     "access": "public",
     "description": "Draws the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.",
-    "lineNumber": 382,
-    "params": [
-      {
-        "nullable": null,
-        "types": [
-          "CanvasRenderingContext2D"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "context",
-        "description": "The context to draw to"
-      }
-    ]
-  },
-  {
-    "__docId__": 102,
-    "kind": "method",
-    "name": "renderBodies",
-    "memberof": "src/modules/BVH.js~BVH",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/modules/BVH.js~BVH#renderBodies",
-    "access": "public",
-    "description": "Draws the bodies within the BVH to a CanvasRenderingContext2D's current path",
-    "lineNumber": 443,
+    "lineNumber": 387,
     "params": [
       {
         "nullable": null,
@@ -1942,9 +1931,34 @@
   },
   {
     "__docId__": 103,
+    "kind": "method",
+    "name": "renderBodies",
+    "memberof": "src/modules/BVH.js~BVH",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/BVH.js~BVH#renderBodies",
+    "access": "public",
+    "description": "Draws the bodies within the BVH to a CanvasRenderingContext2D's current path",
+    "lineNumber": 442,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "CanvasRenderingContext2D"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "context",
+        "description": "The context to draw to"
+      }
+    ]
+  },
+  {
+    "__docId__": 104,
     "kind": "file",
     "name": "src/modules/BVHBranch.js",
-    "content": "/**\n * @private\n */\nconst branch_pool = [];\n\n/**\n * A branch within a BVH\n * @class\n * @private\n */\nexport default class BVHBranch {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/** @private */\n\t\tthis._bvh_parent = null;\n\n\t\t/** @private */\n\t\tthis._bvh_branch = true;\n\n\t\t/** @private */\n\t\tthis._bvh_iterated = false;\n\n\t\t/** @private */\n\t\tthis._bvh_dirty = false;\n\n\t\t/** @private */\n\t\tthis._bvh_left = null;\n\n\t\t/** @private */\n\t\tthis._bvh_right = null;\n\n\t\t/** @private */\n\t\tthis._bvh_sort = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_min_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_min_y = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_y = 0;\n\t}\n\n\t/**\n\t * Returns a branch from the branch pool or creates a new branch\n\t * @returns {BVHBranch}\n\t */\n\tstatic getBranch() {\n\t\tif(branch_pool.length) {\n\t\t\treturn branch_pool.pop();\n\t\t}\n\n\t\treturn new BVHBranch();\n\t}\n\n\t/**\n\t * Releases a branch back into the branch pool\n\t * @param {BVHBranch} branch The branch to release\n\t */\n\tstatic releaseBranch(branch) {\n\t\tbranch_pool.push(branch);\n\t}\n\n\t/**\n\t * Sorting callback used to sort branches by deepest first\n\t * @param {BVHBranch} a The first branch\n\t * @param {BVHBranch} b The second branch\n\t * @returns {Number}\n\t */\n\tstatic sortBranches(a, b) {\n\t\treturn a.sort > b.sort ? -1 : 1;\n\t}\n}\n",
+    "content": "/**\n * @private\n */\nconst branch_pool = [];\n\n/**\n * A branch within a BVH\n * @class\n * @private\n */\nexport default class BVHBranch {\n\t/**\n\t * @constructor\n\t */\n\tconstructor() {\n\t\t/** @private */\n\t\tthis._bvh_parent = null;\n\n\t\t/** @private */\n\t\tthis._bvh_branch = true;\n\n\t\t/** @private */\n\t\tthis._bvh_dirty = false;\n\n\t\t/** @private */\n\t\tthis._bvh_left = null;\n\n\t\t/** @private */\n\t\tthis._bvh_right = null;\n\n\t\t/** @private */\n\t\tthis._bvh_sort = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_min_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_min_y = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_x = 0;\n\n\t\t/** @private */\n\t\tthis._bvh_max_y = 0;\n\t}\n\n\t/**\n\t * Returns a branch from the branch pool or creates a new branch\n\t * @returns {BVHBranch}\n\t */\n\tstatic getBranch() {\n\t\tif(branch_pool.length) {\n\t\t\treturn branch_pool.pop();\n\t\t}\n\n\t\treturn new BVHBranch();\n\t}\n\n\t/**\n\t * Releases a branch back into the branch pool\n\t * @param {BVHBranch} branch The branch to release\n\t */\n\tstatic releaseBranch(branch) {\n\t\tbranch_pool.push(branch);\n\t}\n\n\t/**\n\t * Sorting callback used to sort branches by deepest first\n\t * @param {BVHBranch} a The first branch\n\t * @param {BVHBranch} b The second branch\n\t * @returns {Number}\n\t */\n\tstatic sortBranches(a, b) {\n\t\treturn a.sort > b.sort ? -1 : 1;\n\t}\n}\n",
     "static": true,
     "longname": "C:/Users/sam/projects/Collisions/src/modules/BVHBranch.js",
     "access": "public",
@@ -1952,7 +1966,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 104,
+    "__docId__": 105,
     "kind": "variable",
     "name": "branch_pool",
     "memberof": "src/modules/BVHBranch.js",
@@ -1967,7 +1981,7 @@
     "ignore": true
   },
   {
-    "__docId__": 105,
+    "__docId__": 106,
     "kind": "class",
     "name": "BVHBranch",
     "memberof": "src/modules/BVHBranch.js",
@@ -1989,7 +2003,7 @@
     "ignore": true
   },
   {
-    "__docId__": 106,
+    "__docId__": 107,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/modules/BVHBranch.js~BVHBranch",
@@ -2008,7 +2022,7 @@
     ]
   },
   {
-    "__docId__": 107,
+    "__docId__": 108,
     "kind": "member",
     "name": "_bvh_parent",
     "memberof": "src/modules/BVHBranch.js~BVHBranch",
@@ -2020,7 +2034,7 @@
     "ignore": true
   },
   {
-    "__docId__": 108,
+    "__docId__": 109,
     "kind": "member",
     "name": "_bvh_branch",
     "memberof": "src/modules/BVHBranch.js~BVHBranch",
@@ -2032,18 +2046,6 @@
     "ignore": true
   },
   {
-    "__docId__": 109,
-    "kind": "member",
-    "name": "_bvh_iterated",
-    "memberof": "src/modules/BVHBranch.js~BVHBranch",
-    "static": false,
-    "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_iterated",
-    "access": "private",
-    "description": null,
-    "lineNumber": 23,
-    "ignore": true
-  },
-  {
     "__docId__": 110,
     "kind": "member",
     "name": "_bvh_dirty",
@@ -2052,7 +2054,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_dirty",
     "access": "private",
     "description": null,
-    "lineNumber": 26,
+    "lineNumber": 23,
     "ignore": true
   },
   {
@@ -2064,7 +2066,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_left",
     "access": "private",
     "description": null,
-    "lineNumber": 29,
+    "lineNumber": 26,
     "ignore": true
   },
   {
@@ -2076,7 +2078,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_right",
     "access": "private",
     "description": null,
-    "lineNumber": 32,
+    "lineNumber": 29,
     "ignore": true
   },
   {
@@ -2088,7 +2090,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_sort",
     "access": "private",
     "description": null,
-    "lineNumber": 35,
+    "lineNumber": 32,
     "ignore": true
   },
   {
@@ -2100,7 +2102,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_min_x",
     "access": "private",
     "description": null,
-    "lineNumber": 38,
+    "lineNumber": 35,
     "ignore": true
   },
   {
@@ -2112,7 +2114,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_min_y",
     "access": "private",
     "description": null,
-    "lineNumber": 41,
+    "lineNumber": 38,
     "ignore": true
   },
   {
@@ -2124,7 +2126,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_max_x",
     "access": "private",
     "description": null,
-    "lineNumber": 44,
+    "lineNumber": 41,
     "ignore": true
   },
   {
@@ -2136,7 +2138,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch#_bvh_max_y",
     "access": "private",
     "description": null,
-    "lineNumber": 47,
+    "lineNumber": 44,
     "ignore": true
   },
   {
@@ -2150,7 +2152,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch.getBranch",
     "access": "public",
     "description": "Returns a branch from the branch pool or creates a new branch",
-    "lineNumber": 54,
+    "lineNumber": 51,
     "unknown": [
       {
         "tagName": "@returns",
@@ -2177,7 +2179,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch.releaseBranch",
     "access": "public",
     "description": "Releases a branch back into the branch pool",
-    "lineNumber": 66,
+    "lineNumber": 63,
     "params": [
       {
         "nullable": null,
@@ -2202,7 +2204,7 @@
     "longname": "src/modules/BVHBranch.js~BVHBranch.sortBranches",
     "access": "public",
     "description": "Sorting callback used to sort branches by deepest first",
-    "lineNumber": 76,
+    "lineNumber": 73,
     "unknown": [
       {
         "tagName": "@returns",
@@ -2873,7 +2875,7 @@
     "__docId__": 144,
     "kind": "file",
     "name": "src/modules/Polygon.js",
-    "content": "import Body from './Body.js';\n\n/**\n * A polygon used to detect collisions\n * @class\n */\nexport default class Polygon extends Body {\n\t/**\n\t * @constructor\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]\n\t * @param {Number} [angle = 0] The starting rotation in radians\n\t * @param {Number} [scale_x = 1] The starting scale along the X axis\n\t * @param {Number} [scale_y = 1] The starting scale long the Y axis\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t */\n\tconstructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tsuper(x, y, padding);\n\n\t\t/**\n\t\t * @desc The angle of the body in radians\n\t\t * @type {Number}\n\t\t */\n\t\tthis.angle = angle;\n\n\t\t/**\n\t\t * @desc The scale of the body along the X axis\n\t\t * @type {Number}\n\t\t */\n\t\tthis.scale_x = scale_x;\n\n\t\t/**\n\t\t * @desc The scale of the body along the Y axis\n\t\t * @type {Number}\n\t\t */\n\t\tthis.scale_y = scale_y;\n\n\n\t\t/** @private */\n\t\tthis._polygon = true;\n\n\t\t/** @private */\n\t\tthis._x = x;\n\n\t\t/** @private */\n\t\tthis._y = y;\n\n\t\t/** @private */\n\t\tthis._angle = angle;\n\n\t\t/** @private */\n\t\tthis._scale_x = scale_x;\n\n\t\t/** @private */\n\t\tthis._scale_y = scale_y;\n\n\t\t/** @private */\n\t\tthis._min_x = 0;\n\n\t\t/** @private */\n\t\tthis._min_y = 0;\n\n\t\t/** @private */\n\t\tthis._max_x = 0;\n\n\t\t/** @private */\n\t\tthis._max_y = 0;\n\n\t\t/** @private */\n\t\tthis._points = null;\n\n\t\t/** @private */\n\t\tthis._coords = null;\n\n\t\t/** @private */\n\t\tthis._edges = null;\n\n\t\t/** @private */\n\t\tthis._normals = null;\n\n\t\t/** @private */\n\t\tthis._parent_path = null;\n\n\t\t/** @private */\n\t\tthis._dirty_coords = true;\n\n\t\t/** @private */\n\t\tthis._dirty_normals = true;\n\n\t\tthis.setPoints(points);\n\t}\n\n\t/**\n\t * Draws the polygon to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to add the shape to\n\t */\n\trender(context) {\n\t\tthis._calculateCoords();\n\n\t\tconst coords = this._coords;\n\n\t\tif(coords.length === 2) {\n\t\t\tcontext.moveTo(coords[0], coords[1]);\n\t\t\tcontext.arc(coords[0], coords[1], 1, 0, Math.PI * 2);\n\t\t}\n\t\telse {\n\t\t\tcontext.moveTo(coords[0], coords[1]);\n\n\t\t\tfor(let i = 2; i < coords.length; i += 2) {\n\t\t\t\tcontext.lineTo(coords[i], coords[i + 1]);\n\t\t\t}\n\n\t\t\tif(coords.length > 4) {\n\t\t\t\tcontext.lineTo(coords[0], coords[1]);\n\t\t\t}\n\t\t}\n\t}\n\n\t/**\n\t * Sets the points making up the polygon. It's important to use this function when changing the polygon's shape to ensure internal data is also updated.\n\t * @param {Array<Number[]>} new_points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]\n\t */\n\tsetPoints(new_points) {\n\t\tconst count = new_points.length;\n\n\t\tthis._points  = new Float64Array(count * 2);\n\t\tthis._coords  = new Float64Array(count * 2);\n\t\tthis._edges   = new Float64Array(count * 2);\n\t\tthis._normals = new Float64Array(count * 2);\n\n\t\tconst points = this._points;\n\n\t\tfor(let i = 0, ix = 0, iy = 1; i < count; ++i, ix += 2, iy += 2) {\n\t\t\tconst new_point = new_points[i];\n\n\t\t\tpoints[ix] = new_point[0];\n\t\t\tpoints[iy] = new_point[1];\n\t\t}\n\n\t\tthis._dirty_coords = true;\n\t}\n\n\t/**\n\t * Calculates and caches the polygon's world coordinates based on its points, angle, and scale\n\t */\n\t_calculateCoords() {\n\t\tconst parent_path = this._parent_path;\n\n\t\tif(parent_path) {\n\t\t\tthis.x       = parent_path.x;\n\t\t\tthis.y       = parent_path.y;\n\t\t\tthis.angle   = parent_path.angle;\n\t\t\tthis.scale_x = parent_path.scale_x;\n\t\t\tthis.scale_y = parent_path.scale_y;\n\t\t}\n\n\t\tconst x       = this.x;\n\t\tconst y       = this.y;\n\t\tconst angle   = this.angle;\n\t\tconst scale_x = this.scale_x;\n\t\tconst scale_y = this.scale_y;\n\n\t\tif(\n\t\t\t!this._dirty_coords &&\n\t\t\tx === this._x &&\n\t\t\tx === this._y &&\n\t\t\tangle === this._angle &&\n\t\t\tscale_x === this._scale_x &&\n\t\t\tscale_y === this._scale_y\n\t\t) {\n\t\t\treturn;\n\t\t}\n\n\t\tconst points  = this._points;\n\t\tconst coords  = this._coords;\n\t\tconst count   = points.length;\n\n\t\tlet min_x;\n\t\tlet max_x;\n\t\tlet min_y;\n\t\tlet max_y;\n\n\t\tfor(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {\n\t\t\tlet coord_x = points[ix] * scale_x;\n\t\t\tlet coord_y = points[iy] * scale_y;\n\n\t\t\tif(angle) {\n\t\t\t\tconst cos   = Math.cos(angle);\n\t\t\t\tconst sin   = Math.sin(angle);\n\t\t\t\tconst tmp_x = coord_x;\n\t\t\t\tconst tmp_y = coord_y;\n\n\t\t\t\tcoord_x = tmp_x * cos - tmp_y * sin;\n\t\t\t\tcoord_y = tmp_x * sin + tmp_y * cos;\n\t\t\t}\n\n\t\t\tcoord_x += x;\n\t\t\tcoord_y += y;\n\n\t\t\tcoords[ix] = coord_x;\n\t\t\tcoords[iy] = coord_y;\n\n\t\t\tif(ix === 0) {\n\t\t\t\tmin_x = max_x = coord_x;\n\t\t\t\tmin_y = max_y = coord_y;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tif(coord_x < min_x) {\n\t\t\t\t\tmin_x = coord_x;\n\t\t\t\t}\n\t\t\t\telse if(coord_x > max_x) {\n\t\t\t\t\tmax_x = coord_x;\n\t\t\t\t}\n\n\t\t\t\tif(coord_y < min_y) {\n\t\t\t\t\tmin_y = coord_y;\n\t\t\t\t}\n\t\t\t\telse if(coord_y > max_y) {\n\t\t\t\t\tmax_y = coord_y;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tthis._x             = x;\n\t\tthis._y             = y;\n\t\tthis._angle         = angle;\n\t\tthis._scale_x       = scale_x;\n\t\tthis._scale_y       = scale_y;\n\t\tthis._min_x         = min_x;\n\t\tthis._min_y         = min_y;\n\t\tthis._max_x         = max_x;\n\t\tthis._max_y         = max_y;\n\t\tthis._dirty_coords  = false;\n\t\tthis._dirty_normals = true;\n\t}\n\n\t/**\n\t * Calculates the normals and edges of the polygon's sides\n\t */\n\t_calculateNormals() {\n\t\tif(!this._dirty_normals) {\n\t\t\treturn;\n\t\t}\n\n\t\tconst coords  = this._coords;\n\t\tconst edges   = this._edges;\n\t\tconst normals = this._normals;\n\t\tconst count   = coords.length;\n\n\t\tfor(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {\n\t\t\tconst next   = ix + 2 < count ? ix + 2 : 0;\n\t\t\tconst x      = coords[next] - coords[ix];\n\t\t\tconst y      = coords[next + 1] - coords[iy];\n\t\t\tconst length = x || y ? Math.sqrt(x * x + y * y) : 0;\n\n\t\t\tedges[ix]   = x;\n\t\t\tedges[iy]   = y;\n\t\t\tnormals[ix] = length ? y / length : 0;\n\t\t\tnormals[iy] = length ? -x / length : 0;\n\t\t}\n\n\t\tthis._dirty_normals = false;\n\t}\n};\n",
+    "content": "import Body from './Body.js';\n\n/**\n * A polygon used to detect collisions\n * @class\n */\nexport default class Polygon extends Body {\n\t/**\n\t * @constructor\n\t * @param {Number} [x = 0] The starting X coordinate\n\t * @param {Number} [y = 0] The starting Y coordinate\n\t * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]\n\t * @param {Number} [angle = 0] The starting rotation in radians\n\t * @param {Number} [scale_x = 1] The starting scale along the X axis\n\t * @param {Number} [scale_y = 1] The starting scale long the Y axis\n\t * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions\n\t */\n\tconstructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {\n\t\tsuper(x, y, padding);\n\n\t\t/**\n\t\t * @desc The angle of the body in radians\n\t\t * @type {Number}\n\t\t */\n\t\tthis.angle = angle;\n\n\t\t/**\n\t\t * @desc The scale of the body along the X axis\n\t\t * @type {Number}\n\t\t */\n\t\tthis.scale_x = scale_x;\n\n\t\t/**\n\t\t * @desc The scale of the body along the Y axis\n\t\t * @type {Number}\n\t\t */\n\t\tthis.scale_y = scale_y;\n\n\n\t\t/** @private */\n\t\tthis._polygon = true;\n\n\t\t/** @private */\n\t\tthis._x = x;\n\n\t\t/** @private */\n\t\tthis._y = y;\n\n\t\t/** @private */\n\t\tthis._angle = angle;\n\n\t\t/** @private */\n\t\tthis._scale_x = scale_x;\n\n\t\t/** @private */\n\t\tthis._scale_y = scale_y;\n\n\t\t/** @private */\n\t\tthis._min_x = 0;\n\n\t\t/** @private */\n\t\tthis._min_y = 0;\n\n\t\t/** @private */\n\t\tthis._max_x = 0;\n\n\t\t/** @private */\n\t\tthis._max_y = 0;\n\n\t\t/** @private */\n\t\tthis._points = null;\n\n\t\t/** @private */\n\t\tthis._coords = null;\n\n\t\t/** @private */\n\t\tthis._edges = null;\n\n\t\t/** @private */\n\t\tthis._normals = null;\n\n\t\t/** @private */\n\t\tthis._parent_path = null;\n\n\t\t/** @private */\n\t\tthis._dirty_coords = true;\n\n\t\t/** @private */\n\t\tthis._dirty_normals = true;\n\n\t\tthis.setPoints(points);\n\t}\n\n\t/**\n\t * Draws the polygon to a CanvasRenderingContext2D's current path\n\t * @param {CanvasRenderingContext2D} context The context to add the shape to\n\t */\n\trender(context) {\n\t\tthis._calculateCoords();\n\n\t\tconst coords = this._coords;\n\n\t\tif(coords.length === 2) {\n\t\t\tcontext.moveTo(coords[0], coords[1]);\n\t\t\tcontext.arc(coords[0], coords[1], 1, 0, Math.PI * 2);\n\t\t}\n\t\telse {\n\t\t\tcontext.moveTo(coords[0], coords[1]);\n\n\t\t\tfor(let i = 2; i < coords.length; i += 2) {\n\t\t\t\tcontext.lineTo(coords[i], coords[i + 1]);\n\t\t\t}\n\n\t\t\tif(coords.length > 4) {\n\t\t\t\tcontext.lineTo(coords[0], coords[1]);\n\t\t\t}\n\t\t}\n\t}\n\n\t/**\n\t * Sets the points making up the polygon. It's important to use this function when changing the polygon's shape to ensure internal data is also updated.\n\t * @param {Array<Number[]>} new_points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]\n\t */\n\tsetPoints(new_points) {\n\t\tconst count = new_points.length;\n\n\t\tthis._points  = new Float64Array(count * 2);\n\t\tthis._coords  = new Float64Array(count * 2);\n\t\tthis._edges   = new Float64Array(count * 2);\n\t\tthis._normals = new Float64Array(count * 2);\n\n\t\tconst points = this._points;\n\n\t\tfor(let i = 0, ix = 0, iy = 1; i < count; ++i, ix += 2, iy += 2) {\n\t\t\tconst new_point = new_points[i];\n\n\t\t\tpoints[ix] = new_point[0];\n\t\t\tpoints[iy] = new_point[1];\n\t\t}\n\n\t\tthis._dirty_coords = true;\n\t}\n\n\t/**\n\t * Calculates and caches the polygon's world coordinates based on its points, angle, and scale\n\t */\n\t_calculateCoords() {\n\t\tconst parent_path = this._parent_path;\n\n\t\tif(parent_path) {\n\t\t\tthis.x       = parent_path.x;\n\t\t\tthis.y       = parent_path.y;\n\t\t\tthis.angle   = parent_path.angle;\n\t\t\tthis.scale_x = parent_path.scale_x;\n\t\t\tthis.scale_y = parent_path.scale_y;\n\t\t}\n\n\t\tconst x       = this.x;\n\t\tconst y       = this.y;\n\t\tconst angle   = this.angle;\n\t\tconst scale_x = this.scale_x;\n\t\tconst scale_y = this.scale_y;\n\n\t\tif(\n\t\t\t!this._dirty_coords &&\n\t\t\tx === this._x &&\n\t\t\ty === this._y &&\n\t\t\tangle === this._angle &&\n\t\t\tscale_x === this._scale_x &&\n\t\t\tscale_y === this._scale_y\n\t\t) {\n\t\t\treturn;\n\t\t}\n\n\t\tconst points  = this._points;\n\t\tconst coords  = this._coords;\n\t\tconst count   = points.length;\n\n\t\tlet min_x;\n\t\tlet max_x;\n\t\tlet min_y;\n\t\tlet max_y;\n\n\t\tfor(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {\n\t\t\tlet coord_x = points[ix] * scale_x;\n\t\t\tlet coord_y = points[iy] * scale_y;\n\n\t\t\tif(angle) {\n\t\t\t\tconst cos   = Math.cos(angle);\n\t\t\t\tconst sin   = Math.sin(angle);\n\t\t\t\tconst tmp_x = coord_x;\n\t\t\t\tconst tmp_y = coord_y;\n\n\t\t\t\tcoord_x = tmp_x * cos - tmp_y * sin;\n\t\t\t\tcoord_y = tmp_x * sin + tmp_y * cos;\n\t\t\t}\n\n\t\t\tcoord_x += x;\n\t\t\tcoord_y += y;\n\n\t\t\tcoords[ix] = coord_x;\n\t\t\tcoords[iy] = coord_y;\n\n\t\t\tif(ix === 0) {\n\t\t\t\tmin_x = max_x = coord_x;\n\t\t\t\tmin_y = max_y = coord_y;\n\t\t\t}\n\t\t\telse {\n\t\t\t\tif(coord_x < min_x) {\n\t\t\t\t\tmin_x = coord_x;\n\t\t\t\t}\n\t\t\t\telse if(coord_x > max_x) {\n\t\t\t\t\tmax_x = coord_x;\n\t\t\t\t}\n\n\t\t\t\tif(coord_y < min_y) {\n\t\t\t\t\tmin_y = coord_y;\n\t\t\t\t}\n\t\t\t\telse if(coord_y > max_y) {\n\t\t\t\t\tmax_y = coord_y;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tthis._x             = x;\n\t\tthis._y             = y;\n\t\tthis._angle         = angle;\n\t\tthis._scale_x       = scale_x;\n\t\tthis._scale_y       = scale_y;\n\t\tthis._min_x         = min_x;\n\t\tthis._min_y         = min_y;\n\t\tthis._max_x         = max_x;\n\t\tthis._max_y         = max_y;\n\t\tthis._dirty_coords  = false;\n\t\tthis._dirty_normals = true;\n\t}\n\n\t/**\n\t * Calculates the normals and edges of the polygon's sides\n\t */\n\t_calculateNormals() {\n\t\tif(!this._dirty_normals) {\n\t\t\treturn;\n\t\t}\n\n\t\tconst coords  = this._coords;\n\t\tconst edges   = this._edges;\n\t\tconst normals = this._normals;\n\t\tconst count   = coords.length;\n\n\t\tfor(let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {\n\t\t\tconst next   = ix + 2 < count ? ix + 2 : 0;\n\t\t\tconst x      = coords[next] - coords[ix];\n\t\t\tconst y      = coords[next + 1] - coords[iy];\n\t\t\tconst length = x || y ? Math.sqrt(x * x + y * y) : 0;\n\n\t\t\tedges[ix]   = x;\n\t\t\tedges[iy]   = y;\n\t\t\tnormals[ix] = length ? y / length : 0;\n\t\t\tnormals[iy] = length ? -x / length : 0;\n\t\t}\n\n\t\tthis._dirty_normals = false;\n\t}\n};\n",
     "static": true,
     "longname": "C:/Users/sam/projects/Collisions/src/modules/Polygon.js",
     "access": "public",
@@ -3995,7 +3997,7 @@
   },
   {
     "kind": "index",
-    "content": "Collisions\n===============================================================================\n\n**Collisions** is a JavaScript library used to quickly and accurately detect collisions between Polygons, Circles, Paths, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching with the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.\n\n* [Installation](#installation)\n* [Documentation](#documentation)\n* [Usage](#usage)\n* [Getting started](#getting-started)\n\t1. [Creating a collision system](#1--creating-a-collision-system)\n\t2. [Creating, adding, and removing bodies](#2--creating--adding--and-removing-bodies)\n\t3. [Testing for collisions](#3--testing-for-collisions)\n\t4. [Getting detailed collision information](#4--getting-detailed-collision-information)\n\t5. [Negating overlap](#5--negating-overlap)\n\nInstallation\n===============================================================================\n\n```bash\nnpm install collisions\n```\n\nDocumentation\n===============================================================================\n\nView the [documentation](https://sinova.github.com/Collisions/docs/) (this README is also there).\n\nDemos\n===============================================================================\n\n* [Movement](https://sinova.github.com/Collisions/demo)\n* [Stress Test](https://sinova.github.com/Collisions/demo?stress)\n\nUsage\n===============================================================================\n\n```JavaScript\nimport Collisions from 'collisions';\n\n// Create the collision system\nconst system = new Collisions();\n\n// Create a Result object for collecting information about the collisions\nconst result = system.createResult();\n\n// Add the player (represented by a Circle)\nconst player = system.createCircle(0, 0, 10);\n\n// Create some walls (represented by Polygons)\nconst wall1 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);\nconst wall2 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);\nconst wall3 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);\n\n// Get any potential collisions (this quickly rules out walls that have no chance of colliding with the player)\nconst potentials = player.potentials();\n\n// Loop through the potential wall collisions\nfor(const wall of potentials) {\n\t// Test if the player collides with the wall\n\tif(player.collides(wall, result)) {\n\t\t// Push the player out of the wall\n\t\tplayer.x -= result.overlap * result.overlap_x;\n\t\tplayer.y -= result.overlap * result.overlap_y;\n\t}\n}\n```\n\nGetting Started\n===============================================================================\n\n#### 1. Creating a collision system\n\n**Collisions** provides functions to perform both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, all bodies need to be tracked within a collision system.\n\nTo create a collision system, simply instantiate the Collisions class.\n\n```JavaScript\nimport Collisions from 'collisions';\n\nconst system = new Collisions();\n```\n\n#### 2. Creating, adding, and removing bodies\n\nCollision systems expose several convenience functions for creating bodies. These functions create their respective body and automatically insert it into the system.\n\n```JavaScript\nconst circle  = system.createCircle(100, 100, 10);\nconst polygon = system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);\nconst path    = system.createPath(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);\nconst point   = system.createPoint(10, 10);\n```\n\nIt's also possible to create bodies separately and insert them into the collision system manually at a later time.\n\n```JavaScript\nimport {Collisions, Circle, Polygon, Path, Point} from 'collisions';\n\nconst system = new Collisions();\n\nconst circle  = new Circle(100, 100, 10);\nconst polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);\nconst path    = new Path(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);\nconst point   = new Point(10, 10);\n\n// ...\n\nsystem.insert(circle, polygon, path, point);\n```\n\nBodies can also be removed when they are no longer needed.\n\n```JavaScript\nsystem.remove(polygon, point);\ncircle.remove();\n```\n\n#### 3. Testing for collisions\n\nIt is generally recommended that a broad-phase search be performed first before testing for collisions. This is done by called `potentials()` on a body. This gets a list of nearby bodies that could potentially be colliding with it while quickly ruling out bodies that are too far away. It is important to note that the `potentials()` function returns an **Iterator** and *not* an **Array** (see the [FAQ](#faq)). Once a potential list of colliding bodies is obtained, iterate through them and test for collisions.\n\n```JavaScript\nconst potentials = circle.potentials();\n\nfor(const body of potentials) {\n\tif(circle.collides(body)) {\n\t\tconsole.log('Collision detected!');\n\t}\n}\n```\n\n> **WARNING:** Do not call `pontentials()` while looping through an existing potentials iterator. If nested `potentials()` are required, use `Array.from()` to convert the iterator to an array before making subsequent calls.\n\n```JavaScript\n// BAD\nconst potentials = circle.potentials();\n\nfor(const body of potentials) {\n\tconst potentials = body.potentials();\n}\n\n// GOOD\nconst potentials = Array.from(circle.potentials());\n\nfor(const body of potentials) {\n\tconst potentials = body.potentials();\n}\n```\n\n#### 4. Getting detailed collision information\n\nOften there is a need for detailed information about a collision when it occurs. To get this information, a **Result** object can be passed into the narrow-phase collision test. It is highly recommended that **Result** objects be recycled when performing multiple collision tests unless it's necessary to store a specific Result for later use.\n\n```JavaScript\nconst result     = system.createResult();\nconst potentials = circle.potentials();\n\nfor(body of potentials) {\n\tif(circle.collides(body, result)) {\n\t\tconsole.log(result);\n\t}\n}\n```\n\nFor convenience, there are several ways to create a **Result** object. **Result** objects do not belong to any particular collision system, so any method can be used interchangeably and the same **Result** can be used for collisions across several systems.\n\n```JavaScript\nimport {Collisions, Result} from 'collisions';\n\nconst system = new Collisions();\n\nconst result1 = system.createResult();\nconst result2 = Collisions.createResult();\nconst result3 = new Result();\n```\n\n#### 5. Negating overlap\n\nA common use-case for collisions is negating overlap when a collision occurs (such as when a player hits a wall). This can be done with in collision information stored on a passed in **Result** object.\n\n**Result** objects have several properties set on them when a collision occurs (you can read about all of them in the [documentation](https://sinova.github.com/Collisions/docs/)). The three most useful properties are  **overlap**, **overlap\\_x**, and **overlap\\_y**. Together, these values describe how much and in what direction the source body is overlapping the target body. More specifically, **overlap\\_x** and **overlap\\_y** make up the direction vector, and **overlap** is the magnitude of that vector.\n\n\nThese values can be used to \"push\" one body out of another using the minimum distance required. Effectively, subtracting this vector from the source body's position will cause the bodies to no longer collide. Here's a simple example:\n\n```JavaScript\nif(player.collides(wall, result)) {\n\tplayer.x -= result.overlap * result.overlap_x;\n\tplayer.y -= result.overlap * result.overlap_y;\n}\n```\n\nBounding Volume Padding\n===============================================================================\n\nWhen bodies move around within a collision system, the internal BVH needs to be updated. Specifically, the body needs to be removed from the hierarchy and reinserted. This is one of the most costly operations in maintaining a BVH. In general, most projects won't need to worry about this unless they are dealing with thousands of moving bodies at once. If performance becomes an issue, it can sometimes be beneficial to \"pad\" the bounding volumes of each body so that they don't need to be removed and reinserted if they haven't changed position too much. In essence, padding the bounding volume allows \"breathing room\" for the body within it to move around.\n\nThe tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase `potentials()` search. While the narrow phase will quickly rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.\n\nPadding can be added to a body when instantiating it (see the [documentation](https://sinova.github.com/Collisions/docs/) for each body) or at any point by changing its **padding** property.\n\n```JavaScript\nconst padding = 5;\nconst circle  = new Circle(100, 100, 10, 1, padding);\n\n// ...\n\ncircle.padding = 10;\n```\n\nOnly using SAT\n===============================================================================\n\nSome projects may only have a need to perform SAT collision tests without broad-phase searching. This can be achieved by simply not adding the bodies to a system and not using the **potentials()** function.\n\n```JavaScript\nimport {Circle, Polygon, Result} from 'collisions';\n\nconst circle  = new Circle(45, 45, 20);\nconst polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);\nconst result  = new Result();\n\nif(circle.collides(polygon, result)) {\n\tconsole.log(result);\n}\n```\n\nFAQ\n===============================================================================\n\n#### Why shouldn't I just use a physics engine?\n\nProjects requiring physics are encouraged to use one of the several physics engines out there (e.g. [Matter.js](https://github.com/liabru/matter-js) or [Planck.js](https://github.com/shakiba/planck.js)). However, many projects use physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that are made by these engines (gravity, velocity, friction, etc.). **Collisions** was written to fill this need.\n\n#### Why does potentials() return an Iterator instead of an Array?\n\nPopulating an array with references to potential collisions can take up quite a bit of memory when done for thousands of bodies (even if each body has an array that it recycles). For instance, if the system has 1,000 bodies and each one is potentially colliding with five bodies on average, that's 5,000 references in total. Do this every frame and the garbage collector can start to get noticeably bogged down. Iterators solve this problem by only detecting and yielding a single potential collision at a time. Memory profiles showed the allocations per frame drop from 50 kilobytes to 10 bytes. The reduction in garbage collection far outweighs the small peformance cost of using Iterators.\n\n#### Why does the source code seem to have a lot of copy/paste?\n\n**Collisions** was written with performance as its primary focus. Conscious choices were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.\n\nLimitations\n===============================================================================\n\nSAT based collision detection assumes all tested bodies are convex. Handling concave bodies requires breaking them down into their component convex bodies (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).\n",
+    "content": "Collisions\n===============================================================================\n\n**Collisions** is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, Paths, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching and the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.\n\n* [Installation](#installation)\n* [Documentation](#documentation)\n* [Demos](#demos)\n* [Usage](#usage)\n* [Getting Started](#getting-started)\n\t1. [Creating a Collision System](#1--creating-a-collision-system)\n\t2. [Creating, Inserting, and Removing Bodies](#2--creating--inserting--and-removing-bodies)\n\t3. [Updating the Collision System](#3--updating-the-collision-system)\n\t4. [Testing for Collisions](#4--testing-for-collisions)\n\t5. [Getting Detailed Collision Information](#5--getting-detailed-collision-information)\n\t6. [Negating Overlap](#6--negating-overlap)\n* [Bounding Volume Padding](#bounding-volume-padding)\n* [Only using SAT](#only-using-sat)\n* [FAQ](#faq)\n\nInstallation\n===============================================================================\n\n```bash\nnpm install collisions\n```\n\nDocumentation\n===============================================================================\n\nView the [documentation](https://sinova.github.com/Collisions/docs/) (this README is also there).\n\nDemos\n===============================================================================\n\n* [Movement](https://sinova.github.com/Collisions/demo)\n* [Stress Test](https://sinova.github.com/Collisions/demo?stress)\n\nUsage\n===============================================================================\n\n```JavaScript\nimport Collisions from 'collisions';\n\n// Create the collision system\nconst system = new Collisions();\n\n// Create a Result object for collecting information about the collisions\nconst result = system.createResult();\n\n// Create the player (represented by a Circle)\nconst player = system.createCircle(100, 100, 10);\n\n// Create some walls (represented by Polygons)\nconst wall1 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);\nconst wall2 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);\nconst wall3 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);\n\n// Get any potential collisions (this quickly rules out walls that have no chance of colliding with the player)\nconst potentials = player.potentials();\n\n// Loop through the potential wall collisions\nfor(const wall of potentials) {\n\t// Test if the player collides with the wall\n\tif(player.collides(wall, result)) {\n\t\t// Push the player out of the wall\n\t\tplayer.x -= result.overlap * result.overlap_x;\n\t\tplayer.y -= result.overlap * result.overlap_y;\n\t}\n}\n```\n\nGetting Started\n===============================================================================\n\n#### 1. Creating a Collision System\n\n**Collisions** provides functions for performing both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, bodies need to be tracked within a collision system.\n\nCall the Collisions constructor to create a collision system.\n\n```JavaScript\nimport Collisions from 'collisions';\n\nconst my_system = new Collisions();\n```\n\n#### 2. Creating, Inserting, and Removing Bodies\n\n**Collisions** supports the following body types:\n\n* **Circle:** A closed shape with infinite sides equidistant from a single point\n* **Polygon:** A closed shape made up of line segments\n* **Path:** An open shape made up of line segments\n* **Point:** A single position\n\nTo use them, import the desired body class, call its constructor, and insert it into the collision system using `insert()`.\n\n```JavaScript\nimport {Collisions, Circle, Polygon, Path, Point} from 'collisions';\n\nconst my_system = new Collisions();\n\nconst my_circle  = new Circle(100, 100, 10);\nconst my_polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);\nconst my_path    = new Path(200, 5, [[-30, 0], [-20, -10], [-10, 0]]);\nconst my_point   = new Point(10, 10);\n\nmy_system.insert(my_circle)\nmy_system.insert(my_polygon, my_path, my_point);\n```\n\nCollision systems expose several convenience functions for creating bodies and inserting them into the system in one step. This also avoids having to import the different body classes.\n\n```JavaScript\nimport Collisions from 'collisions';\n\nconst my_system = new Collisions();\n\nconst my_circle  = my_system.createCircle(100, 100, 10);\nconst my_polygon = my_system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);\nconst my_path    = my_system.createPath(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);\nconst my_point   = my_system.createPoint(10, 10);\n```\n\nAnd, of course, bodies can be removed when they are no longer needed.\n\n```JavaScript\nmy_system.remove(my_polygon, my_point);\nmy_circle.remove();\n```\n\n#### 3. Updating the Collision System\n\nCollision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling `update()` and should typically should occur once per frame.\n\n```JavaScript\nmy_system.update();\n```\n\nThe optimal time for updating a collision system is **after** its bodies have changed and **before** collisions are tested. For example, a game loop might use the following order of events:\n\n```JavaScript\nfunction gameLoop() {\n\thandleInput();\n\n\tmy_system.update();\n\n\thandleCollisions();\n\trender();\n}\n```\n\n#### 4. Testing for Collisions\n\nWhen testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling `potentials()` in order to quickly rule out bodies that are too far away to collide. **Collisions** uses a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for its broad-phase search. Calling `potentials()` on a body traverses the BVH and builds a list of potential collision candidates.\n\n```JavaScript\nconst my_potentials = my_polygon.potentials();\n```\n\nOnce a list of potential collisions is acquired, loop through them and perform a narrow-phase collision test using `collides()`. **Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests.\n\n```JavaScript\nconst my_potentials = my_polygon.potentials();\n\nfor(const body of potentials) {\n\tif(my_polygon.collides(body)) {\n\t\tconsole.log('Collision detected!');\n\t}\n}\n```\n\nIt is also possible to skip the broad-phase search entirely and call `collides()` directly on two bodies.\n\n> **Note:** Skipping the broad-phase search is not recommended. When testing for collisions against large numbers of bodies, performing a broad-phase search using a BVH is *much* more efficient.\n\n```JavaScript\nif(my_polygon.collides(my_path)) {\n\tconsole.log('Collision detected!');\n}\n```\n\n#### 5. Getting Detailed Collision Information\n\nThere is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a `Result` object. `Result` objects have several properties set on them when a collision occurs, all of which are described in the [documentation](https://sinova.github.com/Collisions/docs/).\n\nFor convenience, there are several ways to create a `Result` object. `Result` objects do not belong to any particular collision system, so any of the following methods for creating one can be used interchangeably. This also means the same `Result` object can be used for collisions across multiple systems.\n\n> **Note:** It is highly recommended that `Result` objects be recycled when performing multiple collision tests in order to save memory. The following example creates multiple `Result` objects strictly as a demonstration.\n\n```JavaScript\nimport {Collisions, Result, Polygon} from 'collisions';\n\nconst my_system  = new Collisions();\nconst my_polygon = new Polygon(100, 100, 10);\n\nconst result1 = new Result();\nconst result2 = Collisions.createResult();\nconst result3 = Polygon.createResult();\nconst result4 = my_system.createResult();\nconst result5 = my_polygon.createResult();\n```\n\nTo use a `Result` object, pass it into `collides()`. If a collision occurs, it will be populated with information about the collision. Take note in the following example that the same `Result` is being reused each iteration.\n\n```JavaScript\nconst my_result     = my_system.createResult();\nconst my_potentials = my_point.potentials();\n\nfor(const body of my_potentials) {\n\tif(my_point.collides(body, my_result)) {\n\t\tconsole.log(my_result);\n\t}\n}\n```\n\n#### 6. Negating Overlap\n\nA common use-case in collision detection is negating overlap when a collision occurs (such as when a player hits a wall). This can be done using the collision information in a `Result` object (see [Getting Detailed Collision Information](#4--getting-detailed-collision-information)).\n\nThe three most useful properties on a `Result` object are `overlap`, `overlap_x`, and `overlap_y`. Together, these values describe how much and in what direction the source body is overlapping the target body. More specifically, `overlap_x` and `overlap_y` describe the direction vector, and `overlap` describes the magnitude of that vector.\n\nThese values can be used to \"push\" one body out of another using the minimum distance required. Effectively, subtracting this vector from the source body's position will cause the bodies to no longer collide. Here's a simple example:\n\n```JavaScript\nif(player.collides(wall, result)) {\n\tplayer.x -= result.overlap * result.overlap_x;\n\tplayer.y -= result.overlap * result.overlap_y;\n}\n```\n\nConcave Polygons\n===============================================================================\n\n**Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be \"faked\" by using a `Path`, which is a collection of line segments. Keep in mind that a polygon drawn using a `Path` is \"hollow\" and only detects collisions if bodies are touching its line segments.\n\n\nHandling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).\n\n\nBounding Volume Padding\n===============================================================================\n\nWhen bodies move around within a collision system, the internal BVH needs to be updated. Specifically, the body needs to be removed from the BVH and reinserted. This is one of the most costly operations in maintaining a BVH. In general, most projects won't need to worry about this unless they are dealing with thousands of moving bodies at once. In these cases, it can *sometimes* be beneficial to \"pad\" the bounding volumes of each body so that they don't need to be removed and reinserted if they haven't changed position too much. In essence, padding the bounding volume allows \"breathing room\" for the body within it to move around.\n\nThe tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase `potentials()` search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.\n\nPadding can be added to a body when instantiating it (see the [documentation](https://sinova.github.com/Collisions/docs/) for each body) or at any time by changing its `padding` property.\n\n```JavaScript\nconst my_padding = 5;\nconst my_circle  = new Circle(100, 100, 10, 1, my_padding);\n\n// ...\n\nmy_circle.padding = 10;\n```\n\nOnly using SAT\n===============================================================================\n\nSome projects may only have a need to perform SAT collision tests without broad-phase searching. This can be achieved by avoiding collision systems altogether and only using the `collides()` function.\n\n```JavaScript\nimport {Circle, Polygon, Result} from 'collisions';\n\nconst my_circle  = new Circle(45, 45, 20);\nconst my_polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);\nconst my_result  = new Result();\n\nif(my_circle.collides(my_polygon, my_result)) {\n\tconsole.log(my_result);\n}\n```\n\nFAQ\n===============================================================================\n\n#### Why shouldn't I just use a physics engine?\n\nProjects requiring physics are encouraged to use one of the several physics engines out there (e.g. [Matter.js](https://github.com/liabru/matter-js), [Planck.js](https://github.com/shakiba/planck.js)). However, many projects use physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that are made by these engines (gravity, velocity, friction, etc.). **Collisions** was created solely to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with **Collisions** at its core.\n\n#### Why does the source code seem to have quite a bit of copy/paste?\n\n**Collisions** was written with performance as its primary focus. Conscious decisions were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.\n",
     "longname": "C:\\Users\\sam\\projects\\Collisions\\README.md",
     "name": "./README.md",
     "static": true,

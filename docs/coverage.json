@@ -9,8 +9,8 @@
       "undocumentLines": []
     },
     "src/modules/Body.js": {
-      "expectCount": 21,
-      "actualCount": 21,
+      "expectCount": 22,
+      "actualCount": 22,
       "undocumentLines": []
     },
     "src/modules/BVH.js": {
@@ -19,8 +19,8 @@
       "undocumentLines": []
     },
     "src/modules/BVHBranch.js": {
-      "expectCount": 17,
-      "actualCount": 17,
+      "expectCount": 16,
+      "actualCount": 16,
       "undocumentLines": []
     },
     "src/modules/Circle.js": {

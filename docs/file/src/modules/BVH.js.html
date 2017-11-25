@@ -352,70 +352,75 @@ export default class BVH {
 	/**
 	 * Returns a list of potential collisions for a body
 	 * @param {Circle|Polygon|Path|Point} body The body to test
-	 * @returns {Iterator&lt;Body&gt;}
+	 * @returns {Array&lt;Body&gt;}
 	 */
-	* potentials(body) {
-		const hierarchy = this._hierarchy;
-		const min_x     = body._bvh_min_x;
-		const min_y     = body._bvh_min_y;
-		const max_x     = body._bvh_max_x;
-		const max_y     = body._bvh_max_y;
+	potentials(body) {
+		const results = [];
+		const min_x   = body._bvh_min_x;
+		const min_y   = body._bvh_min_y;
+		const max_x   = body._bvh_max_x;
+		const max_y   = body._bvh_max_y;
 
-		let current = hierarchy;
+		let current       = this._hierarchy;
+		let traverse_left = true;
+
+		if(!current || !current._bvh_branch) {
+			return results;
+		}
 
 		while(current) {
-			if(!current._bvh_iterated) {
-				current._bvh_iterated = true;
+			if(traverse_left) {
+				traverse_left = false;
 
-				if(
-					current === body ||
-					current._bvh_max_x &lt; min_x ||
-					current._bvh_max_y &lt; min_y ||
-					current._bvh_min_x &gt; max_x ||
-					current._bvh_min_y &gt; max_y
+				let left = current._bvh_branch ? current._bvh_left : null;
+
+				while(
+					left &amp;&amp;
+					left._bvh_max_x &gt;= min_x &amp;&amp;
+					left._bvh_max_y &gt;= min_y &amp;&amp;
+					left._bvh_min_x &lt;= max_x &amp;&amp;
+					left._bvh_min_y &lt;= max_y
 				) {
-					current = current._bvh_parent;
-
-					continue;
-				}
-
-				if(!current._bvh_branch) {
-					yield current;
-
-					current = current._bvh_parent;
+					current = left;
+					left    = current._bvh_branch ? current._bvh_left : null;
 				}
 			}
 
-			const left = current._bvh_left;
+			const branch = current._bvh_branch;
+			const right  = branch ? current._bvh_right : null;
 
-			if(left &amp;&amp; !left._bvh_iterated) {
-				current = left;
-
-				continue;
+			if(
+				right &amp;&amp;
+				right._bvh_max_x &gt; min_x &amp;&amp;
+				right._bvh_max_y &gt; min_y &amp;&amp;
+				right._bvh_min_x &lt; max_x &amp;&amp;
+				right._bvh_min_y &lt; max_y
+			) {
+				current       = right;
+				traverse_left = true;
 			}
+			else {
+				if(!branch &amp;&amp; current !== body) {
+					results.push(current);
+				}
 
-			const right = current._bvh_right;
+				let parent = current._bvh_parent;
 
-			if(right &amp;&amp; !right._bvh_iterated) {
-				current = right;
+				if(parent) {
+					while(parent &amp;&amp; parent._bvh_right === current) {
+						current = parent;
+						parent  = current._bvh_parent;
+					}
 
-				continue;
+					current = parent;
+				}
+				else {
+					break;
+				}
 			}
-
-			if(left) {
-				left._bvh_iterated = false;
-			}
-
-			if(right) {
-				right._bvh_iterated = false;
-			}
-
-			current = current._bvh_parent;
 		}
 
-		if(hierarchy) {
-			hierarchy._bvh_iterated = false;
-		}
+		return results;
 	}
 
 	/**
@@ -423,59 +428,53 @@ export default class BVH {
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
 	render(context) {
-		const hierarchy = this._hierarchy;
-
-		let current = hierarchy;
+		let current       = this._hierarchy;
+		let traverse_left = true;
 
 		while(current) {
-			if(!current._bvh_iterated) {
-				current._bvh_iterated = true;
+			if(traverse_left) {
+				traverse_left = false;
 
-				const min_x = current._bvh_min_x;
-				const min_y = current._bvh_min_y;
-				const max_x = current._bvh_max_x;
-				const max_y = current._bvh_max_y;
+				let left = current._bvh_branch ? current._bvh_left : null;
 
-				context.moveTo(min_x, min_y);
-				context.lineTo(max_x, min_y);
-				context.lineTo(max_x, max_y);
-				context.lineTo(min_x, max_y);
-				context.lineTo(min_x, min_y);
-
-				if(!current._bvh_branch) {
-					current = current._bvh_parent;
+				while(left) {
+					current = left;
+					left    = current._bvh_branch ? current._bvh_left : null;
 				}
 			}
 
-			const left = current._bvh_left;
+			const branch = current._bvh_branch;
+			const min_x  = current._bvh_min_x;
+			const min_y  = current._bvh_min_y;
+			const max_x  = current._bvh_max_x;
+			const max_y  = current._bvh_max_y;
+			const right  = branch ? current._bvh_right : null;
 
-			if(left &amp;&amp; !left._bvh_iterated) {
-				current = left;
-
-				continue;
-			}
-
-			const right = current._bvh_right;
-
-			if(right &amp;&amp; !right._bvh_iterated) {
-				current = right;
-
-				continue;
-			}
-
-			if(left) {
-				left._bvh_iterated = false;
-			}
+			context.moveTo(min_x, min_y);
+			context.lineTo(max_x, min_y);
+			context.lineTo(max_x, max_y);
+			context.lineTo(min_x, max_y);
+			context.lineTo(min_x, min_y);
 
 			if(right) {
-				right._bvh_iterated = false;
+				current       = right;
+				traverse_left = true;
 			}
+			else {
+				let parent = current._bvh_parent;
 
-			current = current._bvh_parent;
-		}
+				if(parent) {
+					while(parent &amp;&amp; parent._bvh_right === current) {
+						current = parent;
+						parent  = current._bvh_parent;
+					}
 
-		if(hierarchy) {
-			hierarchy._bvh_iterated = false;
+					current = parent;
+				}
+				else {
+					break;
+				}
+			}
 		}
 	}
 

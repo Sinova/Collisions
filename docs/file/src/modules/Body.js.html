@@ -41,7 +41,8 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/modules/Body.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import SAT from &apos;./SAT.js&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Result from &apos;./Result.js&apos;;
+import SAT from &apos;./SAT.js&apos;;
 
 /**
  * The base class for bodies used to detect collisions
@@ -96,9 +97,6 @@ export default class Body {
 		this._bvh_branch = false;
 
 		/** @private */
-		this._bvh_iterated = false;
-
-		/** @private */
 		this._bvh_padding = padding;
 
 		/** @private */
@@ -127,7 +125,7 @@ export default class Body {
 
 	/**
 	 * Returns a list of potential collisions
-	 * @returns {Iterator&lt;Body&gt;}
+	 * @returns {Array&lt;Body&gt;}
 	 */
 	potentials() {
 		const bvh = this._bvh;
@@ -148,6 +146,20 @@ export default class Body {
 		if(bvh) {
 			bvh.remove(this, false);
 		}
+	}
+
+	/**
+	 * Creates a {@link Result} used to collect the detailed results of a collision test
+	 */
+	createResult() {
+		return new Result();
+	}
+
+	/**
+	 * Creates a Result used to collect the detailed results of a collision test
+	 */
+	static createResult() {
+		return new Result();
 	}
 };
 </code></pre>

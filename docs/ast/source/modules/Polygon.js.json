@@ -8885,9 +8885,9 @@
                                       "line": 167,
                                       "column": 4
                                     },
-                                    "identifierName": "x"
+                                    "identifierName": "y"
                                   },
-                                  "name": "x"
+                                  "name": "y"
                                 },
                                 "operator": "===",
                                 "right": {
@@ -31782,7 +31782,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "x",
+      "value": "y",
       "start": 3820,
       "end": 3821,
       "loc": {

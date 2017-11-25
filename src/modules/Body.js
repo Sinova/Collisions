@@ -1,3 +1,4 @@
+import Result from './Result.js';
 import SAT from './SAT.js';
 
 /**
@@ -81,7 +82,7 @@ export default class Body {
 
 	/**
 	 * Returns a list of potential collisions
-	 * @returns {Iterator<Body>}
+	 * @returns {Array<Body>}
 	 */
 	potentials() {
 		const bvh = this._bvh;
@@ -102,5 +103,19 @@ export default class Body {
 		if(bvh) {
 			bvh.remove(this, false);
 		}
+	}
+
+	/**
+	 * Creates a {@link Result} used to collect the detailed results of a collision test
+	 */
+	createResult() {
+		return new Result();
+	}
+
+	/**
+	 * Creates a Result used to collect the detailed results of a collision test
+	 */
+	static createResult() {
+		return new Result();
 	}
 };

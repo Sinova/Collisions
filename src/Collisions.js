@@ -155,7 +155,7 @@ class Collisions {
 	/**
 	 * Returns a list of potential collisions for a body
 	 * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against
-	 * @returns {Iterator<Body>}
+	 * @returns {Array<Body>}
 	 */
 	potentials(body) {
 		return this._bvh.potentials(body);

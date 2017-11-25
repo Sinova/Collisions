@@ -309,19 +309,20 @@ export default class BVH {
 	/**
 	 * Returns a list of potential collisions for a body
 	 * @param {Circle|Polygon|Path|Point} body The body to test
-	 * @returns {Iterator<Body>}
+	 * @returns {Array<Body>}
 	 */
-	* potentials(body) {
-		const min_x = body._bvh_min_x;
-		const min_y = body._bvh_min_y;
-		const max_x = body._bvh_max_x;
-		const max_y = body._bvh_max_y;
+	potentials(body) {
+		const results = [];
+		const min_x   = body._bvh_min_x;
+		const min_y   = body._bvh_min_y;
+		const max_x   = body._bvh_max_x;
+		const max_y   = body._bvh_max_y;
 
 		let current       = this._hierarchy;
 		let traverse_left = true;
 
 		if(!current || !current._bvh_branch) {
-			return;
+			return results;
 		}
 
 		while(current) {
@@ -357,7 +358,7 @@ export default class BVH {
 			}
 			else {
 				if(!branch && current !== body) {
-					yield current;
+					results.push(current);
 				}
 
 				let parent = current._bvh_parent;
@@ -375,6 +376,8 @@ export default class BVH {
 				}
 			}
 		}
+
+		return results;
 	}
 
 	/**

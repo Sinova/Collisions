@@ -444,6 +444,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/modules/body.js~body#createresult",
+    "class/src/modules/Body.js~Body.html#instance-method-createResult",
+    "src/modules/Body.js~Body#createResult",
+    "method"
+  ],
+  [
     "src/modules/body.js~body#padding",
     "class/src/modules/Body.js~Body.html#instance-member-padding",
     "src/modules/Body.js~Body#padding",
@@ -472,6 +478,12 @@ window.esdocSearchIndex = [
     "class/src/modules/Body.js~Body.html#instance-member-y",
     "src/modules/Body.js~Body#y",
     "member"
+  ],
+  [
+    "src/modules/body.js~body.createresult",
+    "class/src/modules/Body.js~Body.html#static-method-createResult",
+    "src/modules/Body.js~Body.createResult",
+    "method"
   ],
   [
     "src/modules/circle.js",

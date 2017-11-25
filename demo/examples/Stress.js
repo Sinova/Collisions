@@ -118,6 +118,7 @@ export default class Stress {
 
 		this.context.beginPath();
 		this.collisions.renderBodies(this.context);
+		// this.collisions.renderBVH(this.context);
 		this.context.stroke();
 
 		// Render the FPS

@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 5562,
+  "end": 5559,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 5562,
+    "end": 5559,
     "loc": {
       "start": {
         "line": 1,
@@ -532,7 +532,7 @@
       {
         "type": "Identifier",
         "start": 407,
-        "end": 5468,
+        "end": 5465,
         "loc": {
           "start": {
             "line": 13,
@@ -565,7 +565,7 @@
         "body": {
           "type": "ClassBody",
           "start": 424,
-          "end": 5468,
+          "end": 5465,
           "loc": {
             "start": {
               "line": 13,
@@ -5875,9 +5875,9 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Iterator<Body>}\n\t ",
+                  "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Array<Body>}\n\t ",
                   "start": 4731,
-                  "end": 4917,
+                  "end": 4914,
                   "loc": {
                     "start": {
                       "line": 155,
@@ -5893,8 +5893,8 @@
             },
             {
               "type": "ClassMethod",
-              "start": 4919,
-              "end": 4977,
+              "start": 4916,
+              "end": 4974,
               "loc": {
                 "start": {
                   "line": 160,
@@ -5909,8 +5909,8 @@
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 4919,
-                "end": 4929,
+                "start": 4916,
+                "end": 4926,
                 "loc": {
                   "start": {
                     "line": 160,
@@ -5933,8 +5933,8 @@
               "params": [
                 {
                   "type": "Identifier",
-                  "start": 4930,
-                  "end": 4934,
+                  "start": 4927,
+                  "end": 4931,
                   "loc": {
                     "start": {
                       "line": 160,
@@ -5951,8 +5951,8 @@
               ],
               "body": {
                 "type": "BlockStatement",
-                "start": 4936,
-                "end": 4977,
+                "start": 4933,
+                "end": 4974,
                 "loc": {
                   "start": {
                     "line": 160,
@@ -5966,8 +5966,8 @@
                 "body": [
                   {
                     "type": "ReturnStatement",
-                    "start": 4940,
-                    "end": 4974,
+                    "start": 4937,
+                    "end": 4971,
                     "loc": {
                       "start": {
                         "line": 161,
@@ -5980,8 +5980,8 @@
                     },
                     "argument": {
                       "type": "CallExpression",
-                      "start": 4947,
-                      "end": 4973,
+                      "start": 4944,
+                      "end": 4970,
                       "loc": {
                         "start": {
                           "line": 161,
@@ -5994,8 +5994,8 @@
                       },
                       "callee": {
                         "type": "MemberExpression",
-                        "start": 4947,
-                        "end": 4967,
+                        "start": 4944,
+                        "end": 4964,
                         "loc": {
                           "start": {
                             "line": 161,
@@ -6008,8 +6008,8 @@
                         },
                         "object": {
                           "type": "MemberExpression",
-                          "start": 4947,
-                          "end": 4956,
+                          "start": 4944,
+                          "end": 4953,
                           "loc": {
                             "start": {
                               "line": 161,
@@ -6022,8 +6022,8 @@
                           },
                           "object": {
                             "type": "ThisExpression",
-                            "start": 4947,
-                            "end": 4951,
+                            "start": 4944,
+                            "end": 4948,
                             "loc": {
                               "start": {
                                 "line": 161,
@@ -6037,8 +6037,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 4952,
-                            "end": 4956,
+                            "start": 4949,
+                            "end": 4953,
                             "loc": {
                               "start": {
                                 "line": 161,
@@ -6056,8 +6056,8 @@
                         },
                         "property": {
                           "type": "Identifier",
-                          "start": 4957,
-                          "end": 4967,
+                          "start": 4954,
+                          "end": 4964,
                           "loc": {
                             "start": {
                               "line": 161,
@@ -6076,8 +6076,8 @@
                       "arguments": [
                         {
                           "type": "Identifier",
-                          "start": 4968,
-                          "end": 4972,
+                          "start": 4965,
+                          "end": 4969,
                           "loc": {
                             "start": {
                               "line": 161,
@@ -6101,9 +6101,9 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Iterator<Body>}\n\t ",
+                  "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Array<Body>}\n\t ",
                   "start": 4731,
-                  "end": 4917,
+                  "end": 4914,
                   "loc": {
                     "start": {
                       "line": 155,
@@ -6120,8 +6120,8 @@
                 {
                   "type": "CommentBlock",
                   "value": "*\n\t * Determines if two bodies are colliding\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t ",
-                  "start": 4980,
-                  "end": 5363,
+                  "start": 4977,
+                  "end": 5360,
                   "loc": {
                     "start": {
                       "line": 164,
@@ -6137,8 +6137,8 @@
             },
             {
               "type": "ClassMethod",
-              "start": 5365,
-              "end": 5466,
+              "start": 5362,
+              "end": 5463,
               "loc": {
                 "start": {
                   "line": 171,
@@ -6153,8 +6153,8 @@
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 5365,
-                "end": 5373,
+                "start": 5362,
+                "end": 5370,
                 "loc": {
                   "start": {
                     "line": 171,
@@ -6177,8 +6177,8 @@
               "params": [
                 {
                   "type": "Identifier",
-                  "start": 5374,
-                  "end": 5380,
+                  "start": 5371,
+                  "end": 5377,
                   "loc": {
                     "start": {
                       "line": 171,
@@ -6194,8 +6194,8 @@
                 },
                 {
                   "type": "Identifier",
-                  "start": 5382,
-                  "end": 5388,
+                  "start": 5379,
+                  "end": 5385,
                   "loc": {
                     "start": {
                       "line": 171,
@@ -6211,8 +6211,8 @@
                 },
                 {
                   "type": "AssignmentPattern",
-                  "start": 5390,
-                  "end": 5403,
+                  "start": 5387,
+                  "end": 5400,
                   "loc": {
                     "start": {
                       "line": 171,
@@ -6225,8 +6225,8 @@
                   },
                   "left": {
                     "type": "Identifier",
-                    "start": 5390,
-                    "end": 5396,
+                    "start": 5387,
+                    "end": 5393,
                     "loc": {
                       "start": {
                         "line": 171,
@@ -6242,8 +6242,8 @@
                   },
                   "right": {
                     "type": "NullLiteral",
-                    "start": 5399,
-                    "end": 5403,
+                    "start": 5396,
+                    "end": 5400,
                     "loc": {
                       "start": {
                         "line": 171,
@@ -6258,8 +6258,8 @@
                 },
                 {
                   "type": "AssignmentPattern",
-                  "start": 5405,
-                  "end": 5416,
+                  "start": 5402,
+                  "end": 5413,
                   "loc": {
                     "start": {
                       "line": 171,
@@ -6272,8 +6272,8 @@
                   },
                   "left": {
                     "type": "Identifier",
-                    "start": 5405,
-                    "end": 5409,
+                    "start": 5402,
+                    "end": 5406,
                     "loc": {
                       "start": {
                         "line": 171,
@@ -6289,8 +6289,8 @@
                   },
                   "right": {
                     "type": "BooleanLiteral",
-                    "start": 5412,
-                    "end": 5416,
+                    "start": 5409,
+                    "end": 5413,
                     "loc": {
                       "start": {
                         "line": 171,
@@ -6307,8 +6307,8 @@
               ],
               "body": {
                 "type": "BlockStatement",
-                "start": 5418,
-                "end": 5466,
+                "start": 5415,
+                "end": 5463,
                 "loc": {
                   "start": {
                     "line": 171,
@@ -6322,8 +6322,8 @@
                 "body": [
                   {
                     "type": "ReturnStatement",
-                    "start": 5422,
-                    "end": 5463,
+                    "start": 5419,
+                    "end": 5460,
                     "loc": {
                       "start": {
                         "line": 172,
@@ -6336,8 +6336,8 @@
                     },
                     "argument": {
                       "type": "CallExpression",
-                      "start": 5429,
-                      "end": 5462,
+                      "start": 5426,
+                      "end": 5459,
                       "loc": {
                         "start": {
                           "line": 172,
@@ -6350,8 +6350,8 @@
                       },
                       "callee": {
                         "type": "Identifier",
-                        "start": 5429,
-                        "end": 5432,
+                        "start": 5426,
+                        "end": 5429,
                         "loc": {
                           "start": {
                             "line": 172,
@@ -6368,8 +6368,8 @@
                       "arguments": [
                         {
                           "type": "Identifier",
-                          "start": 5433,
-                          "end": 5439,
+                          "start": 5430,
+                          "end": 5436,
                           "loc": {
                             "start": {
                               "line": 172,
@@ -6385,8 +6385,8 @@
                         },
                         {
                           "type": "Identifier",
-                          "start": 5441,
-                          "end": 5447,
+                          "start": 5438,
+                          "end": 5444,
                           "loc": {
                             "start": {
                               "line": 172,
@@ -6402,8 +6402,8 @@
                         },
                         {
                           "type": "Identifier",
-                          "start": 5449,
-                          "end": 5455,
+                          "start": 5446,
+                          "end": 5452,
                           "loc": {
                             "start": {
                               "line": 172,
@@ -6419,8 +6419,8 @@
                         },
                         {
                           "type": "Identifier",
-                          "start": 5457,
-                          "end": 5461,
+                          "start": 5454,
+                          "end": 5458,
                           "loc": {
                             "start": {
                               "line": 172,
@@ -6444,8 +6444,8 @@
                 {
                   "type": "CommentBlock",
                   "value": "*\n\t * Determines if two bodies are colliding\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t ",
-                  "start": 4980,
-                  "end": 5363,
+                  "start": 4977,
+                  "end": 5360,
                   "loc": {
                     "start": {
                       "line": 164,
@@ -6467,8 +6467,8 @@
       },
       {
         "type": "EmptyStatement",
-        "start": 5468,
-        "end": 5469,
+        "start": 5465,
+        "end": 5466,
         "loc": {
           "start": {
             "line": 174,
@@ -6482,8 +6482,8 @@
       },
       {
         "type": "ExportNamedDeclaration",
-        "start": 5471,
-        "end": 5561,
+        "start": 5468,
+        "end": 5558,
         "loc": {
           "start": {
             "line": 176,
@@ -6498,8 +6498,8 @@
         "specifiers": [
           {
             "type": "ExportSpecifier",
-            "start": 5481,
-            "end": 5502,
+            "start": 5478,
+            "end": 5499,
             "loc": {
               "start": {
                 "line": 177,
@@ -6512,8 +6512,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 5481,
-              "end": 5491,
+              "start": 5478,
+              "end": 5488,
               "loc": {
                 "start": {
                   "line": 177,
@@ -6529,8 +6529,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 5495,
-              "end": 5502,
+              "start": 5492,
+              "end": 5499,
               "loc": {
                 "start": {
                   "line": 177,
@@ -6547,8 +6547,8 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 5505,
-            "end": 5515,
+            "start": 5502,
+            "end": 5512,
             "loc": {
               "start": {
                 "line": 178,
@@ -6561,8 +6561,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 5505,
-              "end": 5515,
+              "start": 5502,
+              "end": 5512,
               "loc": {
                 "start": {
                   "line": 178,
@@ -6578,8 +6578,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 5505,
-              "end": 5515,
+              "start": 5502,
+              "end": 5512,
               "loc": {
                 "start": {
                   "line": 178,
@@ -6596,8 +6596,8 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 5518,
-            "end": 5524,
+            "start": 5515,
+            "end": 5521,
             "loc": {
               "start": {
                 "line": 179,
@@ -6610,8 +6610,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 5518,
-              "end": 5524,
+              "start": 5515,
+              "end": 5521,
               "loc": {
                 "start": {
                   "line": 179,
@@ -6627,8 +6627,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 5518,
-              "end": 5524,
+              "start": 5515,
+              "end": 5521,
               "loc": {
                 "start": {
                   "line": 179,
@@ -6645,8 +6645,8 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 5527,
-            "end": 5533,
+            "start": 5524,
+            "end": 5530,
             "loc": {
               "start": {
                 "line": 180,
@@ -6659,8 +6659,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 5527,
-              "end": 5533,
+              "start": 5524,
+              "end": 5530,
               "loc": {
                 "start": {
                   "line": 180,
@@ -6676,8 +6676,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 5527,
-              "end": 5533,
+              "start": 5524,
+              "end": 5530,
               "loc": {
                 "start": {
                   "line": 180,
@@ -6694,8 +6694,8 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 5536,
-            "end": 5543,
+            "start": 5533,
+            "end": 5540,
             "loc": {
               "start": {
                 "line": 181,
@@ -6708,8 +6708,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 5536,
-              "end": 5543,
+              "start": 5533,
+              "end": 5540,
               "loc": {
                 "start": {
                   "line": 181,
@@ -6725,8 +6725,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 5536,
-              "end": 5543,
+              "start": 5533,
+              "end": 5540,
               "loc": {
                 "start": {
                   "line": 181,
@@ -6743,8 +6743,8 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 5546,
-            "end": 5550,
+            "start": 5543,
+            "end": 5547,
             "loc": {
               "start": {
                 "line": 182,
@@ -6757,8 +6757,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 5546,
-              "end": 5550,
+              "start": 5543,
+              "end": 5547,
               "loc": {
                 "start": {
                   "line": 182,
@@ -6774,8 +6774,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 5546,
-              "end": 5550,
+              "start": 5543,
+              "end": 5547,
               "loc": {
                 "start": {
                   "line": 182,
@@ -6792,8 +6792,8 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 5553,
-            "end": 5558,
+            "start": 5550,
+            "end": 5555,
             "loc": {
               "start": {
                 "line": 183,
@@ -6806,8 +6806,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 5553,
-              "end": 5558,
+              "start": 5550,
+              "end": 5555,
               "loc": {
                 "start": {
                   "line": 183,
@@ -6823,8 +6823,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 5553,
-              "end": 5558,
+              "start": 5550,
+              "end": 5555,
               "loc": {
                 "start": {
                   "line": 183,
@@ -6844,8 +6844,8 @@
       },
       {
         "type": "ExportNamedDeclaration",
-        "start": 5471,
-        "end": 5561,
+        "start": 5468,
+        "end": 5558,
         "loc": {
           "start": {
             "line": 176,
@@ -6859,7 +6859,7 @@
         "declaration": {
           "type": "ClassDeclaration",
           "start": 407,
-          "end": 5468,
+          "end": 5465,
           "loc": {
             "start": {
               "line": 13,
@@ -6892,7 +6892,7 @@
           "body": {
             "type": "ClassBody",
             "start": 424,
-            "end": 5468,
+            "end": 5465,
             "loc": {
               "start": {
                 "line": 13,
@@ -12202,9 +12202,9 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Iterator<Body>}\n\t ",
+                    "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Array<Body>}\n\t ",
                     "start": 4731,
-                    "end": 4917,
+                    "end": 4914,
                     "loc": {
                       "start": {
                         "line": 155,
@@ -12220,8 +12220,8 @@
               },
               {
                 "type": "ClassMethod",
-                "start": 4919,
-                "end": 4977,
+                "start": 4916,
+                "end": 4974,
                 "loc": {
                   "start": {
                     "line": 160,
@@ -12236,8 +12236,8 @@
                 "computed": false,
                 "key": {
                   "type": "Identifier",
-                  "start": 4919,
-                  "end": 4929,
+                  "start": 4916,
+                  "end": 4926,
                   "loc": {
                     "start": {
                       "line": 160,
@@ -12260,8 +12260,8 @@
                 "params": [
                   {
                     "type": "Identifier",
-                    "start": 4930,
-                    "end": 4934,
+                    "start": 4927,
+                    "end": 4931,
                     "loc": {
                       "start": {
                         "line": 160,
@@ -12278,8 +12278,8 @@
                 ],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 4936,
-                  "end": 4977,
+                  "start": 4933,
+                  "end": 4974,
                   "loc": {
                     "start": {
                       "line": 160,
@@ -12293,8 +12293,8 @@
                   "body": [
                     {
                       "type": "ReturnStatement",
-                      "start": 4940,
-                      "end": 4974,
+                      "start": 4937,
+                      "end": 4971,
                       "loc": {
                         "start": {
                           "line": 161,
@@ -12307,8 +12307,8 @@
                       },
                       "argument": {
                         "type": "CallExpression",
-                        "start": 4947,
-                        "end": 4973,
+                        "start": 4944,
+                        "end": 4970,
                         "loc": {
                           "start": {
                             "line": 161,
@@ -12321,8 +12321,8 @@
                         },
                         "callee": {
                           "type": "MemberExpression",
-                          "start": 4947,
-                          "end": 4967,
+                          "start": 4944,
+                          "end": 4964,
                           "loc": {
                             "start": {
                               "line": 161,
@@ -12335,8 +12335,8 @@
                           },
                           "object": {
                             "type": "MemberExpression",
-                            "start": 4947,
-                            "end": 4956,
+                            "start": 4944,
+                            "end": 4953,
                             "loc": {
                               "start": {
                                 "line": 161,
@@ -12349,8 +12349,8 @@
                             },
                             "object": {
                               "type": "ThisExpression",
-                              "start": 4947,
-                              "end": 4951,
+                              "start": 4944,
+                              "end": 4948,
                               "loc": {
                                 "start": {
                                   "line": 161,
@@ -12364,8 +12364,8 @@
                             },
                             "property": {
                               "type": "Identifier",
-                              "start": 4952,
-                              "end": 4956,
+                              "start": 4949,
+                              "end": 4953,
                               "loc": {
                                 "start": {
                                   "line": 161,
@@ -12383,8 +12383,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 4957,
-                            "end": 4967,
+                            "start": 4954,
+                            "end": 4964,
                             "loc": {
                               "start": {
                                 "line": 161,
@@ -12403,8 +12403,8 @@
                         "arguments": [
                           {
                             "type": "Identifier",
-                            "start": 4968,
-                            "end": 4972,
+                            "start": 4965,
+                            "end": 4969,
                             "loc": {
                               "start": {
                                 "line": 161,
@@ -12428,9 +12428,9 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Iterator<Body>}\n\t ",
+                    "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Array<Body>}\n\t ",
                     "start": 4731,
-                    "end": 4917,
+                    "end": 4914,
                     "loc": {
                       "start": {
                         "line": 155,
@@ -12447,8 +12447,8 @@
                   {
                     "type": "CommentBlock",
                     "value": "*\n\t * Determines if two bodies are colliding\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t ",
-                    "start": 4980,
-                    "end": 5363,
+                    "start": 4977,
+                    "end": 5360,
                     "loc": {
                       "start": {
                         "line": 164,
@@ -12464,8 +12464,8 @@
               },
               {
                 "type": "ClassMethod",
-                "start": 5365,
-                "end": 5466,
+                "start": 5362,
+                "end": 5463,
                 "loc": {
                   "start": {
                     "line": 171,
@@ -12480,8 +12480,8 @@
                 "computed": false,
                 "key": {
                   "type": "Identifier",
-                  "start": 5365,
-                  "end": 5373,
+                  "start": 5362,
+                  "end": 5370,
                   "loc": {
                     "start": {
                       "line": 171,
@@ -12504,8 +12504,8 @@
                 "params": [
                   {
                     "type": "Identifier",
-                    "start": 5374,
-                    "end": 5380,
+                    "start": 5371,
+                    "end": 5377,
                     "loc": {
                       "start": {
                         "line": 171,
@@ -12521,8 +12521,8 @@
                   },
                   {
                     "type": "Identifier",
-                    "start": 5382,
-                    "end": 5388,
+                    "start": 5379,
+                    "end": 5385,
                     "loc": {
                       "start": {
                         "line": 171,
@@ -12538,8 +12538,8 @@
                   },
                   {
                     "type": "AssignmentPattern",
-                    "start": 5390,
-                    "end": 5403,
+                    "start": 5387,
+                    "end": 5400,
                     "loc": {
                       "start": {
                         "line": 171,
@@ -12552,8 +12552,8 @@
                     },
                     "left": {
                       "type": "Identifier",
-                      "start": 5390,
-                      "end": 5396,
+                      "start": 5387,
+                      "end": 5393,
                       "loc": {
                         "start": {
                           "line": 171,
@@ -12569,8 +12569,8 @@
                     },
                     "right": {
                       "type": "NullLiteral",
-                      "start": 5399,
-                      "end": 5403,
+                      "start": 5396,
+                      "end": 5400,
                       "loc": {
                         "start": {
                           "line": 171,
@@ -12585,8 +12585,8 @@
                   },
                   {
                     "type": "AssignmentPattern",
-                    "start": 5405,
-                    "end": 5416,
+                    "start": 5402,
+                    "end": 5413,
                     "loc": {
                       "start": {
                         "line": 171,
@@ -12599,8 +12599,8 @@
                     },
                     "left": {
                       "type": "Identifier",
-                      "start": 5405,
-                      "end": 5409,
+                      "start": 5402,
+                      "end": 5406,
                       "loc": {
                         "start": {
                           "line": 171,
@@ -12616,8 +12616,8 @@
                     },
                     "right": {
                       "type": "BooleanLiteral",
-                      "start": 5412,
-                      "end": 5416,
+                      "start": 5409,
+                      "end": 5413,
                       "loc": {
                         "start": {
                           "line": 171,
@@ -12634,8 +12634,8 @@
                 ],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 5418,
-                  "end": 5466,
+                  "start": 5415,
+                  "end": 5463,
                   "loc": {
                     "start": {
                       "line": 171,
@@ -12649,8 +12649,8 @@
                   "body": [
                     {
                       "type": "ReturnStatement",
-                      "start": 5422,
-                      "end": 5463,
+                      "start": 5419,
+                      "end": 5460,
                       "loc": {
                         "start": {
                           "line": 172,
@@ -12663,8 +12663,8 @@
                       },
                       "argument": {
                         "type": "CallExpression",
-                        "start": 5429,
-                        "end": 5462,
+                        "start": 5426,
+                        "end": 5459,
                         "loc": {
                           "start": {
                             "line": 172,
@@ -12677,8 +12677,8 @@
                         },
                         "callee": {
                           "type": "Identifier",
-                          "start": 5429,
-                          "end": 5432,
+                          "start": 5426,
+                          "end": 5429,
                           "loc": {
                             "start": {
                               "line": 172,
@@ -12695,8 +12695,8 @@
                         "arguments": [
                           {
                             "type": "Identifier",
-                            "start": 5433,
-                            "end": 5439,
+                            "start": 5430,
+                            "end": 5436,
                             "loc": {
                               "start": {
                                 "line": 172,
@@ -12712,8 +12712,8 @@
                           },
                           {
                             "type": "Identifier",
-                            "start": 5441,
-                            "end": 5447,
+                            "start": 5438,
+                            "end": 5444,
                             "loc": {
                               "start": {
                                 "line": 172,
@@ -12729,8 +12729,8 @@
                           },
                           {
                             "type": "Identifier",
-                            "start": 5449,
-                            "end": 5455,
+                            "start": 5446,
+                            "end": 5452,
                             "loc": {
                               "start": {
                                 "line": 172,
@@ -12746,8 +12746,8 @@
                           },
                           {
                             "type": "Identifier",
-                            "start": 5457,
-                            "end": 5461,
+                            "start": 5454,
+                            "end": 5458,
                             "loc": {
                               "start": {
                                 "line": 172,
@@ -12771,8 +12771,8 @@
                   {
                     "type": "CommentBlock",
                     "value": "*\n\t * Determines if two bodies are colliding\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t ",
-                    "start": 4980,
-                    "end": 5363,
+                    "start": 4977,
+                    "end": 5360,
                     "loc": {
                       "start": {
                         "line": 164,
@@ -13043,9 +13043,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Iterator<Body>}\n\t ",
+      "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Array<Body>}\n\t ",
       "start": 4731,
-      "end": 4917,
+      "end": 4914,
       "loc": {
         "start": {
           "line": 155,
@@ -13060,8 +13060,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n\t * Determines if two bodies are colliding\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t ",
-      "start": 4980,
-      "end": 5363,
+      "start": 4977,
+      "end": 5360,
       "loc": {
         "start": {
           "line": 164,
@@ -24843,9 +24843,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Iterator<Body>}\n\t ",
+      "value": "*\n\t * Returns a list of potential collisions for a body\n\t * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against\n\t * @returns {Array<Body>}\n\t ",
       "start": 4731,
-      "end": 4917,
+      "end": 4914,
       "loc": {
         "start": {
           "line": 155,
@@ -24870,8 +24870,8 @@
         "binop": null
       },
       "value": "potentials",
-      "start": 4919,
-      "end": 4929,
+      "start": 4916,
+      "end": 4926,
       "loc": {
         "start": {
           "line": 160,
@@ -24895,8 +24895,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 4929,
-      "end": 4930,
+      "start": 4926,
+      "end": 4927,
       "loc": {
         "start": {
           "line": 160,
@@ -24921,8 +24921,8 @@
         "binop": null
       },
       "value": "body",
-      "start": 4930,
-      "end": 4934,
+      "start": 4927,
+      "end": 4931,
       "loc": {
         "start": {
           "line": 160,
@@ -24946,8 +24946,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 4934,
-      "end": 4935,
+      "start": 4931,
+      "end": 4932,
       "loc": {
         "start": {
           "line": 160,
@@ -24971,8 +24971,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 4936,
-      "end": 4937,
+      "start": 4933,
+      "end": 4934,
       "loc": {
         "start": {
           "line": 160,
@@ -24999,8 +24999,8 @@
         "updateContext": null
       },
       "value": "return",
-      "start": 4940,
-      "end": 4946,
+      "start": 4937,
+      "end": 4943,
       "loc": {
         "start": {
           "line": 161,
@@ -25027,8 +25027,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 4947,
-      "end": 4951,
+      "start": 4944,
+      "end": 4948,
       "loc": {
         "start": {
           "line": 161,
@@ -25053,8 +25053,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 4951,
-      "end": 4952,
+      "start": 4948,
+      "end": 4949,
       "loc": {
         "start": {
           "line": 161,
@@ -25079,8 +25079,8 @@
         "binop": null
       },
       "value": "_bvh",
-      "start": 4952,
-      "end": 4956,
+      "start": 4949,
+      "end": 4953,
       "loc": {
         "start": {
           "line": 161,
@@ -25105,8 +25105,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 4956,
-      "end": 4957,
+      "start": 4953,
+      "end": 4954,
       "loc": {
         "start": {
           "line": 161,
@@ -25131,8 +25131,8 @@
         "binop": null
       },
       "value": "potentials",
-      "start": 4957,
-      "end": 4967,
+      "start": 4954,
+      "end": 4964,
       "loc": {
         "start": {
           "line": 161,
@@ -25156,8 +25156,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 4967,
-      "end": 4968,
+      "start": 4964,
+      "end": 4965,
       "loc": {
         "start": {
           "line": 161,
@@ -25182,8 +25182,8 @@
         "binop": null
       },
       "value": "body",
-      "start": 4968,
-      "end": 4972,
+      "start": 4965,
+      "end": 4969,
       "loc": {
         "start": {
           "line": 161,
@@ -25207,8 +25207,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 4972,
-      "end": 4973,
+      "start": 4969,
+      "end": 4970,
       "loc": {
         "start": {
           "line": 161,
@@ -25233,8 +25233,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 4973,
-      "end": 4974,
+      "start": 4970,
+      "end": 4971,
       "loc": {
         "start": {
           "line": 161,
@@ -25258,8 +25258,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 4976,
-      "end": 4977,
+      "start": 4973,
+      "end": 4974,
       "loc": {
         "start": {
           "line": 162,
@@ -25274,8 +25274,8 @@
     {
       "type": "CommentBlock",
       "value": "*\n\t * Determines if two bodies are colliding\n\t * @param {Circle|Polygon|Path|Point} target The target body to test against\n\t * @param {Result} [result = null] A Result object on which to store information about the collision\n\t * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)\n\t * @returns {Boolean}\n\t ",
-      "start": 4980,
-      "end": 5363,
+      "start": 4977,
+      "end": 5360,
       "loc": {
         "start": {
           "line": 164,
@@ -25300,8 +25300,8 @@
         "binop": null
       },
       "value": "collides",
-      "start": 5365,
-      "end": 5373,
+      "start": 5362,
+      "end": 5370,
       "loc": {
         "start": {
           "line": 171,
@@ -25325,8 +25325,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 5373,
-      "end": 5374,
+      "start": 5370,
+      "end": 5371,
       "loc": {
         "start": {
           "line": 171,
@@ -25351,8 +25351,8 @@
         "binop": null
       },
       "value": "source",
-      "start": 5374,
-      "end": 5380,
+      "start": 5371,
+      "end": 5377,
       "loc": {
         "start": {
           "line": 171,
@@ -25377,8 +25377,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5380,
-      "end": 5381,
+      "start": 5377,
+      "end": 5378,
       "loc": {
         "start": {
           "line": 171,
@@ -25403,8 +25403,8 @@
         "binop": null
       },
       "value": "target",
-      "start": 5382,
-      "end": 5388,
+      "start": 5379,
+      "end": 5385,
       "loc": {
         "start": {
           "line": 171,
@@ -25429,8 +25429,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5388,
-      "end": 5389,
+      "start": 5385,
+      "end": 5386,
       "loc": {
         "start": {
           "line": 171,
@@ -25455,8 +25455,8 @@
         "binop": null
       },
       "value": "result",
-      "start": 5390,
-      "end": 5396,
+      "start": 5387,
+      "end": 5393,
       "loc": {
         "start": {
           "line": 171,
@@ -25482,8 +25482,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 5397,
-      "end": 5398,
+      "start": 5394,
+      "end": 5395,
       "loc": {
         "start": {
           "line": 171,
@@ -25510,8 +25510,8 @@
         "updateContext": null
       },
       "value": "null",
-      "start": 5399,
-      "end": 5403,
+      "start": 5396,
+      "end": 5400,
       "loc": {
         "start": {
           "line": 171,
@@ -25536,8 +25536,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5403,
-      "end": 5404,
+      "start": 5400,
+      "end": 5401,
       "loc": {
         "start": {
           "line": 171,
@@ -25562,8 +25562,8 @@
         "binop": null
       },
       "value": "aabb",
-      "start": 5405,
-      "end": 5409,
+      "start": 5402,
+      "end": 5406,
       "loc": {
         "start": {
           "line": 171,
@@ -25589,8 +25589,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 5410,
-      "end": 5411,
+      "start": 5407,
+      "end": 5408,
       "loc": {
         "start": {
           "line": 171,
@@ -25617,8 +25617,8 @@
         "updateContext": null
       },
       "value": "true",
-      "start": 5412,
-      "end": 5416,
+      "start": 5409,
+      "end": 5413,
       "loc": {
         "start": {
           "line": 171,
@@ -25642,8 +25642,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 5416,
-      "end": 5417,
+      "start": 5413,
+      "end": 5414,
       "loc": {
         "start": {
           "line": 171,
@@ -25667,8 +25667,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 5418,
-      "end": 5419,
+      "start": 5415,
+      "end": 5416,
       "loc": {
         "start": {
           "line": 171,
@@ -25695,8 +25695,8 @@
         "updateContext": null
       },
       "value": "return",
-      "start": 5422,
-      "end": 5428,
+      "start": 5419,
+      "end": 5425,
       "loc": {
         "start": {
           "line": 172,
@@ -25721,8 +25721,8 @@
         "binop": null
       },
       "value": "SAT",
-      "start": 5429,
-      "end": 5432,
+      "start": 5426,
+      "end": 5429,
       "loc": {
         "start": {
           "line": 172,
@@ -25746,8 +25746,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 5432,
-      "end": 5433,
+      "start": 5429,
+      "end": 5430,
       "loc": {
         "start": {
           "line": 172,
@@ -25772,8 +25772,8 @@
         "binop": null
       },
       "value": "source",
-      "start": 5433,
-      "end": 5439,
+      "start": 5430,
+      "end": 5436,
       "loc": {
         "start": {
           "line": 172,
@@ -25798,8 +25798,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5439,
-      "end": 5440,
+      "start": 5436,
+      "end": 5437,
       "loc": {
         "start": {
           "line": 172,
@@ -25824,8 +25824,8 @@
         "binop": null
       },
       "value": "target",
-      "start": 5441,
-      "end": 5447,
+      "start": 5438,
+      "end": 5444,
       "loc": {
         "start": {
           "line": 172,
@@ -25850,8 +25850,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5447,
-      "end": 5448,
+      "start": 5444,
+      "end": 5445,
       "loc": {
         "start": {
           "line": 172,
@@ -25876,8 +25876,8 @@
         "binop": null
       },
       "value": "result",
-      "start": 5449,
-      "end": 5455,
+      "start": 5446,
+      "end": 5452,
       "loc": {
         "start": {
           "line": 172,
@@ -25902,8 +25902,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5455,
-      "end": 5456,
+      "start": 5452,
+      "end": 5453,
       "loc": {
         "start": {
           "line": 172,
@@ -25928,8 +25928,8 @@
         "binop": null
       },
       "value": "aabb",
-      "start": 5457,
-      "end": 5461,
+      "start": 5454,
+      "end": 5458,
       "loc": {
         "start": {
           "line": 172,
@@ -25953,8 +25953,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 5461,
-      "end": 5462,
+      "start": 5458,
+      "end": 5459,
       "loc": {
         "start": {
           "line": 172,
@@ -25979,8 +25979,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5462,
-      "end": 5463,
+      "start": 5459,
+      "end": 5460,
       "loc": {
         "start": {
           "line": 172,
@@ -26004,8 +26004,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 5465,
-      "end": 5466,
+      "start": 5462,
+      "end": 5463,
       "loc": {
         "start": {
           "line": 173,
@@ -26029,8 +26029,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 5467,
-      "end": 5468,
+      "start": 5464,
+      "end": 5465,
       "loc": {
         "start": {
           "line": 174,
@@ -26055,8 +26055,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5468,
-      "end": 5469,
+      "start": 5465,
+      "end": 5466,
       "loc": {
         "start": {
           "line": 174,
@@ -26083,8 +26083,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 5471,
-      "end": 5477,
+      "start": 5468,
+      "end": 5474,
       "loc": {
         "start": {
           "line": 176,
@@ -26108,8 +26108,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 5478,
-      "end": 5479,
+      "start": 5475,
+      "end": 5476,
       "loc": {
         "start": {
           "line": 176,
@@ -26134,8 +26134,8 @@
         "binop": null
       },
       "value": "Collisions",
-      "start": 5481,
-      "end": 5491,
+      "start": 5478,
+      "end": 5488,
       "loc": {
         "start": {
           "line": 177,
@@ -26160,8 +26160,8 @@
         "binop": null
       },
       "value": "as",
-      "start": 5492,
-      "end": 5494,
+      "start": 5489,
+      "end": 5491,
       "loc": {
         "start": {
           "line": 177,
@@ -26188,8 +26188,8 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 5495,
-      "end": 5502,
+      "start": 5492,
+      "end": 5499,
       "loc": {
         "start": {
           "line": 177,
@@ -26214,8 +26214,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5502,
-      "end": 5503,
+      "start": 5499,
+      "end": 5500,
       "loc": {
         "start": {
           "line": 177,
@@ -26240,8 +26240,8 @@
         "binop": null
       },
       "value": "Collisions",
-      "start": 5505,
-      "end": 5515,
+      "start": 5502,
+      "end": 5512,
       "loc": {
         "start": {
           "line": 178,
@@ -26266,8 +26266,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5515,
-      "end": 5516,
+      "start": 5512,
+      "end": 5513,
       "loc": {
         "start": {
           "line": 178,
@@ -26292,8 +26292,8 @@
         "binop": null
       },
       "value": "Result",
-      "start": 5518,
-      "end": 5524,
+      "start": 5515,
+      "end": 5521,
       "loc": {
         "start": {
           "line": 179,
@@ -26318,8 +26318,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5524,
-      "end": 5525,
+      "start": 5521,
+      "end": 5522,
       "loc": {
         "start": {
           "line": 179,
@@ -26344,8 +26344,8 @@
         "binop": null
       },
       "value": "Circle",
-      "start": 5527,
-      "end": 5533,
+      "start": 5524,
+      "end": 5530,
       "loc": {
         "start": {
           "line": 180,
@@ -26370,8 +26370,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5533,
-      "end": 5534,
+      "start": 5530,
+      "end": 5531,
       "loc": {
         "start": {
           "line": 180,
@@ -26396,8 +26396,8 @@
         "binop": null
       },
       "value": "Polygon",
-      "start": 5536,
-      "end": 5543,
+      "start": 5533,
+      "end": 5540,
       "loc": {
         "start": {
           "line": 181,
@@ -26422,8 +26422,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5543,
-      "end": 5544,
+      "start": 5540,
+      "end": 5541,
       "loc": {
         "start": {
           "line": 181,
@@ -26448,8 +26448,8 @@
         "binop": null
       },
       "value": "Path",
-      "start": 5546,
-      "end": 5550,
+      "start": 5543,
+      "end": 5547,
       "loc": {
         "start": {
           "line": 182,
@@ -26474,8 +26474,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5550,
-      "end": 5551,
+      "start": 5547,
+      "end": 5548,
       "loc": {
         "start": {
           "line": 182,
@@ -26500,8 +26500,8 @@
         "binop": null
       },
       "value": "Point",
-      "start": 5553,
-      "end": 5558,
+      "start": 5550,
+      "end": 5555,
       "loc": {
         "start": {
           "line": 183,
@@ -26526,8 +26526,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5558,
-      "end": 5559,
+      "start": 5555,
+      "end": 5556,
       "loc": {
         "start": {
           "line": 183,
@@ -26551,8 +26551,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 5560,
-      "end": 5561,
+      "start": 5557,
+      "end": 5558,
       "loc": {
         "start": {
           "line": 184,
@@ -26577,8 +26577,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 5562,
-      "end": 5562,
+      "start": 5559,
+      "end": 5559,
       "loc": {
         "start": {
           "line": 185,
