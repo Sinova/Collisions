@@ -35,15 +35,15 @@ export default class Movement {
 		this.createPlayer(200, 200);
 
 		const updateKeys = (e) => {
-			const down = e.type === 'keydown';
+			const keydown = e.type === 'keydown';
 
-			e.key === 'w'          && (this.up = down);
-			e.key === 's'          && (this.down = down);
-			e.key === 'a'          && (this.left = down);
-			e.key === 'd'          && (this.right = down);
-			e.key === 'e'          && (this.clockwise = down);
-			e.key === 'q'          && (this.counterclockwise = down);
-			e.key === 'r' && !down && (this.createPlayer(this.player.x, this.player.y));
+			e.key === 'w'             && (this.up = keydown);
+			e.key === 's'             && (this.down = keydown);
+			e.key === 'a'             && (this.left = keydown);
+			e.key === 'd'             && (this.right = keydown);
+			e.key === 'e'             && (this.clockwise = keydown);
+			e.key === 'q'             && (this.counterclockwise = keydown);
+			e.key === 'r' && !keydown && (this.createPlayer(this.player.x, this.player.y));
 		};
 
 		document.addEventListener('keydown', updateKeys);

@@ -320,6 +320,10 @@ export default class BVH {
 		let current       = this._hierarchy;
 		let traverse_left = true;
 
+		if(!current || !current._bvh_branch) {
+			return;
+		}
+
 		while(current) {
 			if(traverse_left) {
 				traverse_left = false;
@@ -352,14 +356,7 @@ export default class BVH {
 				traverse_left = true;
 			}
 			else {
-				if(
-					!branch &&
-					current !== body &&
-					current._bvh_max_x > min_x &&
-					current._bvh_max_y > min_y &&
-					current._bvh_min_x < max_x &&
-					current._bvh_min_y < max_y
-				) {
+				if(!branch && current !== body) {
 					yield current;
 				}
 

@@ -164,7 +164,7 @@ export default class Polygon extends Body {
 		if(
 			!this._dirty_coords &&
 			x === this._x &&
-			x === this._y &&
+			y === this._y &&
 			angle === this._angle &&
 			scale_x === this._scale_x &&
 			scale_y === this._scale_y
