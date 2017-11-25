@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/modules/Circle.js | collisions</title>
+  <title data-ice="title">src/modules/Line.js | collisions</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"></head>
+<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,7 +32,7 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Line.js~Line.html">Line</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
@@ -40,51 +40,34 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/modules/Circle.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Body from &apos;./Body.js&apos;;
+<div class="content" data-ice="content"><h1 data-ice="title">src/modules/Line.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Polygon from &apos;./Polygon.js&apos;;
 
 /**
- * A circle used to detect collisions
+ * A line used to detect collisions
  * @class
  */
-export default class Circle extends Body {
+export default class Line extends Polygon {
 	/**
 	 * @constructor
 	 * @param {Number} [x = 0] The starting X coordinate
 	 * @param {Number} [y = 0] The starting Y coordinate
-	 * @param {Number} [radius = 0] The radius
-	 * @param {Number} [scale = 1] The scale
+	 * @param {Array&lt;Number[]&gt;} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 * @param {Number} [angle = 0] The starting rotation in radians
+	 * @param {Number} [scale_x = 1] The starting scale along the X axis
+	 * @param {Number} [scale_y = 1] The starting scale long the Y axis
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 */
-	constructor(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
-		super(x, y, padding);
+	constructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
+		super(x, y, points, angle,scale_x, scale_y, padding);
 
-		/**
-		 * @desc
-		 * @type {Number}
-		 */
-		this.radius = radius;
+		/** @private */
+		this._line = true;
 
-		/**
-		 * @desc
-		 * @type {Number}
-		 */
-		this.scale = scale;
+		/** @private */
+		this._segments = true;
 	}
-
-	/**
-	 * Draws the circle to a CanvasRenderingContext2D&apos;s current path
-	 * @param {CanvasRenderingContext2D} context The context to add the arc to
-	 */
-	render(context) {
-		const x      = this.x;
-		const y      = this.y;
-		const radius = this.radius * this.scale;
-
-		context.moveTo(x + radius, y);
-		context.arc(x, y, radius, 0, Math.PI * 2);
-	}
-};
+}
 </code></pre>
 
 </div>

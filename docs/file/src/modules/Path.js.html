@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/modules/Circle.js | collisions</title>
+  <title data-ice="title">src/modules/Path.js | collisions</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -40,51 +40,137 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/modules/Circle.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Body from &apos;./Body.js&apos;;
+<div class="content" data-ice="content"><h1 data-ice="title">src/modules/Path.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Body    from &apos;./Body.js&apos;;
+import Polygon from &apos;./Polygon.js&apos;;
 
 /**
- * A circle used to detect collisions
+ * @private
+ */
+const polygon_pool = [];
+
+/**
+ * A path used to detect collisions
  * @class
  */
-export default class Circle extends Body {
+export default class Path extends Body {
 	/**
 	 * @constructor
 	 * @param {Number} [x = 0] The starting X coordinate
 	 * @param {Number} [y = 0] The starting Y coordinate
-	 * @param {Number} [radius = 0] The radius
-	 * @param {Number} [scale = 1] The scale
+	 * @param {Array&lt;Number[]&gt;} [points = []] An array of coordinate pairs making up the path - [[x1, y1], [x2, y2], ...]
+	 * @param {Number} [angle = 0] The starting rotation in radians
+	 * @param {Number} [scale_x = 1] The starting scale along the X axis
+	 * @param {Number} [scale_y = 1] The starting scale long the Y axis
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 */
-	constructor(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
+	constructor(x = 0, y = 0, points = [], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
 		super(x, y, padding);
 
 		/**
-		 * @desc
+		 * @desc The angle of the body in radians
 		 * @type {Number}
 		 */
-		this.radius = radius;
+		this.angle = angle;
 
 		/**
-		 * @desc
+		 * @desc The scale of the body along the X axis
 		 * @type {Number}
 		 */
-		this.scale = scale;
+		this.scale_x = scale_x;
+
+		/**
+		 * @desc The scale of the body along the Y axis
+		 * @type {Number}
+		 */
+		this.scale_y = scale_y;
+
+		/** @private */
+		this._path = true;
+
+		/** @private */
+		this._polygons = [];
+
+		this.setPoints(points);
 	}
 
 	/**
-	 * Draws the circle to a CanvasRenderingContext2D&apos;s current path
-	 * @param {CanvasRenderingContext2D} context The context to add the arc to
+	 * Draws the path to a CanvasRenderingContext2D&apos;s current path
+	 * @param {CanvasRenderingContext2D} context The context to add the shape to
 	 */
 	render(context) {
-		const x      = this.x;
-		const y      = this.y;
-		const radius = this.radius * this.scale;
+		const polygons = this._polygons;
 
-		context.moveTo(x + radius, y);
-		context.arc(x, y, radius, 0, Math.PI * 2);
+		for(let i = 0; i &lt; polygons.length; ++i) {
+			polygons[i].render(context);
+		}
 	}
-};
+
+	/**
+	 * Sets the points making up the path. It&apos;s important to use this function when changing the path&apos;s shape to ensure internal data is also updated.
+	 * @param {Array&lt;Number[]&gt;} new_points An array of coordinate pairs making up the path - [[x1, y1], [x2, y2], ...]
+	 */
+	setPoints(new_points) {
+		const bvh           = this._bvh;
+		const polygons      = this._polygons;
+		const polygon_count = polygons.length;
+		const count         = new_points.length;
+
+		for(let i = count; i &lt; polygon_count; ++i) {
+			if(bvh) {
+				bvh.remove(polygons[i]);
+			}
+
+			releasePolygon(polygons[i]);
+		}
+
+		for(let i = 0; i &lt; count - 1; ++i) {
+			const new_point  = new_points[i];
+			const next_point = new_points[i + 1];
+
+			let polygon;
+
+			if(count &lt;= polygon_count) {
+				polygon = polygons[i];
+			}
+			else {
+				polygon              = getPolygon();
+				polygon._parent_path = this;
+
+				polygons.push(polygon);
+
+				if(bvh) {
+					bvh.insert(polygon);
+				}
+			}
+
+			polygon.setPoints([[new_point[0], new_point[1]], [next_point[0], next_point[1]]]);
+		}
+	}
+}
+
+
+/**
+ * Returns a Polygon from the polygon pool or creates a new polygon
+ * @private
+ * @returns {Polygon}
+ */
+function getPolygon() {
+	if(polygon_pool.length) {
+		return polygon_pool.pop();
+	}
+
+	return new Polygon();
+}
+
+/**
+ * Releases a polygon back into the polygon pool
+ * @private
+ * @param {Polygon} polygon The polygon to release
+ */
+function releasePolygon(polygon) {
+	polygon_pool.push(polygon);
+}
 </code></pre>
 
 </div>

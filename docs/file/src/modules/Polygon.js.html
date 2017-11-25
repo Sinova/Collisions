@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"></head>
+<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
 </ul>
@@ -43,6 +45,7 @@
 
 /**
  * A polygon used to detect collisions
+ * @class
  */
 export default class Polygon extends Body {
 	/**
@@ -120,6 +123,9 @@ export default class Polygon extends Body {
 		this._normals = null;
 
 		/** @private */
+		this._parent_path = null;
+
+		/** @private */
 		this._dirty_coords = true;
 
 		/** @private */
@@ -129,30 +135,17 @@ export default class Polygon extends Body {
 	}
 
 	/**
-	 * Adds lines representing the polygon to a CanvasRenderingContext2D&apos;s current path
+	 * Draws the polygon to a CanvasRenderingContext2D&apos;s current path
 	 * @param {CanvasRenderingContext2D} context The context to add the shape to
 	 */
 	render(context) {
-		if(
-			this._dirty_coords ||
-			this.x !== this._x ||
-			this.y !== this._y ||
-			this.angle !== this._angle ||
-			this.scale_x !== this._scale_x ||
-			this.scale_y !== this._scale_y
-		) {
-			this._calculateCoords();
-		}
+		this._calculateCoords();
 
 		const coords = this._coords;
 
 		if(coords.length === 2) {
 			context.moveTo(coords[0], coords[1]);
 			context.arc(coords[0], coords[1], 1, 0, Math.PI * 2);
-		}
-		else if(coords.length === 4) {
-			context.moveTo(coords[0], coords[1]);
-			context.lineTo(coords[2], coords[3]);
 		}
 		else {
 			context.moveTo(coords[0], coords[1]);
@@ -161,7 +154,9 @@ export default class Polygon extends Body {
 				context.lineTo(coords[i], coords[i + 1]);
 			}
 
-			context.lineTo(coords[0], coords[1]);
+			if(coords.length &gt; 4) {
+				context.lineTo(coords[0], coords[1]);
+			}
 		}
 	}
 
@@ -193,11 +188,33 @@ export default class Polygon extends Body {
 	 * Calculates and caches the polygon&apos;s world coordinates based on its points, angle, and scale
 	 */
 	_calculateCoords() {
+		const parent_path = this._parent_path;
+
+		if(parent_path) {
+			this.x       = parent_path.x;
+			this.y       = parent_path.y;
+			this.angle   = parent_path.angle;
+			this.scale_x = parent_path.scale_x;
+			this.scale_y = parent_path.scale_y;
+		}
+
 		const x       = this.x;
 		const y       = this.y;
 		const angle   = this.angle;
 		const scale_x = this.scale_x;
 		const scale_y = this.scale_y;
+
+		if(
+			!this._dirty_coords &amp;&amp;
+			x === this._x &amp;&amp;
+			x === this._y &amp;&amp;
+			angle === this._angle &amp;&amp;
+			scale_x === this._scale_x &amp;&amp;
+			scale_y === this._scale_y
+		) {
+			return;
+		}
+
 		const points  = this._points;
 		const coords  = this._coords;
 		const count   = points.length;
@@ -265,6 +282,10 @@ export default class Polygon extends Body {
 	 * Calculates the normals and edges of the polygon&apos;s sides
 	 */
 	_calculateNormals() {
+		if(!this._dirty_normals) {
+			return;
+		}
+
 		const coords  = this._coords;
 		const edges   = this._edges;
 		const normals = this._normals;

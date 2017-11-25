@@ -5,6 +5,7 @@ const branch_pool = [];
 
 /**
  * A branch within a BVH
+ * @class
  * @private
  */
 export default class BVHBranch {
@@ -17,9 +18,6 @@ export default class BVHBranch {
 
 		/** @private */
 		this._bvh_branch = true;
-
-		/** @private */
-		this._bvh_iterated = false;
 
 		/** @private */
 		this._bvh_dirty = false;

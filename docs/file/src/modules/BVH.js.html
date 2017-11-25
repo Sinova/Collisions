@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"></head>
+<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
 </ul>
@@ -43,6 +45,7 @@
 
 /**
  * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly
+ * @class
  * @private
  */
 export default class BVH {
@@ -62,11 +65,30 @@ export default class BVH {
 
 	/**
 	 * Inserts a body into the BVH
-	 * @param {Circle|Polygon} body The body to insert
+	 * @param {Circle|Polygon|Path|Point} body The body to insert
 	 * @param {Boolean} [updating = false] Set to true if the body already exists in the BVH (used internally when updating the body&apos;s position)
 	 */
 	insert(body, updating = false) {
+		// Paths are actually collections of Polygons
+		if(body._path) {
+			const polygons = body._polygons;
+
+			body._bvh = this;
+
+			for(let i = 0; i &lt; polygons.length; ++i) {
+				this.insert(polygons[i], updating);
+			}
+
+			return;
+		}
+
 		if(!updating) {
+			const bvh = body._bvh;
+
+			if(bvh &amp;&amp; bvh !== this) {
+				throw new Error(&apos;Body belongs to another collision system&apos;);
+			}
+
 			body._bvh = this;
 			this._bodies.push(body);
 		}
@@ -75,14 +97,7 @@ export default class BVH {
 		const body_x  = body.x;
 		const body_y  = body.y;
 
-		if(polygon &amp;&amp; (
-			body._dirty_coords ||
-			body_x !== body._x ||
-			body_y !== body._y ||
-			body.angle !== body._angle ||
-			body.scale_x !== body._scale_x ||
-			body.scale_y !== body._scale_y
-		)) {
+		if(polygon) {
 			body._calculateCoords();
 		}
 
@@ -187,11 +202,30 @@ export default class BVH {
 
 	/**
 	 * Removes a body from the BVH
-	 * @param {Circle|Polygon} body The body to remove
+	 * @param {Circle|Polygon|Path|Point} body The body to remove
 	 * @param {Boolean} [updating = false] Set to true if this is a temporary removal (used internally when updating the body&apos;s position)
 	 */
 	remove(body, updating = false) {
+		// Paths are actually collections of Polygons
+		if(body._path) {
+			const polygons = body._polygons;
+
+			body._bvh = null;
+
+			for(let i = 0; i &lt; polygons.length; ++i) {
+				this.remove(polygons[i], updating);
+			}
+
+			return;
+		}
+
 		if(!updating) {
+			const bvh = body._bvh;
+
+			if(bvh &amp;&amp; bvh !== this) {
+				throw new Error(&apos;Body belongs to another collision system&apos;);
+			}
+
 			body._bvh = null;
 			this._bodies.splice(this._bodies.indexOf(body), 1);
 		}
@@ -317,17 +351,17 @@ export default class BVH {
 
 	/**
 	 * Returns a list of potential collisions for a body
-	 * @param {Circle|Polygon} body The body to test
+	 * @param {Circle|Polygon|Path|Point} body The body to test
 	 * @returns {Iterator&lt;Body&gt;}
 	 */
 	* potentials(body) {
-		const tree  = this._hierarchy;
-		const min_x = body._bvh_min_x;
-		const min_y = body._bvh_min_y;
-		const max_x = body._bvh_max_x;
-		const max_y = body._bvh_max_y;
+		const hierarchy = this._hierarchy;
+		const min_x     = body._bvh_min_x;
+		const min_y     = body._bvh_min_y;
+		const max_x     = body._bvh_max_x;
+		const max_y     = body._bvh_max_y;
 
-		let current = tree;
+		let current = hierarchy;
 
 		while(current) {
 			if(!current._bvh_iterated) {
@@ -341,11 +375,13 @@ export default class BVH {
 					current._bvh_min_y &gt; max_y
 				) {
 					current = current._bvh_parent;
+
 					continue;
 				}
 
 				if(!current._bvh_branch) {
 					yield current;
+
 					current = current._bvh_parent;
 				}
 			}
@@ -354,6 +390,7 @@ export default class BVH {
 
 			if(left &amp;&amp; !left._bvh_iterated) {
 				current = left;
+
 				continue;
 			}
 
@@ -361,6 +398,7 @@ export default class BVH {
 
 			if(right &amp;&amp; !right._bvh_iterated) {
 				current = right;
+
 				continue;
 			}
 
@@ -374,6 +412,10 @@ export default class BVH {
 
 			current = current._bvh_parent;
 		}
+
+		if(hierarchy) {
+			hierarchy._bvh_iterated = false;
+		}
 	}
 
 	/**
@@ -381,7 +423,9 @@ export default class BVH {
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
 	render(context) {
-		let current = this._hierarchy;
+		const hierarchy = this._hierarchy;
+
+		let current = hierarchy;
 
 		while(current) {
 			if(!current._bvh_iterated) {
@@ -407,6 +451,7 @@ export default class BVH {
 
 			if(left &amp;&amp; !left._bvh_iterated) {
 				current = left;
+
 				continue;
 			}
 
@@ -414,6 +459,7 @@ export default class BVH {
 
 			if(right &amp;&amp; !right._bvh_iterated) {
 				current = right;
+
 				continue;
 			}
 
@@ -427,10 +473,14 @@ export default class BVH {
 
 			current = current._bvh_parent;
 		}
+
+		if(hierarchy) {
+			hierarchy._bvh_iterated = false;
+		}
 	}
 
 	/**
-	 * Draaws the bodies within the BVH to a CanvasRenderingContext2D&apos;s current path
+	 * Draws the bodies within the BVH to a CanvasRenderingContext2D&apos;s current path
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
 	renderBodies(context) {

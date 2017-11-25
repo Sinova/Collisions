@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"></head>
+<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
 </ul>
@@ -39,13 +41,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Result from &apos;<span><a href="file/src/modules/Result.js.html#lineNumber6">collisions/src/modules/Result.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Result from &apos;<span><a href="file/src/modules/Result.js.html#lineNumber7">collisions/src/modules/Result.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/modules/Result.js.html#lineNumber6">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/modules/Result.js.html#lineNumber7">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -67,7 +69,7 @@
   
   <div class="description" data-ice="description"><p>An object used to collect the detailed results of a collision test</p>
 <blockquote>
-<p><strong>Note:</strong> It is highly recommended you recycle the same Result object if possible in order to avoid wasting memory.</p>
+<p><strong>Note:</strong> It is highly recommended you recycle the same Result object if possible in order to avoid wasting memory</p>
 </blockquote>
 </div>
   
@@ -136,7 +138,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/modules/Result.js~Result.html#instance-member-a">a</a></span></span><span class="code" data-ice="signature">: <span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span> | <span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/modules/Result.js~Result.html#instance-member-a">a</a></span></span><span class="code" data-ice="signature">: <span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span> | <span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span> | <span><a href="class/src/modules/Path.js~Path.html">Path</a></span> | <span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span>
         </p>
       </div>
       <div>
@@ -194,7 +196,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/modules/Result.js~Result.html#instance-member-b">b</a></span></span><span class="code" data-ice="signature">: <span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span> | <span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/modules/Result.js~Result.html#instance-member-b">b</a></span></span><span class="code" data-ice="signature">: <span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span> | <span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span> | <span><a href="class/src/modules/Path.js~Path.html">Path</a></span> | <span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span>
         </p>
       </div>
       <div>
@@ -348,7 +350,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber10">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber11">source</a></span></span>
     </span>
   </h3>
 
@@ -390,11 +392,11 @@
     
     
     
-    <span class="code" data-ice="name">a</span><span class="code" data-ice="signature">: <span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span> | <span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span>
+    <span class="code" data-ice="name">a</span><span class="code" data-ice="signature">: <span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span> | <span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span> | <span><a href="class/src/modules/Path.js~Path.html">Path</a></span> | <span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber21">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber22">source</a></span></span>
     </span>
   </h3>
 
@@ -438,7 +440,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber33">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber34">source</a></span></span>
     </span>
   </h3>
 
@@ -478,11 +480,11 @@
     
     
     
-    <span class="code" data-ice="name">b</span><span class="code" data-ice="signature">: <span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span> | <span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span>
+    <span class="code" data-ice="name">b</span><span class="code" data-ice="signature">: <span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span> | <span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span> | <span><a href="class/src/modules/Path.js~Path.html">Path</a></span> | <span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber27">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber28">source</a></span></span>
     </span>
   </h3>
 
@@ -526,7 +528,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber15">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber16">source</a></span></span>
     </span>
   </h3>
 
@@ -570,7 +572,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber45">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber46">source</a></span></span>
     </span>
   </h3>
 
@@ -614,7 +616,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber51">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber52">source</a></span></span>
     </span>
   </h3>
 
@@ -658,7 +660,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber57">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/modules/Result.js.html#lineNumber58">source</a></span></span>
     </span>
   </h3>
 

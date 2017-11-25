@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"></head>
+<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,13 +32,15 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
 </ul>
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">104/104</span></h1>
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">126/128</span></h1>
 
 <table class="files-summary" data-ice="files" data-use-coverage="true">
   <thead>
@@ -56,66 +58,82 @@
   <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/Collisions.js.html">src/Collisions.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">14/14</span></td>
-      <td style="display: none;" data-ice="size">4077 byte</td>
-      <td style="display: none;" data-ice="lines">146</td>
-      <td style="display: none;" data-ice="updated">2017-11-06 05:58:31 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">16/16</span></td>
+      <td style="display: none;" data-ice="size">5562 byte</td>
+      <td style="display: none;" data-ice="lines">184</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 06:34:24 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/modules/BVH.js.html">src/modules/BVH.js</a></span></td>
       <td data-ice="identifier" class="identifiers">-</td>
       <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">11/11</span></td>
-      <td style="display: none;" data-ice="size">11232 byte</td>
-      <td style="display: none;" data-ice="lines">403</td>
-      <td style="display: none;" data-ice="updated">2017-11-06 04:57:10 (UTC)</td>
+      <td style="display: none;" data-ice="size">11989 byte</td>
+      <td style="display: none;" data-ice="lines">451</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 07:55:53 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/modules/BVHBranch.js.html">src/modules/BVHBranch.js</a></span></td>
       <td data-ice="identifier" class="identifiers">-</td>
       <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">17/17</span></td>
-      <td style="display: none;" data-ice="size">1289 byte</td>
-      <td style="display: none;" data-ice="lines">78</td>
-      <td style="display: none;" data-ice="updated">2017-11-06 04:57:00 (UTC)</td>
+      <td style="display: none;" data-ice="size">1299 byte</td>
+      <td style="display: none;" data-ice="lines">79</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 07:56:11 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/modules/Body.js.html">src/modules/Body.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">16/16</span></td>
-      <td style="display: none;" data-ice="size">1852 byte</td>
-      <td style="display: none;" data-ice="lines">82</td>
-      <td style="display: none;" data-ice="updated">2017-11-06 05:21:49 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">21/21</span></td>
+      <td style="display: none;" data-ice="size">2222 byte</td>
+      <td style="display: none;" data-ice="lines">109</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 07:56:06 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/modules/Circle.js.html">src/modules/Circle.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">6/6</span></td>
-      <td style="display: none;" data-ice="size">1090 byte</td>
-      <td style="display: none;" data-ice="lines">46</td>
-      <td style="display: none;" data-ice="updated">2017-11-06 05:21:54 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">5/5</span></td>
+      <td style="display: none;" data-ice="size">1037 byte</td>
+      <td style="display: none;" data-ice="lines">44</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 06:35:23 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/Polygon.js.html">src/modules/Polygon.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/modules/Path.js.html">src/modules/Path.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">12/12</span></td>
+      <td style="display: none;" data-ice="size">3076 byte</td>
+      <td style="display: none;" data-ice="lines">130</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 06:52:53 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/modules/Point.js.html">src/modules/Point.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">3/3</span></td>
+      <td style="display: none;" data-ice="size">513 byte</td>
+      <td style="display: none;" data-ice="lines">20</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 04:37:23 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/modules/Polygon.js.html#errorLines=151,152">src/modules/Polygon.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">25/25</span></td>
-      <td style="display: none;" data-ice="size">5676 byte</td>
-      <td style="display: none;" data-ice="lines">246</td>
-      <td style="display: none;" data-ice="updated">2017-11-06 05:21:59 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">92 %</span><span data-ice="coverageCount" class="coverage-count">26/28</span></td>
+      <td style="display: none;" data-ice="size">5910 byte</td>
+      <td style="display: none;" data-ice="lines">265</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 06:36:14 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/modules/Result.js.html">src/modules/Result.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></td>
       <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">9/9</span></td>
-      <td style="display: none;" data-ice="size">1136 byte</td>
-      <td style="display: none;" data-ice="lines">59</td>
-      <td style="display: none;" data-ice="updated">2017-11-06 05:22:04 (UTC)</td>
+      <td style="display: none;" data-ice="size">1167 byte</td>
+      <td style="display: none;" data-ice="lines">60</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 06:32:57 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/modules/SAT.js.html">src/modules/SAT.js</a></span></td>
       <td data-ice="identifier" class="identifiers">-</td>
       <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">6/6</span></td>
-      <td style="display: none;" data-ice="size">10786 byte</td>
+      <td style="display: none;" data-ice="size">10820 byte</td>
       <td style="display: none;" data-ice="lines">387</td>
-      <td style="display: none;" data-ice="updated">2017-11-06 05:22:13 (UTC)</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 06:32:57 (UTC)</td>
     </tr>
 </tbody>
 </table>

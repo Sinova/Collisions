@@ -1,8 +1,8 @@
 import Collisions from '../../src/Collisions.js';
 
 const result = Collisions.createResult();
-const width  = 1024;
-const height = 768;
+const width  = 800;
+const height = 600;
 const count  = 1000
 const speed  = 1;
 const size   = 5;

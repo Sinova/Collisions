@@ -2,6 +2,7 @@ import Body from './Body.js';
 
 /**
  * A circle used to detect collisions
+ * @class
  */
 export default class Circle extends Body {
 	/**
@@ -26,13 +27,10 @@ export default class Circle extends Body {
 		 * @type {Number}
 		 */
 		this.scale = scale;
-
-		/** @private */
-		this._polygon = false;
 	}
 
 	/**
-	 * Adds an arc representing the circle to a CanvasRenderingContext2D's current path
+	 * Draws the circle to a CanvasRenderingContext2D's current path
 	 * @param {CanvasRenderingContext2D} context The context to add the arc to
 	 */
 	render(context) {

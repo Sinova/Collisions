@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"></head>
+<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,6 +32,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
 </ul>
@@ -43,6 +45,8 @@
 
 /**
  * The base class for bodies used to detect collisions
+ * @class
+ * @protected
  */
 export default class Body {
 	/**
@@ -69,6 +73,18 @@ export default class Body {
 		 * @type {Number}
 		 */
 		this.padding = padding;
+
+		/** @private */
+		this._circle = false;
+
+		/** @private */
+		this._polygon = false;
+
+		/** @private */
+		this._path = false;
+
+		/** @private */
+		this._point = false;
 
 		/** @private */
 		this._bvh = null;
@@ -100,7 +116,7 @@ export default class Body {
 
 	/**
 	 * Determines if the body is colliding with another body
-	 * @param {Circle|Polygon} target The target body to test against
+	 * @param {Circle|Polygon|Path|Point} target The target body to test against
 	 * @param {Result} [result = null] A Result object on which to store information about the collision
 	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 * @returns {Boolean}
@@ -114,11 +130,24 @@ export default class Body {
 	 * @returns {Iterator&lt;Body&gt;}
 	 */
 	potentials() {
-		if(this._bvh === null) {
+		const bvh = this._bvh;
+
+		if(bvh === null) {
 			throw new Error(&apos;Body does not belong to a collision system&apos;);
 		}
 
-		return this._bvh.potentials(this);
+		return bvh.potentials(this);
+	}
+
+	/**
+	 * Removes the body from its current collision system
+	 */
+	remove() {
+		const bvh = this._bvh;
+
+		if(bvh) {
+			bvh.remove(this, false);
+		}
 	}
 };
 </code></pre>

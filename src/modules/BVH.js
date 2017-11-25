@@ -2,6 +2,7 @@ import BVHBranch from './BVHBranch.js';
 
 /**
  * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly
+ * @class
  * @private
  */
 export default class BVH {
@@ -21,11 +22,30 @@ export default class BVH {
 
 	/**
 	 * Inserts a body into the BVH
-	 * @param {Circle|Polygon} body The body to insert
+	 * @param {Circle|Polygon|Path|Point} body The body to insert
 	 * @param {Boolean} [updating = false] Set to true if the body already exists in the BVH (used internally when updating the body's position)
 	 */
 	insert(body, updating = false) {
+		// Paths are actually collections of Polygons
+		if(body._path) {
+			const polygons = body._polygons;
+
+			body._bvh = this;
+
+			for(let i = 0; i < polygons.length; ++i) {
+				this.insert(polygons[i], updating);
+			}
+
+			return;
+		}
+
 		if(!updating) {
+			const bvh = body._bvh;
+
+			if(bvh && bvh !== this) {
+				throw new Error('Body belongs to another collision system');
+			}
+
 			body._bvh = this;
 			this._bodies.push(body);
 		}
@@ -34,14 +54,7 @@ export default class BVH {
 		const body_x  = body.x;
 		const body_y  = body.y;
 
-		if(polygon && (
-			body._dirty_coords ||
-			body_x !== body._x ||
-			body_y !== body._y ||
-			body.angle !== body._angle ||
-			body.scale_x !== body._scale_x ||
-			body.scale_y !== body._scale_y
-		)) {
+		if(polygon) {
 			body._calculateCoords();
 		}
 
@@ -146,11 +159,30 @@ export default class BVH {
 
 	/**
 	 * Removes a body from the BVH
-	 * @param {Circle|Polygon} body The body to remove
+	 * @param {Circle|Polygon|Path|Point} body The body to remove
 	 * @param {Boolean} [updating = false] Set to true if this is a temporary removal (used internally when updating the body's position)
 	 */
 	remove(body, updating = false) {
+		// Paths are actually collections of Polygons
+		if(body._path) {
+			const polygons = body._polygons;
+
+			body._bvh = null;
+
+			for(let i = 0; i < polygons.length; ++i) {
+				this.remove(polygons[i], updating);
+			}
+
+			return;
+		}
+
 		if(!updating) {
+			const bvh = body._bvh;
+
+			if(bvh && bvh !== this) {
+				throw new Error('Body belongs to another collision system');
+			}
+
 			body._bvh = null;
 			this._bodies.splice(this._bodies.indexOf(body), 1);
 		}
@@ -276,62 +308,75 @@ export default class BVH {
 
 	/**
 	 * Returns a list of potential collisions for a body
-	 * @param {Circle|Polygon} body The body to test
+	 * @param {Circle|Polygon|Path|Point} body The body to test
 	 * @returns {Iterator<Body>}
 	 */
 	* potentials(body) {
-		const tree  = this._hierarchy;
 		const min_x = body._bvh_min_x;
 		const min_y = body._bvh_min_y;
 		const max_x = body._bvh_max_x;
 		const max_y = body._bvh_max_y;
 
-		let current = tree;
+		let current       = this._hierarchy;
+		let traverse_left = true;
 
 		while(current) {
-			if(!current._bvh_iterated) {
-				current._bvh_iterated = true;
+			if(traverse_left) {
+				traverse_left = false;
 
-				if(
-					current === body ||
-					current._bvh_max_x < min_x ||
-					current._bvh_max_y < min_y ||
-					current._bvh_min_x > max_x ||
-					current._bvh_min_y > max_y
+				let left = current._bvh_branch ? current._bvh_left : null;
+
+				while(
+					left &&
+					left._bvh_max_x >= min_x &&
+					left._bvh_max_y >= min_y &&
+					left._bvh_min_x <= max_x &&
+					left._bvh_min_y <= max_y
 				) {
-					current = current._bvh_parent;
-					continue;
+					current = left;
+					left    = current._bvh_branch ? current._bvh_left : null;
 				}
+			}
 
-				if(!current._bvh_branch) {
+			const branch = current._bvh_branch;
+			const right  = branch ? current._bvh_right : null;
+
+			if(
+				right &&
+				right._bvh_max_x > min_x &&
+				right._bvh_max_y > min_y &&
+				right._bvh_min_x < max_x &&
+				right._bvh_min_y < max_y
+			) {
+				current       = right;
+				traverse_left = true;
+			}
+			else {
+				if(
+					!branch &&
+					current !== body &&
+					current._bvh_max_x > min_x &&
+					current._bvh_max_y > min_y &&
+					current._bvh_min_x < max_x &&
+					current._bvh_min_y < max_y
+				) {
 					yield current;
-					current = current._bvh_parent;
+				}
+
+				let parent = current._bvh_parent;
+
+				if(parent) {
+					while(parent && parent._bvh_right === current) {
+						current = parent;
+						parent  = current._bvh_parent;
+					}
+
+					current = parent;
+				}
+				else {
+					break;
 				}
 			}
-
-			const left = current._bvh_left;
-
-			if(left && !left._bvh_iterated) {
-				current = left;
-				continue;
-			}
-
-			const right = current._bvh_right;
-
-			if(right && !right._bvh_iterated) {
-				current = right;
-				continue;
-			}
-
-			if(left) {
-				left._bvh_iterated = false;
-			}
-
-			if(right) {
-				right._bvh_iterated = false;
-			}
-
-			current = current._bvh_parent;
 		}
 	}
 
@@ -340,56 +385,58 @@ export default class BVH {
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
 	render(context) {
-		let current = this._hierarchy;
+		let current       = this._hierarchy;
+		let traverse_left = true;
 
 		while(current) {
-			if(!current._bvh_iterated) {
-				current._bvh_iterated = true;
+			if(traverse_left) {
+				traverse_left = false;
 
-				const min_x = current._bvh_min_x;
-				const min_y = current._bvh_min_y;
-				const max_x = current._bvh_max_x;
-				const max_y = current._bvh_max_y;
+				let left = current._bvh_branch ? current._bvh_left : null;
 
-				context.moveTo(min_x, min_y);
-				context.lineTo(max_x, min_y);
-				context.lineTo(max_x, max_y);
-				context.lineTo(min_x, max_y);
-				context.lineTo(min_x, min_y);
-
-				if(!current._bvh_branch) {
-					current = current._bvh_parent;
+				while(left) {
+					current = left;
+					left    = current._bvh_branch ? current._bvh_left : null;
 				}
 			}
 
-			const left = current._bvh_left;
+			const branch = current._bvh_branch;
+			const min_x  = current._bvh_min_x;
+			const min_y  = current._bvh_min_y;
+			const max_x  = current._bvh_max_x;
+			const max_y  = current._bvh_max_y;
+			const right  = branch ? current._bvh_right : null;
 
-			if(left && !left._bvh_iterated) {
-				current = left;
-				continue;
-			}
-
-			const right = current._bvh_right;
-
-			if(right && !right._bvh_iterated) {
-				current = right;
-				continue;
-			}
-
-			if(left) {
-				left._bvh_iterated = false;
-			}
+			context.moveTo(min_x, min_y);
+			context.lineTo(max_x, min_y);
+			context.lineTo(max_x, max_y);
+			context.lineTo(min_x, max_y);
+			context.lineTo(min_x, min_y);
 
 			if(right) {
-				right._bvh_iterated = false;
+				current       = right;
+				traverse_left = true;
 			}
+			else {
+				let parent = current._bvh_parent;
 
-			current = current._bvh_parent;
+				if(parent) {
+					while(parent && parent._bvh_right === current) {
+						current = parent;
+						parent  = current._bvh_parent;
+					}
+
+					current = parent;
+				}
+				else {
+					break;
+				}
+			}
 		}
 	}
 
 	/**
-	 * Draaws the bodies within the BVH to a CanvasRenderingContext2D's current path
+	 * Draws the bodies within the BVH to a CanvasRenderingContext2D's current path
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
 	renderBodies(context) {

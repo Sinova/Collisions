@@ -1,7 +1,8 @@
 /**
  * An object used to collect the detailed results of a collision test
  *
- * > **Note:** It is highly recommended you recycle the same Result object if possible in order to avoid wasting memory.
+ * > **Note:** It is highly recommended you recycle the same Result object if possible in order to avoid wasting memory
+ * @class
  */
 export default class Result {
 	/**
@@ -16,13 +17,13 @@ export default class Result {
 
 		/**
 		 * @desc The source body tested
-		 * @type {Circle|Polygon}
+		 * @type {Circle|Polygon|Path|Point}
 		 */
 		this.a = null;
 
 		/**
 		 * @desc The target body tested against
-		 * @type {Circle|Polygon}
+		 * @type {Circle|Polygon|Path|Point}
 		 */
 		this.b = null;
 

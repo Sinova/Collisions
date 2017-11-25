@@ -2,6 +2,7 @@ import Body from './Body.js';
 
 /**
  * A polygon used to detect collisions
+ * @class
  */
 export default class Polygon extends Body {
 	/**
@@ -79,6 +80,9 @@ export default class Polygon extends Body {
 		this._normals = null;
 
 		/** @private */
+		this._parent_path = null;
+
+		/** @private */
 		this._dirty_coords = true;
 
 		/** @private */
@@ -88,30 +92,17 @@ export default class Polygon extends Body {
 	}
 
 	/**
-	 * Adds lines representing the polygon to a CanvasRenderingContext2D's current path
+	 * Draws the polygon to a CanvasRenderingContext2D's current path
 	 * @param {CanvasRenderingContext2D} context The context to add the shape to
 	 */
 	render(context) {
-		if(
-			this._dirty_coords ||
-			this.x !== this._x ||
-			this.y !== this._y ||
-			this.angle !== this._angle ||
-			this.scale_x !== this._scale_x ||
-			this.scale_y !== this._scale_y
-		) {
-			this._calculateCoords();
-		}
+		this._calculateCoords();
 
 		const coords = this._coords;
 
 		if(coords.length === 2) {
 			context.moveTo(coords[0], coords[1]);
 			context.arc(coords[0], coords[1], 1, 0, Math.PI * 2);
-		}
-		else if(coords.length === 4) {
-			context.moveTo(coords[0], coords[1]);
-			context.lineTo(coords[2], coords[3]);
 		}
 		else {
 			context.moveTo(coords[0], coords[1]);
@@ -120,7 +111,9 @@ export default class Polygon extends Body {
 				context.lineTo(coords[i], coords[i + 1]);
 			}
 
-			context.lineTo(coords[0], coords[1]);
+			if(coords.length > 4) {
+				context.lineTo(coords[0], coords[1]);
+			}
 		}
 	}
 
@@ -152,11 +145,33 @@ export default class Polygon extends Body {
 	 * Calculates and caches the polygon's world coordinates based on its points, angle, and scale
 	 */
 	_calculateCoords() {
+		const parent_path = this._parent_path;
+
+		if(parent_path) {
+			this.x       = parent_path.x;
+			this.y       = parent_path.y;
+			this.angle   = parent_path.angle;
+			this.scale_x = parent_path.scale_x;
+			this.scale_y = parent_path.scale_y;
+		}
+
 		const x       = this.x;
 		const y       = this.y;
 		const angle   = this.angle;
 		const scale_x = this.scale_x;
 		const scale_y = this.scale_y;
+
+		if(
+			!this._dirty_coords &&
+			x === this._x &&
+			x === this._y &&
+			angle === this._angle &&
+			scale_x === this._scale_x &&
+			scale_y === this._scale_y
+		) {
+			return;
+		}
+
 		const points  = this._points;
 		const coords  = this._coords;
 		const count   = points.length;
@@ -224,6 +239,10 @@ export default class Polygon extends Body {
 	 * Calculates the normals and edges of the polygon's sides
 	 */
 	_calculateNormals() {
+		if(!this._dirty_normals) {
+			return;
+		}
+
 		const coords  = this._coords;
 		const edges   = this._edges;
 		const normals = this._normals;

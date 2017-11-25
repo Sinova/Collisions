@@ -55,10 +55,10 @@ export default class Movement {
 			this.collisions.createPolygon(350, 100, [[-30, -40], [60, -60], [50, 20], [20, 50], [-50, 50]], random(0, 360) * Math.PI / 180),
 			this.collisions.createPolygon(40, 200, [[-20, -40], [30, -60], [70, 20], [20, 50], [-50, 30]], random(0, 360) * Math.PI / 180),
 			this.collisions.createPolygon(100, 350, [[-20, -40], [30, -60], [70, 20], [20, 50], [-50, 30]], random(0, 360) * Math.PI / 180),
-			this.collisions.createPolygon(300, 300, [[-20, -40], [60, 60]], random(0, 360) * Math.PI / 180),
-			this.collisions.createPolygon(320, 320, [[0, 0]], random(0, 360) * Math.PI / 180),
-			this.collisions.createPolygon(290, 280, [[0, 0]], random(0, 360) * Math.PI / 180),
-			this.collisions.createPolygon(250, 250, [[0, 0]], random(0, 360) * Math.PI / 180),
+			this.collisions.createPath(300, 300, [[-20, -40], [0, 10], [60, 60]], random(0, 360) * Math.PI / 180),
+			this.collisions.createPoint(320, 320),
+			this.collisions.createPoint(290, 280),
+			this.collisions.createPoint(250, 250),
 		);
 
 		const self = this;
@@ -67,13 +67,9 @@ export default class Movement {
 			self.update();
 			self.frame = requestAnimationFrame(frame);
 		});
-
-		window.foo = this.player;
 	}
 
 	update() {
-		this.collisions.update();
-
 		const polygon = this.player._polygon;
 
 		this.up                          && (this.player.y -= 2);
@@ -83,8 +79,11 @@ export default class Movement {
 		this.clockwise        && polygon && (this.player.angle += 0.05);
 		this.counterclockwise && polygon && (this.player.angle -= 0.05);
 
+		this.collisions.update();
+
 		const potentials = this.player.potentials();
-		for(const body of this.bodies) {
+
+		for(const body of potentials) {
 			if(body === this.player) {
 				continue;
 			}

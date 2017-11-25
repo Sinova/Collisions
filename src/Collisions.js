@@ -1,11 +1,13 @@
 import BVH     from './modules/BVH.js';
 import Circle  from './modules/Circle.js';
 import Polygon from './modules/Polygon.js';
+import Path    from './modules/Path.js';
+import Point   from './modules/Point.js';
 import Result  from './modules/Result.js';
 import SAT     from './modules/SAT.js';
 
 /**
- * A collision system used to track bodies to improve collision detection performance
+ * A collision system used to track bodies in order to improve collision detection performance
  * @class
  */
 class Collisions {
@@ -54,6 +56,40 @@ class Collisions {
 	}
 
 	/**
+	 * Creates a {@link Path} and inserts it into the collision system
+	 * @param {Number} [x = 0] The starting X coordinate
+	 * @param {Number} [y = 0] The starting Y coordinate
+	 * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the path's segments - [[x1, y1], [x2, y2], ...]
+	 * @param {Number} [angle = 0] The starting rotation in radians
+	 * @param {Number} [scale_x = 1] The starting scale along the X axis
+	 * @param {Number} [scale_y = 1] The starting scale long the Y axis
+	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
+	 * @returns {Path}
+	 */
+	createPath(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
+		const body = new Path(x, y, points, angle, scale_x, scale_y, padding);
+
+		this._bvh.insert(body);
+
+		return body;
+	}
+
+	/**
+	 * Creates a {@link Point} and inserts it into the collision system
+	 * @param {Number} [x = 0] The starting X coordinate
+	 * @param {Number} [y = 0] The starting Y coordinate
+	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
+	 * @returns {Point}
+	 */
+	createPoint(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
+		const body = new Point(x, y, padding);
+
+		this._bvh.insert(body);
+
+		return body;
+	}
+
+	/**
 	 * Creates a {@link Result} used to collect the detailed results of a collision test
 	 */
 	createResult() {
@@ -69,7 +105,7 @@ class Collisions {
 
 	/**
 	 * Inserts bodies into the collision system
-	 * @param {Circle|Polygon} bodies
+	 * @param {...Circle|...Polygon|...Path|...Point} bodies
 	 */
 	insert(...bodies) {
 		for(const body of bodies) {
@@ -81,7 +117,7 @@ class Collisions {
 
 	/**
 	 * Removes bodies from the collision system
-	 * @param {Circle|Polygon} bodies
+	 * @param {...Circle|...Polygon|...Path|...Point} bodies
 	 */
 	remove(...bodies) {
 		for(const body of bodies) {
@@ -101,16 +137,16 @@ class Collisions {
 	}
 
 	/**
-	 * Adds lines and arcs representing the bodies within the BVH to a CanvasRenderingContext2D's current path
-	 * @param {CanvasRenderingContext2D} context The context to add lines and arcs to
+	 * Draws the bodies within the system to a CanvasRenderingContext2D's current path
+	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
 	renderBodies(context) {
 		return this._bvh.renderBodies(context);
 	}
 
 	/**
-	 * Adds lines representing the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.
-	 * @param {CanvasRenderingContext2D} context The context to add lines and arcs to
+	 * Draws the system's BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.
+	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
 	renderBVH(context) {
 		return this._bvh.render(context);
@@ -118,7 +154,7 @@ class Collisions {
 
 	/**
 	 * Returns a list of potential collisions for a body
-	 * @param {Circle|Polygon} body The body to test for potential collisions against
+	 * @param {Circle|Polygon|Path|Point} body The body to test for potential collisions against
 	 * @returns {Iterator<Body>}
 	 */
 	potentials(body) {
@@ -127,7 +163,7 @@ class Collisions {
 
 	/**
 	 * Determines if two bodies are colliding
-	 * @param {Circle|Polygon} target The target body to test against
+	 * @param {Circle|Polygon|Path|Point} target The target body to test against
 	 * @param {Result} [result = null] A Result object on which to store information about the collision
 	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 * @returns {Boolean}
@@ -140,7 +176,9 @@ class Collisions {
 export {
 	Collisions as default,
 	Collisions,
+	Result,
 	Circle,
 	Polygon,
-	Result,
+	Path,
+	Point,
 }

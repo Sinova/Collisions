@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Line, and Point Collision Detection"></head>
+<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,16 +32,31 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
 </ul>
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="collisions">Collisions</h1><p><strong>Collisions</strong> is a JavaScript library used to quickly and accurately detect collisions between Polygons, Circles, Lines, and Points. It combines the efficiency of a <a href="https://en.wikipedia.org/wiki/Bounding_volume_hierarchy">Bounding Volume Hierarchy</a> (BVH) for broad-phase searching with the accuracy of the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for narrow-phase collision testing.</p>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="collisions">Collisions</h1><p><strong>Collisions</strong> is a JavaScript library used to quickly and accurately detect collisions between Polygons, Circles, Paths, and Points. It combines the efficiency of a <a href="https://en.wikipedia.org/wiki/Bounding_volume_hierarchy">Bounding Volume Hierarchy</a> (BVH) for broad-phase searching with the accuracy of the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for narrow-phase collision testing.</p>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#getting-started">Getting started</a><ol>
+<li><a href="#1--creating-a-collision-system">Creating a collision system</a></li>
+<li><a href="#2--creating--adding--and-removing-bodies">Creating, adding, and removing bodies</a></li>
+<li><a href="#3--testing-for-collisions">Testing for collisions</a></li>
+<li><a href="#4--getting-detailed-collision-information">Getting detailed collision information</a></li>
+<li><a href="#5--negating-overlap">Negating overlap</a></li>
+</ol>
+</li>
+</ul>
 <h1 id="installation">Installation</h1><pre><code class="lang-bash"><code class="source-code prettyprint">npm install collisions</code>
 </code></pre>
-<h1 id="documentation">Documentation</h1><p><a href="https://sinova.github.com/Collisions/docs/">Click here</a> to view the documentation (this README is also there).</p>
+<h1 id="documentation">Documentation</h1><p>View the <a href="https://sinova.github.com/Collisions/docs/">documentation</a> (this README is also there).</p>
 <h1 id="demos">Demos</h1><ul>
 <li><a href="https://sinova.github.com/Collisions/demo">Movement</a></li>
 <li><a href="https://sinova.github.com/Collisions/demo?stress">Stress Test</a></li>
@@ -62,10 +77,10 @@ const wall1 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [
 const wall2 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);
 const wall3 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);
 
-// Get the potential collisions (this quickly rules out walls that have no chance of colliding with the player)
+// Get any potential collisions (this quickly rules out walls that have no chance of colliding with the player)
 const potentials = player.potentials();
 
-// Loop through the potential collisions
+// Loop through the potential wall collisions
 for(const wall of potentials) {
     // Test if the player collides with the wall
     if(player.collides(wall, result)) {
@@ -75,46 +90,114 @@ for(const wall of potentials) {
     }
 }</code>
 </code></pre>
-<h1 id="getting-started">Getting Started</h1><p><strong>Collisions</strong> provides functions to perform both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, all bodies need to be tracked within a collision system.</p>
-<p>To create a collision system, simply instantiate the Collisions class:</p>
+<h1 id="getting-started">Getting Started</h1><h4 id="1--creating-a-collision-system">1. Creating a collision system</h4><p><strong>Collisions</strong> provides functions to perform both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, all bodies need to be tracked within a collision system.</p>
+<p>To create a collision system, simply instantiate the Collisions class.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">import Collisions from &apos;collisions&apos;;
 
 const system = new Collisions();</code>
 </code></pre>
-<p>The resulting system exposes several functions for creating bodies:</p>
+<h4 id="2--creating--adding--and-removing-bodies">2. Creating, adding, and removing bodies</h4><p>Collision systems expose several convenience functions for creating bodies. These functions create their respective body and automatically insert it into the system.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">const circle  = system.createCircle(100, 100, 10);
 const polygon = system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const line    = system.createLine(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);
+const path    = system.createPath(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);
 const point   = system.createPoint(10, 10);</code>
 </code></pre>
-<p>Those functions create their respective body and automatically insert it into the system. However, it&apos;s possible to create bodies separately and insert them into the system manually:</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">import {Collisions, Circle, Polygon, Line, Point} from &apos;collisions&apos;;
+<p>It&apos;s also possible to create bodies separately and insert them into the collision system manually at a later time.</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">import {Collisions, Circle, Polygon, Path, Point} from &apos;collisions&apos;;
 
-const system  = new Collisions();
+const system = new Collisions();
+
 const circle  = new Circle(100, 100, 10);
 const polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const line    = new Line(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);
+const path    = new Path(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);
 const point   = new Point(10, 10);
 
-system.insert(circle, polygon, line, point);</code>
-</code></pre>
-<p>Bodies can be removed also:</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">system.remove(polygon, point);</code>
-</code></pre>
-<p>When the <strong>result</strong> parameter is supplied to a collision function, three of the properties set on the object are <strong>overlap</strong>, <strong>overlap_x</strong>, and <strong>overlap_y</strong>. Together, these values describe how much and in what direction a body is overlapping another body. More specifically, <strong>overlap_x</strong> and <strong>overlap_y</strong> make up the direction vector and <strong>overlap</strong> is the magnitude of that vector.</p>
-<p>These values can be used to &quot;push&quot; one body out of another using the minimum distance required. Effectively, subtracting this vector from an body&apos;s position will cause the objects to no longer collide. Here&apos;s a simple example:</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">
-const result = system.createResult();
+// ...
 
-if(player.collides(wall, result)) {
+system.insert(circle, polygon, path, point);</code>
+</code></pre>
+<p>Bodies can also be removed when they are no longer needed.</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">system.remove(polygon, point);
+circle.remove();</code>
+</code></pre>
+<h4 id="3--testing-for-collisions">3. Testing for collisions</h4><p>It is generally recommended that a broad-phase search be performed first before testing for collisions. This is done by called <code>potentials()</code> on a body. This gets a list of nearby bodies that could potentially be colliding with it while quickly ruling out bodies that are too far away. It is important to note that the <code>potentials()</code> function returns an <strong>Iterator</strong> and <em>not</em> an <strong>Array</strong> (see the <a href="#faq">FAQ</a>). Once a potential list of colliding bodies is obtained, iterate through them and test for collisions.</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const potentials = circle.potentials();
+
+for(const body of potentials) {
+    if(circle.collides(body)) {
+        console.log(&apos;Collision detected!&apos;);
+    }
+}</code>
+</code></pre>
+<blockquote>
+<p><strong>WARNING:</strong> Do not call <code>pontentials()</code> while looping through an existing potentials iterator. If nested <code>potentials()</code> are required, use <code>Array.from()</code> to convert the iterator to an array before making subsequent calls.</p>
+</blockquote>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">// BAD
+const potentials = circle.potentials();
+
+for(const body of potentials) {
+    const potentials = body.potentials();
+}
+
+// GOOD
+const potentials = Array.from(circle.potentials());
+
+for(const body of potentials) {
+    const potentials = body.potentials();
+}</code>
+</code></pre>
+<h4 id="4--getting-detailed-collision-information">4. Getting detailed collision information</h4><p>Often there is a need for detailed information about a collision when it occurs. To get this information, a <strong>Result</strong> object can be passed into the narrow-phase collision test. It is highly recommended that <strong>Result</strong> objects be recycled when performing multiple collision tests unless it&apos;s necessary to store a specific Result for later use.</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const result     = system.createResult();
+const potentials = circle.potentials();
+
+for(body of potentials) {
+    if(circle.collides(body, result)) {
+        console.log(result);
+    }
+}</code>
+</code></pre>
+<p>For convenience, there are several ways to create a <strong>Result</strong> object. <strong>Result</strong> objects do not belong to any particular collision system, so any method can be used interchangeably and the same <strong>Result</strong> can be used for collisions across several systems.</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">import {Collisions, Result} from &apos;collisions&apos;;
+
+const system = new Collisions();
+
+const result1 = system.createResult();
+const result2 = Collisions.createResult();
+const result3 = new Result();</code>
+</code></pre>
+<h4 id="5--negating-overlap">5. Negating overlap</h4><p>A common use-case for collisions is negating overlap when a collision occurs (such as when a player hits a wall). This can be done with in collision information stored on a passed in <strong>Result</strong> object.</p>
+<p><strong>Result</strong> objects have several properties set on them when a collision occurs (you can read about all of them in the <a href="https://sinova.github.com/Collisions/docs/">documentation</a>). The three most useful properties are  <strong>overlap</strong>, <strong>overlap_x</strong>, and <strong>overlap_y</strong>. Together, these values describe how much and in what direction the source body is overlapping the target body. More specifically, <strong>overlap_x</strong> and <strong>overlap_y</strong> make up the direction vector, and <strong>overlap</strong> is the magnitude of that vector.</p>
+<p>These values can be used to &quot;push&quot; one body out of another using the minimum distance required. Effectively, subtracting this vector from the source body&apos;s position will cause the bodies to no longer collide. Here&apos;s a simple example:</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">if(player.collides(wall, result)) {
     player.x -= result.overlap * result.overlap_x;
     player.y -= result.overlap * result.overlap_y;
 }</code>
 </code></pre>
-<h1 id="faq">FAQ</h1><h4 id="why-shouldn--39-t-i-just-use-a-physics-engine-">Why shouldn&apos;t I just use a physics engine?</h4><p>Projects requiring physics are enthusiastically recommended to use one of the many physics engines that are out there (e.g. <a href="https://github.com/liabru/matter-js">Matter.js</a> or <a href="https://github.com/shakiba/planck.js">Planck.js</a>). However, many projects use physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that are made by these engines (gravity, velocity, friction, etc.). <strong>Collisions</strong> was written to fill this need.</p>
-<h4 id="why-does-potentials---return-an-iterator-instead-of-an-array-">Why does potentials() return an Iterator instead of an Array?</h4><p>Populating an array with references to potential collisions can take up quite a bit of memory when done for thousands of bodies (even if each body has an array that it recycles). For instance, if the system has 1,000 bodies and each one is potentially colliding with five bodies on average, that&apos;s 5,000 references in total. Do this every frame and the garbage collector can start to get noticeably bogged down. Iterators solve this problem by only detecting and yielding a single potential collision at a time as you loop through them. Memory profiles showed the allocations per frame drop from 50 kilobytes to 10 bytes. The reduction in garbage collection far outweighs the small peformance cost of using Iterators.</p>
+<h1 id="bounding-volume-padding">Bounding Volume Padding</h1><p>When bodies move around within a collision system, the internal BVH needs to be updated. Specifically, the body needs to be removed from the hierarchy and reinserted. This is one of the most costly operations in maintaining a BVH. In general, most projects won&apos;t need to worry about this unless they are dealing with thousands of moving bodies at once. If performance becomes an issue, it can sometimes be beneficial to &quot;pad&quot; the bounding volumes of each body so that they don&apos;t need to be removed and reinserted if they haven&apos;t changed position too much. In essence, padding the bounding volume allows &quot;breathing room&quot; for the body within it to move around.</p>
+<p>The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase <code>potentials()</code> search. While the narrow phase will quickly rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.</p>
+<p>Padding can be added to a body when instantiating it (see the <a href="https://sinova.github.com/Collisions/docs/">documentation</a> for each body) or at any point by changing its <strong>padding</strong> property.</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const padding = 5;
+const circle  = new Circle(100, 100, 10, 1, padding);
+
+// ...
+
+circle.padding = 10;</code>
+</code></pre>
+<h1 id="only-using-sat">Only using SAT</h1><p>Some projects may only have a need to perform SAT collision tests without broad-phase searching. This can be achieved by simply not adding the bodies to a system and not using the <strong>potentials()</strong> function.</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">import {Circle, Polygon, Result} from &apos;collisions&apos;;
+
+const circle  = new Circle(45, 45, 20);
+const polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const result  = new Result();
+
+if(circle.collides(polygon, result)) {
+    console.log(result);
+}</code>
+</code></pre>
+<h1 id="faq">FAQ</h1><h4 id="why-shouldn--39-t-i-just-use-a-physics-engine-">Why shouldn&apos;t I just use a physics engine?</h4><p>Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. <a href="https://github.com/liabru/matter-js">Matter.js</a> or <a href="https://github.com/shakiba/planck.js">Planck.js</a>). However, many projects use physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that are made by these engines (gravity, velocity, friction, etc.). <strong>Collisions</strong> was written to fill this need.</p>
+<h4 id="why-does-potentials---return-an-iterator-instead-of-an-array-">Why does potentials() return an Iterator instead of an Array?</h4><p>Populating an array with references to potential collisions can take up quite a bit of memory when done for thousands of bodies (even if each body has an array that it recycles). For instance, if the system has 1,000 bodies and each one is potentially colliding with five bodies on average, that&apos;s 5,000 references in total. Do this every frame and the garbage collector can start to get noticeably bogged down. Iterators solve this problem by only detecting and yielding a single potential collision at a time. Memory profiles showed the allocations per frame drop from 50 kilobytes to 10 bytes. The reduction in garbage collection far outweighs the small peformance cost of using Iterators.</p>
 <h4 id="why-does-the-source-code-seem-to-have-a-lot-of-copy-paste-">Why does the source code seem to have a lot of copy/paste?</h4><p><strong>Collisions</strong> was written with performance as its primary focus. Conscious choices were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.</p>
-<h1 id="limitations">Limitations</h1><p>SAT assumes all tested polygons are convex. Handling concave shapes requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out <a href="https://github.com/schteppe/poly-decomp.js">poly-decomp.js</a>.</p>
+<h1 id="limitations">Limitations</h1><p>SAT based collision detection assumes all tested bodies are convex. Handling concave bodies requires breaking them down into their component convex bodies (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out <a href="https://github.com/schteppe/poly-decomp.js">poly-decomp.js</a>.</p>
 </div>
 </div>
 

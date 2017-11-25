@@ -2,6 +2,8 @@ import SAT from './SAT.js';
 
 /**
  * The base class for bodies used to detect collisions
+ * @class
+ * @protected
  */
 export default class Body {
 	/**
@@ -30,6 +32,18 @@ export default class Body {
 		this.padding = padding;
 
 		/** @private */
+		this._circle = false;
+
+		/** @private */
+		this._polygon = false;
+
+		/** @private */
+		this._path = false;
+
+		/** @private */
+		this._point = false;
+
+		/** @private */
 		this._bvh = null;
 
 		/** @private */
@@ -37,9 +51,6 @@ export default class Body {
 
 		/** @private */
 		this._bvh_branch = false;
-
-		/** @private */
-		this._bvh_iterated = false;
 
 		/** @private */
 		this._bvh_padding = padding;
@@ -59,7 +70,7 @@ export default class Body {
 
 	/**
 	 * Determines if the body is colliding with another body
-	 * @param {Circle|Polygon} target The target body to test against
+	 * @param {Circle|Polygon|Path|Point} target The target body to test against
 	 * @param {Result} [result = null] A Result object on which to store information about the collision
 	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 * @returns {Boolean}
@@ -73,10 +84,23 @@ export default class Body {
 	 * @returns {Iterator<Body>}
 	 */
 	potentials() {
-		if(this._bvh === null) {
+		const bvh = this._bvh;
+
+		if(bvh === null) {
 			throw new Error('Body does not belong to a collision system');
 		}
 
-		return this._bvh.potentials(this);
+		return bvh.potentials(this);
+	}
+
+	/**
+	 * Removes the body from its current collision system
+	 */
+	remove() {
+		const bvh = this._bvh;
+
+		if(bvh) {
+			bvh.remove(this, false);
+		}
 	}
 };

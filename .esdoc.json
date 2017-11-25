@@ -8,7 +8,7 @@
 
 			"option" : {
 				"accessor": {
-					"access" : ["public"],
+					"access" : ["public", "protected"],
 					"autoPrivate" : true
 				},
 
