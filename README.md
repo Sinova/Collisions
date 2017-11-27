@@ -39,8 +39,8 @@ View the [documentation](https://sinova.github.com/Collisions/) (this README is 
 Demos
 ===============================================================================
 
-* [Tank](https://sinova.github.com/Collisions/demo)
-* [Stress Test](https://sinova.github.com/Collisions/demo?stress)
+* [Tank](https://sinova.github.com/Collisions/demo/)
+* [Stress Test](https://sinova.github.com/Collisions/demo/?stress)
 
 <a name="anchor-usage"></a>
 Usage
