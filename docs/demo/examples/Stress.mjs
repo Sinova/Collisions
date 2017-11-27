@@ -1,4 +1,4 @@
-import Collisions from '../../src/Collisions.mjs';
+import Collisions from '../Collisions.mjs';
 
 const result = Collisions.createResult();
 const width  = 800;
