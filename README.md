@@ -33,7 +33,7 @@ npm install collisions
 Documentation
 ===============================================================================
 
-View the [documentation](https://sinova.github.com/Collisions/docs/) (this README is also there).
+View the [documentation](https://sinova.github.com/Collisions/) (this README is also there).
 
 <a name="anchor-demos"></a>
 Demos
@@ -196,7 +196,7 @@ if(my_polygon.collides(my_line)) {
 <a name="anchor-step-5"></a>
 ## 5. Getting Detailed Collision Information
 
-There is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a `Result` object. `Result` objects have several properties set on them when a collision occurs, all of which are described in the [documentation](https://sinova.github.com/Collisions/docs/).
+There is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a `Result` object. `Result` objects have several properties set on them when a collision occurs, all of which are described in the [documentation](https://sinova.github.com/Collisions/).
 
 For convenience, there are several ways to create a `Result` object. `Result` objects do not belong to any particular collision system, so any of the following methods for creating one can be used interchangeably. This also means the same `Result` object can be used for collisions across multiple systems.
 
@@ -271,7 +271,7 @@ When bodies move around within a collision system, the internal BVH needs to be 
 
 The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase `potentials()` search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.
 
-Padding can be added to a body when instantiating it (see the [documentation](https://sinova.github.com/Collisions/docs/) for each body) or at any time by changing its `padding` property.
+Padding can be added to a body when instantiating it (see the [documentation](https://sinova.github.com/Collisions/) for each body) or at any time by changing its `padding` property.
 
 ```JavaScript
 const my_padding = 5;
