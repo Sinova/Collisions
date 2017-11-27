@@ -3,22 +3,23 @@ Collisions
 
 **Collisions** is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching and the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.
 
-* [Installation](#installation)
-* [Documentation](#documentation)
-* [Demos](#demos)
-* [Usage](#usage)
-* [Getting Started](#getting-started)
-	1. [Creating a Collision System](#1--creating-a-collision-system)
-	2. [Creating, Inserting, and Removing Bodies](#2--creating--inserting--and-removing-bodies)
-	3. [Updating the Collision System](#3--updating-the-collision-system)
-	4. [Testing for Collisions](#4--testing-for-collisions)
-	5. [Getting Detailed Collision Information](#5--getting-detailed-collision-information)
-	6. [Negating Overlap](#6--negating-overlap)
-* [Concave Polygons](#concave-polygons)
-* [Bounding Volume Padding](#bounding-volume-padding)
-* [Only using SAT](#only-using-sat)
-* [FAQ](#faq)
+* [Installation](#anchor-installation)
+* [Documentation](#anchor-documentation)
+* [Demos](#anchor-demos)
+* [Usage](#anchor-usage)
+* [Getting Started](#anchor-getting-started)
+	1. [Creating a Collision System](#anchor-step-1)
+	2. [Creating, Inserting, and Removing Bodies](#anchor-step-2)
+	3. [Updating the Collision System](#anchor-step-3)
+	4. [Testing for Collisions](#anchor-step-4)
+	5. [Getting Detailed Collision Information](#anchor-step-5)
+	6. [Negating Overlap](#anchor-step-6)
+* [Concave Polygons](#anchor-concave-polygons)
+* [Bounding Volume Padding](#anchor-bounding-volume-padding)
+* [Only using SAT](#anchor-only-using-sat)
+* [FAQ](#anchor-faq)
 
+<a name="anchor-installation"></a>
 Installation
 ===============================================================================
 
@@ -28,17 +29,20 @@ npm install collisions
 
 > **Note:** This library uses the ECMAScript Module syntax. At the time of writing, Node v9.2.0 requires the `--experimental-modules` flag be turned on in order for modules to work properly. This is only necessary if a project needs to run in Node. All modern browsers support modules.
 
+<a name="anchor-documentation"></a>
 Documentation
 ===============================================================================
 
 View the [documentation](https://sinova.github.com/Collisions/docs/) (this README is also there).
 
+<a name="anchor-demos"></a>
 Demos
 ===============================================================================
 
 * [Tank](https://sinova.github.com/Collisions/demo)
 * [Stress Test](https://sinova.github.com/Collisions/demo?stress)
 
+<a name="anchor-usage"></a>
 Usage
 ===============================================================================
 
@@ -73,9 +77,11 @@ for(const wall of potentials) {
 }
 ```
 
+<a name="anchor-getting-started"></a>
 Getting Started
 ===============================================================================
 
+<a name="anchor-step-1"></a>
 ## 1. Creating a Collision System
 
 **Collisions** provides functions for performing both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, bodies need to be tracked within a collision system.
@@ -88,6 +94,7 @@ import Collisions from 'collisions';
 const my_system = new Collisions();
 ```
 
+<a name="anchor-step-2"></a>
 ## 2. Creating, Inserting, and Removing Bodies
 
 **Collisions** supports the following body types:
@@ -132,6 +139,7 @@ my_system.remove(my_polygon, my_point);
 my_circle.remove();
 ```
 
+<a name="anchor-step-3"></a>
 ## 3. Updating the Collision System
 
 Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling `update()` and should typically should occur once per frame.
@@ -154,6 +162,7 @@ function gameLoop() {
 }
 ```
 
+<a name="anchor-step-4"></a>
 ## 4. Testing for Collisions
 
 When testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling `potentials()` in order to quickly rule out bodies that are too far away to collide. **Collisions** uses a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for its broad-phase search. Calling `potentials()` on a body traverses the BVH and builds a list of potential collision candidates.
@@ -184,6 +193,7 @@ if(my_polygon.collides(my_line)) {
 }
 ```
 
+<a name="anchor-step-5"></a>
 ## 5. Getting Detailed Collision Information
 
 There is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a `Result` object. `Result` objects have several properties set on them when a collision occurs, all of which are described in the [documentation](https://sinova.github.com/Collisions/docs/).
@@ -218,9 +228,10 @@ for(const body of my_potentials) {
 }
 ```
 
+<a name="anchor-step-6"></a>
 ## 6. Negating Overlap
 
-A common use-case in collision detection is negating overlap when a collision occurs (such as when a player hits a wall). This can be done using the collision information in a `Result` object (see [Getting Detailed Collision Information](#4--getting-detailed-collision-information)).
+A common use-case in collision detection is negating overlap when a collision occurs (such as when a player hits a wall). This can be done using the collision information in a `Result` object (see [Getting Detailed Collision Information](#anchor-getting-detailed-collision-information)).
 
 The three most useful properties on a `Result` object are `overlap`, `overlap_x`, and `overlap_y`. Together, these values describe how much and in what direction the source body is overlapping the target body. More specifically, `overlap_x` and `overlap_y` describe the direction vector, and `overlap` describes the magnitude of that vector.
 
@@ -233,6 +244,7 @@ if(player.collides(wall, result)) {
 }
 ```
 
+<a name="anchor-lines"></a>
 Lines
 ===============================================================================
 
@@ -242,14 +254,16 @@ Creating lines is as simple as creating a single-sided polygon (i.e. a polygon w
 const my_line = new Polygon(200, 5, [[-30, 0], [10, 20]]);
 ```
 
+<a name="anchor-concave-polygons"></a>
 Concave Polygons
 ===============================================================================
 
-**Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be "faked" by using a series of [Lines](#lines). Keep in mind that a polygon drawn using [Lines](#lines) is "hollow".
+**Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be "faked" by using a series of [Lines](#anchor-lines). Keep in mind that a polygon drawn using [Lines](#anchor-lines) is "hollow".
 
 Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.mjs](https://github.com/schteppe/poly-decomp.mjs).
 
 
+<a name="anchor-bounding-volume-padding"></a>
 Bounding Volume Padding
 ===============================================================================
 
@@ -268,6 +282,7 @@ const my_circle  = new Circle(100, 100, 10, 1, my_padding);
 my_circle.padding = 10;
 ```
 
+<a name="anchor-only-using-sat"></a>
 Only using SAT
 ===============================================================================
 
@@ -285,6 +300,7 @@ if(my_circle.collides(my_polygon, my_result)) {
 }
 ```
 
+<a name="anchor-faq"></a>
 FAQ
 ===============================================================================
 

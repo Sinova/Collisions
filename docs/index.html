@@ -41,34 +41,38 @@
 
 <div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="collisions">Collisions</h1><p><strong>Collisions</strong> is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, and Points. It combines the efficiency of a <a href="https://en.wikipedia.org/wiki/Bounding_volume_hierarchy">Bounding Volume Hierarchy</a> (BVH) for broad-phase searching and the accuracy of the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for narrow-phase collision testing.</p>
 <ul>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#documentation">Documentation</a></li>
-<li><a href="#demos">Demos</a></li>
-<li><a href="#usage">Usage</a></li>
-<li><a href="#getting-started">Getting Started</a><ol>
-<li><a href="#1--creating-a-collision-system">Creating a Collision System</a></li>
-<li><a href="#2--creating--inserting--and-removing-bodies">Creating, Inserting, and Removing Bodies</a></li>
-<li><a href="#3--updating-the-collision-system">Updating the Collision System</a></li>
-<li><a href="#4--testing-for-collisions">Testing for Collisions</a></li>
-<li><a href="#5--getting-detailed-collision-information">Getting Detailed Collision Information</a></li>
-<li><a href="#6--negating-overlap">Negating Overlap</a></li>
+<li><a href="#anchor-installation">Installation</a></li>
+<li><a href="#anchor-documentation">Documentation</a></li>
+<li><a href="#anchor-demos">Demos</a></li>
+<li><a href="#anchor-usage">Usage</a></li>
+<li><a href="#anchor-getting-started">Getting Started</a><ol>
+<li><a href="#anchor-step-1">Creating a Collision System</a></li>
+<li><a href="#anchor-step-2">Creating, Inserting, and Removing Bodies</a></li>
+<li><a href="#anchor-step-3">Updating the Collision System</a></li>
+<li><a href="#anchor-step-4">Testing for Collisions</a></li>
+<li><a href="#anchor-step-5">Getting Detailed Collision Information</a></li>
+<li><a href="#anchor-step-6">Negating Overlap</a></li>
 </ol>
 </li>
-<li><a href="#concave-polygons">Concave Polygons</a></li>
-<li><a href="#bounding-volume-padding">Bounding Volume Padding</a></li>
-<li><a href="#only-using-sat">Only using SAT</a></li>
-<li><a href="#faq">FAQ</a></li>
+<li><a href="#anchor-concave-polygons">Concave Polygons</a></li>
+<li><a href="#anchor-bounding-volume-padding">Bounding Volume Padding</a></li>
+<li><a href="#anchor-only-using-sat">Only using SAT</a></li>
+<li><a href="#anchor-faq">FAQ</a></li>
 </ul>
+<p><a name="anchor-installation"></a></p>
 <h1 id="installation">Installation</h1><pre><code class="lang-bash"><code class="source-code prettyprint">npm install collisions</code>
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> This library uses the ECMAScript Module syntax. At the time of writing, Node v9.2.0 requires the <code>--experimental-modules</code> flag be turned on in order for modules to work properly. This is only necessary if a project needs to run in Node. All modern browsers support modules.</p>
 </blockquote>
+<p><a name="anchor-documentation"></a></p>
 <h1 id="documentation">Documentation</h1><p>View the <a href="https://sinova.github.com/Collisions/docs/">documentation</a> (this README is also there).</p>
+<p><a name="anchor-demos"></a></p>
 <h1 id="demos">Demos</h1><ul>
 <li><a href="https://sinova.github.com/Collisions/demo">Tank</a></li>
 <li><a href="https://sinova.github.com/Collisions/demo?stress">Stress Test</a></li>
 </ul>
+<p><a name="anchor-usage"></a></p>
 <h1 id="usage">Usage</h1><pre><code class="lang-JavaScript"><code class="source-code prettyprint">import Collisions from &apos;collisions&apos;;
 
 // Create the collision system
@@ -98,12 +102,15 @@ for(const wall of potentials) {
     }
 }</code>
 </code></pre>
-<h1 id="getting-started">Getting Started</h1><h2 id="1--creating-a-collision-system">1. Creating a Collision System</h2><p><strong>Collisions</strong> provides functions for performing both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, bodies need to be tracked within a collision system.</p>
+<p><a name="anchor-getting-started"></a></p>
+<h1 id="getting-started">Getting Started</h1><p><a name="anchor-step-1"></a></p>
+<h2 id="1--creating-a-collision-system">1. Creating a Collision System</h2><p><strong>Collisions</strong> provides functions for performing both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, bodies need to be tracked within a collision system.</p>
 <p>Call the Collisions constructor to create a collision system.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">import Collisions from &apos;collisions&apos;;
 
 const my_system = new Collisions();</code>
 </code></pre>
+<p><a name="anchor-step-2"></a></p>
 <h2 id="2--creating--inserting--and-removing-bodies">2. Creating, Inserting, and Removing Bodies</h2><p><strong>Collisions</strong> supports the following body types:</p>
 <ul>
 <li><strong>Circle:</strong> A shape with infinite sides equidistant from a single point</li>
@@ -137,6 +144,7 @@ const my_point   = my_system.createPoint(10, 10);</code>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_system.remove(my_polygon, my_point);
 my_circle.remove();</code>
 </code></pre>
+<p><a name="anchor-step-3"></a></p>
 <h2 id="3--updating-the-collision-system">3. Updating the Collision System</h2><p>Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling <code>update()</code> and should typically should occur once per frame.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_system.update();</code>
 </code></pre>
@@ -151,6 +159,7 @@ my_circle.remove();</code>
     render();
 }</code>
 </code></pre>
+<p><a name="anchor-step-4"></a></p>
 <h2 id="4--testing-for-collisions">4. Testing for Collisions</h2><p>When testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling <code>potentials()</code> in order to quickly rule out bodies that are too far away to collide. <strong>Collisions</strong> uses a <a href="https://en.wikipedia.org/wiki/Bounding_volume_hierarchy">Bounding Volume Hierarchy</a> (BVH) for its broad-phase search. Calling <code>potentials()</code> on a body traverses the BVH and builds a list of potential collision candidates.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_potentials = my_polygon.potentials();</code>
 </code></pre>
@@ -171,6 +180,7 @@ for(const body of potentials) {
     console.log(&apos;Collision detected!&apos;);
 }</code>
 </code></pre>
+<p><a name="anchor-step-5"></a></p>
 <h2 id="5--getting-detailed-collision-information">5. Getting Detailed Collision Information</h2><p>There is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a <code>Result</code> object. <code>Result</code> objects have several properties set on them when a collision occurs, all of which are described in the <a href="https://sinova.github.com/Collisions/docs/">documentation</a>.</p>
 <p>For convenience, there are several ways to create a <code>Result</code> object. <code>Result</code> objects do not belong to any particular collision system, so any of the following methods for creating one can be used interchangeably. This also means the same <code>Result</code> object can be used for collisions across multiple systems.</p>
 <blockquote>
@@ -197,7 +207,8 @@ for(const body of my_potentials) {
     }
 }</code>
 </code></pre>
-<h2 id="6--negating-overlap">6. Negating Overlap</h2><p>A common use-case in collision detection is negating overlap when a collision occurs (such as when a player hits a wall). This can be done using the collision information in a <code>Result</code> object (see <a href="#4--getting-detailed-collision-information">Getting Detailed Collision Information</a>).</p>
+<p><a name="anchor-step-6"></a></p>
+<h2 id="6--negating-overlap">6. Negating Overlap</h2><p>A common use-case in collision detection is negating overlap when a collision occurs (such as when a player hits a wall). This can be done using the collision information in a <code>Result</code> object (see <a href="#anchor-getting-detailed-collision-information">Getting Detailed Collision Information</a>).</p>
 <p>The three most useful properties on a <code>Result</code> object are <code>overlap</code>, <code>overlap_x</code>, and <code>overlap_y</code>. Together, these values describe how much and in what direction the source body is overlapping the target body. More specifically, <code>overlap_x</code> and <code>overlap_y</code> describe the direction vector, and <code>overlap</code> describes the magnitude of that vector.</p>
 <p>These values can be used to &quot;push&quot; one body out of another using the minimum distance required. More simply, subtracting this vector from the source body&apos;s position will cause the bodies to no longer collide. Here&apos;s an example:</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">if(player.collides(wall, result)) {
@@ -205,11 +216,14 @@ for(const body of my_potentials) {
     player.y -= result.overlap * result.overlap_y;
 }</code>
 </code></pre>
+<p><a name="anchor-lines"></a></p>
 <h1 id="lines">Lines</h1><p>Creating lines is as simple as creating a single-sided polygon (i.e. a polygon with only two coordinate pairs).</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_line = new Polygon(200, 5, [[-30, 0], [10, 20]]);</code>
 </code></pre>
-<h1 id="concave-polygons">Concave Polygons</h1><p><strong>Collisions</strong> uses the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be &quot;faked&quot; by using a series of <a href="#lines">Lines</a>. Keep in mind that a polygon drawn using <a href="#lines">Lines</a> is &quot;hollow&quot;.</p>
+<p><a name="anchor-concave-polygons"></a></p>
+<h1 id="concave-polygons">Concave Polygons</h1><p><strong>Collisions</strong> uses the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be &quot;faked&quot; by using a series of <a href="#anchor-lines">Lines</a>. Keep in mind that a polygon drawn using <a href="#anchor-lines">Lines</a> is &quot;hollow&quot;.</p>
 <p>Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out <a href="https://github.com/schteppe/poly-decomp.mjs">poly-decomp.mjs</a>.</p>
+<p><a name="anchor-bounding-volume-padding"></a></p>
 <h1 id="bounding-volume-padding">Bounding Volume Padding</h1><p>When bodies move around within a collision system, the internal BVH needs to be updated. Specifically, the body needs to be removed from the BVH and reinserted. This is one of the most costly operations in maintaining a BVH. In general, most projects won&apos;t need to worry about this unless they are dealing with thousands of moving bodies at once. In these cases, it can <em>sometimes</em> be beneficial to &quot;pad&quot; the bounding volumes of each body so that they don&apos;t need to be removed and reinserted if they haven&apos;t changed position too much. In other words, padding the bounding volume allows &quot;breathing room&quot; for the body within it to move around without needing to be updated.</p>
 <p>The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase <code>potentials()</code> search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.</p>
 <p>Padding can be added to a body when instantiating it (see the <a href="https://sinova.github.com/Collisions/docs/">documentation</a> for each body) or at any time by changing its <code>padding</code> property.</p>
@@ -220,6 +234,7 @@ const my_circle  = new Circle(100, 100, 10, 1, my_padding);
 
 my_circle.padding = 10;</code>
 </code></pre>
+<p><a name="anchor-only-using-sat"></a></p>
 <h1 id="only-using-sat">Only using SAT</h1><p>Some projects may only have a need to perform SAT collision tests without broad-phase searching. This can be achieved by avoiding collision systems altogether and only using the <code>collides()</code> function.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">import {Circle, Polygon, Result} from &apos;collisions&apos;;
 
@@ -231,6 +246,7 @@ if(my_circle.collides(my_polygon, my_result)) {
     console.log(my_result);
 }</code>
 </code></pre>
+<p><a name="anchor-faq"></a></p>
 <h1 id="faq">FAQ</h1><h2 id="why-shouldn--39-t-i-just-use-a-physics-engine-">Why shouldn&apos;t I just use a physics engine?</h2><p>Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. <a href="https://github.com/liabru/matter-js">Matter.mjs</a>, <a href="https://github.com/shakiba/planck.mjs">Planck.mjs</a>). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). <strong>Collisions</strong> was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with <strong>Collisions</strong> at its core.</p>
 <h2 id="why-does-the-source-code-seem-to-have-quite-a-bit-of-copy-paste-">Why does the source code seem to have quite a bit of copy/paste?</h2><p><strong>Collisions</strong> was written with performance as its primary focus. Conscious decisions were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.</p>
 <h2 id="sometimes-bodies-can--quot-squeeze-quot--between-two-other-bodies--what--39-s-going-on-">Sometimes bodies can &quot;squeeze&quot; between two other bodies. What&apos;s going on?</h2><p>This isn&apos;t caused by faulty collisions, but rather how a project handles its collision responses. There are several ways to go about responding to collisions, the most common of which is to loop through all bodies, find their potential collisions, and negate any overlaps that are found one at a time. Since the overlaps are negated one at a time, the last negation takes precedence and can cause the body to be pushed into another body.</p>
