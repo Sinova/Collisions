@@ -76,7 +76,7 @@ for(const wall of potentials) {
 Getting Started
 ===============================================================================
 
-#### 1. Creating a Collision System
+## 1. Creating a Collision System
 
 **Collisions** provides functions for performing both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, bodies need to be tracked within a collision system.
 
@@ -88,7 +88,7 @@ import Collisions from 'collisions';
 const my_system = new Collisions();
 ```
 
-#### 2. Creating, Inserting, and Removing Bodies
+## 2. Creating, Inserting, and Removing Bodies
 
 **Collisions** supports the following body types:
 
@@ -132,7 +132,7 @@ my_system.remove(my_polygon, my_point);
 my_circle.remove();
 ```
 
-#### 3. Updating the Collision System
+## 3. Updating the Collision System
 
 Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling `update()` and should typically should occur once per frame.
 
@@ -154,7 +154,7 @@ function gameLoop() {
 }
 ```
 
-#### 4. Testing for Collisions
+## 4. Testing for Collisions
 
 When testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling `potentials()` in order to quickly rule out bodies that are too far away to collide. **Collisions** uses a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for its broad-phase search. Calling `potentials()` on a body traverses the BVH and builds a list of potential collision candidates.
 
@@ -184,7 +184,7 @@ if(my_polygon.collides(my_line)) {
 }
 ```
 
-#### 5. Getting Detailed Collision Information
+## 5. Getting Detailed Collision Information
 
 There is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a `Result` object. `Result` objects have several properties set on them when a collision occurs, all of which are described in the [documentation](https://sinova.github.com/Collisions/docs/).
 
@@ -218,7 +218,7 @@ for(const body of my_potentials) {
 }
 ```
 
-#### 6. Negating Overlap
+## 6. Negating Overlap
 
 A common use-case in collision detection is negating overlap when a collision occurs (such as when a player hits a wall). This can be done using the collision information in a `Result` object (see [Getting Detailed Collision Information](#4--getting-detailed-collision-information)).
 
@@ -288,15 +288,15 @@ if(my_circle.collides(my_polygon, my_result)) {
 FAQ
 ===============================================================================
 
-#### Why shouldn't I just use a physics engine?
+## Why shouldn't I just use a physics engine?
 
 Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. [Matter.mjs](https://github.com/liabru/matter-js), [Planck.mjs](https://github.com/shakiba/planck.mjs)). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). **Collisions** was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with **Collisions** at its core.
 
-#### Why does the source code seem to have quite a bit of copy/paste?
+## Why does the source code seem to have quite a bit of copy/paste?
 
 **Collisions** was written with performance as its primary focus. Conscious decisions were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.
 
-#### Sometimes bodies can "squeeze" between two other bodies. What's going on?
+## Sometimes bodies can "squeeze" between two other bodies. What's going on?
 
 This isn't caused by faulty collisions, but rather how a project handles its collision responses. There are several ways to go about responding to collisions, the most common of which is to loop through all bodies, find their potential collisions, and negate any overlaps that are found one at a time. Since the overlaps are negated one at a time, the last negation takes precedence and can cause the body to be pushed into another body.
 

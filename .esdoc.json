@@ -1,6 +1,7 @@
 {
 	"source"      : "./src",
 	"destination" : "./docs",
+	"includes"    : ["\\.js$", "\\.mjs$"],
 
 	"plugins" : [
 		{

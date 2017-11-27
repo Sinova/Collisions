@@ -29,7 +29,13 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  </ul>
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.mjs~Collisions.html">Collisions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.mjs~Body.html">Body</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.mjs~Circle.html">Circle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.mjs~Point.html">Point</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.mjs~Polygon.html">Polygon</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.mjs~Result.html">Result</a></span></span></li>
+</ul>
 </div>
 </nav>
 
@@ -92,13 +98,13 @@ for(const wall of potentials) {
     }
 }</code>
 </code></pre>
-<h1 id="getting-started">Getting Started</h1><h4 id="1--creating-a-collision-system">1. Creating a Collision System</h4><p><strong>Collisions</strong> provides functions for performing both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, bodies need to be tracked within a collision system.</p>
+<h1 id="getting-started">Getting Started</h1><h2 id="1--creating-a-collision-system">1. Creating a Collision System</h2><p><strong>Collisions</strong> provides functions for performing both broad-phase and narrow-phase collision tests. In order to take full advantage of both phases, bodies need to be tracked within a collision system.</p>
 <p>Call the Collisions constructor to create a collision system.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">import Collisions from &apos;collisions&apos;;
 
 const my_system = new Collisions();</code>
 </code></pre>
-<h4 id="2--creating--inserting--and-removing-bodies">2. Creating, Inserting, and Removing Bodies</h4><p><strong>Collisions</strong> supports the following body types:</p>
+<h2 id="2--creating--inserting--and-removing-bodies">2. Creating, Inserting, and Removing Bodies</h2><p><strong>Collisions</strong> supports the following body types:</p>
 <ul>
 <li><strong>Circle:</strong> A shape with infinite sides equidistant from a single point</li>
 <li><strong>Polygon:</strong> A shape made up of line segments</li>
@@ -131,7 +137,7 @@ const my_point   = my_system.createPoint(10, 10);</code>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_system.remove(my_polygon, my_point);
 my_circle.remove();</code>
 </code></pre>
-<h4 id="3--updating-the-collision-system">3. Updating the Collision System</h4><p>Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling <code>update()</code> and should typically should occur once per frame.</p>
+<h2 id="3--updating-the-collision-system">3. Updating the Collision System</h2><p>Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling <code>update()</code> and should typically should occur once per frame.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_system.update();</code>
 </code></pre>
 <p>The optimal time for updating a collision system is <strong>after</strong> its bodies have changed and <strong>before</strong> collisions are tested. For example, a game loop might use the following order of events:</p>
@@ -145,7 +151,7 @@ my_circle.remove();</code>
     render();
 }</code>
 </code></pre>
-<h4 id="4--testing-for-collisions">4. Testing for Collisions</h4><p>When testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling <code>potentials()</code> in order to quickly rule out bodies that are too far away to collide. <strong>Collisions</strong> uses a <a href="https://en.wikipedia.org/wiki/Bounding_volume_hierarchy">Bounding Volume Hierarchy</a> (BVH) for its broad-phase search. Calling <code>potentials()</code> on a body traverses the BVH and builds a list of potential collision candidates.</p>
+<h2 id="4--testing-for-collisions">4. Testing for Collisions</h2><p>When testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling <code>potentials()</code> in order to quickly rule out bodies that are too far away to collide. <strong>Collisions</strong> uses a <a href="https://en.wikipedia.org/wiki/Bounding_volume_hierarchy">Bounding Volume Hierarchy</a> (BVH) for its broad-phase search. Calling <code>potentials()</code> on a body traverses the BVH and builds a list of potential collision candidates.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_potentials = my_polygon.potentials();</code>
 </code></pre>
 <p>Once a list of potential collisions is acquired, loop through them and perform a narrow-phase collision test using <code>collides()</code>. <strong>Collisions</strong> uses the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for its narrow-phase collision tests.</p>
@@ -165,7 +171,7 @@ for(const body of potentials) {
     console.log(&apos;Collision detected!&apos;);
 }</code>
 </code></pre>
-<h4 id="5--getting-detailed-collision-information">5. Getting Detailed Collision Information</h4><p>There is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a <code>Result</code> object. <code>Result</code> objects have several properties set on them when a collision occurs, all of which are described in the <a href="https://sinova.github.com/Collisions/docs/">documentation</a>.</p>
+<h2 id="5--getting-detailed-collision-information">5. Getting Detailed Collision Information</h2><p>There is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a <code>Result</code> object. <code>Result</code> objects have several properties set on them when a collision occurs, all of which are described in the <a href="https://sinova.github.com/Collisions/docs/">documentation</a>.</p>
 <p>For convenience, there are several ways to create a <code>Result</code> object. <code>Result</code> objects do not belong to any particular collision system, so any of the following methods for creating one can be used interchangeably. This also means the same <code>Result</code> object can be used for collisions across multiple systems.</p>
 <blockquote>
 <p><strong>Note:</strong> It is highly recommended that <code>Result</code> objects be recycled when performing multiple collision tests in order to save memory. The following example creates multiple <code>Result</code> objects strictly as a demonstration.</p>
@@ -191,7 +197,7 @@ for(const body of my_potentials) {
     }
 }</code>
 </code></pre>
-<h4 id="6--negating-overlap">6. Negating Overlap</h4><p>A common use-case in collision detection is negating overlap when a collision occurs (such as when a player hits a wall). This can be done using the collision information in a <code>Result</code> object (see <a href="#4--getting-detailed-collision-information">Getting Detailed Collision Information</a>).</p>
+<h2 id="6--negating-overlap">6. Negating Overlap</h2><p>A common use-case in collision detection is negating overlap when a collision occurs (such as when a player hits a wall). This can be done using the collision information in a <code>Result</code> object (see <a href="#4--getting-detailed-collision-information">Getting Detailed Collision Information</a>).</p>
 <p>The three most useful properties on a <code>Result</code> object are <code>overlap</code>, <code>overlap_x</code>, and <code>overlap_y</code>. Together, these values describe how much and in what direction the source body is overlapping the target body. More specifically, <code>overlap_x</code> and <code>overlap_y</code> describe the direction vector, and <code>overlap</code> describes the magnitude of that vector.</p>
 <p>These values can be used to &quot;push&quot; one body out of another using the minimum distance required. More simply, subtracting this vector from the source body&apos;s position will cause the bodies to no longer collide. Here&apos;s an example:</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">if(player.collides(wall, result)) {
@@ -225,9 +231,9 @@ if(my_circle.collides(my_polygon, my_result)) {
     console.log(my_result);
 }</code>
 </code></pre>
-<h1 id="faq">FAQ</h1><h4 id="why-shouldn--39-t-i-just-use-a-physics-engine-">Why shouldn&apos;t I just use a physics engine?</h4><p>Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. <a href="https://github.com/liabru/matter-js">Matter.mjs</a>, <a href="https://github.com/shakiba/planck.mjs">Planck.mjs</a>). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). <strong>Collisions</strong> was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with <strong>Collisions</strong> at its core.</p>
-<h4 id="why-does-the-source-code-seem-to-have-quite-a-bit-of-copy-paste-">Why does the source code seem to have quite a bit of copy/paste?</h4><p><strong>Collisions</strong> was written with performance as its primary focus. Conscious decisions were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.</p>
-<h4 id="sometimes-bodies-can--quot-squeeze-quot--between-two-other-bodies--what--39-s-going-on-">Sometimes bodies can &quot;squeeze&quot; between two other bodies. What&apos;s going on?</h4><p>This isn&apos;t caused by faulty collisions, but rather how a project handles its collision responses. There are several ways to go about responding to collisions, the most common of which is to loop through all bodies, find their potential collisions, and negate any overlaps that are found one at a time. Since the overlaps are negated one at a time, the last negation takes precedence and can cause the body to be pushed into another body.</p>
+<h1 id="faq">FAQ</h1><h2 id="why-shouldn--39-t-i-just-use-a-physics-engine-">Why shouldn&apos;t I just use a physics engine?</h2><p>Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. <a href="https://github.com/liabru/matter-js">Matter.mjs</a>, <a href="https://github.com/shakiba/planck.mjs">Planck.mjs</a>). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). <strong>Collisions</strong> was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with <strong>Collisions</strong> at its core.</p>
+<h2 id="why-does-the-source-code-seem-to-have-quite-a-bit-of-copy-paste-">Why does the source code seem to have quite a bit of copy/paste?</h2><p><strong>Collisions</strong> was written with performance as its primary focus. Conscious decisions were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.</p>
+<h2 id="sometimes-bodies-can--quot-squeeze-quot--between-two-other-bodies--what--39-s-going-on-">Sometimes bodies can &quot;squeeze&quot; between two other bodies. What&apos;s going on?</h2><p>This isn&apos;t caused by faulty collisions, but rather how a project handles its collision responses. There are several ways to go about responding to collisions, the most common of which is to loop through all bodies, find their potential collisions, and negate any overlaps that are found one at a time. Since the overlaps are negated one at a time, the last negation takes precedence and can cause the body to be pushed into another body.</p>
 <p>One workaround is to resolve each collision, update the collision system, and repeat until no collisions are found. Keep in mind that this can potentially lead to infinite loops if the two colliding bodies equally negate each other. Another solution is to collect all overlaps and combine them into a single resultant vector and then push the body out, but this can get rather complicated.</p>
 <p>There is no perfect solution. How collisions are handled depends on the project.</p>
 </div>
