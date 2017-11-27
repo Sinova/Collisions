@@ -27,7 +27,7 @@ Installation
 npm install collisions
 ```
 
-> **Note:** This library uses the ECMAScript Module syntax. At the time of writing, Node v9.2.0 requires the `--experimental-modules` flag be turned on in order for modules to work properly. This is only necessary if a project needs to run in Node. All modern browsers support modules.
+> **Note:** This library uses the ECMAScript Module syntax. At the time of writing, Node v9.2.0 requires the `--experimental-modules` flag be turned on in order for modules to work properly (see the [Node documentation](https://nodejs.org/api/esm.html)). This is only necessary if a project needs to run in Node. All modern browsers support modules.
 
 <a name="anchor-documentation"></a>
 Documentation
