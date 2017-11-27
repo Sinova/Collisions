@@ -1,5 +1,5 @@
-import Result from './Result.js';
-import SAT    from './SAT.js';
+import Result from './Result.mjs';
+import SAT    from './SAT.mjs';
 
 /**
  * The base class for bodies used to detect collisions

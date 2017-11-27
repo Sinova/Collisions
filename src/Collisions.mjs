@@ -1,9 +1,9 @@
-import BVH     from './modules/BVH.js';
-import Circle  from './modules/Circle.js';
-import Polygon from './modules/Polygon.js';
-import Point   from './modules/Point.js';
-import Result  from './modules/Result.js';
-import SAT     from './modules/SAT.js';
+import BVH     from './modules/BVH.mjs';
+import Circle  from './modules/Circle.mjs';
+import Polygon from './modules/Polygon.mjs';
+import Point   from './modules/Point.mjs';
+import Result  from './modules/Result.mjs';
+import SAT     from './modules/SAT.mjs';
 
 /**
  * A collision system used to track bodies in order to improve collision detection performance
@@ -61,7 +61,7 @@ class Collisions {
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 * @returns {Point}
 	 */
-	createPoint(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
+	createPoint(x = 0, y = 0, padding = 0) {
 		const body = new Point(x, y, padding);
 
 		this._bvh.insert(body);

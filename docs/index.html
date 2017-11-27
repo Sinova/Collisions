@@ -29,13 +29,7 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
-</ul>
+  </ul>
 </div>
 </nav>
 
@@ -61,6 +55,9 @@
 </ul>
 <h1 id="installation">Installation</h1><pre><code class="lang-bash"><code class="source-code prettyprint">npm install collisions</code>
 </code></pre>
+<blockquote>
+<p><strong>Note:</strong> This library uses the ECMAScript Module syntax. At the time of writing, Node v9.2.0 requires the <code>--experimental-modules</code> flag be turned on in order for modules to work properly. This is only necessary if a project needs to run in Node. All modern browsers support modules.</p>
+</blockquote>
 <h1 id="documentation">Documentation</h1><p>View the <a href="https://sinova.github.com/Collisions/docs/">documentation</a> (this README is also there).</p>
 <h1 id="demos">Demos</h1><ul>
 <li><a href="https://sinova.github.com/Collisions/demo">Tank</a></li>
@@ -206,7 +203,7 @@ for(const body of my_potentials) {
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_line = new Polygon(200, 5, [[-30, 0], [10, 20]]);</code>
 </code></pre>
 <h1 id="concave-polygons">Concave Polygons</h1><p><strong>Collisions</strong> uses the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be &quot;faked&quot; by using a series of <a href="#lines">Lines</a>. Keep in mind that a polygon drawn using <a href="#lines">Lines</a> is &quot;hollow&quot;.</p>
-<p>Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out <a href="https://github.com/schteppe/poly-decomp.js">poly-decomp.js</a>.</p>
+<p>Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out <a href="https://github.com/schteppe/poly-decomp.mjs">poly-decomp.mjs</a>.</p>
 <h1 id="bounding-volume-padding">Bounding Volume Padding</h1><p>When bodies move around within a collision system, the internal BVH needs to be updated. Specifically, the body needs to be removed from the BVH and reinserted. This is one of the most costly operations in maintaining a BVH. In general, most projects won&apos;t need to worry about this unless they are dealing with thousands of moving bodies at once. In these cases, it can <em>sometimes</em> be beneficial to &quot;pad&quot; the bounding volumes of each body so that they don&apos;t need to be removed and reinserted if they haven&apos;t changed position too much. In other words, padding the bounding volume allows &quot;breathing room&quot; for the body within it to move around without needing to be updated.</p>
 <p>The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase <code>potentials()</code> search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.</p>
 <p>Padding can be added to a body when instantiating it (see the <a href="https://sinova.github.com/Collisions/docs/">documentation</a> for each body) or at any time by changing its <code>padding</code> property.</p>
@@ -228,7 +225,7 @@ if(my_circle.collides(my_polygon, my_result)) {
     console.log(my_result);
 }</code>
 </code></pre>
-<h1 id="faq">FAQ</h1><h4 id="why-shouldn--39-t-i-just-use-a-physics-engine-">Why shouldn&apos;t I just use a physics engine?</h4><p>Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. <a href="https://github.com/liabru/matter-js">Matter.js</a>, <a href="https://github.com/shakiba/planck.js">Planck.js</a>). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). <strong>Collisions</strong> was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with <strong>Collisions</strong> at its core.</p>
+<h1 id="faq">FAQ</h1><h4 id="why-shouldn--39-t-i-just-use-a-physics-engine-">Why shouldn&apos;t I just use a physics engine?</h4><p>Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. <a href="https://github.com/liabru/matter-js">Matter.mjs</a>, <a href="https://github.com/shakiba/planck.mjs">Planck.mjs</a>). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). <strong>Collisions</strong> was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with <strong>Collisions</strong> at its core.</p>
 <h4 id="why-does-the-source-code-seem-to-have-quite-a-bit-of-copy-paste-">Why does the source code seem to have quite a bit of copy/paste?</h4><p><strong>Collisions</strong> was written with performance as its primary focus. Conscious decisions were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.</p>
 <h4 id="sometimes-bodies-can--quot-squeeze-quot--between-two-other-bodies--what--39-s-going-on-">Sometimes bodies can &quot;squeeze&quot; between two other bodies. What&apos;s going on?</h4><p>This isn&apos;t caused by faulty collisions, but rather how a project handles its collision responses. There are several ways to go about responding to collisions, the most common of which is to loop through all bodies, find their potential collisions, and negate any overlaps that are found one at a time. Since the overlaps are negated one at a time, the last negation takes precedence and can cause the body to be pushed into another body.</p>
 <p>One workaround is to resolve each collision, update the collision system, and repeat until no collisions are found. Keep in mind that this can potentially lead to infinite loops if the two colliding bodies equally negate each other. Another solution is to collect all overlaps and combine them into a single resultant vector and then push the body out, but this can get rather complicated.</p>

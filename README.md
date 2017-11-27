@@ -26,6 +26,8 @@ Installation
 npm install collisions
 ```
 
+> **Note:** This library uses the ECMAScript Module syntax. At the time of writing, Node v9.2.0 requires the `--experimental-modules` flag be turned on in order for modules to work properly. This is only necessary if a project needs to run in Node. All modern browsers support modules.
+
 Documentation
 ===============================================================================
 
@@ -245,7 +247,7 @@ Concave Polygons
 
 **Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be "faked" by using a series of [Lines](#lines). Keep in mind that a polygon drawn using [Lines](#lines) is "hollow".
 
-Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).
+Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.mjs](https://github.com/schteppe/poly-decomp.mjs).
 
 
 Bounding Volume Padding
@@ -288,7 +290,7 @@ FAQ
 
 #### Why shouldn't I just use a physics engine?
 
-Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. [Matter.js](https://github.com/liabru/matter-js), [Planck.js](https://github.com/shakiba/planck.js)). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). **Collisions** was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with **Collisions** at its core.
+Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. [Matter.mjs](https://github.com/liabru/matter-js), [Planck.mjs](https://github.com/shakiba/planck.mjs)). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). **Collisions** was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with **Collisions** at its core.
 
 #### Why does the source code seem to have quite a bit of copy/paste?
 
