@@ -3,7 +3,7 @@ import Collisions from '../../src/Collisions.js';
 const result = Collisions.createResult();
 const width  = 800;
 const height = 600;
-const count  = 1000
+const count  = 500
 const speed  = 1;
 const size   = 5;
 
@@ -24,6 +24,12 @@ export default class Stress {
 		this.canvas.height = height;
 		this.context.font  = '24px Arial';
 
+		// World bounds
+		this.collisions.createPolygon(0, 0, [[0, 0], [width, 0]]);
+		this.collisions.createPolygon(0, 0, [[width, 0], [width, height]]);
+		this.collisions.createPolygon(0, 0, [[width, height], [0, height]]);
+		this.collisions.createPolygon(0, 0, [[0, height], [0, 0]]);
+
 		for(let i = 0; i < count; ++i) {
 			this.createShape(!random(0, 49));
 		}
@@ -32,8 +38,10 @@ export default class Stress {
 			<div><b>Total:</b> ${count}</div>
 			<div><b>Polygons:</b> ${this.polygons}</div>
 			<div><b>Circles:</b> ${this.circles}</div>
+			<div><label><input id="bvh" type="checkbox"> Show Bounding Volume Hierarchy</label></div>
 		`;
 
+		this.bvh_checkbox = this.element.querySelector('#bvh');
 		this.element.appendChild(this.canvas);
 
 		const self = this;
@@ -87,25 +95,6 @@ export default class Stress {
 					body2.direction_y = 2 * dot * -result.overlap_x - body2.direction_y;
 				}
 			}
-
-			// Keep the shape in bounds
-			if(body.x < 0) {
-				body.x            = 0;
-				body.direction_x *= -1;
-			}
-			else if(body.x > width) {
-				body.x             = width;
-				body.direction_x *= -1;
-			}
-
-			if(body.y < 0) {
-				body.y            = 0;
-				body.direction_y *= -1;
-			}
-			else if(body.y > height) {
-				body.y            = height;
-				body.direction_y *= -1;
-			}
 		}
 
 		// Clear the canvas
@@ -113,16 +102,21 @@ export default class Stress {
 		this.context.fillRect(0, 0, width, height);
 
 		// Render the bodies
-		this.context.fillStyle   = '#FFFFFF';
 		this.context.strokeStyle = '#FFFFFF';
-
 		this.context.beginPath();
 		this.collisions.renderBodies(this.context);
-		// this.collisions.renderBVH(this.context);
 		this.context.stroke();
 
+		// Render the BVH
+		if(this.bvh_checkbox.checked) {
+			this.context.strokeStyle = '#00FF00';
+			this.context.beginPath();
+			this.collisions.renderBVH(this.context);
+			this.context.stroke();
+		}
+
 		// Render the FPS
-		this.context.fillStyle = '#FC0';
+		this.context.fillStyle = '#FFCC00';
 		this.context.fillText(average_fps, 10, 30);
 	}
 

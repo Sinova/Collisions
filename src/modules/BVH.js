@@ -22,23 +22,10 @@ export default class BVH {
 
 	/**
 	 * Inserts a body into the BVH
-	 * @param {Circle|Polygon|Path|Point} body The body to insert
+	 * @param {Circle|Polygon|Point} body The body to insert
 	 * @param {Boolean} [updating = false] Set to true if the body already exists in the BVH (used internally when updating the body's position)
 	 */
 	insert(body, updating = false) {
-		// Paths are actually collections of Polygons
-		if(body._path) {
-			const polygons = body._polygons;
-
-			body._bvh = this;
-
-			for(let i = 0; i < polygons.length; ++i) {
-				this.insert(polygons[i], updating);
-			}
-
-			return;
-		}
-
 		if(!updating) {
 			const bvh = body._bvh;
 
@@ -159,23 +146,10 @@ export default class BVH {
 
 	/**
 	 * Removes a body from the BVH
-	 * @param {Circle|Polygon|Path|Point} body The body to remove
+	 * @param {Circle|Polygon|Point} body The body to remove
 	 * @param {Boolean} [updating = false] Set to true if this is a temporary removal (used internally when updating the body's position)
 	 */
 	remove(body, updating = false) {
-		// Paths are actually collections of Polygons
-		if(body._path) {
-			const polygons = body._polygons;
-
-			body._bvh = null;
-
-			for(let i = 0; i < polygons.length; ++i) {
-				this.remove(polygons[i], updating);
-			}
-
-			return;
-		}
-
 		if(!updating) {
 			const bvh = body._bvh;
 
@@ -308,7 +282,7 @@ export default class BVH {
 
 	/**
 	 * Returns a list of potential collisions for a body
-	 * @param {Circle|Polygon|Path|Point} body The body to test
+	 * @param {Circle|Polygon|Point} body The body to test
 	 * @returns {Array<Body>}
 	 */
 	potentials(body) {

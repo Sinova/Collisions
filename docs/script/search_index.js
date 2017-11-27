@@ -18,12 +18,6 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "collisions/src/modules/path.js~path",
-    "class/src/modules/Path.js~Path.html",
-    "<span>Path</span> <span class=\"search-result-import-path\">collisions/src/modules/Path.js</span>",
-    "class"
-  ],
-  [
     "collisions/src/modules/point.js~point",
     "class/src/modules/Point.js~Point.html",
     "<span>Point</span> <span class=\"search-result-import-path\">collisions/src/modules/Point.js</span>",
@@ -348,12 +342,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/collisions.js~collisions#createpath",
-    "class/src/Collisions.js~Collisions.html#instance-method-createPath",
-    "src/Collisions.js~Collisions#createPath",
-    "method"
-  ],
-  [
     "src/collisions.js~collisions#createpoint",
     "class/src/Collisions.js~Collisions.html#instance-method-createPoint",
     "src/Collisions.js~Collisions#createPoint",
@@ -516,48 +504,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/modules/path.js",
-    "file/src/modules/Path.js.html",
-    "src/modules/Path.js",
-    "file"
-  ],
-  [
-    "src/modules/path.js~path#angle",
-    "class/src/modules/Path.js~Path.html#instance-member-angle",
-    "src/modules/Path.js~Path#angle",
-    "member"
-  ],
-  [
-    "src/modules/path.js~path#constructor",
-    "class/src/modules/Path.js~Path.html#instance-constructor-constructor",
-    "src/modules/Path.js~Path#constructor",
-    "method"
-  ],
-  [
-    "src/modules/path.js~path#render",
-    "class/src/modules/Path.js~Path.html#instance-method-render",
-    "src/modules/Path.js~Path#render",
-    "method"
-  ],
-  [
-    "src/modules/path.js~path#scale_x",
-    "class/src/modules/Path.js~Path.html#instance-member-scale_x",
-    "src/modules/Path.js~Path#scale_x",
-    "member"
-  ],
-  [
-    "src/modules/path.js~path#scale_y",
-    "class/src/modules/Path.js~Path.html#instance-member-scale_y",
-    "src/modules/Path.js~Path#scale_y",
-    "member"
-  ],
-  [
-    "src/modules/path.js~path#setpoints",
-    "class/src/modules/Path.js~Path.html#instance-method-setPoints",
-    "src/modules/Path.js~Path#setPoints",
-    "method"
-  ],
-  [
     "src/modules/point.js",
     "file/src/modules/Point.js.html",
     "src/modules/Point.js",
@@ -610,18 +556,6 @@ window.esdocSearchIndex = [
     "class/src/modules/Polygon.js~Polygon.html#instance-method-setPoints",
     "src/modules/Polygon.js~Polygon#setPoints",
     "method"
-  ],
-  [
-    "src/modules/polygon.js~polygon#x",
-    "class/src/modules/Polygon.js~Polygon.html#instance-member-x",
-    "src/modules/Polygon.js~Polygon#x",
-    "member"
-  ],
-  [
-    "src/modules/polygon.js~polygon#y",
-    "class/src/modules/Polygon.js~Polygon.html#instance-member-y",
-    "src/modules/Polygon.js~Polygon#y",
-    "member"
   ],
   [
     "src/modules/result.js",

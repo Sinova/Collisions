@@ -1,5 +1,5 @@
 import Result from './Result.js';
-import SAT from './SAT.js';
+import SAT    from './SAT.js';
 
 /**
  * The base class for bodies used to detect collisions
@@ -39,9 +39,6 @@ export default class Body {
 		this._polygon = false;
 
 		/** @private */
-		this._path = false;
-
-		/** @private */
 		this._point = false;
 
 		/** @private */
@@ -71,7 +68,7 @@ export default class Body {
 
 	/**
 	 * Determines if the body is colliding with another body
-	 * @param {Circle|Polygon|Path|Point} target The target body to test against
+	 * @param {Circle|Polygon|Point} target The target body to test against
 	 * @param {Result} [result = null] A Result object on which to store information about the collision
 	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 * @returns {Boolean}

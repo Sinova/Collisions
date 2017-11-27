@@ -80,15 +80,12 @@ export default class Polygon extends Body {
 		this._normals = null;
 
 		/** @private */
-		this._parent_path = null;
-
-		/** @private */
 		this._dirty_coords = true;
 
 		/** @private */
 		this._dirty_normals = true;
 
-		this.setPoints(points);
+		Polygon.prototype.setPoints.call(this, points);
 	}
 
 	/**
@@ -145,16 +142,6 @@ export default class Polygon extends Body {
 	 * Calculates and caches the polygon's world coordinates based on its points, angle, and scale
 	 */
 	_calculateCoords() {
-		const parent_path = this._parent_path;
-
-		if(parent_path) {
-			this.x       = parent_path.x;
-			this.y       = parent_path.y;
-			this.angle   = parent_path.angle;
-			this.scale_x = parent_path.scale_x;
-			this.scale_y = parent_path.scale_y;
-		}
-
 		const x       = this.x;
 		const y       = this.y;
 		const angle   = this.angle;

@@ -1,4 +1,4 @@
-import Movement from './examples/Movement.js';
+import Tank   from './examples/Tank.js';
 import Stress from './examples/Stress.js';
 
 let example;
@@ -9,7 +9,7 @@ switch(window.location.search) {
 		break;
 
 	default:
-		example = new Movement();
+		example = new Tank();
 		break;
 }
 

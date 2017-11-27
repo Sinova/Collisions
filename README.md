@@ -1,7 +1,7 @@
 Collisions
 ===============================================================================
 
-**Collisions** is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, Paths, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching and the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.
+**Collisions** is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching and the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.
 
 * [Installation](#installation)
 * [Documentation](#documentation)
@@ -14,6 +14,7 @@ Collisions
 	4. [Testing for Collisions](#4--testing-for-collisions)
 	5. [Getting Detailed Collision Information](#5--getting-detailed-collision-information)
 	6. [Negating Overlap](#6--negating-overlap)
+* [Concave Polygons](#concave-polygons)
 * [Bounding Volume Padding](#bounding-volume-padding)
 * [Only using SAT](#only-using-sat)
 * [FAQ](#faq)
@@ -33,7 +34,7 @@ View the [documentation](https://sinova.github.com/Collisions/docs/) (this READM
 Demos
 ===============================================================================
 
-* [Movement](https://sinova.github.com/Collisions/demo)
+* [Tank](https://sinova.github.com/Collisions/demo)
 * [Stress Test](https://sinova.github.com/Collisions/demo?stress)
 
 Usage
@@ -52,9 +53,9 @@ const result = system.createResult();
 const player = system.createCircle(100, 100, 10);
 
 // Create some walls (represented by Polygons)
-const wall1 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);
-const wall2 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);
-const wall3 = system.createPolygon(10, 10, [[-20, -40], [-10, -70], [30, -40], [20, 30], [-30, 20]]);
+const wall1 = this.collisions.createPolygon(400, 500, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 1.7);
+const wall2 = this.collisions.createPolygon(200, 100, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 2.2);
+const wall3 = this.collisions.createPolygon(400, 50, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 0.7);
 
 // Get any potential collisions (this quickly rules out walls that have no chance of colliding with the player)
 const potentials = player.potentials();
@@ -89,25 +90,24 @@ const my_system = new Collisions();
 
 **Collisions** supports the following body types:
 
-* **Circle:** A closed shape with infinite sides equidistant from a single point
-* **Polygon:** A closed shape made up of line segments
-* **Path:** An open shape made up of line segments
-* **Point:** A single position
+* **Circle:** A shape with infinite sides equidistant from a single point
+* **Polygon:** A shape made up of line segments
+* **Point:** A single coordinate
 
 To use them, import the desired body class, call its constructor, and insert it into the collision system using `insert()`.
 
 ```JavaScript
-import {Collisions, Circle, Polygon, Path, Point} from 'collisions';
+import {Collisions, Circle, Polygon, Point} from 'collisions';
 
 const my_system = new Collisions();
 
 const my_circle  = new Circle(100, 100, 10);
 const my_polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const my_path    = new Path(200, 5, [[-30, 0], [-20, -10], [-10, 0]]);
+const my_line    = new Polygon(200, 5, [[-30, 0], [10, 20]]);
 const my_point   = new Point(10, 10);
 
 my_system.insert(my_circle)
-my_system.insert(my_polygon, my_path, my_point);
+my_system.insert(my_polygon, my_line, my_point);
 ```
 
 Collision systems expose several convenience functions for creating bodies and inserting them into the system in one step. This also avoids having to import the different body classes.
@@ -119,7 +119,7 @@ const my_system = new Collisions();
 
 const my_circle  = my_system.createCircle(100, 100, 10);
 const my_polygon = my_system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const my_path    = my_system.createPath(-30, 5, [[-30, 0], [-20, -10], [-10, 0]]);
+const my_line    = my_system.createPolygon(200, 5, [[-30, 0], [10, 20]]);
 const my_point   = my_system.createPoint(10, 10);
 ```
 
@@ -143,6 +143,7 @@ The optimal time for updating a collision system is **after** its bodies have ch
 ```JavaScript
 function gameLoop() {
 	handleInput();
+	processGameLogic();
 
 	my_system.update();
 
@@ -176,7 +177,7 @@ It is also possible to skip the broad-phase search entirely and call `collides()
 > **Note:** Skipping the broad-phase search is not recommended. When testing for collisions against large numbers of bodies, performing a broad-phase search using a BVH is *much* more efficient.
 
 ```JavaScript
-if(my_polygon.collides(my_path)) {
+if(my_polygon.collides(my_line)) {
 	console.log('Collision detected!');
 }
 ```
@@ -202,7 +203,7 @@ const result4 = my_system.createResult();
 const result5 = my_polygon.createResult();
 ```
 
-To use a `Result` object, pass it into `collides()`. If a collision occurs, it will be populated with information about the collision. Take note in the following example that the same `Result` is being reused each iteration.
+To use a `Result` object, pass it into `collides()`. If a collision occurs, it will be populated with information about the collision. Take note in the following example that the same `Result` object is being reused each iteration.
 
 ```JavaScript
 const my_result     = my_system.createResult();
@@ -221,7 +222,7 @@ A common use-case in collision detection is negating overlap when a collision oc
 
 The three most useful properties on a `Result` object are `overlap`, `overlap_x`, and `overlap_y`. Together, these values describe how much and in what direction the source body is overlapping the target body. More specifically, `overlap_x` and `overlap_y` describe the direction vector, and `overlap` describes the magnitude of that vector.
 
-These values can be used to "push" one body out of another using the minimum distance required. Effectively, subtracting this vector from the source body's position will cause the bodies to no longer collide. Here's a simple example:
+These values can be used to "push" one body out of another using the minimum distance required. More simply, subtracting this vector from the source body's position will cause the bodies to no longer collide. Here's an example:
 
 ```JavaScript
 if(player.collides(wall, result)) {
@@ -230,11 +231,19 @@ if(player.collides(wall, result)) {
 }
 ```
 
+Lines
+===============================================================================
+
+Creating lines is as simple as creating a single-sided polygon (i.e. a polygon with only two coordinate pairs).
+
+```JavaScript
+const my_line = new Polygon(200, 5, [[-30, 0], [10, 20]]);
+```
+
 Concave Polygons
 ===============================================================================
 
-**Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be "faked" by using a `Path`, which is a collection of line segments. Keep in mind that a polygon drawn using a `Path` is "hollow" and only detects collisions if bodies are touching its line segments.
-
+**Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be "faked" by using a series of [Lines](#lines). Keep in mind that a polygon drawn using [Lines](#lines) is "hollow".
 
 Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).
 
@@ -242,7 +251,7 @@ Handling true concave polygons requires breaking them down into their component 
 Bounding Volume Padding
 ===============================================================================
 
-When bodies move around within a collision system, the internal BVH needs to be updated. Specifically, the body needs to be removed from the BVH and reinserted. This is one of the most costly operations in maintaining a BVH. In general, most projects won't need to worry about this unless they are dealing with thousands of moving bodies at once. In these cases, it can *sometimes* be beneficial to "pad" the bounding volumes of each body so that they don't need to be removed and reinserted if they haven't changed position too much. In essence, padding the bounding volume allows "breathing room" for the body within it to move around.
+When bodies move around within a collision system, the internal BVH needs to be updated. Specifically, the body needs to be removed from the BVH and reinserted. This is one of the most costly operations in maintaining a BVH. In general, most projects won't need to worry about this unless they are dealing with thousands of moving bodies at once. In these cases, it can *sometimes* be beneficial to "pad" the bounding volumes of each body so that they don't need to be removed and reinserted if they haven't changed position too much. In other words, padding the bounding volume allows "breathing room" for the body within it to move around without needing to be updated.
 
 The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase `potentials()` search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.
 
@@ -279,8 +288,16 @@ FAQ
 
 #### Why shouldn't I just use a physics engine?
 
-Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. [Matter.js](https://github.com/liabru/matter-js), [Planck.js](https://github.com/shakiba/planck.js)). However, many projects use physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that are made by these engines (gravity, velocity, friction, etc.). **Collisions** was created solely to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with **Collisions** at its core.
+Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. [Matter.js](https://github.com/liabru/matter-js), [Planck.js](https://github.com/shakiba/planck.js)). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). **Collisions** was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with **Collisions** at its core.
 
 #### Why does the source code seem to have quite a bit of copy/paste?
 
 **Collisions** was written with performance as its primary focus. Conscious decisions were made to sacrifice readability in order to avoid the overhead of unnecessary function calls or property lookups.
+
+#### Sometimes bodies can "squeeze" between two other bodies. What's going on?
+
+This isn't caused by faulty collisions, but rather how a project handles its collision responses. There are several ways to go about responding to collisions, the most common of which is to loop through all bodies, find their potential collisions, and negate any overlaps that are found one at a time. Since the overlaps are negated one at a time, the last negation takes precedence and can cause the body to be pushed into another body.
+
+One workaround is resolve each collision, update the collision system, and repeat until no collisions are found. Keep in mind that this can potentially lead to infinite loops if the two colliding bodies equally negate each other. Another solution is to collect all overlaps and combine them into a single resultant vector and then push the body out, but this can get rather complicated.
+
+There is no perfect solution. How collisions are handled depends on the project.

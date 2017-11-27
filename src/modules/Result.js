@@ -17,13 +17,13 @@ export default class Result {
 
 		/**
 		 * @desc The source body tested
-		 * @type {Circle|Polygon|Path|Point}
+		 * @type {Circle|Polygon|Point}
 		 */
 		this.a = null;
 
 		/**
 		 * @desc The target body tested against
-		 * @type {Circle|Polygon|Path|Point}
+		 * @type {Circle|Polygon|Point}
 		 */
 		this.b = null;
 

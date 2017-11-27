@@ -18,3 +18,5 @@ export default class Point extends Polygon {
 		this._point = true;
 	}
 }
+
+Point.prototype.setPoints = undefined;

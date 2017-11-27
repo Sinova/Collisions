@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"></head>
+<meta name="description" content="Separating Axis Theorem (SAT) Cirlce, Polygon, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Cirlce, Polygon, and Point Collision Detection"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,7 +32,6 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
@@ -65,23 +64,10 @@ export default class BVH {
 
 	/**
 	 * Inserts a body into the BVH
-	 * @param {Circle|Polygon|Path|Point} body The body to insert
+	 * @param {Circle|Polygon|Point} body The body to insert
 	 * @param {Boolean} [updating = false] Set to true if the body already exists in the BVH (used internally when updating the body&apos;s position)
 	 */
 	insert(body, updating = false) {
-		// Paths are actually collections of Polygons
-		if(body._path) {
-			const polygons = body._polygons;
-
-			body._bvh = this;
-
-			for(let i = 0; i &lt; polygons.length; ++i) {
-				this.insert(polygons[i], updating);
-			}
-
-			return;
-		}
-
 		if(!updating) {
 			const bvh = body._bvh;
 
@@ -202,23 +188,10 @@ export default class BVH {
 
 	/**
 	 * Removes a body from the BVH
-	 * @param {Circle|Polygon|Path|Point} body The body to remove
+	 * @param {Circle|Polygon|Point} body The body to remove
 	 * @param {Boolean} [updating = false] Set to true if this is a temporary removal (used internally when updating the body&apos;s position)
 	 */
 	remove(body, updating = false) {
-		// Paths are actually collections of Polygons
-		if(body._path) {
-			const polygons = body._polygons;
-
-			body._bvh = null;
-
-			for(let i = 0; i &lt; polygons.length; ++i) {
-				this.remove(polygons[i], updating);
-			}
-
-			return;
-		}
-
 		if(!updating) {
 			const bvh = body._bvh;
 
@@ -351,7 +324,7 @@ export default class BVH {
 
 	/**
 	 * Returns a list of potential collisions for a body
-	 * @param {Circle|Polygon|Path|Point} body The body to test
+	 * @param {Circle|Polygon|Point} body The body to test
 	 * @returns {Array&lt;Body&gt;}
 	 */
 	potentials(body) {

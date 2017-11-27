@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Polygon, Circle, Path, and Point Collision Detection"></head>
+<meta name="description" content="Separating Axis Theorem (SAT) Cirlce, Polygon, and Point Collision Detection"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="collisions"><meta property="twitter:description" content="Separating Axis Theorem (SAT) Cirlce, Polygon, and Point Collision Detection"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -32,7 +32,6 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.js~Collisions.html">Collisions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.js~Body.html">Body</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.js~Circle.html">Circle</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Path.js~Path.html">Path</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.js~Point.html">Point</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.js~Polygon.html">Polygon</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.js~Result.html">Result</a></span></span></li>
@@ -123,15 +122,12 @@ export default class Polygon extends Body {
 		this._normals = null;
 
 		/** @private */
-		this._parent_path = null;
-
-		/** @private */
 		this._dirty_coords = true;
 
 		/** @private */
 		this._dirty_normals = true;
 
-		this.setPoints(points);
+		Polygon.prototype.setPoints.call(this, points);
 	}
 
 	/**
@@ -188,16 +184,6 @@ export default class Polygon extends Body {
 	 * Calculates and caches the polygon&apos;s world coordinates based on its points, angle, and scale
 	 */
 	_calculateCoords() {
-		const parent_path = this._parent_path;
-
-		if(parent_path) {
-			this.x       = parent_path.x;
-			this.y       = parent_path.y;
-			this.angle   = parent_path.angle;
-			this.scale_x = parent_path.scale_x;
-			this.scale_y = parent_path.scale_y;
-		}
-
 		const x       = this.x;
 		const y       = this.y;
 		const angle   = this.angle;

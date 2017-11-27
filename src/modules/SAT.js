@@ -1,8 +1,8 @@
 /**
- * Determines if two convex bodies are colliding using the Separating Axis Theorem
+ * Determines if two bodies are colliding using the Separating Axis Theorem
  * @private
- * @param {Circle|Polygon|Path|Point} a The source body to test
- * @param {Circle|Polygon|Path|Point} b The target body to test against
+ * @param {Circle|Polygon|Point} a The source body to test
+ * @param {Circle|Polygon|Point} b The target body to test against
  * @param {Result} [result = null] A Result object on which to store information about the collision
  * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own collision heuristic)
  * @returns {Boolean}
@@ -10,6 +10,14 @@
 export default function SAT(a, b, result = null, aabb = true) {
 	const a_polygon = a._polygon;
 	const b_polygon = b._polygon;
+
+	if(result) {
+		result.a_in_b    = true;
+		result.b_in_a    = true;
+		result.overlap   = null;
+		result.overlap_x = 0;
+		result.overlap_y = 0;
+	}
 
 	if(a_polygon) {
 		a._calculateCoords();
@@ -31,18 +39,26 @@ export default function SAT(a, b, result = null, aabb = true) {
 		b._calculateNormals();
 	}
 
-	return (
+	const collision = (
 		a_polygon && b_polygon ? polygonPolygon(a, b, result) :
 		a_polygon ? polygonCircle(a, b, result, false) :
 		b_polygon ? polygonCircle(b, a, result, true) :
 		circleCircle(a, b, result)
 	);
+
+	if(result) {
+		result.collision = collision;
+		result.a         = a;
+		result.b         = b;
+	}
+
+	return collision;
 }
 
 /**
  * Determines if two bodies' axis aligned bounding boxes are colliding
- * @param {Circle|Polygon|Path|Point} a The source body to test
- * @param {Circle|Polygon|Path|Point} b The target body to test against
+ * @param {Circle|Polygon|Point} a The source body to test
+ * @param {Circle|Polygon|Point} b The target body to test against
  */
 function aabbAABB(a, b) {
 	const a_polygon = a._polygon;
@@ -76,16 +92,6 @@ function aabbAABB(a, b) {
 function polygonPolygon(a, b, result = null) {
 	const a_count = a._coords.length;
 	const b_count = b._coords.length;
-
-	if(result) {
-		result.a         = a;
-		result.b         = b;
-		result.a_in_b    = true;
-		result.b_in_a    = true;
-		result.overlap   = Number.MAX_VALUE;
-		result.overlap_x = 0;
-		result.overlap_y = 0;
-	}
 
 	// Handle points specially
 	if(a_count === 2 && b_count === 2) {
@@ -145,7 +151,7 @@ function polygonCircle(a, b, result = null, reverse = false) {
 
 	let a_in_b    = true;
 	let b_in_a    = true;
-	let overlap   = Number.MAX_VALUE;
+	let overlap   = null;
 	let overlap_x = 0;
 	let overlap_y = 0;
 
@@ -239,7 +245,7 @@ function polygonCircle(a, b, result = null, reverse = false) {
 				}
 			}
 
-			if(tmp_overlapping && tmp_overlap < overlap) {
+			if(tmp_overlapping && (overlap === null || overlap > tmp_overlap)) {
 				overlap   = tmp_overlap;
 				overlap_x = tmp_overlap_x;
 				overlap_y = tmp_overlap_y;
@@ -248,8 +254,6 @@ function polygonCircle(a, b, result = null, reverse = false) {
 	}
 
 	if(result) {
-		result.a         = reverse ? b : a;
-		result.b         = reverse ? a : b;
 		result.a_in_b    = reverse ? b_in_a : a_in_b;
 		result.b_in_a    = reverse ? a_in_b : b_in_a;
 		result.overlap   = overlap;
@@ -282,8 +286,6 @@ function circleCircle(a, b, result = null) {
 	if(result) {
 		const length = Math.sqrt(length_squared);
 
-		result.a         = a;
-		result.b         = b;
 		result.a_in_b    = a_radius <= b_radius && length <= b_radius - a_radius;
 		result.b_in_a    = b_radius <= a_radius && length <= a_radius - b_radius;
 		result.overlap   = radius_sum - length;
@@ -307,19 +309,23 @@ function separatingAxis(a_coords, b_coords, x, y, result = null) {
 	const a_count = a_coords.length;
 	const b_count = b_coords.length;
 
-	let a_start = Number.MAX_VALUE;
-	let a_end   = -Number.MAX_VALUE;
-	let b_start = Number.MAX_VALUE;
-	let b_end   = -Number.MAX_VALUE;
+	if(!a_count || !b_count) {
+		return true;
+	}
+
+	let a_start = null;
+	let a_end   = null;
+	let b_start = null;
+	let b_end   = null;
 
 	for(let ix = 0, iy = 1; ix < a_count; ix += 2, iy += 2) {
 		const dot = a_coords[ix] * x + a_coords[iy] * y;
 
-		if(dot < a_start) {
+		if(a_start === null || a_start > dot) {
 			a_start = dot;
 		}
 
-		if(dot > a_end) {
+		if(a_end === null || a_end < dot) {
 			a_end = dot;
 		}
 	}
@@ -327,11 +333,11 @@ function separatingAxis(a_coords, b_coords, x, y, result = null) {
 	for(let ix = 0, iy = 1; ix < b_count; ix += 2, iy += 2) {
 		const dot = b_coords[ix] * x + b_coords[iy] * y;
 
-		if(dot < b_start) {
+		if(b_start === null || b_start > dot) {
 			b_start = dot;
 		}
 
-		if(dot > b_end) {
+		if(b_end === null || b_end < dot) {
 			b_end = dot;
 		}
 	}
@@ -372,9 +378,10 @@ function separatingAxis(a_coords, b_coords, x, y, result = null) {
 			}
 		}
 
+		const current_overlap  = result.overlap;
 		const absolute_overlap = overlap < 0 ? -overlap : overlap;
 
-		if(absolute_overlap < result.overlap) {
+		if(current_overlap === null || current_overlap > absolute_overlap) {
 			const sign = overlap < 0 ? -1 : 1;
 
 			result.overlap   = absolute_overlap;
