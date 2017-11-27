@@ -63,6 +63,9 @@ const wall1 = this.collisions.createPolygon(400, 500, [[-60, -20], [60, -20], [6
 const wall2 = this.collisions.createPolygon(200, 100, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 2.2);
 const wall3 = this.collisions.createPolygon(400, 50, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 0.7);
 
+// Update the collision system
+system.update();
+
 // Get any potential collisions (this quickly rules out walls that have no chance of colliding with the player)
 const potentials = player.potentials();
 
