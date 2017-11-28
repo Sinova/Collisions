@@ -15,6 +15,7 @@ Collisions
 	5. [Getting Detailed Collision Information](#anchor-step-5)
 	6. [Negating Overlap](#anchor-step-6)
 * [Concave Polygons](#anchor-concave-polygons)
+* [Rendering](#anchor-rendering)
 * [Bounding Volume Padding](#anchor-bounding-volume-padding)
 * [Only using SAT](#anchor-only-using-sat)
 * [FAQ](#anchor-faq)
@@ -145,7 +146,7 @@ my_circle.remove();
 <a name="anchor-step-3"></a>
 ## 3. Updating the Collision System
 
-Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling `update()` and should typically should occur once per frame.
+Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling `update()` and should typically occur once per frame.
 
 ```JavaScript
 my_system.update();
@@ -265,6 +266,26 @@ Concave Polygons
 
 Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.mjs](https://github.com/schteppe/poly-decomp.mjs).
 
+<a name="anchor-rendering"></a>
+Rendering
+===============================================================================
+
+For debugging, it is often useful to be able to visualize the collision bodies. Collision systems can be rendered to a `<canvas>` element by calling `render()` and passing in the canvas' 2D context.
+
+```JavaScript
+const my_canvas  = document.createElement('canvas');
+const my_context = canvas.getContext('2d');
+
+// ...
+
+my_system.render(my_context);
+```
+
+Individual bodies can also be rendered.
+
+```JavaScript
+my_polygon.render(my_context);
+```
 
 <a name="anchor-bounding-volume-padding"></a>
 Bounding Volume Padding

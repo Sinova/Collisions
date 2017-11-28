@@ -55,6 +55,7 @@
 </ol>
 </li>
 <li><a href="#anchor-concave-polygons">Concave Polygons</a></li>
+<li><a href="#anchor-rendering">Rendering</a></li>
 <li><a href="#anchor-bounding-volume-padding">Bounding Volume Padding</a></li>
 <li><a href="#anchor-only-using-sat">Only using SAT</a></li>
 <li><a href="#anchor-faq">FAQ</a></li>
@@ -148,7 +149,7 @@ const my_point   = my_system.createPoint(10, 10);</code>
 my_circle.remove();</code>
 </code></pre>
 <p><a name="anchor-step-3"></a></p>
-<h2 id="3--updating-the-collision-system">3. Updating the Collision System</h2><p>Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling <code>update()</code> and should typically should occur once per frame.</p>
+<h2 id="3--updating-the-collision-system">3. Updating the Collision System</h2><p>Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling <code>update()</code> and should typically occur once per frame.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_system.update();</code>
 </code></pre>
 <p>The optimal time for updating a collision system is <strong>after</strong> its bodies have changed and <strong>before</strong> collisions are tested. For example, a game loop might use the following order of events:</p>
@@ -226,6 +227,18 @@ for(const body of my_potentials) {
 <p><a name="anchor-concave-polygons"></a></p>
 <h1 id="concave-polygons">Concave Polygons</h1><p><strong>Collisions</strong> uses the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be &quot;faked&quot; by using a series of <a href="#anchor-lines">Lines</a>. Keep in mind that a polygon drawn using <a href="#anchor-lines">Lines</a> is &quot;hollow&quot;.</p>
 <p>Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out <a href="https://github.com/schteppe/poly-decomp.mjs">poly-decomp.mjs</a>.</p>
+<p><a name="anchor-rendering"></a></p>
+<h1 id="rendering">Rendering</h1><p>For debugging, it is often useful to be able to visualize the collision bodies. Collision systems can be rendered to a <code>&lt;canvas&gt;</code> element by calling <code>render()</code> and passing in the canvas&apos; 2D context.</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_canvas  = document.createElement(&apos;canvas&apos;);
+const my_context = canvas.getContext(&apos;2d&apos;);
+
+// ...
+
+my_system.render(my_context);</code>
+</code></pre>
+<p>Individual bodies can also be rendered.</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_polygon.render(my_context);</code>
+</code></pre>
 <p><a name="anchor-bounding-volume-padding"></a></p>
 <h1 id="bounding-volume-padding">Bounding Volume Padding</h1><p>When bodies move around within a collision system, the internal BVH needs to be updated. Specifically, the body needs to be removed from the BVH and reinserted. This is one of the most costly operations in maintaining a BVH. In general, most projects won&apos;t need to worry about this unless they are dealing with thousands of moving bodies at once. In these cases, it can <em>sometimes</em> be beneficial to &quot;pad&quot; the bounding volumes of each body so that they don&apos;t need to be removed and reinserted if they haven&apos;t changed position too much. In other words, padding the bounding volume allows &quot;breathing room&quot; for the body within it to move around without needing to be updated.</p>
 <p>The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase <code>potentials()</code> search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.</p>
