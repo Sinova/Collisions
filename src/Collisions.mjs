@@ -120,16 +120,16 @@ class Collisions {
 	 * Draws the bodies within the system to a CanvasRenderingContext2D's current path
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
-	renderBodies(context) {
-		return this._bvh.renderBodies(context);
+	draw(context) {
+		return this._bvh.draw(context);
 	}
 
 	/**
 	 * Draws the system's BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
-	renderBVH(context) {
-		return this._bvh.render(context);
+	drawBVH(context) {
+		return this._bvh.draw(context);
 	}
 
 	/**

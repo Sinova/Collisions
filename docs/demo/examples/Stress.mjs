@@ -104,14 +104,14 @@ export default class Stress {
 		// Render the bodies
 		this.context.strokeStyle = '#FFFFFF';
 		this.context.beginPath();
-		this.collisions.renderBodies(this.context);
+		this.collisions.draw(this.context);
 		this.context.stroke();
 
 		// Render the BVH
 		if(this.bvh_checkbox.checked) {
 			this.context.strokeStyle = '#00FF00';
 			this.context.beginPath();
-			this.collisions.renderBVH(this.context);
+			this.collisions.drawBVH(this.context);
 			this.context.stroke();
 		}
 

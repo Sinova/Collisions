@@ -92,7 +92,7 @@ export default class Polygon extends Body {
 	 * Draws the polygon to a CanvasRenderingContext2D's current path
 	 * @param {CanvasRenderingContext2D} context The context to add the shape to
 	 */
-	render(context) {
+	draw(context) {
 		this._calculateCoords();
 
 		const coords = this._coords;

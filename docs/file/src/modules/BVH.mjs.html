@@ -397,10 +397,23 @@ export default class BVH {
 	}
 
 	/**
+	 * Draws the bodies within the BVH to a CanvasRenderingContext2D&apos;s current path
+	 * @param {CanvasRenderingContext2D} context The context to draw to
+	 */
+	draw(context) {
+		const bodies = this._bodies;
+		const count  = bodies.length;
+
+		for(let i = 0; i &lt; count; ++i) {
+			bodies[i].draw(context);
+		}
+	}
+
+	/**
 	 * Draws the BVH to a CanvasRenderingContext2D&apos;s current path. This is useful for testing out different padding values for bodies.
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
-	render(context) {
+	drawBVH(context) {
 		let current       = this._hierarchy;
 		let traverse_left = true;
 
@@ -448,19 +461,6 @@ export default class BVH {
 					break;
 				}
 			}
-		}
-	}
-
-	/**
-	 * Draws the bodies within the BVH to a CanvasRenderingContext2D&apos;s current path
-	 * @param {CanvasRenderingContext2D} context The context to draw to
-	 */
-	renderBodies(context) {
-		const bodies = this._bodies;
-		const count  = bodies.length;
-
-		for(let i = 0; i &lt; count; ++i) {
-			bodies[i].render(context);
 		}
 	}
 }

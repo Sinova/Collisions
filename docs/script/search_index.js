@@ -360,6 +360,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/collisions.mjs~collisions#draw",
+    "class/src/Collisions.mjs~Collisions.html#instance-method-draw",
+    "src/Collisions.mjs~Collisions#draw",
+    "method"
+  ],
+  [
+    "src/collisions.mjs~collisions#drawbvh",
+    "class/src/Collisions.mjs~Collisions.html#instance-method-drawBVH",
+    "src/Collisions.mjs~Collisions#drawBVH",
+    "method"
+  ],
+  [
     "src/collisions.mjs~collisions#insert",
     "class/src/Collisions.mjs~Collisions.html#instance-method-insert",
     "src/Collisions.mjs~Collisions#insert",
@@ -375,18 +387,6 @@ window.esdocSearchIndex = [
     "src/collisions.mjs~collisions#remove",
     "class/src/Collisions.mjs~Collisions.html#instance-method-remove",
     "src/Collisions.mjs~Collisions#remove",
-    "method"
-  ],
-  [
-    "src/collisions.mjs~collisions#renderbvh",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-renderBVH",
-    "src/Collisions.mjs~Collisions#renderBVH",
-    "method"
-  ],
-  [
-    "src/collisions.mjs~collisions#renderbodies",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-renderBodies",
-    "src/Collisions.mjs~Collisions#renderBodies",
     "method"
   ],
   [
@@ -486,16 +486,16 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/modules/circle.mjs~circle#draw",
+    "class/src/modules/Circle.mjs~Circle.html#instance-method-draw",
+    "src/modules/Circle.mjs~Circle#draw",
+    "method"
+  ],
+  [
     "src/modules/circle.mjs~circle#radius",
     "class/src/modules/Circle.mjs~Circle.html#instance-member-radius",
     "src/modules/Circle.mjs~Circle#radius",
     "member"
-  ],
-  [
-    "src/modules/circle.mjs~circle#render",
-    "class/src/modules/Circle.mjs~Circle.html#instance-method-render",
-    "src/modules/Circle.mjs~Circle#render",
-    "method"
   ],
   [
     "src/modules/circle.mjs~circle#scale",
@@ -534,9 +534,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/modules/polygon.mjs~polygon#render",
-    "class/src/modules/Polygon.mjs~Polygon.html#instance-method-render",
-    "src/modules/Polygon.mjs~Polygon#render",
+    "src/modules/polygon.mjs~polygon#draw",
+    "class/src/modules/Polygon.mjs~Polygon.html#instance-method-draw",
+    "src/modules/Polygon.mjs~Polygon#draw",
     "method"
   ],
   [

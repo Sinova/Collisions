@@ -270,21 +270,42 @@ Handling true concave polygons requires breaking them down into their component 
 Rendering
 ===============================================================================
 
-For debugging, it is often useful to be able to visualize the collision bodies. Collision systems can be rendered to a `<canvas>` element by calling `render()` and passing in the canvas' 2D context.
+For debugging, it is often useful to be able to visualize the collision bodies. All of the bodies in a Collision system can be drawn to a `<canvas>` element by calling `draw()` and passing in the canvas' 2D context.
 
 ```JavaScript
 const my_canvas  = document.createElement('canvas');
 const my_context = canvas.getContext('2d');
 
 // ...
+my_context.strokeStyle = '#FFFFFF';
+my_context.beginPath();
 
-my_system.render(my_context);
+my_system.draw(my_context);
+
+my_context.stroke();
 ```
 
-Individual bodies can also be rendered.
+Bodies can be individually drawn as well.
 
 ```JavaScript
-my_polygon.render(my_context);
+my_context.strokeStyle = '#FFFFFF';
+my_context.beginPath();
+
+my_polygon.draw(my_context);
+my_circle.draw(my_context);
+
+my_context.stroke();
+```
+
+The BVH can also be drawn to help test [Bounding Volume Padding](#anchor-bounding-volume-padding).
+
+```JavaScript
+my_context.strokeStyle = '#FFFFFF';
+my_context.beginPath();
+
+my_system.drawBVH(my_context);
+
+my_context.stroke();
 ```
 
 <a name="anchor-bounding-volume-padding"></a>
