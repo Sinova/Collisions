@@ -11,6 +11,8 @@ export default function SAT(a, b, result = null, aabb = true) {
 	const a_polygon = a._polygon;
 	const b_polygon = b._polygon;
 
+	let collision = false;
+
 	if(result) {
 		result.a_in_b    = true;
 		result.b_in_a    = true;
@@ -27,24 +29,22 @@ export default function SAT(a, b, result = null, aabb = true) {
 		b._calculateCoords();
 	}
 
-	if(aabb && !aabbAABB(a, b)) {
-		return false;
-	}
+	if(!aabb || aabbAABB(a, b)) {
+		if(a_polygon) {
+			a._calculateNormals();
+		}
 
-	if(a_polygon) {
-		a._calculateNormals();
-	}
+		if(b_polygon) {
+			b._calculateNormals();
+		}
 
-	if(b_polygon) {
-		b._calculateNormals();
+		collision = (
+			a_polygon && b_polygon ? polygonPolygon(a, b, result) :
+			a_polygon ? polygonCircle(a, b, result, false) :
+			b_polygon ? polygonCircle(b, a, result, true) :
+			circleCircle(a, b, result)
+		);
 	}
-
-	const collision = (
-		a_polygon && b_polygon ? polygonPolygon(a, b, result) :
-		a_polygon ? polygonCircle(a, b, result, false) :
-		b_polygon ? polygonCircle(b, a, result, true) :
-		circleCircle(a, b, result)
-	);
 
 	if(result) {
 		result.collision = collision;
