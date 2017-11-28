@@ -14,6 +14,8 @@ export default function SAT(a, b, result = null, aabb = true) {
 	let collision = false;
 
 	if(result) {
+		result.a         = a;
+		result.b         = b;
 		result.a_in_b    = true;
 		result.b_in_a    = true;
 		result.overlap   = null;
@@ -48,8 +50,6 @@ export default function SAT(a, b, result = null, aabb = true) {
 
 	if(result) {
 		result.collision = collision;
-		result.a         = a;
-		result.b         = b;
 	}
 
 	return collision;

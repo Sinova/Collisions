@@ -264,7 +264,7 @@ Concave Polygons
 
 **Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be "faked" by using a series of [Lines](#anchor-lines). Keep in mind that a polygon drawn using [Lines](#anchor-lines) is "hollow".
 
-Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.mjs](https://github.com/schteppe/poly-decomp.mjs).
+Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).
 
 <a name="anchor-rendering"></a>
 Rendering
@@ -312,7 +312,7 @@ my_context.stroke();
 Bounding Volume Padding
 ===============================================================================
 
-When bodies move around within a collision system, the internal BVH needs to be updated. Specifically, the body needs to be removed from the BVH and reinserted. This is one of the most costly operations in maintaining a BVH. In general, most projects won't need to worry about this unless they are dealing with thousands of moving bodies at once. In these cases, it can *sometimes* be beneficial to "pad" the bounding volumes of each body so that they don't need to be removed and reinserted if they haven't changed position too much. In other words, padding the bounding volume allows "breathing room" for the body within it to move around without needing to be updated.
+When bodies move around within a collision system, the internal BVH has to remove and reinsert the body in order to determine where it belongs in the hierarchy. This is one of the most costly operations in maintaining a BVH. In general, most projects will never see a performance issue from this unless they are dealing with thousands of moving bodies at once. In these cases, it can *sometimes* be beneficial to "pad" the bounding volumes of each body so that the BVH doesn't need to remove and reinsert bodies that haven't changed position too much. In other words, padding the bounding volume allows "breathing room" for the body within it to move around without being flagged for an update.
 
 The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase `potentials()` search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.
 
@@ -351,7 +351,7 @@ FAQ
 
 ## Why shouldn't I just use a physics engine?
 
-Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. [Matter.mjs](https://github.com/liabru/matter-js), [Planck.mjs](https://github.com/shakiba/planck.mjs)). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). **Collisions** was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with **Collisions** at its core.
+Projects requiring physics are encouraged to use one of the several physics engines out there (e.g. [Matter.js](https://github.com/liabru/matter-js), [Planck.js](https://github.com/shakiba/planck.js)). However, many projects end up using physics engines solely for collision detection, and developers often find themselves having to work around some of the assumptions that these engines make (gravity, velocity, friction, etc.). **Collisions** was created to provide robust collision detection and nothing more. In fact, a physics engine could easily be written with **Collisions** at its core.
 
 ## Why does the source code seem to have quite a bit of copy/paste?
 
