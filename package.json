@@ -1,6 +1,6 @@
 {
 	"name": "collisions",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"description": "Collision detection for circles, polygons, and points",
 	"main": "src/Collisions.mjs",
 	"scripts": {},
