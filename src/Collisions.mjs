@@ -129,7 +129,7 @@ class Collisions {
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
 	drawBVH(context) {
-		return this._bvh.draw(context);
+		return this._bvh.drawBVH(context);
 	}
 
 	/**

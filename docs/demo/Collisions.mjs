@@ -1,3 +1,3 @@
-import Collisions from 'https://cdn.rawgit.com/Sinova/Collisions/057c834b/src/Collisions.mjs';
+import Collisions from 'https://cdn.rawgit.com/Sinova/Collisions/edfbf1f7/src/Collisions.mjs';
 
 export default Collisions;
