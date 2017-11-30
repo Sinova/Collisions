@@ -28,7 +28,12 @@ Installation
 npm install collisions
 ```
 
-> **Note:** This library uses the ECMAScript Module syntax. At the time of writing, Node v9.2.0 requires the `--experimental-modules` flag be turned on in order for modules to work properly (see the [Node documentation](https://nodejs.org/api/esm.html)). This is only necessary if a project needs to run in Node. All modern browsers support modules.
+> **Note:** This library uses the native ECMAScript Module syntax. Most environments support native modules, but the following exceptions apply:
+>
+> * Node.js (9.2.0) requires the [--experimental-modules](https://nodejs.org/api/esm.html) flag
+> * Firefox (54) requires the [dom.moduleScripts.enabled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Browser_compatibility) setting
+>
+> Bundling solutions such as [Webpack](https://webpack.js.org/) or [Rollup.js](https://rollupjs.org/) make native modules compatible with all environments.
 
 <a name="anchor-documentation"></a>
 Documentation
@@ -95,7 +100,7 @@ Call the Collisions constructor to create a collision system.
 ```JavaScript
 import Collisions from 'collisions';
 
-const my_system = new Collisions();
+const system = new Collisions();
 ```
 
 <a name="anchor-step-2"></a>
@@ -112,15 +117,15 @@ To use them, import the desired body class, call its constructor, and insert it 
 ```JavaScript
 import {Collisions, Circle, Polygon, Point} from 'collisions';
 
-const my_system = new Collisions();
+const system = new Collisions();
 
-const my_circle  = new Circle(100, 100, 10);
-const my_polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const my_line    = new Polygon(200, 5, [[-30, 0], [10, 20]]);
-const my_point   = new Point(10, 10);
+const circle  = new Circle(100, 100, 10);
+const polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const line    = new Polygon(200, 5, [[-30, 0], [10, 20]]);
+const point   = new Point(10, 10);
 
-my_system.insert(my_circle)
-my_system.insert(my_polygon, my_line, my_point);
+system.insert(circle)
+system.insert(polygon, line, point);
 ```
 
 Collision systems expose several convenience functions for creating bodies and inserting them into the system in one step. This also avoids having to import the different body classes.
@@ -128,19 +133,19 @@ Collision systems expose several convenience functions for creating bodies and i
 ```JavaScript
 import Collisions from 'collisions';
 
-const my_system = new Collisions();
+const system = new Collisions();
 
-const my_circle  = my_system.createCircle(100, 100, 10);
-const my_polygon = my_system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const my_line    = my_system.createPolygon(200, 5, [[-30, 0], [10, 20]]);
-const my_point   = my_system.createPoint(10, 10);
+const circle  = system.createCircle(100, 100, 10);
+const polygon = system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const line    = system.createPolygon(200, 5, [[-30, 0], [10, 20]]);
+const point   = system.createPoint(10, 10);
 ```
 
 And, of course, bodies can be removed when they are no longer needed.
 
 ```JavaScript
-my_system.remove(my_polygon, my_point);
-my_circle.remove();
+system.remove(polygon, point);
+circle.remove();
 ```
 
 <a name="anchor-step-3"></a>
@@ -149,7 +154,7 @@ my_circle.remove();
 Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling `update()` and should typically occur once per frame.
 
 ```JavaScript
-my_system.update();
+system.update();
 ```
 
 The optimal time for updating a collision system is **after** its bodies have changed and **before** collisions are tested. For example, a game loop might use the following order of events:
@@ -159,7 +164,7 @@ function gameLoop() {
 	handleInput();
 	processGameLogic();
 
-	my_system.update();
+	system.update();
 
 	handleCollisions();
 	render();
@@ -172,16 +177,16 @@ function gameLoop() {
 When testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling `potentials()` in order to quickly rule out bodies that are too far away to collide. **Collisions** uses a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for its broad-phase search. Calling `potentials()` on a body traverses the BVH and builds a list of potential collision candidates.
 
 ```JavaScript
-const my_potentials = my_polygon.potentials();
+const potentials = polygon.potentials();
 ```
 
 Once a list of potential collisions is acquired, loop through them and perform a narrow-phase collision test using `collides()`. **Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests.
 
 ```JavaScript
-const my_potentials = my_polygon.potentials();
+const potentials = polygon.potentials();
 
 for(const body of potentials) {
-	if(my_polygon.collides(body)) {
+	if(polygon.collides(body)) {
 		console.log('Collision detected!');
 	}
 }
@@ -192,7 +197,7 @@ It is also possible to skip the broad-phase search entirely and call `collides()
 > **Note:** Skipping the broad-phase search is not recommended. When testing for collisions against large numbers of bodies, performing a broad-phase search using a BVH is *much* more efficient.
 
 ```JavaScript
-if(my_polygon.collides(my_line)) {
+if(polygon.collides(line)) {
 	console.log('Collision detected!');
 }
 ```
@@ -209,25 +214,25 @@ For convenience, there are several ways to create a `Result` object. `Result` ob
 ```JavaScript
 import {Collisions, Result, Polygon} from 'collisions';
 
-const my_system  = new Collisions();
+const system     = new Collisions();
 const my_polygon = new Polygon(100, 100, 10);
 
 const result1 = new Result();
 const result2 = Collisions.createResult();
-const result3 = Polygon.createResult();
-const result4 = my_system.createResult();
+const result3 = system.createResult();
+const result4 = Polygon.createResult();
 const result5 = my_polygon.createResult();
 ```
 
 To use a `Result` object, pass it into `collides()`. If a collision occurs, it will be populated with information about the collision. Take note in the following example that the same `Result` object is being reused each iteration.
 
 ```JavaScript
-const my_result     = my_system.createResult();
-const my_potentials = my_point.potentials();
+const result     = system.createResult();
+const potentials = point.potentials();
 
-for(const body of my_potentials) {
-	if(my_point.collides(body, my_result)) {
-		console.log(my_result);
+for(const body of potentials) {
+	if(point.collides(body, result)) {
+		console.log(result);
 	}
 }
 ```
@@ -255,7 +260,7 @@ Lines
 Creating lines is as simple as creating a single-sided polygon (i.e. a polygon with only two coordinate pairs).
 
 ```JavaScript
-const my_line = new Polygon(200, 5, [[-30, 0], [10, 20]]);
+const line = new Polygon(200, 5, [[-30, 0], [10, 20]]);
 ```
 
 <a name="anchor-concave-polygons"></a>
@@ -273,39 +278,39 @@ Rendering
 For debugging, it is often useful to be able to visualize the collision bodies. All of the bodies in a Collision system can be drawn to a `<canvas>` element by calling `draw()` and passing in the canvas' 2D context.
 
 ```JavaScript
-const my_canvas  = document.createElement('canvas');
-const my_context = canvas.getContext('2d');
+const canvas  = document.createElement('canvas');
+const context = canvas.getContext('2d');
 
 // ...
-my_context.strokeStyle = '#FFFFFF';
-my_context.beginPath();
+context.strokeStyle = '#FFFFFF';
+context.beginPath();
 
-my_system.draw(my_context);
+system.draw(context);
 
-my_context.stroke();
+context.stroke();
 ```
 
 Bodies can be individually drawn as well.
 
 ```JavaScript
-my_context.strokeStyle = '#FFFFFF';
-my_context.beginPath();
+context.strokeStyle = '#FFFFFF';
+context.beginPath();
 
-my_polygon.draw(my_context);
-my_circle.draw(my_context);
+polygon.draw(context);
+circle.draw(context);
 
-my_context.stroke();
+context.stroke();
 ```
 
 The BVH can also be drawn to help test [Bounding Volume Padding](#anchor-bounding-volume-padding).
 
 ```JavaScript
-my_context.strokeStyle = '#FFFFFF';
-my_context.beginPath();
+context.strokeStyle = '#FFFFFF';
+context.beginPath();
 
-my_system.drawBVH(my_context);
+system.drawBVH(context);
 
-my_context.stroke();
+context.stroke();
 ```
 
 <a name="anchor-bounding-volume-padding"></a>
@@ -319,12 +324,12 @@ The tradeoff is that the slightly larger bounding volumes can trigger more false
 Padding can be added to a body when instantiating it (see the [documentation](https://sinova.github.com/Collisions/) for each body) or at any time by changing its `padding` property.
 
 ```JavaScript
-const my_padding = 5;
-const my_circle  = new Circle(100, 100, 10, 1, my_padding);
+const padding = 5;
+const circle  = new Circle(100, 100, 10, 1, padding);
 
 // ...
 
-my_circle.padding = 10;
+circle.padding = 10;
 ```
 
 <a name="anchor-only-using-sat"></a>
@@ -336,12 +341,12 @@ Some projects may only have a need to perform SAT collision tests without broad-
 ```JavaScript
 import {Circle, Polygon, Result} from 'collisions';
 
-const my_circle  = new Circle(45, 45, 20);
-const my_polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const my_result  = new Result();
+const circle  = new Circle(45, 45, 20);
+const polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const result  = new Result();
 
-if(my_circle.collides(my_polygon, my_result)) {
-	console.log(my_result);
+if(circle.collides(polygon, result)) {
+	console.log(result);
 }
 ```
 

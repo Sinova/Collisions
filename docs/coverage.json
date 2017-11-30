@@ -8,11 +8,6 @@
       "actualCount": 15,
       "undocumentLines": []
     },
-    "src/modules/Body.mjs": {
-      "expectCount": 21,
-      "actualCount": 21,
-      "undocumentLines": []
-    },
     "src/modules/BVH.mjs": {
       "expectCount": 11,
       "actualCount": 11,
@@ -21,6 +16,11 @@
     "src/modules/BVHBranch.mjs": {
       "expectCount": 16,
       "actualCount": 16,
+      "undocumentLines": []
+    },
+    "src/modules/Body.mjs": {
+      "expectCount": 21,
+      "actualCount": 21,
       "undocumentLines": []
     },
     "src/modules/Circle.mjs": {

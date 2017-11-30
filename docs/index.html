@@ -64,7 +64,12 @@
 <h1 id="installation">Installation</h1><pre><code class="lang-bash"><code class="source-code prettyprint">npm install collisions</code>
 </code></pre>
 <blockquote>
-<p><strong>Note:</strong> This library uses the ECMAScript Module syntax. At the time of writing, Node v9.2.0 requires the <code>--experimental-modules</code> flag be turned on in order for modules to work properly (see the <a href="https://nodejs.org/api/esm.html">Node documentation</a>). This is only necessary if a project needs to run in Node. All modern browsers support modules.</p>
+<p><strong>Note:</strong> This library uses the native ECMAScript Module syntax. Most environments support native modules, but the following exceptions apply:</p>
+<ul>
+<li>Node.js (9.2.0) requires the <a href="https://nodejs.org/api/esm.html">--experimental-modules</a> flag</li>
+<li>Firefox (54) requires the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Browser_compatibility">dom.moduleScripts.enabled</a> setting</li>
+</ul>
+<p>Bundling solutions such as <a href="https://webpack.js.org/">Webpack</a> or <a href="https://rollupjs.org/">Rollup.js</a> make native modules compatible with all environments.</p>
 </blockquote>
 <p><a name="anchor-documentation"></a></p>
 <h1 id="documentation">Documentation</h1><p>View the <a href="https://sinova.github.com/Collisions/">documentation</a> (this README is also there).</p>
@@ -112,7 +117,7 @@ for(const wall of potentials) {
 <p>Call the Collisions constructor to create a collision system.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">import Collisions from &apos;collisions&apos;;
 
-const my_system = new Collisions();</code>
+const system = new Collisions();</code>
 </code></pre>
 <p><a name="anchor-step-2"></a></p>
 <h2 id="2--creating--inserting--and-removing-bodies">2. Creating, Inserting, and Removing Bodies</h2><p><strong>Collisions</strong> supports the following body types:</p>
@@ -124,40 +129,40 @@ const my_system = new Collisions();</code>
 <p>To use them, import the desired body class, call its constructor, and insert it into the collision system using <code>insert()</code>.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">import {Collisions, Circle, Polygon, Point} from &apos;collisions&apos;;
 
-const my_system = new Collisions();
+const system = new Collisions();
 
-const my_circle  = new Circle(100, 100, 10);
-const my_polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const my_line    = new Polygon(200, 5, [[-30, 0], [10, 20]]);
-const my_point   = new Point(10, 10);
+const circle  = new Circle(100, 100, 10);
+const polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const line    = new Polygon(200, 5, [[-30, 0], [10, 20]]);
+const point   = new Point(10, 10);
 
-my_system.insert(my_circle)
-my_system.insert(my_polygon, my_line, my_point);</code>
+system.insert(circle)
+system.insert(polygon, line, point);</code>
 </code></pre>
 <p>Collision systems expose several convenience functions for creating bodies and inserting them into the system in one step. This also avoids having to import the different body classes.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">import Collisions from &apos;collisions&apos;;
 
-const my_system = new Collisions();
+const system = new Collisions();
 
-const my_circle  = my_system.createCircle(100, 100, 10);
-const my_polygon = my_system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const my_line    = my_system.createPolygon(200, 5, [[-30, 0], [10, 20]]);
-const my_point   = my_system.createPoint(10, 10);</code>
+const circle  = system.createCircle(100, 100, 10);
+const polygon = system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const line    = system.createPolygon(200, 5, [[-30, 0], [10, 20]]);
+const point   = system.createPoint(10, 10);</code>
 </code></pre>
 <p>And, of course, bodies can be removed when they are no longer needed.</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_system.remove(my_polygon, my_point);
-my_circle.remove();</code>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">system.remove(polygon, point);
+circle.remove();</code>
 </code></pre>
 <p><a name="anchor-step-3"></a></p>
 <h2 id="3--updating-the-collision-system">3. Updating the Collision System</h2><p>Collision systems need to be updated when the bodies within them change. This includes when bodies are inserted, removed, or when their properties change (e.g. position, angle, scaling, etc.). Updating a collision system is done by calling <code>update()</code> and should typically occur once per frame.</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_system.update();</code>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">system.update();</code>
 </code></pre>
 <p>The optimal time for updating a collision system is <strong>after</strong> its bodies have changed and <strong>before</strong> collisions are tested. For example, a game loop might use the following order of events:</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">function gameLoop() {
     handleInput();
     processGameLogic();
 
-    my_system.update();
+    system.update();
 
     handleCollisions();
     render();
@@ -165,13 +170,13 @@ my_circle.remove();</code>
 </code></pre>
 <p><a name="anchor-step-4"></a></p>
 <h2 id="4--testing-for-collisions">4. Testing for Collisions</h2><p>When testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling <code>potentials()</code> in order to quickly rule out bodies that are too far away to collide. <strong>Collisions</strong> uses a <a href="https://en.wikipedia.org/wiki/Bounding_volume_hierarchy">Bounding Volume Hierarchy</a> (BVH) for its broad-phase search. Calling <code>potentials()</code> on a body traverses the BVH and builds a list of potential collision candidates.</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_potentials = my_polygon.potentials();</code>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const potentials = polygon.potentials();</code>
 </code></pre>
 <p>Once a list of potential collisions is acquired, loop through them and perform a narrow-phase collision test using <code>collides()</code>. <strong>Collisions</strong> uses the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for its narrow-phase collision tests.</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_potentials = my_polygon.potentials();
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const potentials = polygon.potentials();
 
 for(const body of potentials) {
-    if(my_polygon.collides(body)) {
+    if(polygon.collides(body)) {
         console.log(&apos;Collision detected!&apos;);
     }
 }</code>
@@ -180,7 +185,7 @@ for(const body of potentials) {
 <blockquote>
 <p><strong>Note:</strong> Skipping the broad-phase search is not recommended. When testing for collisions against large numbers of bodies, performing a broad-phase search using a BVH is <em>much</em> more efficient.</p>
 </blockquote>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">if(my_polygon.collides(my_line)) {
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">if(polygon.collides(line)) {
     console.log(&apos;Collision detected!&apos;);
 }</code>
 </code></pre>
@@ -192,22 +197,22 @@ for(const body of potentials) {
 </blockquote>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">import {Collisions, Result, Polygon} from &apos;collisions&apos;;
 
-const my_system  = new Collisions();
+const system     = new Collisions();
 const my_polygon = new Polygon(100, 100, 10);
 
 const result1 = new Result();
 const result2 = Collisions.createResult();
-const result3 = Polygon.createResult();
-const result4 = my_system.createResult();
+const result3 = system.createResult();
+const result4 = Polygon.createResult();
 const result5 = my_polygon.createResult();</code>
 </code></pre>
 <p>To use a <code>Result</code> object, pass it into <code>collides()</code>. If a collision occurs, it will be populated with information about the collision. Take note in the following example that the same <code>Result</code> object is being reused each iteration.</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_result     = my_system.createResult();
-const my_potentials = my_point.potentials();
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const result     = system.createResult();
+const potentials = point.potentials();
 
-for(const body of my_potentials) {
-    if(my_point.collides(body, my_result)) {
-        console.log(my_result);
+for(const body of potentials) {
+    if(point.collides(body, result)) {
+        console.log(result);
     }
 }</code>
 </code></pre>
@@ -222,62 +227,62 @@ for(const body of my_potentials) {
 </code></pre>
 <p><a name="anchor-lines"></a></p>
 <h1 id="lines">Lines</h1><p>Creating lines is as simple as creating a single-sided polygon (i.e. a polygon with only two coordinate pairs).</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_line = new Polygon(200, 5, [[-30, 0], [10, 20]]);</code>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const line = new Polygon(200, 5, [[-30, 0], [10, 20]]);</code>
 </code></pre>
 <p><a name="anchor-concave-polygons"></a></p>
 <h1 id="concave-polygons">Concave Polygons</h1><p><strong>Collisions</strong> uses the <a href="https://en.wikipedia.org/wiki/Separating_axis_theorem">Separating Axis Theorem</a> (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be &quot;faked&quot; by using a series of <a href="#anchor-lines">Lines</a>. Keep in mind that a polygon drawn using <a href="#anchor-lines">Lines</a> is &quot;hollow&quot;.</p>
 <p>Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out <a href="https://github.com/schteppe/poly-decomp.js">poly-decomp.js</a>.</p>
 <p><a name="anchor-rendering"></a></p>
 <h1 id="rendering">Rendering</h1><p>For debugging, it is often useful to be able to visualize the collision bodies. All of the bodies in a Collision system can be drawn to a <code>&lt;canvas&gt;</code> element by calling <code>draw()</code> and passing in the canvas&apos; 2D context.</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_canvas  = document.createElement(&apos;canvas&apos;);
-const my_context = canvas.getContext(&apos;2d&apos;);
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const canvas  = document.createElement(&apos;canvas&apos;);
+const context = canvas.getContext(&apos;2d&apos;);
 
 // ...
-my_context.strokeStyle = &apos;#FFFFFF&apos;;
-my_context.beginPath();
+context.strokeStyle = &apos;#FFFFFF&apos;;
+context.beginPath();
 
-my_system.draw(my_context);
+system.draw(context);
 
-my_context.stroke();</code>
+context.stroke();</code>
 </code></pre>
 <p>Bodies can be individually drawn as well.</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_context.strokeStyle = &apos;#FFFFFF&apos;;
-my_context.beginPath();
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">context.strokeStyle = &apos;#FFFFFF&apos;;
+context.beginPath();
 
-my_polygon.draw(my_context);
-my_circle.draw(my_context);
+polygon.draw(context);
+circle.draw(context);
 
-my_context.stroke();</code>
+context.stroke();</code>
 </code></pre>
 <p>The BVH can also be drawn to help test <a href="#anchor-bounding-volume-padding">Bounding Volume Padding</a>.</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">my_context.strokeStyle = &apos;#FFFFFF&apos;;
-my_context.beginPath();
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">context.strokeStyle = &apos;#FFFFFF&apos;;
+context.beginPath();
 
-my_system.drawBVH(my_context);
+system.drawBVH(context);
 
-my_context.stroke();</code>
+context.stroke();</code>
 </code></pre>
 <p><a name="anchor-bounding-volume-padding"></a></p>
 <h1 id="bounding-volume-padding">Bounding Volume Padding</h1><p>When bodies move around within a collision system, the internal BVH has to remove and reinsert the body in order to determine where it belongs in the hierarchy. This is one of the most costly operations in maintaining a BVH. In general, most projects will never see a performance issue from this unless they are dealing with thousands of moving bodies at once. In these cases, it can <em>sometimes</em> be beneficial to &quot;pad&quot; the bounding volumes of each body so that the BVH doesn&apos;t need to remove and reinsert bodies that haven&apos;t changed position too much. In other words, padding the bounding volume allows &quot;breathing room&quot; for the body within it to move around without being flagged for an update.</p>
 <p>The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase <code>potentials()</code> search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.</p>
 <p>Padding can be added to a body when instantiating it (see the <a href="https://sinova.github.com/Collisions/">documentation</a> for each body) or at any time by changing its <code>padding</code> property.</p>
-<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const my_padding = 5;
-const my_circle  = new Circle(100, 100, 10, 1, my_padding);
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">const padding = 5;
+const circle  = new Circle(100, 100, 10, 1, padding);
 
 // ...
 
-my_circle.padding = 10;</code>
+circle.padding = 10;</code>
 </code></pre>
 <p><a name="anchor-only-using-sat"></a></p>
 <h1 id="only-using-sat">Only using SAT</h1><p>Some projects may only have a need to perform SAT collision tests without broad-phase searching. This can be achieved by avoiding collision systems altogether and only using the <code>collides()</code> function.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">import {Circle, Polygon, Result} from &apos;collisions&apos;;
 
-const my_circle  = new Circle(45, 45, 20);
-const my_polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const my_result  = new Result();
+const circle  = new Circle(45, 45, 20);
+const polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const result  = new Result();
 
-if(my_circle.collides(my_polygon, my_result)) {
-    console.log(my_result);
+if(circle.collides(polygon, result)) {
+    console.log(result);
 }</code>
 </code></pre>
 <p><a name="anchor-faq"></a></p>
