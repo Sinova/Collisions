@@ -433,7 +433,7 @@ class Result {
 	}
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Result;
-
+;
 
 
 /***/ }),
@@ -515,7 +515,7 @@ function SAT(a, b, result = null, aabb = true) {
 	}
 
 	return collision;
-}
+};
 
 /**
  * Determines if two bodies' axis aligned bounding boxes are colliding
@@ -566,25 +566,24 @@ function polygonPolygon(a, b, result = null) {
 
 		return a_coords[0] === b_coords[0] && a_coords[1] === b_coords[1];
 	}
-	else {
-		const a_coords  = a._coords;
-		const b_coords  = b._coords;
-		const a_normals = a._normals;
-		const b_normals = b._normals;
 
-		if(a_count > 2) {
-			for(let ix = 0, iy = 1; ix < a_count; ix += 2, iy += 2) {
-				if(separatingAxis(a_coords, b_coords, a_normals[ix], a_normals[iy], result)) {
-					return false;
-				}
+	const a_coords  = a._coords;
+	const b_coords  = b._coords;
+	const a_normals = a._normals;
+	const b_normals = b._normals;
+
+	if(a_count > 2) {
+		for(let ix = 0, iy = 1; ix < a_count; ix += 2, iy += 2) {
+			if(separatingAxis(a_coords, b_coords, a_normals[ix], a_normals[iy], result)) {
+				return false;
 			}
 		}
+	}
 
-		if(b_count > 2) {
-			for(let ix = 0, iy = 1; ix < b_count; ix += 2, iy += 2) {
-				if(separatingAxis(a_coords, b_coords, b_normals[ix], b_normals[iy], result)) {
-					return false;
-				}
+	if(b_count > 2) {
+		for(let ix = 0, iy = 1; ix < b_count; ix += 2, iy += 2) {
+			if(separatingAxis(a_coords, b_coords, b_normals[ix], b_normals[iy], result)) {
+				return false;
 			}
 		}
 	}
@@ -1764,7 +1763,7 @@ class BVH {
 	}
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = BVH;
-
+;
 
 
 /***/ }),
@@ -1846,7 +1845,7 @@ class BVHBranch {
 	}
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = BVHBranch;
-
+;
 
 
 /***/ }),
@@ -1930,7 +1929,7 @@ class Point extends __WEBPACK_IMPORTED_MODULE_0__Polygon_mjs__["a" /* default */
 	}
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Point;
-
+;
 
 Point.prototype.setPoints = undefined;
 

@@ -14,6 +14,7 @@ Collisions
 	4. [Testing for Collisions](#anchor-step-4)
 	5. [Getting Detailed Collision Information](#anchor-step-5)
 	6. [Negating Overlap](#anchor-step-6)
+* [Lines](#anchor-lines)
 * [Concave Polygons](#anchor-concave-polygons)
 * [Rendering](#anchor-rendering)
 * [Bounding Volume Padding](#anchor-bounding-volume-padding)
@@ -271,7 +272,7 @@ if(player.collides(wall, result)) {
 Lines
 ===============================================================================
 
-Creating lines is as simple as creating a single-sided polygon (i.e. a polygon with only two coordinate pairs).
+Creating a line is simply a matter of creating a single-sided polygon (i.e. a polygon with only two coordinate pairs).
 
 ```JavaScript
 const line = new Polygon(200, 5, [[-30, 0], [10, 20]]);

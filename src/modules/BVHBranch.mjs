@@ -70,4 +70,4 @@ export default class BVHBranch {
 	static sortBranches(a, b) {
 		return a.sort > b.sort ? -1 : 1;
 	}
-}
+};

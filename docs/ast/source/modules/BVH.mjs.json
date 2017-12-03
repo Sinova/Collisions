@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 11377,
+  "end": 11378,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 11377,
+    "end": 11378,
     "loc": {
       "start": {
         "line": 1,
@@ -26727,6 +26727,21 @@
             }
           }
         ]
+      },
+      {
+        "type": "EmptyStatement",
+        "start": 11376,
+        "end": 11377,
+        "loc": {
+          "start": {
+            "line": 410,
+            "column": 1
+          },
+          "end": {
+            "line": 410,
+            "column": 2
+          }
+        }
       }
     ],
     "directives": []
@@ -77704,6 +77719,32 @@
     },
     {
       "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 11376,
+      "end": 11377,
+      "loc": {
+        "start": {
+          "line": 410,
+          "column": 1
+        },
+        "end": {
+          "line": 410,
+          "column": 2
+        }
+      }
+    },
+    {
+      "type": {
         "label": "eof",
         "beforeExpr": false,
         "startsExpr": false,
@@ -77715,8 +77756,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 11377,
-      "end": 11377,
+      "start": 11378,
+      "end": 11378,
       "loc": {
         "start": {
           "line": 411,

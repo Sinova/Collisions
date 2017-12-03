@@ -407,4 +407,4 @@ export default class BVH {
 			}
 		}
 	}
-}
+};

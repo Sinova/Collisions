@@ -57,4 +57,4 @@ export default class Result {
 		 */
 		this.overlap_y = 0;
 	}
-}
+};
