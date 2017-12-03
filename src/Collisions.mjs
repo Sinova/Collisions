@@ -160,4 +160,4 @@ export {
 	Circle,
 	Polygon,
 	Point,
-}
+};
