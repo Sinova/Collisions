@@ -9,7 +9,7 @@ Collisions
 * [Usage](#anchor-usage)
 * [Getting Started](#anchor-getting-started)
 	1. [Creating a Collision System](#anchor-step-1)
-	2. [Creating, Inserting, and Removing Bodies](#anchor-step-2)
+	2. [Creating, Inserting, Updating, and Removing Bodies](#anchor-step-2)
 	3. [Updating the Collision System](#anchor-step-3)
 	4. [Testing for Collisions](#anchor-step-4)
 	5. [Getting Detailed Collision Information](#anchor-step-5)
@@ -104,7 +104,7 @@ const system = new Collisions();
 ```
 
 <a name="anchor-step-2"></a>
-## 2. Creating, Inserting, and Removing Bodies
+## 2. Creating, Inserting, Updating, and Removing Bodies
 
 **Collisions** supports the following body types:
 
@@ -139,6 +139,20 @@ const circle  = system.createCircle(100, 100, 10);
 const polygon = system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
 const line    = system.createPolygon(200, 5, [[-30, 0], [10, 20]]);
 const point   = system.createPoint(10, 10);
+```
+
+All bodies have `x` and `y` properties that can be manipulated. Additionally, `Circle` bodies have a `scale` property that can be used to scale their overall size. `Polygon` bodies have `scale_x` and `scale_y` properties to scale their points along a particular axis and an `angle` property to rotate their points around their current position (using radians).
+
+```JavaScript
+circle.x     = 20;
+circle.y     = 30;
+circle.scale = 1.5;
+
+polygon.x       = 40;
+polygon.y       = 100;
+polygon.scale_x = 1.2;
+polygon.scale_y = 3.4;
+polygon.angle   = 1.2;
 ```
 
 And, of course, bodies can be removed when they are no longer needed.

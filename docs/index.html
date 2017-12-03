@@ -47,7 +47,7 @@
 <li><a href="#anchor-usage">Usage</a></li>
 <li><a href="#anchor-getting-started">Getting Started</a><ol>
 <li><a href="#anchor-step-1">Creating a Collision System</a></li>
-<li><a href="#anchor-step-2">Creating, Inserting, and Removing Bodies</a></li>
+<li><a href="#anchor-step-2">Creating, Inserting, Updating, and Removing Bodies</a></li>
 <li><a href="#anchor-step-3">Updating the Collision System</a></li>
 <li><a href="#anchor-step-4">Testing for Collisions</a></li>
 <li><a href="#anchor-step-5">Getting Detailed Collision Information</a></li>
@@ -120,7 +120,7 @@ for(const wall of potentials) {
 const system = new Collisions();</code>
 </code></pre>
 <p><a name="anchor-step-2"></a></p>
-<h2 id="2--creating--inserting--and-removing-bodies">2. Creating, Inserting, and Removing Bodies</h2><p><strong>Collisions</strong> supports the following body types:</p>
+<h2 id="2--creating--inserting--updating--and-removing-bodies">2. Creating, Inserting, Updating, and Removing Bodies</h2><p><strong>Collisions</strong> supports the following body types:</p>
 <ul>
 <li><strong>Circle:</strong> A shape with infinite sides equidistant from a single point</li>
 <li><strong>Polygon:</strong> A shape made up of line segments</li>
@@ -148,6 +148,17 @@ const circle  = system.createCircle(100, 100, 10);
 const polygon = system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
 const line    = system.createPolygon(200, 5, [[-30, 0], [10, 20]]);
 const point   = system.createPoint(10, 10);</code>
+</code></pre>
+<p>All bodies have <code>x</code> and <code>y</code> properties that can be manipulated. Additionally, <code>Circle</code> bodies have a <code>scale</code> property that can be used to scale their overall size. <code>Polygon</code> bodies have <code>scale_x</code> and <code>scale_y</code> properties to scale their points along a particular axis and an <code>angle</code> property to rotate their points around their current position (using radians).</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">circle.x     = 20;
+circle.y     = 30;
+circle.scale = 1.5;
+
+polygon.x       = 40;
+polygon.y       = 100;
+polygon.scale_x = 1.2;
+polygon.scale_y = 3.4;
+polygon.angle   = 1.2;</code>
 </code></pre>
 <p>And, of course, bodies can be removed when they are no longer needed.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">system.remove(polygon, point);
