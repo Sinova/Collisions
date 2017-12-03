@@ -66,19 +66,37 @@ export default function SAT(a, b, result = null, aabb = true) {
 	}
 
 	if(a_polygon) {
-		a._calculateCoords();
+		if(
+			a._dirty_coords ||
+			a.x       !== a._x ||
+			a.y       !== a._y ||
+			a.angle   !== a._angle ||
+			a.scale_x !== a._scale_x ||
+			a.scale_y !== a._scale_y
+		) {
+			a._calculateCoords();
+		}
 	}
 
 	if(b_polygon) {
-		b._calculateCoords();
+		if(
+			b._dirty_coords ||
+			b.x       !== b._x ||
+			b.y       !== b._y ||
+			b.angle   !== b._angle ||
+			b.scale_x !== b._scale_x ||
+			b.scale_y !== b._scale_y
+		) {
+			b._calculateCoords();
+		}
 	}
 
 	if(!aabb || aabbAABB(a, b)) {
-		if(a_polygon) {
+		if(a_polygon &amp;&amp; a._dirty_normals) {
 			a._calculateNormals();
 		}
 
-		if(b_polygon) {
+		if(b_polygon &amp;&amp; b._dirty_normals) {
 			b._calculateNormals();
 		}
 

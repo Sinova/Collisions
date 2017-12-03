@@ -468,19 +468,37 @@ function SAT(a, b, result = null, aabb = true) {
 	}
 
 	if(a_polygon) {
-		a._calculateCoords();
+		if(
+			a._dirty_coords ||
+			a.x       !== a._x ||
+			a.y       !== a._y ||
+			a.angle   !== a._angle ||
+			a.scale_x !== a._scale_x ||
+			a.scale_y !== a._scale_y
+		) {
+			a._calculateCoords();
+		}
 	}
 
 	if(b_polygon) {
-		b._calculateCoords();
+		if(
+			b._dirty_coords ||
+			b.x       !== b._x ||
+			b.y       !== b._y ||
+			b.angle   !== b._angle ||
+			b.scale_x !== b._scale_x ||
+			b.scale_y !== b._scale_y
+		) {
+			b._calculateCoords();
+		}
 	}
 
 	if(!aabb || aabbAABB(a, b)) {
-		if(a_polygon) {
+		if(a_polygon && a._dirty_normals) {
 			a._calculateNormals();
 		}
 
-		if(b_polygon) {
+		if(b_polygon && b._dirty_normals) {
 			b._calculateNormals();
 		}
 
@@ -939,7 +957,16 @@ class Polygon extends __WEBPACK_IMPORTED_MODULE_0__Body_mjs__["a" /* default */]
 	 * @param {CanvasRenderingContext2D} context The context to add the shape to
 	 */
 	draw(context) {
-		this._calculateCoords();
+		if(
+			this._dirty_coords ||
+			this.x       !== this._x ||
+			this.y       !== this._y ||
+			this.angle   !== this._angle ||
+			this.scale_x !== this._scale_x ||
+			this.scale_y !== this._scale_y
+		) {
+			this._calculateCoords();
+		}
 
 		const coords = this._coords;
 
@@ -993,18 +1020,6 @@ class Polygon extends __WEBPACK_IMPORTED_MODULE_0__Body_mjs__["a" /* default */]
 		const angle   = this.angle;
 		const scale_x = this.scale_x;
 		const scale_y = this.scale_y;
-
-		if(
-			!this._dirty_coords &&
-			x === this._x &&
-			y === this._y &&
-			angle === this._angle &&
-			scale_x === this._scale_x &&
-			scale_y === this._scale_y
-		) {
-			return;
-		}
-
 		const points  = this._points;
 		const coords  = this._coords;
 		const count   = points.length;
@@ -1072,10 +1087,6 @@ class Polygon extends __WEBPACK_IMPORTED_MODULE_0__Body_mjs__["a" /* default */]
 	 * Calculates the normals and edges of the polygon's sides
 	 */
 	_calculateNormals() {
-		if(!this._dirty_normals) {
-			return;
-		}
-
 		const coords  = this._coords;
 		const edges   = this._edges;
 		const normals = this._normals;
@@ -1386,7 +1397,16 @@ class BVH {
 		const body_y  = body.y;
 
 		if(polygon) {
-			body._calculateCoords();
+			if(
+				body._dirty_coords ||
+				body.x       !== body._x ||
+				body.y       !== body._y ||
+				body.angle   !== body._angle ||
+				body.scale_x !== body._scale_x ||
+				body.scale_y !== body._scale_y
+			) {
+				body._calculateCoords();
+			}
 		}
 
 		const padding    = body._bvh_padding;
@@ -1442,15 +1462,6 @@ class BVH {
 					current._bvh_max_x = left_new_max_x > right_new_max_x ? left_new_max_x : right_new_max_x;
 					current._bvh_max_y = left_new_max_y > right_new_max_y ? left_new_max_y : right_new_max_y;
 
-					// If we're in the middle of an "update" insertion,
-					// we've just resized this branch so it's no longer dirty
-					if(updating && current._bvh_dirty) {
-						const dirty_branches = this._dirty_branches;
-
-						current._bvh_dirty = false;
-						dirty_branches.splice(dirty_branches.indexOf(current), 1);
-					}
-
 					current = left_difference <= right_difference ? left : right;
 				}
 				// Leaf
@@ -1463,7 +1474,6 @@ class BVH {
 					const new_parent   = current._bvh_parent = body._bvh_parent = __WEBPACK_IMPORTED_MODULE_0__BVHBranch_mjs__["a" /* default */].getBranch();
 
 					new_parent._bvh_parent = grandparent;
-					new_parent._bvh_dirty  = false;
 					new_parent._bvh_left   = current;
 					new_parent._bvh_right  = body;
 					new_parent._bvh_sort   = sort++;
@@ -1530,10 +1540,27 @@ class BVH {
 				grandparent._bvh_right = sibling;
 			}
 
-			if(!grandparent._bvh_dirty) {
-				grandparent._bvh_dirty = true;
+			let branch = grandparent;
 
-				this._dirty_branches.push(grandparent);
+			while(branch) {
+				const left       = branch._bvh_left;
+				const left_min_x = left._bvh_min_x;
+				const left_min_y = left._bvh_min_y;
+				const left_max_x = left._bvh_max_x;
+				const left_max_y = left._bvh_max_y;
+
+				const right       = branch._bvh_right;
+				const right_min_x = right._bvh_min_x;
+				const right_min_y = right._bvh_min_y;
+				const right_max_x = right._bvh_max_x;
+				const right_max_y = right._bvh_max_y;
+
+				branch._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;
+				branch._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;
+				branch._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;
+				branch._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;
+
+				branch = branch._bvh_parent;
 			}
 		}
 		else {
@@ -1544,15 +1571,11 @@ class BVH {
 	}
 
 	/**
-	 * Updates the BVH. Moved bodies are removed/inserted and their parent branches are resized.
+	 * Updates the BVH. Moved bodies are removed/inserted.
 	 */
 	update() {
-		let count;
-
-		// Update moved bodies
 		const bodies = this._bodies;
-
-		count = bodies.length;
+		const count  = bodies.length;
 
 		for(let i = 0; i < count; ++i) {
 			const body = bodies[i];
@@ -1566,6 +1589,20 @@ class BVH {
 
 			if(!update) {
 				const polygon = body._polygon;
+
+				if(polygon) {
+					if(
+						body._dirty_coords ||
+						body.x       !== body._x ||
+						body.y       !== body._y ||
+						body.angle   !== body._angle ||
+						body.scale_x !== body._scale_x ||
+						body.scale_y !== body._scale_y
+					) {
+						body._calculateCoords();
+					}
+				}
+
 				const x       = body.x;
 				const y       = body.y;
 				const radius  = polygon ? 0 : body.radius * body.scale;
@@ -1582,46 +1619,6 @@ class BVH {
 				this.insert(body, true);
 			}
 		}
-
-		// Resize dirty branches
-		const dirty_branches = this._dirty_branches;
-
-		count = dirty_branches.length;
-
-		dirty_branches.sort(__WEBPACK_IMPORTED_MODULE_0__BVHBranch_mjs__["a" /* default */].sortBranches);
-
-		for(let i = 0; i < count; ++i) {
-			let branch = dirty_branches[i];
-
-			while(branch) {
-				const left       = branch._bvh_left;
-				const left_min_x = left._bvh_min_x;
-				const left_min_y = left._bvh_min_y;
-				const left_max_x = left._bvh_max_x;
-				const left_max_y = left._bvh_max_y;
-
-				const right       = branch._bvh_right;
-				const right_min_x = right._bvh_min_x;
-				const right_min_y = right._bvh_min_y;
-				const right_max_x = right._bvh_max_x;
-				const right_max_y = right._bvh_max_y;
-
-				branch._bvh_dirty = false;
-				branch._bvh_min_x = left_min_x < right_min_x ? left_min_x : right_min_x;
-				branch._bvh_min_y = left_min_y < right_min_y ? left_min_y : right_min_y;
-				branch._bvh_max_x = left_max_x > right_max_x ? left_max_x : right_max_x;
-				branch._bvh_max_y = left_max_y > right_max_y ? left_max_y : right_max_y;
-
-				branch = branch._bvh_parent;
-
-				// If the parent is dirty, it should be coming up in the for() loop anyway, so bail out
-				if(branch && branch._bvh_dirty) {
-					break;
-				}
-			}
-		}
-
-		dirty_branches.length = 0;
 	}
 
 	/**
@@ -1795,9 +1792,6 @@ class BVHBranch {
 
 		/** @private */
 		this._bvh_branch = true;
-
-		/** @private */
-		this._bvh_dirty = false;
 
 		/** @private */
 		this._bvh_left = null;

@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 111,
-  "actualCount": 111,
+  "expectCount": 110,
+  "actualCount": 110,
   "files": {
     "src/Collisions.mjs": {
       "expectCount": 15,
@@ -14,8 +14,8 @@
       "undocumentLines": []
     },
     "src/modules/BVHBranch.mjs": {
-      "expectCount": 16,
-      "actualCount": 16,
+      "expectCount": 15,
+      "actualCount": 15,
       "undocumentLines": []
     },
     "src/modules/Body.mjs": {

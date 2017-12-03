@@ -93,7 +93,16 @@ export default class Polygon extends Body {
 	 * @param {CanvasRenderingContext2D} context The context to add the shape to
 	 */
 	draw(context) {
-		this._calculateCoords();
+		if(
+			this._dirty_coords ||
+			this.x       !== this._x ||
+			this.y       !== this._y ||
+			this.angle   !== this._angle ||
+			this.scale_x !== this._scale_x ||
+			this.scale_y !== this._scale_y
+		) {
+			this._calculateCoords();
+		}
 
 		const coords = this._coords;
 
@@ -147,18 +156,6 @@ export default class Polygon extends Body {
 		const angle   = this.angle;
 		const scale_x = this.scale_x;
 		const scale_y = this.scale_y;
-
-		if(
-			!this._dirty_coords &&
-			x === this._x &&
-			y === this._y &&
-			angle === this._angle &&
-			scale_x === this._scale_x &&
-			scale_y === this._scale_y
-		) {
-			return;
-		}
-
 		const points  = this._points;
 		const coords  = this._coords;
 		const count   = points.length;
@@ -226,10 +223,6 @@ export default class Polygon extends Body {
 	 * Calculates the normals and edges of the polygon's sides
 	 */
 	_calculateNormals() {
-		if(!this._dirty_normals) {
-			return;
-		}
-
 		const coords  = this._coords;
 		const edges   = this._edges;
 		const normals = this._normals;

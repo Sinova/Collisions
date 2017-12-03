@@ -20,9 +20,6 @@ export default class BVHBranch {
 		this._bvh_branch = true;
 
 		/** @private */
-		this._bvh_dirty = false;
-
-		/** @private */
 		this._bvh_left = null;
 
 		/** @private */
