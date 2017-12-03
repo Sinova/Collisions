@@ -31,11 +31,12 @@ export default class Tank {
 
 		const updateKeys = (e) => {
 			const keydown = e.type === 'keydown';
+			const key     = e.key.toLowerCase();
 
-			e.key === 'w' && (this.up = keydown);
-			e.key === 's' && (this.down = keydown);
-			e.key === 'a' && (this.left = keydown);
-			e.key === 'd' && (this.right = keydown);
+			key === 'w' && (this.up = keydown);
+			key === 's' && (this.down = keydown);
+			key === 'a' && (this.left = keydown);
+			key === 'd' && (this.right = keydown);
 		};
 
 		document.addEventListener('keydown', updateKeys);

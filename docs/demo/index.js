@@ -1175,11 +1175,12 @@ class Tank {
 
 		const updateKeys = (e) => {
 			const keydown = e.type === 'keydown';
+			const key     = e.key.toLowerCase();
 
-			e.key === 'w' && (this.up = keydown);
-			e.key === 's' && (this.down = keydown);
-			e.key === 'a' && (this.left = keydown);
-			e.key === 'd' && (this.right = keydown);
+			key === 'w' && (this.up = keydown);
+			key === 's' && (this.down = keydown);
+			key === 'a' && (this.left = keydown);
+			key === 'd' && (this.right = keydown);
 		};
 
 		document.addEventListener('keydown', updateKeys);
@@ -1602,13 +1603,13 @@ class BVH {
 					}
 				}
 
-				const x       = body.x;
-				const y       = body.y;
-				const radius  = polygon ? 0 : body.radius * body.scale;
-				const min_x   = polygon ? body._min_x : x - radius;
-				const min_y   = polygon ? body._min_y : y - radius;
-				const max_x   = polygon ? body._max_x : x + radius;
-				const max_y   = polygon ? body._max_y : y + radius;
+				const x      = body.x;
+				const y      = body.y;
+				const radius = polygon ? 0 : body.radius * body.scale;
+				const min_x  = polygon ? body._min_x : x - radius;
+				const min_y  = polygon ? body._min_y : y - radius;
+				const max_x  = polygon ? body._max_x : x + radius;
+				const max_y  = polygon ? body._max_y : y + radius;
 
 				update = min_x < body._bvh_min_x || min_y < body._bvh_min_y || max_x > body._bvh_max_x || max_y > body._bvh_max_y;
 			}
