@@ -92,7 +92,7 @@
           },
           "extra": {
             "rawValue": "./modules/BVH.mjs",
-            "raw": "'./modules/BVH.mjs'"
+            "raw": "'./modules/BVH.js'"
           },
           "value": "./modules/BVH.mjs"
         }
@@ -161,7 +161,7 @@
           },
           "extra": {
             "rawValue": "./modules/Circle.mjs",
-            "raw": "'./modules/Circle.mjs'"
+            "raw": "'./modules/Circle.js'"
           },
           "value": "./modules/Circle.mjs"
         }
@@ -230,7 +230,7 @@
           },
           "extra": {
             "rawValue": "./modules/Polygon.mjs",
-            "raw": "'./modules/Polygon.mjs'"
+            "raw": "'./modules/Polygon.js'"
           },
           "value": "./modules/Polygon.mjs"
         }
@@ -299,7 +299,7 @@
           },
           "extra": {
             "rawValue": "./modules/Point.mjs",
-            "raw": "'./modules/Point.mjs'"
+            "raw": "'./modules/Point.js'"
           },
           "value": "./modules/Point.mjs"
         }
@@ -368,7 +368,7 @@
           },
           "extra": {
             "rawValue": "./modules/Result.mjs",
-            "raw": "'./modules/Result.mjs'"
+            "raw": "'./modules/Result.js'"
           },
           "value": "./modules/Result.mjs"
         }
@@ -437,7 +437,7 @@
           },
           "extra": {
             "rawValue": "./modules/SAT.mjs",
-            "raw": "'./modules/SAT.mjs'"
+            "raw": "'./modules/SAT.js'"
           },
           "value": "./modules/SAT.mjs"
         },
