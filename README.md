@@ -26,15 +26,8 @@ Installation
 ===============================================================================
 
 ```bash
-npm install collisions
+npm install detect-collisions
 ```
-
-> **Note:** This library uses the native ECMAScript Module syntax. Most environments support native modules, but the following exceptions apply:
->
-> * Node.js (9.2.0) requires the [--experimental-modules](https://nodejs.org/api/esm.html) flag
-> * Firefox (54) requires the [dom.moduleScripts.enabled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Browser_compatibility) setting
->
-> Bundling solutions such as [Webpack](https://webpack.js.org/) or [Rollup.js](https://rollupjs.org/) make native modules compatible with all environments.
 
 <a name="anchor-documentation"></a>
 Documentation
@@ -54,7 +47,7 @@ Usage
 ===============================================================================
 
 ```JavaScript
-import Collisions from 'collisions';
+const Collisions = require('detect-collisions').default;
 
 // Create the collision system
 const system = new Collisions();
@@ -99,7 +92,7 @@ Getting Started
 Call the Collisions constructor to create a collision system.
 
 ```JavaScript
-import Collisions from 'collisions';
+const Collisions = require('detect-collisions').default;
 
 const system = new Collisions();
 ```
@@ -113,10 +106,10 @@ const system = new Collisions();
 * **Polygon:** A shape made up of line segments
 * **Point:** A single coordinate
 
-To use them, import the desired body class, call its constructor, and insert it into the collision system using `insert()`.
+To use them, require the desired body class, call its constructor, and insert it into the collision system using `insert()`.
 
 ```JavaScript
-import {Collisions, Circle, Polygon, Point} from 'collisions';
+const {Collisions, Circle, Polygon, Point} = require('detect-collisions');
 
 const system = new Collisions();
 
@@ -129,10 +122,10 @@ system.insert(circle)
 system.insert(polygon, line, point);
 ```
 
-Collision systems expose several convenience functions for creating bodies and inserting them into the system in one step. This also avoids having to import the different body classes.
+Collision systems expose several convenience functions for creating bodies and inserting them into the system in one step. This also avoids having to require the different body classes.
 
 ```JavaScript
-import Collisions from 'collisions';
+const Collisions = require('detect-collisions').default;
 
 const system = new Collisions();
 
@@ -212,7 +205,7 @@ It is also possible to skip the broad-phase search entirely and call `collides()
 > **Note:** Skipping the broad-phase search is not recommended. When testing for collisions against large numbers of bodies, performing a broad-phase search using a BVH is *much* more efficient.
 
 ```JavaScript
-if(polygon.collides(line)) {
+if (polygon.collides(line)) {
 	console.log('Collision detected!');
 }
 ```
@@ -227,7 +220,7 @@ For convenience, there are several ways to create a `Result` object. `Result` ob
 > **Note:** It is highly recommended that `Result` objects be recycled when performing multiple collision tests in order to save memory. The following example creates multiple `Result` objects strictly as a demonstration.
 
 ```JavaScript
-import {Collisions, Result, Polygon} from 'collisions';
+const {Collisions, Result, Polygon} = require('detect-collisions');
 
 const system     = new Collisions();
 const my_polygon = new Polygon(100, 100, 10);
@@ -354,7 +347,7 @@ Only using SAT
 Some projects may only have a need to perform SAT collision tests without broad-phase searching. This can be achieved by avoiding collision systems altogether and only using the `collides()` function.
 
 ```JavaScript
-import {Circle, Polygon, Result} from 'collisions';
+const {Circle, Polygon, Result} = require('collisions');
 
 const circle  = new Circle(45, 45, 20);
 const polygon = new Polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);

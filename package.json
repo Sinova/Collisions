@@ -1,7 +1,7 @@
 {
-	"name": "collisions",
+	"name": "detect-collisions",
 	"version": "2.1.0",
-	"description": "Collision detection for circles, polygons, and points",
+	"description": "[forked] Collision detection for circles, polygons, and points",
 	"main": "source/index.js",
 	"scripts": {
 		"lint": "eslint ./source --fix",
