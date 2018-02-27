@@ -92,7 +92,7 @@
           },
           "extra": {
             "rawValue": "./Result.mjs",
-            "raw": "'./Result.mjs'"
+            "raw": "'./Result.js'"
           },
           "value": "./Result.mjs"
         }
@@ -161,7 +161,7 @@
           },
           "extra": {
             "rawValue": "./SAT.mjs",
-            "raw": "'./SAT.mjs'"
+            "raw": "'./SAT.js'"
           },
           "value": "./SAT.mjs"
         },

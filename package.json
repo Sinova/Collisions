@@ -1,9 +1,11 @@
 {
 	"name": "collisions",
-	"version": "2.0.13",
+	"version": "2.1.0",
 	"description": "Collision detection for circles, polygons, and points",
-	"main": "src/Collisions.mjs",
+	"main": "source/index.js",
 	"scripts": {
+		"lint": "eslint ./source --fix",
+	    "compile": "babel ./source --out-dir ./es2015",
 		"build": "rm -rf ./docs/* && esdoc && webpack"
 	},
 	"repository": {
@@ -37,7 +39,44 @@
 		"esdoc": "^1.0.4",
 		"esdoc-standard-plugin": "^1.0.0",
 		"html-webpack-plugin": "^2.30.1",
-		"npm": "^5.5.1",
-		"webpack": "^3.9.0"
-	}
+		"webpack": "^4.0.1",
+    	"babel-cli": "^6.26.0",
+    	"babel-loader": "^7.1.2",
+    	"babel-preset-es2015": "^6.24.1"
+	},
+	"dependencies": {
+		"editions": "^1.3.3"
+	},
+	"editions": [
+		{
+			"description": "Source + ESNext + Import",
+			"entry": "index.js",
+			"directory": "source",
+			"syntaxes": [
+				"javascript",
+				"esnext",
+				"require",
+				"arrows",
+				"getset",
+				"const",
+				"let",
+				"classes",
+				"defaults",
+				"spread",
+				"rest",
+				"destructuring",
+				"template strings"
+			]
+		},
+		{
+			"description": "Compiled + ES2015 + Require",
+			"entry": "index.js",
+			"directory": "es2015",
+			"syntaxes": [
+				"javascript",
+				"es2015",
+				"require"
+			]
+		}
+	]
 }
