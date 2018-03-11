@@ -3,6 +3,7 @@
 	"version": "2.0.13",
 	"description": "Collision detection for circles, polygons, and points",
 	"main": "src/Collisions.mjs",
+	"types": "collisions.d.ts",
 	"scripts": {
 		"build": "rm -rf ./docs/* && esdoc && webpack"
 	},
