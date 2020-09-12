@@ -154,10 +154,10 @@ export class Collisions {
 
     /**
      * Inserts bodies into the collision system
-     * @param {Body} bodies
+     * @param {Body[]} bodies
      * @returns {Collisions}
      */
-    insert(bodies: Body): Collisions;
+    insert(...bodies: Body[]): Collisions;
 
     /**
      * Removes bodies from the collision system
