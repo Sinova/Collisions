@@ -17,7 +17,7 @@ Collisions
 
 > I'm linking to 
 > [my forked version of the docs](https://ryanatkn.github.io/collisions/)
-> because I fixed some broken links from the old GitHub `.com/.io` switchover
+> because I fixed some broken links from the old GitHub pages `.com/.io` switchover
 
 > TODO fix the broken docs build (`webpack.config.cjs` doesn't work as intended)
 
