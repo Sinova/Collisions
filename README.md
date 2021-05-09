@@ -3,7 +3,8 @@ Collisions
 
 > **important**: this is a forked and republished version of
 > [Sinova/Collisions](https://github.com/Sinova/Collisions)
-> due to [its current staleness](https://github.com/Sinova/Collisions/issues/20) —
+> due to its [currently stale release](https://github.com/Sinova/Collisions/issues/20)
+> and the incompatible (for my tools) shape of its published artifacts —
 > we recommend using the original if possible instead of this fork,
 > but if you run into problems, this might be what you need
 
