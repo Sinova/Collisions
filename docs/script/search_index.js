@@ -1,38 +1,38 @@
 window.esdocSearchIndex = [
   [
-    "@ryanatkn/collisions/src/modules/body.mjs~body",
-    "class/src/modules/Body.mjs~Body.html",
-    "<span>Body</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Body.mjs</span>",
+    "@ryanatkn/collisions/src/modules/body.js~body",
+    "class/src/modules/Body.js~Body.html",
+    "<span>Body</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Body.js</span>",
     "class"
   ],
   [
-    "@ryanatkn/collisions/src/modules/circle.mjs~circle",
-    "class/src/modules/Circle.mjs~Circle.html",
-    "<span>Circle</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Circle.mjs</span>",
+    "@ryanatkn/collisions/src/modules/circle.js~circle",
+    "class/src/modules/Circle.js~Circle.html",
+    "<span>Circle</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Circle.js</span>",
     "class"
   ],
   [
-    "@ryanatkn/collisions/src/collisions.mjs~collisions",
-    "class/src/Collisions.mjs~Collisions.html",
-    "<span>Collisions</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/Collisions.mjs</span>",
+    "@ryanatkn/collisions/src/collisions.js~collisions",
+    "class/src/Collisions.js~Collisions.html",
+    "<span>Collisions</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/Collisions.js</span>",
     "class"
   ],
   [
-    "@ryanatkn/collisions/src/modules/point.mjs~point",
-    "class/src/modules/Point.mjs~Point.html",
-    "<span>Point</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Point.mjs</span>",
+    "@ryanatkn/collisions/src/modules/point.js~point",
+    "class/src/modules/Point.js~Point.html",
+    "<span>Point</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Point.js</span>",
     "class"
   ],
   [
-    "@ryanatkn/collisions/src/modules/polygon.mjs~polygon",
-    "class/src/modules/Polygon.mjs~Polygon.html",
-    "<span>Polygon</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Polygon.mjs</span>",
+    "@ryanatkn/collisions/src/modules/polygon.js~polygon",
+    "class/src/modules/Polygon.js~Polygon.html",
+    "<span>Polygon</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Polygon.js</span>",
     "class"
   ],
   [
-    "@ryanatkn/collisions/src/modules/result.mjs~result",
-    "class/src/modules/Result.mjs~Result.html",
-    "<span>Result</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Result.mjs</span>",
+    "@ryanatkn/collisions/src/modules/result.js~result",
+    "class/src/modules/Result.js~Result.html",
+    "<span>Result</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Result.js</span>",
     "class"
   ],
   [
@@ -318,309 +318,309 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "src/collisions.mjs",
-    "file/src/Collisions.mjs.html",
-    "src/Collisions.mjs",
+    "src/collisions.js",
+    "file/src/Collisions.js.html",
+    "src/Collisions.js",
     "file"
   ],
   [
-    "src/collisions.mjs~collisions#collides",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-collides",
-    "src/Collisions.mjs~Collisions#collides",
+    "src/collisions.js~collisions#collides",
+    "class/src/Collisions.js~Collisions.html#instance-method-collides",
+    "src/Collisions.js~Collisions#collides",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#constructor",
-    "class/src/Collisions.mjs~Collisions.html#instance-constructor-constructor",
-    "src/Collisions.mjs~Collisions#constructor",
+    "src/collisions.js~collisions#constructor",
+    "class/src/Collisions.js~Collisions.html#instance-constructor-constructor",
+    "src/Collisions.js~Collisions#constructor",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#createcircle",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-createCircle",
-    "src/Collisions.mjs~Collisions#createCircle",
+    "src/collisions.js~collisions#createcircle",
+    "class/src/Collisions.js~Collisions.html#instance-method-createCircle",
+    "src/Collisions.js~Collisions#createCircle",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#createpoint",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-createPoint",
-    "src/Collisions.mjs~Collisions#createPoint",
+    "src/collisions.js~collisions#createpoint",
+    "class/src/Collisions.js~Collisions.html#instance-method-createPoint",
+    "src/Collisions.js~Collisions#createPoint",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#createpolygon",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-createPolygon",
-    "src/Collisions.mjs~Collisions#createPolygon",
+    "src/collisions.js~collisions#createpolygon",
+    "class/src/Collisions.js~Collisions.html#instance-method-createPolygon",
+    "src/Collisions.js~Collisions#createPolygon",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#createresult",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-createResult",
-    "src/Collisions.mjs~Collisions#createResult",
+    "src/collisions.js~collisions#createresult",
+    "class/src/Collisions.js~Collisions.html#instance-method-createResult",
+    "src/Collisions.js~Collisions#createResult",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#draw",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-draw",
-    "src/Collisions.mjs~Collisions#draw",
+    "src/collisions.js~collisions#draw",
+    "class/src/Collisions.js~Collisions.html#instance-method-draw",
+    "src/Collisions.js~Collisions#draw",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#drawbvh",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-drawBVH",
-    "src/Collisions.mjs~Collisions#drawBVH",
+    "src/collisions.js~collisions#drawbvh",
+    "class/src/Collisions.js~Collisions.html#instance-method-drawBVH",
+    "src/Collisions.js~Collisions#drawBVH",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#insert",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-insert",
-    "src/Collisions.mjs~Collisions#insert",
+    "src/collisions.js~collisions#insert",
+    "class/src/Collisions.js~Collisions.html#instance-method-insert",
+    "src/Collisions.js~Collisions#insert",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#potentials",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-potentials",
-    "src/Collisions.mjs~Collisions#potentials",
+    "src/collisions.js~collisions#potentials",
+    "class/src/Collisions.js~Collisions.html#instance-method-potentials",
+    "src/Collisions.js~Collisions#potentials",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#remove",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-remove",
-    "src/Collisions.mjs~Collisions#remove",
+    "src/collisions.js~collisions#remove",
+    "class/src/Collisions.js~Collisions.html#instance-method-remove",
+    "src/Collisions.js~Collisions#remove",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions#update",
-    "class/src/Collisions.mjs~Collisions.html#instance-method-update",
-    "src/Collisions.mjs~Collisions#update",
+    "src/collisions.js~collisions#update",
+    "class/src/Collisions.js~Collisions.html#instance-method-update",
+    "src/Collisions.js~Collisions#update",
     "method"
   ],
   [
-    "src/collisions.mjs~collisions.createresult",
-    "class/src/Collisions.mjs~Collisions.html#static-method-createResult",
-    "src/Collisions.mjs~Collisions.createResult",
+    "src/collisions.js~collisions.createresult",
+    "class/src/Collisions.js~Collisions.html#static-method-createResult",
+    "src/Collisions.js~Collisions.createResult",
     "method"
   ],
   [
-    "src/modules/bvh.mjs",
-    "file/src/modules/BVH.mjs.html",
-    "src/modules/BVH.mjs",
+    "src/modules/bvh.js",
+    "file/src/modules/BVH.js.html",
+    "src/modules/BVH.js",
     "file"
   ],
   [
-    "src/modules/bvhbranch.mjs",
-    "file/src/modules/BVHBranch.mjs.html",
-    "src/modules/BVHBranch.mjs",
+    "src/modules/bvhbranch.js",
+    "file/src/modules/BVHBranch.js.html",
+    "src/modules/BVHBranch.js",
     "file"
   ],
   [
-    "src/modules/body.mjs",
-    "file/src/modules/Body.mjs.html",
-    "src/modules/Body.mjs",
+    "src/modules/body.js",
+    "file/src/modules/Body.js.html",
+    "src/modules/Body.js",
     "file"
   ],
   [
-    "src/modules/body.mjs~body#collides",
-    "class/src/modules/Body.mjs~Body.html#instance-method-collides",
-    "src/modules/Body.mjs~Body#collides",
+    "src/modules/body.js~body#collides",
+    "class/src/modules/Body.js~Body.html#instance-method-collides",
+    "src/modules/Body.js~Body#collides",
     "method"
   ],
   [
-    "src/modules/body.mjs~body#constructor",
-    "class/src/modules/Body.mjs~Body.html#instance-constructor-constructor",
-    "src/modules/Body.mjs~Body#constructor",
+    "src/modules/body.js~body#constructor",
+    "class/src/modules/Body.js~Body.html#instance-constructor-constructor",
+    "src/modules/Body.js~Body#constructor",
     "method"
   ],
   [
-    "src/modules/body.mjs~body#createresult",
-    "class/src/modules/Body.mjs~Body.html#instance-method-createResult",
-    "src/modules/Body.mjs~Body#createResult",
+    "src/modules/body.js~body#createresult",
+    "class/src/modules/Body.js~Body.html#instance-method-createResult",
+    "src/modules/Body.js~Body#createResult",
     "method"
   ],
   [
-    "src/modules/body.mjs~body#padding",
-    "class/src/modules/Body.mjs~Body.html#instance-member-padding",
-    "src/modules/Body.mjs~Body#padding",
+    "src/modules/body.js~body#padding",
+    "class/src/modules/Body.js~Body.html#instance-member-padding",
+    "src/modules/Body.js~Body#padding",
     "member"
   ],
   [
-    "src/modules/body.mjs~body#potentials",
-    "class/src/modules/Body.mjs~Body.html#instance-method-potentials",
-    "src/modules/Body.mjs~Body#potentials",
+    "src/modules/body.js~body#potentials",
+    "class/src/modules/Body.js~Body.html#instance-method-potentials",
+    "src/modules/Body.js~Body#potentials",
     "method"
   ],
   [
-    "src/modules/body.mjs~body#remove",
-    "class/src/modules/Body.mjs~Body.html#instance-method-remove",
-    "src/modules/Body.mjs~Body#remove",
+    "src/modules/body.js~body#remove",
+    "class/src/modules/Body.js~Body.html#instance-method-remove",
+    "src/modules/Body.js~Body#remove",
     "method"
   ],
   [
-    "src/modules/body.mjs~body#x",
-    "class/src/modules/Body.mjs~Body.html#instance-member-x",
-    "src/modules/Body.mjs~Body#x",
+    "src/modules/body.js~body#x",
+    "class/src/modules/Body.js~Body.html#instance-member-x",
+    "src/modules/Body.js~Body#x",
     "member"
   ],
   [
-    "src/modules/body.mjs~body#y",
-    "class/src/modules/Body.mjs~Body.html#instance-member-y",
-    "src/modules/Body.mjs~Body#y",
+    "src/modules/body.js~body#y",
+    "class/src/modules/Body.js~Body.html#instance-member-y",
+    "src/modules/Body.js~Body#y",
     "member"
   ],
   [
-    "src/modules/body.mjs~body.createresult",
-    "class/src/modules/Body.mjs~Body.html#static-method-createResult",
-    "src/modules/Body.mjs~Body.createResult",
+    "src/modules/body.js~body.createresult",
+    "class/src/modules/Body.js~Body.html#static-method-createResult",
+    "src/modules/Body.js~Body.createResult",
     "method"
   ],
   [
-    "src/modules/circle.mjs",
-    "file/src/modules/Circle.mjs.html",
-    "src/modules/Circle.mjs",
+    "src/modules/circle.js",
+    "file/src/modules/Circle.js.html",
+    "src/modules/Circle.js",
     "file"
   ],
   [
-    "src/modules/circle.mjs~circle#constructor",
-    "class/src/modules/Circle.mjs~Circle.html#instance-constructor-constructor",
-    "src/modules/Circle.mjs~Circle#constructor",
+    "src/modules/circle.js~circle#constructor",
+    "class/src/modules/Circle.js~Circle.html#instance-constructor-constructor",
+    "src/modules/Circle.js~Circle#constructor",
     "method"
   ],
   [
-    "src/modules/circle.mjs~circle#draw",
-    "class/src/modules/Circle.mjs~Circle.html#instance-method-draw",
-    "src/modules/Circle.mjs~Circle#draw",
+    "src/modules/circle.js~circle#draw",
+    "class/src/modules/Circle.js~Circle.html#instance-method-draw",
+    "src/modules/Circle.js~Circle#draw",
     "method"
   ],
   [
-    "src/modules/circle.mjs~circle#radius",
-    "class/src/modules/Circle.mjs~Circle.html#instance-member-radius",
-    "src/modules/Circle.mjs~Circle#radius",
+    "src/modules/circle.js~circle#radius",
+    "class/src/modules/Circle.js~Circle.html#instance-member-radius",
+    "src/modules/Circle.js~Circle#radius",
     "member"
   ],
   [
-    "src/modules/circle.mjs~circle#scale",
-    "class/src/modules/Circle.mjs~Circle.html#instance-member-scale",
-    "src/modules/Circle.mjs~Circle#scale",
+    "src/modules/circle.js~circle#scale",
+    "class/src/modules/Circle.js~Circle.html#instance-member-scale",
+    "src/modules/Circle.js~Circle#scale",
     "member"
   ],
   [
-    "src/modules/point.mjs",
-    "file/src/modules/Point.mjs.html",
-    "src/modules/Point.mjs",
+    "src/modules/point.js",
+    "file/src/modules/Point.js.html",
+    "src/modules/Point.js",
     "file"
   ],
   [
-    "src/modules/point.mjs~point#constructor",
-    "class/src/modules/Point.mjs~Point.html#instance-constructor-constructor",
-    "src/modules/Point.mjs~Point#constructor",
+    "src/modules/point.js~point#constructor",
+    "class/src/modules/Point.js~Point.html#instance-constructor-constructor",
+    "src/modules/Point.js~Point#constructor",
     "method"
   ],
   [
-    "src/modules/polygon.mjs",
-    "file/src/modules/Polygon.mjs.html",
-    "src/modules/Polygon.mjs",
+    "src/modules/polygon.js",
+    "file/src/modules/Polygon.js.html",
+    "src/modules/Polygon.js",
     "file"
   ],
   [
-    "src/modules/polygon.mjs~polygon#angle",
-    "class/src/modules/Polygon.mjs~Polygon.html#instance-member-angle",
-    "src/modules/Polygon.mjs~Polygon#angle",
+    "src/modules/polygon.js~polygon#angle",
+    "class/src/modules/Polygon.js~Polygon.html#instance-member-angle",
+    "src/modules/Polygon.js~Polygon#angle",
     "member"
   ],
   [
-    "src/modules/polygon.mjs~polygon#constructor",
-    "class/src/modules/Polygon.mjs~Polygon.html#instance-constructor-constructor",
-    "src/modules/Polygon.mjs~Polygon#constructor",
+    "src/modules/polygon.js~polygon#constructor",
+    "class/src/modules/Polygon.js~Polygon.html#instance-constructor-constructor",
+    "src/modules/Polygon.js~Polygon#constructor",
     "method"
   ],
   [
-    "src/modules/polygon.mjs~polygon#draw",
-    "class/src/modules/Polygon.mjs~Polygon.html#instance-method-draw",
-    "src/modules/Polygon.mjs~Polygon#draw",
+    "src/modules/polygon.js~polygon#draw",
+    "class/src/modules/Polygon.js~Polygon.html#instance-method-draw",
+    "src/modules/Polygon.js~Polygon#draw",
     "method"
   ],
   [
-    "src/modules/polygon.mjs~polygon#scale_x",
-    "class/src/modules/Polygon.mjs~Polygon.html#instance-member-scale_x",
-    "src/modules/Polygon.mjs~Polygon#scale_x",
+    "src/modules/polygon.js~polygon#scale_x",
+    "class/src/modules/Polygon.js~Polygon.html#instance-member-scale_x",
+    "src/modules/Polygon.js~Polygon#scale_x",
     "member"
   ],
   [
-    "src/modules/polygon.mjs~polygon#scale_y",
-    "class/src/modules/Polygon.mjs~Polygon.html#instance-member-scale_y",
-    "src/modules/Polygon.mjs~Polygon#scale_y",
+    "src/modules/polygon.js~polygon#scale_y",
+    "class/src/modules/Polygon.js~Polygon.html#instance-member-scale_y",
+    "src/modules/Polygon.js~Polygon#scale_y",
     "member"
   ],
   [
-    "src/modules/polygon.mjs~polygon#setpoints",
-    "class/src/modules/Polygon.mjs~Polygon.html#instance-method-setPoints",
-    "src/modules/Polygon.mjs~Polygon#setPoints",
+    "src/modules/polygon.js~polygon#setpoints",
+    "class/src/modules/Polygon.js~Polygon.html#instance-method-setPoints",
+    "src/modules/Polygon.js~Polygon#setPoints",
     "method"
   ],
   [
-    "src/modules/result.mjs",
-    "file/src/modules/Result.mjs.html",
-    "src/modules/Result.mjs",
+    "src/modules/result.js",
+    "file/src/modules/Result.js.html",
+    "src/modules/Result.js",
     "file"
   ],
   [
-    "src/modules/result.mjs~result#a",
-    "class/src/modules/Result.mjs~Result.html#instance-member-a",
-    "src/modules/Result.mjs~Result#a",
+    "src/modules/result.js~result#a",
+    "class/src/modules/Result.js~Result.html#instance-member-a",
+    "src/modules/Result.js~Result#a",
     "member"
   ],
   [
-    "src/modules/result.mjs~result#a_in_b",
-    "class/src/modules/Result.mjs~Result.html#instance-member-a_in_b",
-    "src/modules/Result.mjs~Result#a_in_b",
+    "src/modules/result.js~result#a_in_b",
+    "class/src/modules/Result.js~Result.html#instance-member-a_in_b",
+    "src/modules/Result.js~Result#a_in_b",
     "member"
   ],
   [
-    "src/modules/result.mjs~result#b",
-    "class/src/modules/Result.mjs~Result.html#instance-member-b",
-    "src/modules/Result.mjs~Result#b",
+    "src/modules/result.js~result#b",
+    "class/src/modules/Result.js~Result.html#instance-member-b",
+    "src/modules/Result.js~Result#b",
     "member"
   ],
   [
-    "src/modules/result.mjs~result#b_in_a",
-    "class/src/modules/Result.mjs~Result.html#instance-member-b_in_a",
-    "src/modules/Result.mjs~Result#b_in_a",
+    "src/modules/result.js~result#b_in_a",
+    "class/src/modules/Result.js~Result.html#instance-member-b_in_a",
+    "src/modules/Result.js~Result#b_in_a",
     "member"
   ],
   [
-    "src/modules/result.mjs~result#collision",
-    "class/src/modules/Result.mjs~Result.html#instance-member-collision",
-    "src/modules/Result.mjs~Result#collision",
+    "src/modules/result.js~result#collision",
+    "class/src/modules/Result.js~Result.html#instance-member-collision",
+    "src/modules/Result.js~Result#collision",
     "member"
   ],
   [
-    "src/modules/result.mjs~result#constructor",
-    "class/src/modules/Result.mjs~Result.html#instance-constructor-constructor",
-    "src/modules/Result.mjs~Result#constructor",
+    "src/modules/result.js~result#constructor",
+    "class/src/modules/Result.js~Result.html#instance-constructor-constructor",
+    "src/modules/Result.js~Result#constructor",
     "method"
   ],
   [
-    "src/modules/result.mjs~result#overlap",
-    "class/src/modules/Result.mjs~Result.html#instance-member-overlap",
-    "src/modules/Result.mjs~Result#overlap",
+    "src/modules/result.js~result#overlap",
+    "class/src/modules/Result.js~Result.html#instance-member-overlap",
+    "src/modules/Result.js~Result#overlap",
     "member"
   ],
   [
-    "src/modules/result.mjs~result#overlap_x",
-    "class/src/modules/Result.mjs~Result.html#instance-member-overlap_x",
-    "src/modules/Result.mjs~Result#overlap_x",
+    "src/modules/result.js~result#overlap_x",
+    "class/src/modules/Result.js~Result.html#instance-member-overlap_x",
+    "src/modules/Result.js~Result#overlap_x",
     "member"
   ],
   [
-    "src/modules/result.mjs~result#overlap_y",
-    "class/src/modules/Result.mjs~Result.html#instance-member-overlap_y",
-    "src/modules/Result.mjs~Result#overlap_y",
+    "src/modules/result.js~result#overlap_y",
+    "class/src/modules/Result.js~Result.html#instance-member-overlap_y",
+    "src/modules/Result.js~Result#overlap_y",
     "member"
   ],
   [
-    "src/modules/sat.mjs",
-    "file/src/modules/SAT.mjs.html",
-    "src/modules/SAT.mjs",
+    "src/modules/sat.js",
+    "file/src/modules/SAT.js.html",
+    "src/modules/SAT.js",
     "file"
   ]
 ]

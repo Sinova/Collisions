@@ -3,47 +3,47 @@
   "expectCount": 111,
   "actualCount": 111,
   "files": {
-    "src/Collisions.mjs": {
+    "src/Collisions.js": {
       "expectCount": 15,
       "actualCount": 15,
       "undocumentLines": []
     },
-    "src/modules/BVH.mjs": {
+    "src/modules/BVH.js": {
       "expectCount": 11,
       "actualCount": 11,
       "undocumentLines": []
     },
-    "src/modules/BVHBranch.mjs": {
+    "src/modules/BVHBranch.js": {
       "expectCount": 15,
       "actualCount": 15,
       "undocumentLines": []
     },
-    "src/modules/Body.mjs": {
+    "src/modules/Body.js": {
       "expectCount": 21,
       "actualCount": 21,
       "undocumentLines": []
     },
-    "src/modules/Circle.mjs": {
+    "src/modules/Circle.js": {
       "expectCount": 5,
       "actualCount": 5,
       "undocumentLines": []
     },
-    "src/modules/Point.mjs": {
+    "src/modules/Point.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/modules/Polygon.mjs": {
+    "src/modules/Polygon.js": {
       "expectCount": 25,
       "actualCount": 25,
       "undocumentLines": []
     },
-    "src/modules/Result.mjs": {
+    "src/modules/Result.js": {
       "expectCount": 10,
       "actualCount": 10,
       "undocumentLines": []
     },
-    "src/modules/SAT.mjs": {
+    "src/modules/SAT.js": {
       "expectCount": 6,
       "actualCount": 6,
       "undocumentLines": []

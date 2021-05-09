@@ -70,12 +70,12 @@
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Collisions; });
 /* unused harmony export Collisions */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_BVH_mjs__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_Circle_mjs__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_Polygon_mjs__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_Point_mjs__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_Result_mjs__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_SAT_mjs__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_BVH_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_Circle_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_Polygon_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_Point_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_Result_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_SAT_js__ = __webpack_require__(3);
 /* unused harmony reexport Result */
 /* unused harmony reexport Circle */
 /* unused harmony reexport Polygon */
@@ -97,7 +97,7 @@ class Collisions {
 	 */
 	constructor() {
 		/** @private */
-		this._bvh = new __WEBPACK_IMPORTED_MODULE_0__modules_BVH_mjs__["a" /* default */]();
+		this._bvh = new __WEBPACK_IMPORTED_MODULE_0__modules_BVH_js__["a" /* default */]();
 	}
 
 	/**
@@ -110,7 +110,7 @@ class Collisions {
 	 * @returns {Circle}
 	 */
 	createCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
-		const body = new __WEBPACK_IMPORTED_MODULE_1__modules_Circle_mjs__["a" /* default */](x, y, radius, scale, padding);
+		const body = new __WEBPACK_IMPORTED_MODULE_1__modules_Circle_js__["a" /* default */](x, y, radius, scale, padding);
 
 		this._bvh.insert(body);
 
@@ -129,7 +129,7 @@ class Collisions {
 	 * @returns {Polygon}
 	 */
 	createPolygon(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
-		const body = new __WEBPACK_IMPORTED_MODULE_2__modules_Polygon_mjs__["a" /* default */](x, y, points, angle, scale_x, scale_y, padding);
+		const body = new __WEBPACK_IMPORTED_MODULE_2__modules_Polygon_js__["a" /* default */](x, y, points, angle, scale_x, scale_y, padding);
 
 		this._bvh.insert(body);
 
@@ -144,7 +144,7 @@ class Collisions {
 	 * @returns {Point}
 	 */
 	createPoint(x = 0, y = 0, padding = 0) {
-		const body = new __WEBPACK_IMPORTED_MODULE_3__modules_Point_mjs__["a" /* default */](x, y, padding);
+		const body = new __WEBPACK_IMPORTED_MODULE_3__modules_Point_js__["a" /* default */](x, y, padding);
 
 		this._bvh.insert(body);
 
@@ -155,14 +155,14 @@ class Collisions {
 	 * Creates a {@link Result} used to collect the detailed results of a collision test
 	 */
 	createResult() {
-		return new __WEBPACK_IMPORTED_MODULE_4__modules_Result_mjs__["a" /* default */]();
+		return new __WEBPACK_IMPORTED_MODULE_4__modules_Result_js__["a" /* default */]();
 	}
 
 	/**
 	 * Creates a Result used to collect the detailed results of a collision test
 	 */
 	static createResult() {
-		return new __WEBPACK_IMPORTED_MODULE_4__modules_Result_mjs__["a" /* default */]();
+		return new __WEBPACK_IMPORTED_MODULE_4__modules_Result_js__["a" /* default */]();
 	}
 
 	/**
@@ -231,7 +231,7 @@ class Collisions {
 	 * @returns {Boolean}
 	 */
 	collides(source, target, result = null, aabb = true) {
-		return Object(__WEBPACK_IMPORTED_MODULE_5__modules_SAT_mjs__["a" /* default */])(source, target, result, aabb);
+		return Object(__WEBPACK_IMPORTED_MODULE_5__modules_SAT_js__["a" /* default */])(source, target, result, aabb);
 	}
 };
 
@@ -243,8 +243,8 @@ class Collisions {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Result_mjs__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SAT_mjs__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Result_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SAT_js__ = __webpack_require__(3);
 
 
 
@@ -321,7 +321,7 @@ class Body {
 	 * @returns {Boolean}
 	 */
 	collides(target, result = null, aabb = true) {
-		return Object(__WEBPACK_IMPORTED_MODULE_1__SAT_mjs__["a" /* default */])(this, target, result, aabb);
+		return Object(__WEBPACK_IMPORTED_MODULE_1__SAT_js__["a" /* default */])(this, target, result, aabb);
 	}
 
 	/**
@@ -353,14 +353,14 @@ class Body {
 	 * Creates a {@link Result} used to collect the detailed results of a collision test
 	 */
 	createResult() {
-		return new __WEBPACK_IMPORTED_MODULE_0__Result_mjs__["a" /* default */]();
+		return new __WEBPACK_IMPORTED_MODULE_0__Result_js__["a" /* default */]();
 	}
 
 	/**
 	 * Creates a Result used to collect the detailed results of a collision test
 	 */
 	static createResult() {
-		return new __WEBPACK_IMPORTED_MODULE_0__Result_mjs__["a" /* default */]();
+		return new __WEBPACK_IMPORTED_MODULE_0__Result_js__["a" /* default */]();
 	}
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Body;
@@ -860,14 +860,14 @@ function separatingAxis(a_coords, b_coords, x, y, result = null) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Body_mjs__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Body_js__ = __webpack_require__(1);
 
 
 /**
  * A polygon used to detect collisions
  * @class
  */
-class Polygon extends __WEBPACK_IMPORTED_MODULE_0__Body_mjs__["a" /* default */] {
+class Polygon extends __WEBPACK_IMPORTED_MODULE_0__Body_js__["a" /* default */] {
 	/**
 	 * @constructor
 	 * @param {Number} [x = 0] The starting X coordinate
@@ -1116,8 +1116,8 @@ class Polygon extends __WEBPACK_IMPORTED_MODULE_0__Body_mjs__["a" /* default */]
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__examples_Tank_mjs__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__examples_Stress_mjs__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__examples_Tank_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__examples_Stress_js__ = __webpack_require__(11);
 
 
 
@@ -1125,11 +1125,11 @@ let example;
 
 switch(window.location.search) {
 	case '?stress':
-		example = new __WEBPACK_IMPORTED_MODULE_1__examples_Stress_mjs__["a" /* default */]();
+		example = new __WEBPACK_IMPORTED_MODULE_1__examples_Stress_js__["a" /* default */]();
 		break;
 
 	default:
-		example = new __WEBPACK_IMPORTED_MODULE_0__examples_Tank_mjs__["a" /* default */]();
+		example = new __WEBPACK_IMPORTED_MODULE_0__examples_Tank_js__["a" /* default */]();
 		break;
 }
 
@@ -1141,16 +1141,16 @@ document.body.appendChild(example.element);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_Collisions_mjs__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_Collisions_js__ = __webpack_require__(0);
 
 
 const width  = 800;
 const height = 600;
-const result = __WEBPACK_IMPORTED_MODULE_0__src_Collisions_mjs__["a" /* default */].createResult();
+const result = __WEBPACK_IMPORTED_MODULE_0__src_Collisions_js__["a" /* default */].createResult();
 
 class Tank {
 	constructor() {
-		const collisions = new __WEBPACK_IMPORTED_MODULE_0__src_Collisions_mjs__["a" /* default */]();
+		const collisions = new __WEBPACK_IMPORTED_MODULE_0__src_Collisions_js__["a" /* default */]();
 
 		this.element    = document.createElement('div');
 		this.canvas     = document.createElement('canvas');
@@ -1352,7 +1352,7 @@ function random(min, max) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BVHBranch_mjs__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BVHBranch_js__ = __webpack_require__(8);
 
 
 /**
@@ -1471,7 +1471,7 @@ class BVH {
 					const parent_min_y = current._bvh_min_y;
 					const parent_max_x = current._bvh_max_x;
 					const parent_max_y = current._bvh_max_y;
-					const new_parent   = current._bvh_parent = body._bvh_parent = __WEBPACK_IMPORTED_MODULE_0__BVHBranch_mjs__["a" /* default */].getBranch();
+					const new_parent   = current._bvh_parent = body._bvh_parent = __WEBPACK_IMPORTED_MODULE_0__BVHBranch_js__["a" /* default */].getBranch();
 
 					new_parent._bvh_parent = grandparent;
 					new_parent._bvh_left   = current;
@@ -1567,7 +1567,7 @@ class BVH {
 			this._hierarchy = sibling;
 		}
 
-		__WEBPACK_IMPORTED_MODULE_0__BVHBranch_mjs__["a" /* default */].releaseBranch(parent);
+		__WEBPACK_IMPORTED_MODULE_0__BVHBranch_js__["a" /* default */].releaseBranch(parent);
 	}
 
 	/**
@@ -1854,14 +1854,14 @@ class BVHBranch {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Body_mjs__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Body_js__ = __webpack_require__(1);
 
 
 /**
  * A circle used to detect collisions
  * @class
  */
-class Circle extends __WEBPACK_IMPORTED_MODULE_0__Body_mjs__["a" /* default */] {
+class Circle extends __WEBPACK_IMPORTED_MODULE_0__Body_js__["a" /* default */] {
 	/**
 	 * @constructor
 	 * @param {Number} [x = 0] The starting X coordinate
@@ -1908,14 +1908,14 @@ class Circle extends __WEBPACK_IMPORTED_MODULE_0__Body_mjs__["a" /* default */] 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Polygon_mjs__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Polygon_js__ = __webpack_require__(4);
 
 
 /**
  * A point used to detect collisions
  * @class
  */
-class Point extends __WEBPACK_IMPORTED_MODULE_0__Polygon_mjs__["a" /* default */] {
+class Point extends __WEBPACK_IMPORTED_MODULE_0__Polygon_js__["a" /* default */] {
 	/**
 	 * @constructor
 	 * @param {Number} [x = 0] The starting X coordinate
@@ -1940,10 +1940,10 @@ Point.prototype.setPoints = undefined;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_Collisions_mjs__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_Collisions_js__ = __webpack_require__(0);
 
 
-const result = __WEBPACK_IMPORTED_MODULE_0__src_Collisions_mjs__["a" /* default */].createResult();
+const result = __WEBPACK_IMPORTED_MODULE_0__src_Collisions_js__["a" /* default */].createResult();
 const width  = 800;
 const height = 600;
 const count  = 500
@@ -1958,7 +1958,7 @@ class Stress {
 		this.element    = document.createElement('div');
 		this.canvas     = document.createElement('canvas');
 		this.context    = this.canvas.getContext('2d');
-		this.collisions = new __WEBPACK_IMPORTED_MODULE_0__src_Collisions_mjs__["a" /* default */]();
+		this.collisions = new __WEBPACK_IMPORTED_MODULE_0__src_Collisions_js__["a" /* default */]();
 		this.bodies     = [];
 		this.polygons   = 0;
 		this.circles    = 0;

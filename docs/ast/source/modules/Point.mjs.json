@@ -91,10 +91,10 @@
             }
           },
           "extra": {
-            "rawValue": "./Polygon.mjs",
-            "raw": "'./Polygon.mjs'"
+            "rawValue": "./Polygon.js",
+            "raw": "'./Polygon.js'"
           },
-          "value": "./Polygon.mjs"
+          "value": "./Polygon.js"
         },
         "trailingComments": [
           {
@@ -1127,7 +1127,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./Polygon.mjs",
+      "value": "./Polygon.js",
       "start": 20,
       "end": 35,
       "loc": {

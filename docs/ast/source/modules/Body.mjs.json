@@ -91,10 +91,10 @@
             }
           },
           "extra": {
-            "rawValue": "./Result.mjs",
-            "raw": "'./Result.mjs'"
+            "rawValue": "./Result.js",
+            "raw": "'./Result.js'"
           },
-          "value": "./Result.mjs"
+          "value": "./Result.js"
         }
       },
       {
@@ -160,10 +160,10 @@
             }
           },
           "extra": {
-            "rawValue": "./SAT.mjs",
-            "raw": "'./SAT.mjs'"
+            "rawValue": "./SAT.js",
+            "raw": "'./SAT.js'"
           },
-          "value": "./SAT.mjs"
+          "value": "./SAT.js"
         },
         "trailingComments": [
           {
@@ -4258,7 +4258,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./Result.mjs",
+      "value": "./Result.js",
       "start": 19,
       "end": 33,
       "loc": {
@@ -4391,7 +4391,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./SAT.mjs",
+      "value": "./SAT.js",
       "start": 54,
       "end": 65,
       "loc": {

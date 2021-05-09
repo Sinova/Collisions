@@ -91,10 +91,10 @@
             }
           },
           "extra": {
-            "rawValue": "./BVHBranch.mjs",
-            "raw": "'./BVHBranch.mjs'"
+            "rawValue": "./BVHBranch.js",
+            "raw": "'./BVHBranch.js'"
           },
-          "value": "./BVHBranch.mjs"
+          "value": "./BVHBranch.js"
         },
         "trailingComments": [
           {
@@ -27050,7 +27050,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./BVHBranch.mjs",
+      "value": "./BVHBranch.js",
       "start": 22,
       "end": 39,
       "loc": {

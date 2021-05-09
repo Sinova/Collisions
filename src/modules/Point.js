@@ -1,4 +1,4 @@
-import Polygon from './Polygon.mjs';
+import Polygon from './Polygon.js';
 
 /**
  * A point used to detect collisions

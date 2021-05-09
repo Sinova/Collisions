@@ -1,4 +1,4 @@
-import BVHBranch from './BVHBranch.mjs';
+import BVHBranch from './BVHBranch.js';
 
 /**
  * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly

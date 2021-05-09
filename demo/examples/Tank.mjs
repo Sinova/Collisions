@@ -1,4 +1,4 @@
-import Collisions from '../../src/Collisions.mjs';
+import Collisions from '../../src/Collisions.js';
 
 const width  = 800;
 const height = 600;

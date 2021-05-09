@@ -1,4 +1,4 @@
-import Body from './Body.mjs';
+import Body from './Body.js';
 
 /**
  * A polygon used to detect collisions

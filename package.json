@@ -5,8 +5,9 @@
 	"license": "MIT",
 	"version": "2.0.14",
 	"homepage": "https://ryanatkn.github.io/collisions",
-	"main": "src/Collisions.mjs",
-	"module": "src/Collisions.mjs",
+	"type": "module",
+	"main": "src/Collisions.js",
+	"module": "src/Collisions.js",
 	"types": "collisions.d.ts",
 	"scripts": {
 		"build": "rm -rf ./docs/* && esdoc && webpack"

@@ -91,10 +91,10 @@
             }
           },
           "extra": {
-            "rawValue": "./Body.mjs",
-            "raw": "'./Body.mjs'"
+            "rawValue": "./Body.js",
+            "raw": "'./Body.js'"
           },
-          "value": "./Body.mjs"
+          "value": "./Body.js"
         },
         "trailingComments": [
           {
@@ -15631,7 +15631,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./Body.mjs",
+      "value": "./Body.js",
       "start": 17,
       "end": 29,
       "loc": {
