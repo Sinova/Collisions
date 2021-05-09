@@ -2,7 +2,7 @@ Collisions
 ===============================================================================
 
 > **important**: this is a forked and republished version of
-> [Sinova/Collisions](https://github.com/Sinova/Collisions)
+> <https://github.com/Sinova/Collisions>
 > due to its [currently stale release](https://github.com/Sinova/Collisions/issues/20) and the
 > [incompatible](https://github.com/ryanatkn/collisions/commit/6e4135789fe5f1e8cdddbc76d7726ee838e30acb)
 > (for my tools) shape of its published artifacts —
