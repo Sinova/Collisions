@@ -411,7 +411,7 @@ class Result {
 		 * @desc True if B is completely contained within A
 		 * @type {Boolean}
 		 */
-		this.a_in_b = false;
+		this.b_in_a = false;
 
 		/**
 		 * @desc The magnitude of the shortest axis of overlap

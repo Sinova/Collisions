@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 110,
-  "actualCount": 110,
+  "expectCount": 111,
+  "actualCount": 111,
   "files": {
     "src/Collisions.mjs": {
       "expectCount": 15,
@@ -39,8 +39,8 @@
       "undocumentLines": []
     },
     "src/modules/Result.mjs": {
-      "expectCount": 9,
-      "actualCount": 9,
+      "expectCount": 10,
+      "actualCount": 10,
       "undocumentLines": []
     },
     "src/modules/SAT.mjs": {

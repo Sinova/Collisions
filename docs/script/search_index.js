@@ -1,38 +1,38 @@
 window.esdocSearchIndex = [
   [
-    "collisions/src/modules/body.mjs~body",
+    "@ryanatkn/collisions/src/modules/body.mjs~body",
     "class/src/modules/Body.mjs~Body.html",
-    "<span>Body</span> <span class=\"search-result-import-path\">collisions/src/modules/Body.mjs</span>",
+    "<span>Body</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Body.mjs</span>",
     "class"
   ],
   [
-    "collisions/src/modules/circle.mjs~circle",
+    "@ryanatkn/collisions/src/modules/circle.mjs~circle",
     "class/src/modules/Circle.mjs~Circle.html",
-    "<span>Circle</span> <span class=\"search-result-import-path\">collisions/src/modules/Circle.mjs</span>",
+    "<span>Circle</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Circle.mjs</span>",
     "class"
   ],
   [
-    "collisions~collisions",
+    "@ryanatkn/collisions/src/collisions.mjs~collisions",
     "class/src/Collisions.mjs~Collisions.html",
-    "<span>Collisions</span> <span class=\"search-result-import-path\">collisions</span>",
+    "<span>Collisions</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/Collisions.mjs</span>",
     "class"
   ],
   [
-    "collisions/src/modules/point.mjs~point",
+    "@ryanatkn/collisions/src/modules/point.mjs~point",
     "class/src/modules/Point.mjs~Point.html",
-    "<span>Point</span> <span class=\"search-result-import-path\">collisions/src/modules/Point.mjs</span>",
+    "<span>Point</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Point.mjs</span>",
     "class"
   ],
   [
-    "collisions/src/modules/polygon.mjs~polygon",
+    "@ryanatkn/collisions/src/modules/polygon.mjs~polygon",
     "class/src/modules/Polygon.mjs~Polygon.html",
-    "<span>Polygon</span> <span class=\"search-result-import-path\">collisions/src/modules/Polygon.mjs</span>",
+    "<span>Polygon</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Polygon.mjs</span>",
     "class"
   ],
   [
-    "collisions/src/modules/result.mjs~result",
+    "@ryanatkn/collisions/src/modules/result.mjs~result",
     "class/src/modules/Result.mjs~Result.html",
-    "<span>Result</span> <span class=\"search-result-import-path\">collisions/src/modules/Result.mjs</span>",
+    "<span>Result</span> <span class=\"search-result-import-path\">@ryanatkn/collisions/src/modules/Result.mjs</span>",
     "class"
   ],
   [
@@ -579,6 +579,12 @@ window.esdocSearchIndex = [
     "src/modules/result.mjs~result#b",
     "class/src/modules/Result.mjs~Result.html#instance-member-b",
     "src/modules/Result.mjs~Result#b",
+    "member"
+  ],
+  [
+    "src/modules/result.mjs~result#b_in_a",
+    "class/src/modules/Result.mjs~Result.html#instance-member-b_in_a",
+    "src/modules/Result.mjs~Result#b_in_a",
     "member"
   ],
   [
