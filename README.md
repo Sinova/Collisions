@@ -8,7 +8,8 @@ Collisions
 > ([1](https://github.com/ryanatkn/collisions/commit/52de9ec375cf75784e681d6e218ecff8899f7747#diff-7ae45ad102eab3b6d7e7896acd08c427a9b25b346470d7bc6507b6481575d519R8),
 > [2](https://github.com/ryanatkn/collisions/commit/6e4135789fe5f1e8cdddbc76d7726ee838e30acb),
 > [3](https://github.com/ryanatkn/collisions/commit/9ad86129045c0ca6a84d2803ee9aa49565a9b6f0)) —
-> please use the original if possible instead of this fork,
+> please use [the original](https://github.com/Sinova/Collisions)
+> if possible instead of this fork,
 > but if you run into problems, this might be what you need
 
 > I'm linking to 
