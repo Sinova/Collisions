@@ -8,8 +8,9 @@ Collisions
 > we recommend using the original if possible instead of this fork,
 > but if you run into problems, this might be what you need
 
-> I'm linking to my forked version of the docs because
-> I fixed some broken links from the old GitHub `.com/.io` switchover
+> I'm linking to 
+> [my forked version of the docs](https://ryanatkn.github.io/collisions/)
+> because I fixed some broken links from the old GitHub `.com/.io` switchover
 
 > TODO publish and document `npm i @ryanatkn/collisions`
 
