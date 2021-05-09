@@ -2,8 +2,12 @@ Collisions
 ===============================================================================
 
 > **important**: this is a forked and republished version of
-> [Sinova/Collisions](https://github.com/Sinova/Collisions) —
-> we recommend using the original if possible instead of this fork
+> [Sinova/Collisions](https://github.com/Sinova/Collisions)
+> due to [its current staleness](https://github.com/Sinova/Collisions/issues/20) —
+> we recommend using the original if possible instead of this fork,
+> but if you run into problems, this might be what you need
+
+> TODO publish and document `npm i @ryanatkn/collisions`
 
 **Collisions** is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching and the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.
 
