@@ -7,6 +7,10 @@
 	"homepage": "https://ryanatkn.github.io/collisions",
 	"type": "module",
 	"main": "src/Collisions.js",
+	"files": [
+		"src",
+		"collisions.d.ts"
+	],
 	"module": "src/Collisions.js",
 	"types": "collisions.d.ts",
 	"scripts": {
