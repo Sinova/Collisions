@@ -4,8 +4,9 @@ Collisions
 > **important**: this is a forked and republished version of
 > <https://github.com/Sinova/Collisions>
 > due to its [currently stale release](https://github.com/Sinova/Collisions/issues/20) and the
-> [incompatible](https://github.com/ryanatkn/collisions/commit/6e4135789fe5f1e8cdddbc76d7726ee838e30acb)
-> (for my tools) shape of its published artifacts —
+> incompatible (for my tools) shape of its published artifacts
+> ([1](https://github.com/ryanatkn/collisions/commit/6e4135789fe5f1e8cdddbc76d7726ee838e30acb),
+> [2](https://github.com/ryanatkn/collisions/commit/9ad86129045c0ca6a84d2803ee9aa49565a9b6f0)) —
 > please use the original if possible instead of this fork,
 > but if you run into problems, this might be what you need
 
