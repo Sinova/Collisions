@@ -6,7 +6,7 @@ Collisions
 > due to its [currently stale release](https://github.com/Sinova/Collisions/issues/20) and the
 > [incompatible](https://github.com/ryanatkn/collisions/commit/6e4135789fe5f1e8cdddbc76d7726ee838e30acb)
 > (for my tools) shape of its published artifacts —
-> we recommend using the original if possible instead of this fork,
+> please use the original if possible instead of this fork,
 > but if you run into problems, this might be what you need
 
 > I'm linking to 
