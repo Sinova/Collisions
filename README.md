@@ -19,7 +19,7 @@ Collisions
 
 > TODO fix the broken docs build (`webpack.config.cjs` doesn't work as intended)
 
-> TODO publish and document `npm i @ryanatkn/collisions`
+> install: `npm i @ryanatkn/collisions`
 
 **Collisions** is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching and the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.
 
