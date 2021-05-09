@@ -42,7 +42,8 @@
 <div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="collisions">Collisions</h1><blockquote>
 <p><strong>important</strong>: this is a forked and republished version of
 <a href="https://github.com/Sinova/Collisions">Sinova/Collisions</a>
-due to <a href="https://github.com/Sinova/Collisions/issues/20">its current staleness</a> &#x2014;
+due to its <a href="https://github.com/Sinova/Collisions/issues/20">currently stale release</a>
+and the incompatible (for my tools) shape of its published artifacts &#x2014;
 we recommend using the original if possible instead of this fork,
 but if you run into problems, this might be what you need</p>
 <p>TODO publish and document <code>npm i @ryanatkn/collisions</code></p>
@@ -81,11 +82,11 @@ but if you run into problems, this might be what you need</p>
 <p>Bundling solutions such as <a href="https://webpack.js.org/">Webpack</a> or <a href="https://rollupjs.org/">Rollup.js</a> make native modules compatible with all environments.</p>
 </blockquote>
 <p><a name="anchor-documentation"></a></p>
-<h1 id="documentation">Documentation</h1><p>View the <a href="https://sinova.github.com/Collisions/">documentation</a> (this README is also there).</p>
+<h1 id="documentation">Documentation</h1><p>View the <a href="https://ryanatkn.github.io/collisions/">documentation</a> (this README is also there).</p>
 <p><a name="anchor-demos"></a></p>
 <h1 id="demos">Demos</h1><ul>
-<li><a href="https://sinova.github.com/Collisions/demo/">Tank</a></li>
-<li><a href="https://sinova.github.com/Collisions/demo/?stress">Stress Test</a></li>
+<li><a href="https://ryanatkn.github.io/collisions/demo/">Tank</a></li>
+<li><a href="https://ryanatkn.github.io/collisions/demo/?stress">Stress Test</a></li>
 </ul>
 <p><a name="anchor-usage"></a></p>
 <h1 id="usage">Usage</h1><pre><code class="lang-JavaScript"><code class="source-code prettyprint">import Collisions from &apos;collisions&apos;;
@@ -210,7 +211,7 @@ for(const body of potentials) {
 }</code>
 </code></pre>
 <p><a name="anchor-step-5"></a></p>
-<h2 id="5--getting-detailed-collision-information">5. Getting Detailed Collision Information</h2><p>There is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a <code>Result</code> object. <code>Result</code> objects have several properties set on them when a collision occurs, all of which are described in the <a href="https://sinova.github.com/Collisions/">documentation</a>.</p>
+<h2 id="5--getting-detailed-collision-information">5. Getting Detailed Collision Information</h2><p>There is often a need for detailed information about a collision in order to react to it appropriately. This information is stored using a <code>Result</code> object. <code>Result</code> objects have several properties set on them when a collision occurs, all of which are described in the <a href="https://ryanatkn.github.io/collisions/">documentation</a>.</p>
 <p>For convenience, there are several ways to create a <code>Result</code> object. <code>Result</code> objects do not belong to any particular collision system, so any of the following methods for creating one can be used interchangeably. This also means the same <code>Result</code> object can be used for collisions across multiple systems.</p>
 <blockquote>
 <p><strong>Note:</strong> It is highly recommended that <code>Result</code> objects be recycled when performing multiple collision tests in order to save memory. The following example creates multiple <code>Result</code> objects strictly as a demonstration.</p>
@@ -285,7 +286,7 @@ context.stroke();</code>
 <p><a name="anchor-bounding-volume-padding"></a></p>
 <h1 id="bounding-volume-padding">Bounding Volume Padding</h1><p>When bodies move around within a collision system, the internal BVH has to remove and reinsert the body in order to determine where it belongs in the hierarchy. This is one of the most costly operations in maintaining a BVH. In general, most projects will never see a performance issue from this unless they are dealing with thousands of moving bodies at once. In these cases, it can <em>sometimes</em> be beneficial to &quot;pad&quot; the bounding volumes of each body so that the BVH doesn&apos;t need to remove and reinsert bodies that haven&apos;t changed position too much. In other words, padding the bounding volume allows &quot;breathing room&quot; for the body within it to move around without being flagged for an update.</p>
 <p>The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase <code>potentials()</code> search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.</p>
-<p>Padding can be added to a body when instantiating it (see the <a href="https://sinova.github.com/Collisions/">documentation</a> for each body) or at any time by changing its <code>padding</code> property.</p>
+<p>Padding can be added to a body when instantiating it (see the <a href="https://ryanatkn.github.io/collisions/">documentation</a> for each body) or at any time by changing its <code>padding</code> property.</p>
 <pre><code class="lang-JavaScript"><code class="source-code prettyprint">const padding = 5;
 const circle  = new Circle(100, 100, 10, 1, padding);
 
