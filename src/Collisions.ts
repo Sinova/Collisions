@@ -1,9 +1,9 @@
-import BVH     from './modules/BVH.mjs';
-import Circle  from './modules/Circle.mjs';
-import Polygon from './modules/Polygon.mjs';
-import Point   from './modules/Point.mjs';
-import Result  from './modules/Result.mjs';
-import SAT     from './modules/SAT.mjs';
+import BVH from './modules/BVH.js';
+import Circle from './modules/Circle.js';
+import Polygon from './modules/Polygon.js';
+import Point from './modules/Point.js';
+import Result from './modules/Result.js';
+import SAT from './modules/SAT.js';
 
 /**
  * A collision system used to track bodies in order to improve collision detection performance
@@ -88,7 +88,7 @@ class Collisions {
 	 * @param {...Circle|...Polygon|...Point} bodies
 	 */
 	insert(...bodies) {
-		for(const body of bodies) {
+		for (const body of bodies) {
 			this._bvh.insert(body, false);
 		}
 
@@ -100,7 +100,7 @@ class Collisions {
 	 * @param {...Circle|...Polygon|...Point} bodies
 	 */
 	remove(...bodies) {
-		for(const body of bodies) {
+		for (const body of bodies) {
 			this._bvh.remove(body, false);
 		}
 
@@ -151,13 +151,6 @@ class Collisions {
 	collides(source, target, result = null, aabb = true) {
 		return SAT(source, target, result, aabb);
 	}
-};
+}
 
-export {
-	Collisions as default,
-	Collisions,
-	Result,
-	Circle,
-	Polygon,
-	Point,
-};
+export {Collisions as default, Collisions, Result, Circle, Polygon, Point};

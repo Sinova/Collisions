@@ -45,10 +45,29 @@
 		"url": "https://github.com/ryanatkn/collisions/issues"
 	},
 	"devDependencies": {
-		"esdoc": "^1.0.4",
-		"esdoc-standard-plugin": "^1.0.0",
-		"html-webpack-plugin": "^2.30.1",
-		"npm": "^5.5.1",
-		"webpack": "^3.9.0"
+		"@feltcoop/gro": "^0.21.5",
+		"prettier": "~2.2.1",
+		"prettier-plugin-svelte": "^2.2.0",
+		"svelte": "^3.29.0",
+		"svelte-preprocess-esbuild": "^2.0.0",
+		"tslib": "^2.2.0",
+		"typescript": "^4.2.4"
+	},
+	"prettier": {
+		"useTabs": true,
+		"printWidth": 100,
+		"singleQuote": true,
+		"trailingComma": "all",
+		"bracketSpacing": false,
+		"svelteSortOrder": "options-scripts-markup-styles",
+		"svelteBracketNewLine": true,
+		"overrides": [
+			{
+				"files": "package.json",
+				"options": {
+					"useTabs": false
+				}
+			}
+		]
 	}
 }

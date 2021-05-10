@@ -1,4 +1,4 @@
-import Polygon from './Polygon.mjs';
+import Polygon from './Polygon.js';
 
 /**
  * A point used to detect collisions
@@ -17,6 +17,6 @@ export default class Point extends Polygon {
 		/** @private */
 		this._point = true;
 	}
-};
+}
 
 Point.prototype.setPoints = undefined;

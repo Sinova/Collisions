@@ -46,7 +46,7 @@ export default class BVHBranch {
 	 * @returns {BVHBranch}
 	 */
 	static getBranch() {
-		if(branch_pool.length) {
+		if (branch_pool.length) {
 			return branch_pool.pop();
 		}
 
@@ -70,4 +70,4 @@ export default class BVHBranch {
 	static sortBranches(a, b) {
 		return a.sort > b.sort ? -1 : 1;
 	}
-};
+}
