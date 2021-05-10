@@ -6,7 +6,7 @@ Collisions
 > due to its [currently stale release](https://github.com/Sinova/Collisions/issues/20) and the
 > incompatible (for my tools) shape of its published artifacts
 > ([1](https://github.com/ryanatkn/collisions/commit/6e4135789fe5f1e8cdddbc76d7726ee838e30acb),
-> [2](https://github.com/ryanatkn/collisions/commit/e180cc27f5d545a9a2987cb6990fdf16c20a0aff))
+> [2](https://github.com/ryanatkn/collisions/commit/b886d744dca9662797f1c477f175861e1fdb7299))
 > (tldr: it hasn't been updated since ESM Node APIs stabilized) —
 > please use [the original](https://github.com/Sinova/Collisions)
 > if possible instead of this fork,
