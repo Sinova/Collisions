@@ -12,8 +12,8 @@ Collisions
 > if possible instead of this fork,
 > but if you run into problems, this might be what you need
 
-> install: [`npm i @ryanatkn/collisions`](https://www.npmjs.com/package/@ryanatkn/collisions)
-> v2.0.15
+> install v2.0.16:
+> [`npm i @ryanatkn/collisions`](https://www.npmjs.com/package/@ryanatkn/collisions)
 
 > I'm linking to 
 > [my forked version of the docs](https://ryanatkn.github.io/collisions/)
