@@ -1,8 +1,5 @@
 import type {SomeBody} from './Body';
 
-// no-op for now
-export const assertBVHBranch: (a: any) => asserts a is BVHBranch = (_) => {};
-
 /**
  * @private
  */

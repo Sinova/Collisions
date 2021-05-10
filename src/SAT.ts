@@ -1,6 +1,6 @@
 import type {SomeBody} from './Body.js';
 import type {Circle} from './Circle.js';
-import {assertPolygon} from './Polygon.js';
+import {assertPolygon} from './assert.js';
 import type {Polygon} from './Polygon.js';
 import type {Result} from './Result.js';
 

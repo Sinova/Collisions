@@ -1,6 +1,6 @@
-import {BVHBranch, assertBVHBranch} from './BVHBranch.js';
+import {BVHBranch} from './BVHBranch.js';
 import type {Body, SomeBody} from './Body.js';
-import {assertPolygon} from './Polygon.js';
+import {assertPolygon, assertBVHBranch} from './assert.js';
 import type {Polygon} from './Polygon.js';
 import type {Circle} from './Circle.js';
 

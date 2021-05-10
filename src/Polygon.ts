@@ -1,8 +1,4 @@
 import {Body} from './Body.js';
-import type {SomeBody} from './Body.js';
-
-// no-op for now
-export const assertPolygon: (a: SomeBody) => asserts a is Polygon = (_) => {};
 
 /**
  * A polygon used to detect collisions
