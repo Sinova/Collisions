@@ -13,6 +13,7 @@
 > I'm linking to
 > [my forked version of the docs](https://ryanatkn.github.io/collisions/)
 > because I fixed some broken links from the old GitHub pages `.com/.io` switchover
+> (TODO upstream a fix)
 
 ## todo
 
