@@ -9,7 +9,6 @@
 		"node": ">=14.16.0"
 	},
 	"main": "src/Collisions.mjs",
-	"module": "src/Collisions.mjs",
 	"files": [
 		"src",
 		"collisions.d.ts"
