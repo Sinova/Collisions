@@ -1,7 +1,10 @@
 {
 	"name": "@ryanatkn/collisions",
 	"description": "collision detection for circles, polygons, and points — fork of github.com/Sinova/Collisions",
-	"author": "Samuel Hodge",
+	"author": {
+		"name": "Samuel Hodge",
+		"url": "https://github.com/Sinova"
+	},
 	"license": "MIT",
 	"version": "2.0.16",
 	"homepage": "https://ryanatkn.github.io/collisions",
