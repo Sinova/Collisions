@@ -1,5 +1,10 @@
 # changelog
 
+## 2.0.20
+
+- add commonjs alongside ESM build
+  ([#2](https://github.com/ryanatkn/collisions/pull/2))
+
 ## 2.0.19
 
 - fix build
