@@ -1,5 +1,9 @@
 # changelog
 
+## 2.0.19
+
+- fix build
+
 ## 2.0.18
 
 - distribute as ES modules

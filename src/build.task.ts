@@ -7,6 +7,6 @@ export const task: Task = {
 		await invokeTask('gro/build');
 		// TODO replace with new build system in gro@0.22
 		await fs.remove('dist');
-		await fs.copy('.gro/prod/lib', 'dist');
+		await fs.copy('.gro/prod/lib', 'dist', {filter: (file) => !file.endsWith('.map')});
 	},
 };
