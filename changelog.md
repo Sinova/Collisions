@@ -1,4 +1,4 @@
-# @ryanatkn/collisions changelog
+# changelog
 
 ## 2.0.17
 
