@@ -1,5 +1,9 @@
 # changelog
 
+## 2.0.18
+
+- distribute as ES modules
+
 ## 2.0.17
 
 - convert to TypeScript
