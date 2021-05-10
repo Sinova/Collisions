@@ -1,10 +1,12 @@
-import Polygon from './Polygon.mjs';
+import {Polygon} from './Polygon.js';
 
 /**
  * A point used to detect collisions
  * @class
  */
-export default class Point extends Polygon {
+export class Point extends Polygon {
+	_point = true;
+
 	/**
 	 * @constructor
 	 * @param {Number} [x = 0] The starting X coordinate
@@ -13,10 +15,9 @@ export default class Point extends Polygon {
 	 */
 	constructor(x = 0, y = 0, padding = 0) {
 		super(x, y, [[0, 0]], 0, 1, 1, padding);
-
-		/** @private */
-		this._point = true;
 	}
-};
 
-Point.prototype.setPoints = undefined;
+	// TODO is this correct? here's the original code:
+	// Point.prototype.setPoints = undefined;
+	setPoints = undefined as any;
+}

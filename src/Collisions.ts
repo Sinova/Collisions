@@ -1,15 +1,18 @@
-import BVH     from './modules/BVH.mjs';
-import Circle  from './modules/Circle.mjs';
-import Polygon from './modules/Polygon.mjs';
-import Point   from './modules/Point.mjs';
-import Result  from './modules/Result.mjs';
-import SAT     from './modules/SAT.mjs';
+import {BVH} from './BVH.js';
+import {Circle} from './Circle.js';
+import {Point} from './Point.js';
+import {Polygon} from './Polygon.js';
+import {Result} from './Result.js';
+import type {Body, SomeBody} from './Body.js';
+import {SAT} from './SAT.js';
 
 /**
  * A collision system used to track bodies in order to improve collision detection performance
  * @class
  */
-class Collisions {
+export class Collisions {
+	_bvh: BVH;
+
 	/**
 	 * @constructor
 	 */
@@ -27,7 +30,7 @@ class Collisions {
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 * @returns {Circle}
 	 */
-	createCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
+	createCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0): Circle {
 		const body = new Circle(x, y, radius, scale, padding);
 
 		this._bvh.insert(body);
@@ -46,7 +49,15 @@ class Collisions {
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 * @returns {Polygon}
 	 */
-	createPolygon(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
+	createPolygon(
+		x = 0,
+		y = 0,
+		points = [[0, 0]],
+		angle = 0,
+		scale_x = 1,
+		scale_y = 1,
+		padding = 0,
+	): Polygon {
 		const body = new Polygon(x, y, points, angle, scale_x, scale_y, padding);
 
 		this._bvh.insert(body);
@@ -61,7 +72,7 @@ class Collisions {
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 * @returns {Point}
 	 */
-	createPoint(x = 0, y = 0, padding = 0) {
+	createPoint(x = 0, y = 0, padding = 0): Point {
 		const body = new Point(x, y, padding);
 
 		this._bvh.insert(body);
@@ -72,14 +83,14 @@ class Collisions {
 	/**
 	 * Creates a {@link Result} used to collect the detailed results of a collision test
 	 */
-	createResult() {
+	createResult(): Result {
 		return new Result();
 	}
 
 	/**
 	 * Creates a Result used to collect the detailed results of a collision test
 	 */
-	static createResult() {
+	static createResult(): Result {
 		return new Result();
 	}
 
@@ -87,8 +98,8 @@ class Collisions {
 	 * Inserts bodies into the collision system
 	 * @param {...Circle|...Polygon|...Point} bodies
 	 */
-	insert(...bodies) {
-		for(const body of bodies) {
+	insert(...bodies: SomeBody[]): Collisions {
+		for (const body of bodies) {
 			this._bvh.insert(body, false);
 		}
 
@@ -99,8 +110,8 @@ class Collisions {
 	 * Removes bodies from the collision system
 	 * @param {...Circle|...Polygon|...Point} bodies
 	 */
-	remove(...bodies) {
-		for(const body of bodies) {
+	remove(...bodies: SomeBody[]): Collisions {
+		for (const body of bodies) {
 			this._bvh.remove(body, false);
 		}
 
@@ -110,7 +121,7 @@ class Collisions {
 	/**
 	 * Updates the collision system. This should be called before any collisions are tested.
 	 */
-	update() {
+	update(): Collisions {
 		this._bvh.update();
 
 		return this;
@@ -120,16 +131,16 @@ class Collisions {
 	 * Draws the bodies within the system to a CanvasRenderingContext2D's current path
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
-	draw(context) {
-		return this._bvh.draw(context);
+	draw(context: CanvasRenderingContext2D): void {
+		this._bvh.draw(context);
 	}
 
 	/**
 	 * Draws the system's BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
-	drawBVH(context) {
-		return this._bvh.drawBVH(context);
+	drawBVH(context: CanvasRenderingContext2D): void {
+		this._bvh.drawBVH(context);
 	}
 
 	/**
@@ -137,27 +148,19 @@ class Collisions {
 	 * @param {Circle|Polygon|Point} body The body to test for potential collisions against
 	 * @returns {Array<Body>}
 	 */
-	potentials(body) {
+	potentials(body: SomeBody): Body[] {
 		return this._bvh.potentials(body);
 	}
 
 	/**
 	 * Determines if two bodies are colliding
+	 * @param {Circle|Polygon|Point} source The source body
 	 * @param {Circle|Polygon|Point} target The target body to test against
 	 * @param {Result} [result = null] A Result object on which to store information about the collision
 	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 * @returns {Boolean}
 	 */
-	collides(source, target, result = null, aabb = true) {
+	collides(source: SomeBody, target: SomeBody, result: Result | null = null, aabb = true): boolean {
 		return SAT(source, target, result, aabb);
 	}
-};
-
-export {
-	Collisions as default,
-	Collisions,
-	Result,
-	Circle,
-	Polygon,
-	Point,
-};
+}

@@ -1,10 +1,14 @@
-import Body from './Body.mjs';
+import {Body} from './Body.js';
 
 /**
  * A circle used to detect collisions
  * @class
  */
-export default class Circle extends Body {
+export class Circle extends Body {
+	radius: number;
+	scale: number;
+	_circle = true;
+
 	/**
 	 * @constructor
 	 * @param {Number} [x = 0] The starting X coordinate
@@ -33,12 +37,12 @@ export default class Circle extends Body {
 	 * Draws the circle to a CanvasRenderingContext2D's current path
 	 * @param {CanvasRenderingContext2D} context The context to add the arc to
 	 */
-	draw(context) {
-		const x      = this.x;
-		const y      = this.y;
+	draw(context: CanvasRenderingContext2D): void {
+		const x = this.x;
+		const y = this.y;
 		const radius = this.radius * this.scale;
 
 		context.moveTo(x + radius, y);
 		context.arc(x, y, radius, 0, Math.PI * 2);
 	}
-};
+}

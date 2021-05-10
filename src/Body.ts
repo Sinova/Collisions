@@ -1,12 +1,35 @@
-import Result from './Result.mjs';
-import SAT    from './SAT.mjs';
+import type {BVH} from './BVH.js';
+import type {BVHBranch} from './BVHBranch.js';
+import type {Circle} from './Circle.js';
+import type {Point} from './Point.js';
+import type {Polygon} from './Polygon.js';
+import {Result} from './Result.js';
+import {SAT} from './SAT.js';
+
+// TODO name? lol
+export type SomeBody = Circle | Polygon | Point;
 
 /**
  * The base class for bodies used to detect collisions
  * @class
  * @protected
  */
-export default class Body {
+export class Body {
+	x: number;
+	y: number;
+	padding: number;
+	_circle = false;
+	_polygon = false;
+	_point = false;
+	_bvh: null | BVH = null;
+	_bvh_parent: null | BVHBranch = null;
+	_bvh_branch = false;
+	_bvh_padding: number;
+	_bvh_min_x = 0;
+	_bvh_min_y = 0;
+	_bvh_max_x = 0;
+	_bvh_max_y = 0;
+
 	/**
 	 * @constructor
 	 * @param {Number} [x = 0] The starting X coordinate
@@ -31,39 +54,7 @@ export default class Body {
 		 * @type {Number}
 		 */
 		this.padding = padding;
-
-		/** @private */
-		this._circle = false;
-
-		/** @private */
-		this._polygon = false;
-
-		/** @private */
-		this._point = false;
-
-		/** @private */
-		this._bvh = null;
-
-		/** @private */
-		this._bvh_parent = null;
-
-		/** @private */
-		this._bvh_branch = false;
-
-		/** @private */
 		this._bvh_padding = padding;
-
-		/** @private */
-		this._bvh_min_x = 0;
-
-		/** @private */
-		this._bvh_min_y = 0;
-
-		/** @private */
-		this._bvh_max_x = 0;
-
-		/** @private */
-		this._bvh_max_y = 0;
 	}
 
 	/**
@@ -73,18 +64,18 @@ export default class Body {
 	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 * @returns {Boolean}
 	 */
-	collides(target, result = null, aabb = true) {
-		return SAT(this, target, result, aabb);
+	collides(target: SomeBody, result: Result | null = null, aabb = true): boolean {
+		return SAT(this as any, target, result, aabb); // TODO type?
 	}
 
 	/**
 	 * Returns a list of potential collisions
 	 * @returns {Array<Body>}
 	 */
-	potentials() {
+	potentials(): Body[] {
 		const bvh = this._bvh;
 
-		if(bvh === null) {
+		if (bvh === null) {
 			throw new Error('Body does not belong to a collision system');
 		}
 
@@ -94,25 +85,25 @@ export default class Body {
 	/**
 	 * Removes the body from its current collision system
 	 */
-	remove() {
+	remove(): void {
 		const bvh = this._bvh;
 
-		if(bvh) {
-			bvh.remove(this, false);
+		if (bvh) {
+			bvh.remove(this as any, false); // TODO type?
 		}
 	}
 
 	/**
 	 * Creates a {@link Result} used to collect the detailed results of a collision test
 	 */
-	createResult() {
+	createResult(): Result {
 		return new Result();
 	}
 
 	/**
 	 * Creates a Result used to collect the detailed results of a collision test
 	 */
-	static createResult() {
+	static createResult(): Result {
 		return new Result();
 	}
-};
+}
