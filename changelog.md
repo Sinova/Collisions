@@ -3,7 +3,7 @@
 ## 2.0.17
 
 - convert to TypeScript
-  ([#1](https://github.com/feltcoop/gro/pull/1))
+  ([#1](https://github.com/ryanatkn/collisions/pull/1))
 
 <hr/>
 
