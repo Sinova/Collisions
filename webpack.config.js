@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	entry : './demo/index.js',
+	entry : './demo/index.mjs',
 
 	plugins : [
 		new HtmlWebpackPlugin({

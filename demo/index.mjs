@@ -1,5 +1,5 @@
-import Tank   from './examples/Tank.js';
-import Stress from './examples/Stress.js';
+import Tank   from './examples/Tank.mjs';
+import Stress from './examples/Stress.mjs';
 
 let example;
 

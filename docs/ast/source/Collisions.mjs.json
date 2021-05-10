@@ -91,10 +91,10 @@
             }
           },
           "extra": {
-            "rawValue": "./modules/BVH.js",
-            "raw": "'./modules/BVH.js'"
+            "rawValue": "./modules/BVH.mjs",
+            "raw": "'./modules/BVH.mjs'"
           },
-          "value": "./modules/BVH.js"
+          "value": "./modules/BVH.mjs"
         }
       },
       {
@@ -160,10 +160,10 @@
             }
           },
           "extra": {
-            "rawValue": "./modules/Circle.js",
-            "raw": "'./modules/Circle.js'"
+            "rawValue": "./modules/Circle.mjs",
+            "raw": "'./modules/Circle.mjs'"
           },
-          "value": "./modules/Circle.js"
+          "value": "./modules/Circle.mjs"
         }
       },
       {
@@ -229,10 +229,10 @@
             }
           },
           "extra": {
-            "rawValue": "./modules/Polygon.js",
-            "raw": "'./modules/Polygon.js'"
+            "rawValue": "./modules/Polygon.mjs",
+            "raw": "'./modules/Polygon.mjs'"
           },
-          "value": "./modules/Polygon.js"
+          "value": "./modules/Polygon.mjs"
         }
       },
       {
@@ -298,10 +298,10 @@
             }
           },
           "extra": {
-            "rawValue": "./modules/Point.js",
-            "raw": "'./modules/Point.js'"
+            "rawValue": "./modules/Point.mjs",
+            "raw": "'./modules/Point.mjs'"
           },
-          "value": "./modules/Point.js"
+          "value": "./modules/Point.mjs"
         }
       },
       {
@@ -367,10 +367,10 @@
             }
           },
           "extra": {
-            "rawValue": "./modules/Result.js",
-            "raw": "'./modules/Result.js'"
+            "rawValue": "./modules/Result.mjs",
+            "raw": "'./modules/Result.mjs'"
           },
-          "value": "./modules/Result.js"
+          "value": "./modules/Result.mjs"
         }
       },
       {
@@ -436,10 +436,10 @@
             }
           },
           "extra": {
-            "rawValue": "./modules/SAT.js",
-            "raw": "'./modules/SAT.js'"
+            "rawValue": "./modules/SAT.mjs",
+            "raw": "'./modules/SAT.mjs'"
           },
-          "value": "./modules/SAT.js"
+          "value": "./modules/SAT.mjs"
         },
         "trailingComments": [
           {
@@ -10750,7 +10750,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./modules/BVH.js",
+      "value": "./modules/BVH.mjs",
       "start": 20,
       "end": 39,
       "loc": {
@@ -10883,7 +10883,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./modules/Circle.js",
+      "value": "./modules/Circle.mjs",
       "start": 61,
       "end": 83,
       "loc": {
@@ -11016,7 +11016,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./modules/Polygon.js",
+      "value": "./modules/Polygon.mjs",
       "start": 105,
       "end": 128,
       "loc": {
@@ -11149,7 +11149,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./modules/Point.js",
+      "value": "./modules/Point.mjs",
       "start": 150,
       "end": 171,
       "loc": {
@@ -11282,7 +11282,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./modules/Result.js",
+      "value": "./modules/Result.mjs",
       "start": 193,
       "end": 215,
       "loc": {
@@ -11415,7 +11415,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./modules/SAT.js",
+      "value": "./modules/SAT.mjs",
       "start": 237,
       "end": 256,
       "loc": {

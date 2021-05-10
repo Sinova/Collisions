@@ -5,11 +5,11 @@
 	"license": "MIT",
 	"version": "2.0.15",
 	"homepage": "https://ryanatkn.github.io/collisions",
-	"type": "module",
 	"engines": {
 		"node": ">=14.16.0"
 	},
-	"main": "src/Collisions.js",
+	"main": "src/Collisions.mjs",
+	"module": "src/Collisions.mjs",
 	"files": [
 		"src",
 		"collisions.d.ts"

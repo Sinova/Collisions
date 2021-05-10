@@ -1,4 +1,4 @@
-import Body from './Body.js';
+import Body from './Body.mjs';
 
 /**
  * A circle used to detect collisions
