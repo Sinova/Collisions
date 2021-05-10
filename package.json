@@ -3,7 +3,7 @@
 	"description": "collision detection for circles, polygons, and points — fork of github.com/Sinova/Collisions",
 	"author": "Samuel Hodge",
 	"license": "MIT",
-	"version": "2.0.14",
+	"version": "2.0.15",
 	"homepage": "https://ryanatkn.github.io/collisions",
 	"type": "module",
 	"main": "src/Collisions.js",
