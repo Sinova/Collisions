@@ -15,6 +15,12 @@
 > because I fixed some broken links from the old GitHub pages `.com/.io` switchover
 > (TODO upstream a fix)
 
+## todo
+
+- output types in build process and delete [`collisions.d.ts`](collisions.d.ts)
+- migrate to new gro build process and delete [`src/build.task.ts`](src/build.task.ts)
+  and [`src/gro.config.ts`](src/gro.config.ts)
+
 <hr/>
 
 **Collisions** is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching and the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.
