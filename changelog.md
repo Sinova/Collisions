@@ -1,5 +1,9 @@
 # changelog
 
+## 2.0.21
+
+- fix types with missing static `Collisions.createResult`
+
 ## 2.0.20
 
 - add commonjs alongside ESM build

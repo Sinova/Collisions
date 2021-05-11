@@ -7,7 +7,7 @@
 > if possible instead of this fork,
 > but if you run into problems, this might be what you need
 
-> install v2.0.20:
+> install v2.0.21:
 > [`npm i @ryanatkn/collisions`](https://www.npmjs.com/package/@ryanatkn/collisions)
 
 > I'm linking to
