@@ -14,7 +14,7 @@ export type SomeBody = Circle | Polygon | Point;
  * @class
  * @protected
  */
-export class Body {
+export abstract class Body {
 	x: number;
 	y: number;
 	padding: number;
@@ -56,6 +56,8 @@ export class Body {
 		this.padding = padding;
 		this._bvh_padding = padding;
 	}
+
+	abstract draw(context: CanvasRenderingContext2D): void;
 
 	/**
 	 * Determines if the body is colliding with another body
