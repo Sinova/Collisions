@@ -17,7 +17,7 @@ export class Point extends Polygon {
 		super(x, y, [[0, 0]], 0, 1, 1, padding);
 	}
 
-	// TODO is this correct? here's the original code:
-	// Point.prototype.setPoints = undefined;
+	// remove the `Polygon` method that doesn't apply to points
+	// is there a better pattern for this? throwing in the function body seems worse
 	setPoints = undefined as any;
 }
