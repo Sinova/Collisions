@@ -1,14 +1,9 @@
 import type {SomeBody} from './Body';
 
-/**
- * @private
- */
 const branch_pool: BVHBranch[] = [];
 
 /**
  * A branch within a BVH
- * @class
- * @private
  */
 export class BVHBranch {
 	_bvh_branch = true;
@@ -23,7 +18,6 @@ export class BVHBranch {
 
 	/**
 	 * Returns a branch from the branch pool or creates a new branch
-	 * @returns {BVHBranch}
 	 */
 	static getBranch(): BVHBranch {
 		if (branch_pool.length) {
@@ -35,7 +29,7 @@ export class BVHBranch {
 
 	/**
 	 * Releases a branch back into the branch pool
-	 * @param {BVHBranch} branch The branch to release
+	 * 		branch: The branch to release
 	 */
 	static releaseBranch(branch: BVHBranch): void {
 		branch_pool.push(branch);
@@ -43,9 +37,8 @@ export class BVHBranch {
 
 	/**
 	 * Sorting callback used to sort branches by deepest first
-	 * @param {BVHBranch} a The first branch
-	 * @param {BVHBranch} b The second branch
-	 * @returns {Number}
+	 * 		a: The first branch
+	 * 		b: The second branch
 	 */
 	static sortBranches(a: BVHBranch, b: BVHBranch): number {
 		return a._bvh_sort > b._bvh_sort ? -1 : 1;

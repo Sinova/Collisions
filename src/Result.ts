@@ -4,7 +4,6 @@ import type {SomeBody} from './Body';
  * An object used to collect the detailed results of a collision test
  *
  * > **Note:** It is highly recommended you recycle the same Result object if possible in order to avoid wasting memory
- * @class
  */
 export class Result {
 	// True if a collision was detected

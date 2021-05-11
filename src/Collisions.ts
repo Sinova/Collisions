@@ -8,26 +8,21 @@ import {SAT} from './SAT.js';
 
 /**
  * A collision system used to track bodies in order to improve collision detection performance
- * @class
  */
 export class Collisions {
 	_bvh: BVH;
 
-	/**
-	 * @constructor
-	 */
 	constructor() {
 		this._bvh = new BVH();
 	}
 
 	/**
-	 * Creates a {@link Circle} and inserts it into the collision system
-	 * @param {Number} [x = 0] The starting X coordinate
-	 * @param {Number} [y = 0] The starting Y coordinate
-	 * @param {Number} [radius = 0] The radius
-	 * @param {Number} [scale = 1] The scale
-	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
-	 * @returns {Circle}
+	 * Creates a `Circle` and inserts it into the collision system
+	 * 		x: The starting X coordinate
+	 * 		y: The starting Y coordinate
+	 * 		radius
+	 * 		scale
+	 * 		padding: The amount to pad the bounding volume when testing for potential collisions
 	 */
 	createCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0): Circle {
 		const body = new Circle(x, y, radius, scale, padding);
@@ -38,15 +33,14 @@ export class Collisions {
 	}
 
 	/**
-	 * Creates a {@link Polygon} and inserts it into the collision system
-	 * @param {Number} [x = 0] The starting X coordinate
-	 * @param {Number} [y = 0] The starting Y coordinate
-	 * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
-	 * @param {Number} [angle = 0] The starting rotation in radians
-	 * @param {Number} [scale_x = 1] The starting scale along the X axis
-	 * @param {Number} [scale_y = 1] The starting scale long the Y axis
-	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
-	 * @returns {Polygon}
+	 * Creates a `Polygon` and inserts it into the collision system
+	 * 		x: The starting X coordinate
+	 * 		y: The starting Y coordinate
+	 * 		points: An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 * 		angle: The starting rotation in radians
+	 * 		scale_x: The starting scale along the X axis
+	 * 		scale_y: The starting scale long the Y axis
+	 * 		padding: The amount to pad the bounding volume when testing for potential collisions
 	 */
 	createPolygon(
 		x = 0,
@@ -65,11 +59,10 @@ export class Collisions {
 	}
 
 	/**
-	 * Creates a {@link Point} and inserts it into the collision system
-	 * @param {Number} [x = 0] The starting X coordinate
-	 * @param {Number} [y = 0] The starting Y coordinate
-	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
-	 * @returns {Point}
+	 * Creates a `Point` and inserts it into the collision system
+	 * 		x: The starting X coordinate
+	 * 		y: The starting Y coordinate
+	 * 		padding: The amount to pad the bounding volume when testing for potential collisions
 	 */
 	createPoint(x = 0, y = 0, padding = 0): Point {
 		const body = new Point(x, y, padding);
@@ -80,7 +73,7 @@ export class Collisions {
 	}
 
 	/**
-	 * Creates a {@link Result} used to collect the detailed results of a collision test
+	 * Creates a `Result` used to collect the detailed results of a collision test
 	 */
 	createResult(): Result {
 		return new Result();
@@ -95,7 +88,6 @@ export class Collisions {
 
 	/**
 	 * Inserts bodies into the collision system
-	 * @param {...Circle|...Polygon|...Point} bodies
 	 */
 	insert(...bodies: SomeBody[]): Collisions {
 		for (const body of bodies) {
@@ -107,7 +99,6 @@ export class Collisions {
 
 	/**
 	 * Removes bodies from the collision system
-	 * @param {...Circle|...Polygon|...Point} bodies
 	 */
 	remove(...bodies: SomeBody[]): Collisions {
 		for (const body of bodies) {
@@ -127,16 +118,17 @@ export class Collisions {
 	}
 
 	/**
-	 * Draws the bodies within the system to a CanvasRenderingContext2D's current path
-	 * @param {CanvasRenderingContext2D} context The context to draw to
+	 * Draws the bodies within the system to a `CanvasRenderingContext2D`'s current path
+	 * 		context: The context to draw to
 	 */
 	draw(context: CanvasRenderingContext2D): void {
 		this._bvh.draw(context);
 	}
 
 	/**
-	 * Draws the system's BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.
-	 * @param {CanvasRenderingContext2D} context The context to draw to
+	 * Draws the system's BVH to a `CanvasRenderingContext2D`'s current path.
+	 * This is useful for testing out different padding values for bodies.
+	 * 		context: The context to draw to
 	 */
 	drawBVH(context: CanvasRenderingContext2D): void {
 		this._bvh.drawBVH(context);
@@ -144,8 +136,7 @@ export class Collisions {
 
 	/**
 	 * Returns a list of potential collisions for a body
-	 * @param {Circle|Polygon|Point} body The body to test for potential collisions against
-	 * @returns {Array<Body>}
+	 * 		body: The body to test for potential collisions against
 	 */
 	potentials(body: SomeBody): Body[] {
 		return this._bvh.potentials(body);
@@ -153,11 +144,10 @@ export class Collisions {
 
 	/**
 	 * Determines if two bodies are colliding
-	 * @param {Circle|Polygon|Point} source The source body
-	 * @param {Circle|Polygon|Point} target The target body to test against
-	 * @param {Result} [result = null] A Result object on which to store information about the collision
-	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
-	 * @returns {Boolean}
+	 * 		source: The source body
+	 * 		target: The target body to test against
+	 * 		result: A Result object on which to store information about the collision
+	 * 		aabb: Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 */
 	collides(source: SomeBody, target: SomeBody, result: Result | null = null, aabb = true): boolean {
 		return SAT(source, target, result, aabb);

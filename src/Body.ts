@@ -11,8 +11,6 @@ export type SomeBody = Circle | Polygon | Point;
 
 /**
  * The base class for bodies used to detect collisions
- * @class
- * @protected
  */
 export abstract class Body {
 	x: number; // The X coordinate of the body
@@ -32,10 +30,9 @@ export abstract class Body {
 	_bvh_max_y = 0;
 
 	/**
-	 * @constructor
-	 * @param {Number} [x = 0] The starting X coordinate
-	 * @param {Number} [y = 0] The starting Y coordinate
-	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
+	 * x: The starting X coordinate
+	 * y: The starting Y coordinate
+	 * padding: The amount to pad the bounding volume when testing for potential collisions
 	 */
 	constructor(x = 0, y = 0, padding = 0) {
 		this.x = x;
@@ -48,10 +45,9 @@ export abstract class Body {
 
 	/**
 	 * Determines if the body is colliding with another body
-	 * @param {Circle|Polygon|Point} target The target body to test against
-	 * @param {Result} [result = null] A Result object on which to store information about the collision
-	 * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
-	 * @returns {Boolean}
+	 * 		target: The target body to test against
+	 * 		result: A `Result` object on which to store information about the collision
+	 * 		aabb: Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 */
 	collides(target: SomeBody, result: Result | null = null, aabb = true): boolean {
 		return SAT(this as any, target, result, aabb); // TODO type?
@@ -59,7 +55,6 @@ export abstract class Body {
 
 	/**
 	 * Returns a list of potential collisions
-	 * @returns {Array<Body>}
 	 */
 	potentials(): Body[] {
 		const bvh = this._bvh;
@@ -83,14 +78,14 @@ export abstract class Body {
 	}
 
 	/**
-	 * Creates a {@link Result} used to collect the detailed results of a collision test
+	 * Creates a `Result` used to collect the detailed results of a collision test
 	 */
 	createResult(): Result {
 		return new Result();
 	}
 
 	/**
-	 * Creates a Result used to collect the detailed results of a collision test
+	 * Creates a `Result` used to collect the detailed results of a collision test
 	 */
 	static createResult(): Result {
 		return new Result();

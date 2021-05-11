@@ -2,7 +2,6 @@ import {Body} from './Body.js';
 
 /**
  * A circle used to detect collisions
- * @class
  */
 export class Circle extends Body {
 	radius: number;
@@ -11,12 +10,11 @@ export class Circle extends Body {
 	_circle = true;
 
 	/**
-	 * @constructor
-	 * @param {Number} [x = 0] The starting X coordinate
-	 * @param {Number} [y = 0] The starting Y coordinate
-	 * @param {Number} [radius = 0] The radius
-	 * @param {Number} [scale = 1] The scale
-	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
+	 * x: The starting X coordinate
+	 * y: The starting Y coordinate
+	 * radius
+	 * scale
+	 * padding: The amount to pad the bounding volume when testing for potential collisions
 	 */
 	constructor(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
 		super(x, y, padding);
@@ -27,7 +25,7 @@ export class Circle extends Body {
 
 	/**
 	 * Draws the circle to a CanvasRenderingContext2D's current path
-	 * @param {CanvasRenderingContext2D} context The context to add the arc to
+	 * 		context: The context to add the arc to
 	 */
 	draw(context: CanvasRenderingContext2D): void {
 		const x = this.x;

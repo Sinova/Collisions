@@ -2,7 +2,6 @@ import {Body} from './Body.js';
 
 /**
  * A polygon used to detect collisions
- * @class
  */
 export class Polygon extends Body {
 	angle: number;
@@ -27,14 +26,13 @@ export class Polygon extends Body {
 	_dirty_normals = true;
 
 	/**
-	 * @constructor
-	 * @param {Number} [x = 0] The starting X coordinate
-	 * @param {Number} [y = 0] The starting Y coordinate
-	 * @param {Array<Number[]>} [points = []] An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
-	 * @param {Number} [angle = 0] The starting rotation in radians
-	 * @param {Number} [scale_x = 1] The starting scale along the X axis
-	 * @param {Number} [scale_y = 1] The starting scale long the Y axis
-	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
+	 * x: The starting X coordinate
+	 * y: The starting Y coordinate
+	 * points: An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 * angle: The starting rotation in radians
+	 * scale_x: The starting scale along the X axis
+	 * scale_y: The starting scale long the Y axis
+	 * padding: The amount to pad the bounding volume when testing for potential collisions
 	 */
 	constructor(
 		x = 0,
@@ -62,7 +60,7 @@ export class Polygon extends Body {
 
 	/**
 	 * Draws the polygon to a CanvasRenderingContext2D's current path
-	 * @param {CanvasRenderingContext2D} context The context to add the shape to
+	 * 		context: The context to add the shape to
 	 */
 	draw(context: CanvasRenderingContext2D): void {
 		if (
@@ -96,7 +94,7 @@ export class Polygon extends Body {
 
 	/**
 	 * Sets the points making up the polygon. It's important to use this function when changing the polygon's shape to ensure internal data is also updated.
-	 * @param {Array<Number[]>} new_points An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
+	 * 		new_points: An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
 	 */
 	setPoints(new_points: number[][]): void {
 		const count = new_points.length;

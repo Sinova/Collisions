@@ -6,8 +6,6 @@ import type {Circle} from './Circle.js';
 
 /**
  * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly
- * @class
- * @private
  */
 export class BVH {
 	_hierarchy: BVHBranch | SomeBody | null = null;
@@ -16,8 +14,8 @@ export class BVH {
 
 	/**
 	 * Inserts a body into the BVH
-	 * @param {Circle|Polygon|Point} body The body to insert
-	 * @param {Boolean} [updating = false] Set to true if the body already exists in the BVH (used internally when updating the body's position)
+	 * 		body: The body to insert
+	 * 		updating: Set to true if the body already exists in the BVH (used internally when updating the body's position)
 	 */
 	insert(body: SomeBody, updating = false): void {
 		if (!updating) {
@@ -141,8 +139,8 @@ export class BVH {
 
 	/**
 	 * Removes a body from the BVH
-	 * @param {Circle|Polygon|Point} body The body to remove
-	 * @param {Boolean} [updating = false] Set to true if this is a temporary removal (used internally when updating the body's position)
+	 * 		body: The body to remove
+	 * 		updating: Set to true if this is a temporary removal (used internally when updating the body's position)
 	 */
 	remove(body: SomeBody, updating = false): void {
 		if (!updating) {
@@ -267,8 +265,7 @@ export class BVH {
 
 	/**
 	 * Returns a list of potential collisions for a body
-	 * @param {Circle|Polygon|Point} body The body to test
-	 * @returns {Array<Body>}
+	 * 		body: The body to test
 	 */
 	potentials(body: Body): Body[] {
 		const results: Body[] = [];
@@ -341,7 +338,7 @@ export class BVH {
 
 	/**
 	 * Draws the bodies within the BVH to a CanvasRenderingContext2D's current path
-	 * @param {CanvasRenderingContext2D} context The context to draw to
+	 * 		context: The context to draw to
 	 */
 	draw(context: CanvasRenderingContext2D): void {
 		const bodies = this._bodies;
@@ -354,7 +351,7 @@ export class BVH {
 
 	/**
 	 * Draws the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.
-	 * @param {CanvasRenderingContext2D} context The context to draw to
+	 * 		context: The context to draw to
 	 */
 	drawBVH(context: CanvasRenderingContext2D): void {
 		let current: BVHBranch | SomeBody | null = this._hierarchy;

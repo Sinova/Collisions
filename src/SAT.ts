@@ -6,12 +6,10 @@ import type {Result} from './Result.js';
 
 /**
  * Determines if two bodies are colliding using the Separating Axis Theorem
- * @private
- * @param {Circle|Polygon|Point} a The source body to test
- * @param {Circle|Polygon|Point} b The target body to test against
- * @param {Result} [result = null] A Result object on which to store information about the collision
- * @param {Boolean} [aabb = true] Set to false to skip the AABB test (useful if you use your own collision heuristic)
- * @returns {Boolean}
+ * 		a: The source body to test
+ * 		b: The target body to test against
+ * 		result: A Result object on which to store information about the collision
+ * 		aabb: Set to false to skip the AABB test (useful if you use your own collision heuristic)
  */
 export function SAT(a: SomeBody, b: SomeBody, result: Result | null = null, aabb = true): boolean {
 	const a_polygon = a._polygon;
@@ -87,8 +85,8 @@ export function SAT(a: SomeBody, b: SomeBody, result: Result | null = null, aabb
 
 /**
  * Determines if two bodies' axis aligned bounding boxes are colliding
- * @param {Circle|Polygon|Point} a The source body to test
- * @param {Circle|Polygon|Point} b The target body to test against
+ * 		a: The source body to test
+ * 		b: The target body to test against
  */
 function aabbAABB(a: SomeBody, b: SomeBody): boolean {
 	const a_polygon = a._polygon;
@@ -114,10 +112,9 @@ function aabbAABB(a: SomeBody, b: SomeBody): boolean {
 
 /**
  * Determines if two polygons are colliding
- * @param {Polygon} a The source polygon to test
- * @param {Polygon} b The target polygon to test against
- * @param {Result} [result = null] A Result object on which to store information about the collision
- * @returns {Boolean}
+ * 		a: The source polygon to test
+ * 		b: The target polygon to test against
+ * 		result: A Result object on which to store information about the collision
  */
 function polygonPolygon(a: Polygon, b: Polygon, result: Result | null = null): boolean {
 	const a_count = a._coords!.length;
@@ -161,11 +158,10 @@ function polygonPolygon(a: Polygon, b: Polygon, result: Result | null = null): b
 
 /**
  * Determines if a polygon and a circle are colliding
- * @param {Polygon} a The source polygon to test
- * @param {Circle} b The target circle to test against
- * @param {Result} [result = null] A Result object on which to store information about the collision
- * @param {Boolean} [reverse = false] Set to true to reverse a and b in the result parameter when testing circle->polygon instead of polygon->circle
- * @returns {Boolean}
+ * 		a: The source polygon to test
+ * 		b: The target circle to test against
+ * 		result: A Result object on which to store information about the collision
+ * 		reverse: Set to true to reverse a and b in the result parameter when testing circle->polygon instead of polygon->circle
  */
 function polygonCircle(
 	a: Polygon,
@@ -298,10 +294,9 @@ function polygonCircle(
 
 /**
  * Determines if two circles are colliding
- * @param {Circle} a The source circle to test
- * @param {Circle} b The target circle to test against
- * @param {Result} [result = null] A Result object on which to store information about the collision
- * @returns {Boolean}
+ * 		a: The source circle to test
+ * 		b: The target circle to test against
+ * 		result: A Result object on which to store information about the collision
  */
 function circleCircle(a: Circle, b: Circle, result: Result | null = null): boolean {
 	const a_radius = a.radius * a.scale;
@@ -330,12 +325,11 @@ function circleCircle(a: Circle, b: Circle, result: Result | null = null): boole
 
 /**
  * Determines if two polygons are separated by an axis
- * @param {Array<Number>} a_coords The coordinates of the polygon to test
- * @param {Array<Number>} b_coords The coordinates of the polygon to test against
- * @param {Number} x The X direction of the axis
- * @param {Number} y The Y direction of the axis
- * @param {Result} [result = null] A Result object on which to store information about the collision
- * @returns {Boolean}
+ * 		a_coords: The coordinates of the polygon to test
+ * 		b_coords: The coordinates of the polygon to test against
+ * 		x: The X direction of the axis
+ * 		y: The Y direction of the axis
+ * 		result: A Result object on which to store information about the collision
  */
 function separatingAxis(
 	a_coords: Float64Array,
