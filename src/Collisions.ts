@@ -17,7 +17,6 @@ export class Collisions {
 	 * @constructor
 	 */
 	constructor() {
-		/** @private */
 		this._bvh = new BVH();
 	}
 

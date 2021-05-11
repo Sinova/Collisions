@@ -7,6 +7,7 @@ import {Body} from './Body.js';
 export class Circle extends Body {
 	radius: number;
 	scale: number;
+
 	_circle = true;
 
 	/**
@@ -20,16 +21,7 @@ export class Circle extends Body {
 	constructor(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
 		super(x, y, padding);
 
-		/**
-		 * @desc
-		 * @type {Number}
-		 */
 		this.radius = radius;
-
-		/**
-		 * @desc
-		 * @type {Number}
-		 */
 		this.scale = scale;
 	}
 

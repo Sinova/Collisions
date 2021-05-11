@@ -15,9 +15,10 @@ export type SomeBody = Circle | Polygon | Point;
  * @protected
  */
 export abstract class Body {
-	x: number;
-	y: number;
-	padding: number;
+	x: number; // The X coordinate of the body
+	y: number; // The Y coordinate of the body
+	padding: number; // The amount to pad the bounding volume when testing for potential collisions
+
 	_circle = false;
 	_polygon = false;
 	_point = false;
@@ -37,22 +38,8 @@ export abstract class Body {
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 */
 	constructor(x = 0, y = 0, padding = 0) {
-		/**
-		 * @desc The X coordinate of the body
-		 * @type {Number}
-		 */
 		this.x = x;
-
-		/**
-		 * @desc The Y coordinate of the body
-		 * @type {Number}
-		 */
 		this.y = y;
-
-		/**
-		 * @desc The amount to pad the bounding volume when testing for potential collisions
-		 * @type {Number}
-		 */
 		this.padding = padding;
 		this._bvh_padding = padding;
 	}

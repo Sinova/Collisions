@@ -11,8 +11,8 @@ const branch_pool: BVHBranch[] = [];
  * @private
  */
 export class BVHBranch {
-	_bvh_parent: null | BVHBranch = null;
 	_bvh_branch = true;
+	_bvh_parent: null | BVHBranch = null;
 	_bvh_left: null | BVHBranch | SomeBody = null;
 	_bvh_right: null | BVHBranch | SomeBody = null;
 	_bvh_sort = 0;

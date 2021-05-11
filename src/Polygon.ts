@@ -8,12 +8,13 @@ export class Polygon extends Body {
 	angle: number;
 	scale_x: number;
 	scale_y: number;
+
 	_polygon = true;
 	_x: number;
 	_y: number;
-	_angle: number;
-	_scale_x: number;
-	_scale_y: number;
+	_angle: number; // The angle of the body in radians
+	_scale_x: number; // The scale of the body along the X axis
+	_scale_y: number; // The scale of the body along the Y axis
 	_min_x = 0;
 	_min_y = 0;
 	_max_x = 0;
@@ -46,37 +47,14 @@ export class Polygon extends Body {
 	) {
 		super(x, y, padding);
 
-		/**
-		 * @desc The angle of the body in radians
-		 * @type {Number}
-		 */
 		this.angle = angle;
-
-		/**
-		 * @desc The scale of the body along the X axis
-		 * @type {Number}
-		 */
 		this.scale_x = scale_x;
-
-		/**
-		 * @desc The scale of the body along the Y axis
-		 * @type {Number}
-		 */
 		this.scale_y = scale_y;
 
-		/** @private */
 		this._x = x;
-
-		/** @private */
 		this._y = y;
-
-		/** @private */
 		this._angle = angle;
-
-		/** @private */
 		this._scale_x = scale_x;
-
-		/** @private */
 		this._scale_y = scale_y;
 
 		this.setPoints(points);

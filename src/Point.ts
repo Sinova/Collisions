@@ -5,6 +5,7 @@ import {Polygon} from './Polygon.js';
  * @class
  */
 export class Point extends Polygon {
+	// TODO should this set `_polygon` to `false`?
 	_point = true;
 
 	/**
@@ -17,7 +18,7 @@ export class Point extends Polygon {
 		super(x, y, [[0, 0]], 0, 1, 1, padding);
 	}
 
-	// remove the `Polygon` method that doesn't apply to points
-	// is there a better pattern for this? throwing in the function body seems worse
+	// Remove the `Polygon` method that doesn't apply to points.
+	// Is there a better pattern for this? Throwing in the function body seems worse.
 	setPoints = undefined as any;
 }
