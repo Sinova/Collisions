@@ -152,6 +152,8 @@ export class Collisions {
      */
     createResult(): Result;
 
+    static createResult(): Result;
+
     /**
      * Inserts bodies into the collision system
      * @param {Body} bodies
