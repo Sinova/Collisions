@@ -79,7 +79,7 @@ export class Polygon extends Body {
 		/** @private */
 		this._scale_y = scale_y;
 
-		Polygon.prototype.setPoints.call(this, points);
+		this.setPoints(points);
 	}
 
 	/**
