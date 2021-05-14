@@ -152,6 +152,10 @@ export class Collisions {
      */
     createResult(): Result;
 
+    /**
+     * Creates a {@link Result} used to collect the detailed results of a collision test
+     * @returns {Result}
+     */
     static createResult(): Result;
 
     /**
