@@ -1,6 +1,5 @@
 import {BVHBranch} from './BVHBranch.js';
 import type {Body, SomeBody} from './Body.js';
-import {assertPolygon, assertBVHBranch} from './assert.js';
 import type {Polygon} from './Polygon.js';
 import type {Circle} from './Circle.js';
 
@@ -34,7 +33,7 @@ export class BVH {
 		const body_y = body.y;
 
 		if (polygon) {
-			assertPolygon(body);
+			body = body as Polygon;
 			if (
 				body._dirty_coords ||
 				body.x !== body._x ||
@@ -66,7 +65,7 @@ export class BVH {
 			this._hierarchy = body;
 		} else {
 			while (true) {
-				assertBVHBranch(current);
+				current = current as BVHBranch;
 
 				// Branch
 				if (current!._bvh_branch) {
@@ -215,7 +214,7 @@ export class BVH {
 		const count = bodies.length;
 
 		for (let i = 0; i < count; ++i) {
-			const body = bodies[i];
+			let body = bodies[i];
 
 			let update = false;
 
@@ -228,7 +227,7 @@ export class BVH {
 				const polygon = body._polygon;
 
 				if (polygon) {
-					assertPolygon(body);
+					body = body as Polygon;
 					if (
 						body._dirty_coords ||
 						body.x !== body._x ||

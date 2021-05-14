@@ -1,6 +1,5 @@
 import type {SomeBody} from './Body.js';
 import type {Circle} from './Circle.js';
-import {assertPolygon} from './assert.js';
 import type {Polygon} from './Polygon.js';
 import type {Result} from './Result.js';
 
@@ -28,7 +27,7 @@ export function SAT(a: SomeBody, b: SomeBody, result: Result | null = null, aabb
 	}
 
 	if (a_polygon) {
-		assertPolygon(a);
+		a = a as Polygon;
 		if (
 			a._dirty_coords ||
 			a.x !== a._x ||
@@ -42,7 +41,7 @@ export function SAT(a: SomeBody, b: SomeBody, result: Result | null = null, aabb
 	}
 
 	if (b_polygon) {
-		assertPolygon(b);
+		b = b as Polygon;
 		if (
 			b._dirty_coords ||
 			b.x !== b._x ||
@@ -56,12 +55,12 @@ export function SAT(a: SomeBody, b: SomeBody, result: Result | null = null, aabb
 	}
 
 	if (!aabb || aabbAABB(a, b)) {
-		assertPolygon(a);
+		a = a as Polygon;
 		if (a_polygon && a._dirty_normals) {
 			a._calculateNormals();
 		}
 
-		assertPolygon(b);
+		b = b as Polygon;
 		if (b_polygon && b._dirty_normals) {
 			b._calculateNormals();
 		}
