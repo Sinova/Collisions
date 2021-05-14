@@ -1,5 +1,10 @@
 # changelog
 
+## 2.0.22
+
+- upgrade Gro and delete custom task
+- remove temporary assertions
+
 ## 2.0.21
 
 - fix types with missing static `Collisions.createResult`
