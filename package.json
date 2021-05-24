@@ -22,7 +22,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "types": "dist/index.d.ts",
   "scripts": {

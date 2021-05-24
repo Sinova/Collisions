@@ -1,5 +1,9 @@
 # changelog
 
+## 2.0.24
+
+- include `src/` in published package
+
 ## 2.0.23
 
 - upgrade Gro and publish typemaps
