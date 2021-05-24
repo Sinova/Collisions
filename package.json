@@ -54,7 +54,7 @@
     "url": "https://github.com/ryanatkn/collisions/issues"
   },
   "devDependencies": {
-    "@feltcoop/gro": "^0.22.0",
+    "@feltcoop/gro": "^0.23.3",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
     "svelte": "^3.29.0",

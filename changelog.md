@@ -1,5 +1,9 @@
 # changelog
 
+## 2.0.23
+
+- upgrade Gro and publish typemaps
+
 ## 2.0.22
 
 - upgrade Gro and delete custom task
