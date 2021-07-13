@@ -12,20 +12,10 @@
   "engines": {
     "node": ">=14.16.0"
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./package.json": "./package.json"
-  },
   "files": [
     "dist",
     "src"
   ],
-  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "gro dev",
     "build": "gro build"
@@ -55,13 +45,10 @@
     "url": "https://github.com/ryanatkn/collisions/issues"
   },
   "devDependencies": {
-    "@feltcoop/gro": "^0.23.4",
-    "prettier": "~2.2.1",
-    "prettier-plugin-svelte": "^2.2.0",
-    "svelte": "^3.29.0",
-    "svelte-preprocess-esbuild": "^2.0.0",
-    "tslib": "^2.2.0",
-    "typescript": "^4.2.4"
+    "@feltcoop/gro": "^0.34.0",
+    "prettier": "^2.3.2",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5"
   },
   "prettier": {
     "useTabs": true,
@@ -69,8 +56,6 @@
     "singleQuote": true,
     "trailingComma": "all",
     "bracketSpacing": false,
-    "svelteSortOrder": "options-scripts-markup-styles",
-    "svelteBracketNewLine": true,
     "overrides": [
       {
         "files": "package.json",

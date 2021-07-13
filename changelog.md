@@ -1,8 +1,12 @@
 # changelog
 
+## 2.0.26
+
+- upgrade `@feltcoop/gro@0.34.0`
+
 ## 2.0.25
 
-- upgrade Gro to fix typemap paths
+- upgrade `@feltcoop/gro@0.23.4` to fix typemap paths
 
 ## 2.0.24
 
