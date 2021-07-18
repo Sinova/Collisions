@@ -8,7 +8,7 @@ export class Polygon extends Body {
 	scale_x: number;
 	scale_y: number;
 
-	_polygon = true;
+	override _polygon = true;
 	_x: number;
 	_y: number;
 	_angle: number; // The angle of the body in radians

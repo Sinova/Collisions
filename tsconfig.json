@@ -1,4 +1,5 @@
 {
+	"include": ["src"],
 	"compilerOptions": {
 		"moduleResolution": "node",
 		"target": "es2020",
@@ -9,20 +10,18 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
+		"noImplicitOverride": true,
 		"noFallthroughCasesInSwitch": true,
 		"importsNotUsedAsValues": "error",
 		"isolatedModules": true,
+		"resolveJsonModule": true,
 		"sourceMap": true,
 		"importHelpers": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"baseUrl": ".",
 		"checkJs": true,
 		"paths": {
-			"$app/*": [".svelte/dev/runtime/app/*", ".svelte/build/runtime/app/*"],
-			"$service-worker": [".svelte/build/runtime/service-worker"],
-			"$lib/*": ["src/lib/*"]
+			"$lib/*": ["./src/lib/*"]
 		}
-	},
-	"include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.svelte"]
+	}
 }

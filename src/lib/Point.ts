@@ -5,7 +5,7 @@ import {Polygon} from './Polygon.js';
  */
 export class Point extends Polygon {
 	// TODO should this set `_polygon` to `false`?
-	_point = true;
+	override _point = true;
 
 	/**
 	 * x: The starting X coordinate
@@ -18,5 +18,5 @@ export class Point extends Polygon {
 
 	// Remove the `Polygon` method that doesn't apply to points.
 	// Is there a better pattern for this? Throwing in the function body seems worse.
-	setPoints = undefined as any;
+	override setPoints = undefined as any;
 }

@@ -7,7 +7,7 @@ export class Circle extends Body {
 	radius: number;
 	scale: number;
 
-	_circle = true;
+	override _circle = true;
 
 	/**
 	 * x: The starting X coordinate
