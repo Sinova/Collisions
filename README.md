@@ -7,8 +7,8 @@
 > if possible instead of this fork,
 > but if you run into problems, this might be what you need
 
-> install v2.0.22:
-> [`npm i @ryanatkn/collisions`](https://www.npmjs.com/package/@ryanatkn/collisions)
+> install this fork:
+> [`npm i @ryanatkn/collisions`](https://www.npmjs.com/package/@ryanatkn/collisions) and see [the changelog](changelog.md)
 
 > I'm linking to
 > [my forked version of the docs](https://ryanatkn.github.io/collisions/)
