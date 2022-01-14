@@ -1,4 +1,4 @@
-import {type  GroConfigCreator, type  GroConfigPartial} from '@feltcoop/gro';
+import {type GroConfigCreator, type GroConfigPartial} from '@feltcoop/gro';
 
 /*
 
