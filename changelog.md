@@ -1,5 +1,9 @@
 # changelog
 
+## 2.0.27
+
+- upgrade `@feltcoop/gro@0.48.0`
+
 ## 2.0.26
 
 - upgrade `@feltcoop/gro@0.34.0`
