@@ -45,10 +45,19 @@
     "url": "https://github.com/ryanatkn/collisions/issues"
   },
   "devDependencies": {
-    "@feltcoop/gro": "^0.49.0",
-    "prettier": "^2.5.1",
+    "@feltcoop/eslint-config": "^0.1.4",
+    "@feltcoop/gro": "^0.53.0",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
+    "eslint": "^8.11.0",
+    "eslint-plugin-svelte3": "^3.4.1",
+    "prettier": "^2.6.0",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.6.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": "@feltcoop"
   },
   "prettier": {
     "useTabs": true,

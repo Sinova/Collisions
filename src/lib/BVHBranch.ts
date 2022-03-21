@@ -6,7 +6,7 @@ const branch_pool: BVHBranch[] = [];
  * A branch within a BVH
  */
 export class BVHBranch {
-	_bvh_branch = true;
+	readonly _bvh_branch = true as const;
 	_bvh_parent: null | BVHBranch = null;
 	_bvh_left: null | BVHBranch | SomeBody = null;
 	_bvh_right: null | BVHBranch | SomeBody = null;

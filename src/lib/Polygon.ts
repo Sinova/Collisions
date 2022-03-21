@@ -3,12 +3,15 @@ import {Body} from './Body.js';
 /**
  * A polygon used to detect collisions
  */
-export class Polygon extends Body {
+export class Polygon<TPoint extends boolean = false> extends Body {
+	override readonly _polygon = true as const;
+	override readonly _circle = false as const;
+	override readonly _point: TPoint | false = false as const; // super weird but seems to work?
+
 	angle: number;
 	scale_x: number;
 	scale_y: number;
 
-	override _polygon = true;
 	_x: number;
 	_y: number;
 	_angle: number; // The angle of the body in radians
@@ -59,40 +62,6 @@ export class Polygon extends Body {
 	}
 
 	/**
-	 * Draws the polygon to a CanvasRenderingContext2D's current path
-	 * 		context: The context to add the shape to
-	 */
-	draw(context: CanvasRenderingContext2D): void {
-		if (
-			this._dirty_coords ||
-			this.x !== this._x ||
-			this.y !== this._y ||
-			this.angle !== this._angle ||
-			this.scale_x !== this._scale_x ||
-			this.scale_y !== this._scale_y
-		) {
-			this._calculateCoords();
-		}
-
-		const coords = this._coords!;
-
-		if (coords.length === 2) {
-			context.moveTo(coords[0], coords[1]);
-			context.arc(coords[0], coords[1], 1, 0, Math.PI * 2);
-		} else {
-			context.moveTo(coords[0], coords[1]);
-
-			for (let i = 2; i < coords.length; i += 2) {
-				context.lineTo(coords[i], coords[i + 1]);
-			}
-
-			if (coords.length > 4) {
-				context.lineTo(coords[0], coords[1]);
-			}
-		}
-	}
-
-	/**
 	 * Sets the points making up the polygon. It's important to use this function when changing the polygon's shape to ensure internal data is also updated.
 	 * 		new_points: An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
 	 */
@@ -120,23 +89,17 @@ export class Polygon extends Body {
 	 * Calculates and caches the polygon's world coordinates based on its points, angle, and scale
 	 */
 	_calculateCoords(): void {
-		const x = this.x;
-		const y = this.y;
-		const angle = this.angle;
-		const scale_x = this.scale_x;
-		const scale_y = this.scale_y;
-		const points = this._points!;
-		const coords = this._coords!;
-		const count = points.length;
+		const {x, y, angle, scale_x, scale_y, _points, _coords} = this;
+		const count = _points!.length;
 
-		let min_x: number = 0;
-		let max_x: number = 0;
-		let min_y: number = 0;
-		let max_y: number = 0;
+		let min_x = 0;
+		let max_x = 0;
+		let min_y = 0;
+		let max_y = 0;
 
 		for (let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {
-			let coord_x = points[ix] * scale_x;
-			let coord_y = points[iy] * scale_y;
+			let coord_x = _points![ix] * scale_x;
+			let coord_y = _points![iy] * scale_y;
 
 			if (angle) {
 				const cos = Math.cos(angle);
@@ -151,8 +114,8 @@ export class Polygon extends Body {
 			coord_x += x;
 			coord_y += y;
 
-			coords[ix] = coord_x;
-			coords[iy] = coord_y;
+			_coords![ix] = coord_x;
+			_coords![iy] = coord_y;
 
 			if (ix === 0) {
 				min_x = max_x = coord_x;
@@ -189,21 +152,19 @@ export class Polygon extends Body {
 	 * Calculates the normals and edges of the polygon's sides
 	 */
 	_calculateNormals(): void {
-		const coords = this._coords!;
-		const edges = this._edges!;
-		const normals = this._normals!;
-		const count = coords.length;
+		const {_coords, _edges, _normals} = this;
+		const count = _coords!.length;
 
 		for (let ix = 0, iy = 1; ix < count; ix += 2, iy += 2) {
 			const next = ix + 2 < count ? ix + 2 : 0;
-			const x = coords[next] - coords[ix];
-			const y = coords[next + 1] - coords[iy];
+			const x = _coords![next] - _coords![ix];
+			const y = _coords![next + 1] - _coords![iy];
 			const length = x || y ? Math.sqrt(x * x + y * y) : 0;
 
-			edges[ix] = x;
-			edges[iy] = y;
-			normals[ix] = length ? y / length : 0;
-			normals[iy] = length ? -x / length : 0;
+			_edges![ix] = x;
+			_edges![iy] = y;
+			_normals![ix] = length ? y / length : 0;
+			_normals![iy] = length ? -x / length : 0;
 		}
 
 		this._dirty_normals = false;

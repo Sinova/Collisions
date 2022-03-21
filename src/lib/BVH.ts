@@ -1,7 +1,10 @@
 import {BVHBranch} from './BVHBranch.js';
-import type {Body, SomeBody} from './Body.js';
+import type {SomeBody} from './Body.js';
 import type {Polygon} from './Polygon.js';
-import type {Circle} from './Circle.js';
+
+export interface FilterPotentials {
+	(bodyA: SomeBody, bodyB: SomeBody): boolean;
+}
 
 /**
  * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly
@@ -33,7 +36,6 @@ export class BVH {
 		const body_y = body.y;
 
 		if (polygon) {
-			body = body as Polygon;
 			if (
 				body._dirty_coords ||
 				body.x !== body._x ||
@@ -47,7 +49,7 @@ export class BVH {
 		}
 
 		const padding = body._bvh_padding;
-		const radius = polygon ? 0 : (body as Circle).radius * (body as Circle).scale;
+		const radius = polygon ? 0 : body.radius * body.scale;
 		const body_min_x = (polygon ? (body as Polygon)._min_x : body_x - radius) - padding;
 		const body_min_y = (polygon ? (body as Polygon)._min_y : body_y - radius) - padding;
 		const body_max_x = (polygon ? (body as Polygon)._max_x : body_x + radius) + padding;
@@ -65,10 +67,8 @@ export class BVH {
 			this._hierarchy = body;
 		} else {
 			while (true) {
-				current = current as BVHBranch;
-
 				// Branch
-				if (current!._bvh_branch) {
+				if (current._bvh_branch) {
 					const left: BVHBranch = current._bvh_left as any;
 					const left_min_y = left._bvh_min_y;
 					const left_max_x = left._bvh_max_x;
@@ -167,7 +167,7 @@ export class BVH {
 		sibling._bvh_parent = grandparent;
 
 		if (sibling._bvh_branch) {
-			(sibling as BVHBranch)._bvh_sort = parent._bvh_sort;
+			sibling._bvh_sort = parent._bvh_sort;
 		}
 
 		if (grandparent) {
@@ -242,7 +242,7 @@ export class BVH {
 
 				const x = body.x;
 				const y = body.y;
-				const radius = polygon ? 0 : (body as Circle).radius * (body as Circle).scale;
+				const radius = polygon ? 0 : body.radius * body.scale;
 				const min_x = polygon ? (body as Polygon)._min_x : x - radius;
 				const min_y = polygon ? (body as Polygon)._min_y : y - radius;
 				const max_x = polygon ? (body as Polygon)._max_x : x + radius;
@@ -266,14 +266,13 @@ export class BVH {
 	 * Returns a list of potential collisions for a body
 	 * 		body: The body to test
 	 */
-	potentials(body: Body): Body[] {
-		const results: Body[] = [];
+	potentials(body: SomeBody, filter?: FilterPotentials, results: SomeBody[] = []): SomeBody[] {
 		const min_x = body._bvh_min_x;
 		const min_y = body._bvh_min_y;
 		const max_x = body._bvh_max_x;
 		const max_y = body._bvh_max_y;
 
-		let current: Body | BVHBranch | null = this._hierarchy;
+		let current: SomeBody | BVHBranch | null = this._hierarchy;
 		let traverse_left = true;
 
 		if (!current || !current._bvh_branch) {
@@ -284,9 +283,7 @@ export class BVH {
 			if (traverse_left) {
 				traverse_left = false;
 
-				let left: Body | BVHBranch | null = current._bvh_branch
-					? (current as BVHBranch)._bvh_left
-					: null;
+				let left: SomeBody | BVHBranch | null = current._bvh_branch ? current._bvh_left : null;
 
 				while (
 					left &&
@@ -296,12 +293,11 @@ export class BVH {
 					left._bvh_min_y <= max_y
 				) {
 					current = left;
-					left = current._bvh_branch ? (current as BVHBranch)._bvh_left : null;
+					left = current._bvh_branch ? current._bvh_left : null;
 				}
 			}
 
-			const branch: boolean = current._bvh_branch;
-			const right: Body | BVHBranch | null = branch ? (current as BVHBranch)._bvh_right : null;
+			const right: SomeBody | BVHBranch | null = current._bvh_branch ? current._bvh_right : null;
 
 			if (
 				right &&
@@ -313,16 +309,16 @@ export class BVH {
 				current = right;
 				traverse_left = true;
 			} else {
-				if (!branch && current !== body) {
-					results.push(current as Body);
+				if (!current._bvh_branch && current !== body && (!filter || filter(body, current))) {
+					results.push(current);
 				}
 
-				let parent: any = current._bvh_parent;
+				let parent: BVHBranch | null = current._bvh_parent;
 
 				if (parent) {
 					while (parent && parent._bvh_right === current) {
 						current = parent;
-						parent = current!._bvh_parent;
+						parent = current._bvh_parent;
 					}
 
 					current = parent;
@@ -333,71 +329,5 @@ export class BVH {
 		}
 
 		return results;
-	}
-
-	/**
-	 * Draws the bodies within the BVH to a CanvasRenderingContext2D's current path
-	 * 		context: The context to draw to
-	 */
-	draw(context: CanvasRenderingContext2D): void {
-		const bodies = this._bodies;
-		const count = bodies.length;
-
-		for (let i = 0; i < count; ++i) {
-			bodies[i].draw(context);
-		}
-	}
-
-	/**
-	 * Draws the BVH to a CanvasRenderingContext2D's current path. This is useful for testing out different padding values for bodies.
-	 * 		context: The context to draw to
-	 */
-	drawBVH(context: CanvasRenderingContext2D): void {
-		let current: BVHBranch | SomeBody | null = this._hierarchy;
-		let traverse_left = true;
-
-		while (current) {
-			if (traverse_left) {
-				traverse_left = false;
-
-				let left = current._bvh_branch ? (current as BVHBranch)._bvh_left : null;
-
-				while (left) {
-					current = left;
-					left = current!._bvh_branch ? (current as BVHBranch)._bvh_left : null;
-				}
-			}
-
-			const branch: boolean = current._bvh_branch;
-			const min_x = current._bvh_min_x;
-			const min_y = current._bvh_min_y;
-			const max_x = current._bvh_max_x;
-			const max_y = current._bvh_max_y;
-			const right: any = branch ? (current as BVHBranch)._bvh_right : null;
-
-			context.moveTo(min_x, min_y);
-			context.lineTo(max_x, min_y);
-			context.lineTo(max_x, max_y);
-			context.lineTo(min_x, max_y);
-			context.lineTo(min_x, min_y);
-
-			if (right) {
-				current = right;
-				traverse_left = true;
-			} else {
-				let parent = current._bvh_parent!;
-
-				if (parent) {
-					while (parent && parent._bvh_right === current) {
-						current = parent;
-						parent = current._bvh_parent!;
-					}
-
-					current = parent;
-				} else {
-					break;
-				}
-			}
-		}
 	}
 }

@@ -7,8 +7,11 @@
 > if possible instead of this fork,
 > but if you run into problems, this might be what you need
 
-> install this fork:
-> [`npm i @ryanatkn/collisions`](https://www.npmjs.com/package/@ryanatkn/collisions) and see [the changelog](changelog.md)
+> to install this fork:
+> [`npm i @ryanatkn/collisions`](https://www.npmjs.com/package/@ryanatkn/collisions)
+> and see [the changelog](changelog.md) for the differences from
+> [Sinova/Collisions](https://github.com/Sinova/Collisions)
+> (the original docs below are out of date)
 
 > I'm linking to
 > [my forked version of the docs](https://ryanatkn.github.io/collisions/)

@@ -1,9 +1,10 @@
-export {Body} from './Body.js';
-export {BVH} from './BVH.js';
+export {Body, type SomeBody} from './Body.js';
+export {BVH, type FilterPotentials} from './BVH.js';
 export {BVHBranch} from './BVHBranch.js';
 export {Circle} from './Circle.js';
 export {Collisions} from './Collisions.js';
 export {Point} from './Point.js';
 export {Polygon} from './Polygon.js';
-export {Result} from './Result.js';
-export {SAT} from './SAT.js';
+export {CollisionResult} from './CollisionResult.js';
+export {SAT, aabbAABB} from './SAT.js';
+export {drawBodies, drawCircle, drawPolygon, drawBVH} from './draw.js';

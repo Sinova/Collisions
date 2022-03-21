@@ -1,9 +1,9 @@
-import {BVH} from './BVH.js';
+import {BVH, type FilterPotentials} from './BVH.js';
 import {Circle} from './Circle.js';
 import {Point} from './Point.js';
 import {Polygon} from './Polygon.js';
-import {Result} from './Result.js';
-import type {Body, SomeBody} from './Body.js';
+import type {CollisionResult} from './CollisionResult.js';
+import type {SomeBody} from './Body.js';
 import {SAT} from './SAT.js';
 
 /**
@@ -73,20 +73,6 @@ export class Collisions {
 	}
 
 	/**
-	 * Creates a `Result` used to collect the detailed results of a collision test
-	 */
-	createResult(): Result {
-		return new Result();
-	}
-
-	/**
-	 * Creates a Result used to collect the detailed results of a collision test
-	 */
-	static createResult(): Result {
-		return new Result();
-	}
-
-	/**
 	 * Inserts bodies into the collision system
 	 */
 	insert(...bodies: SomeBody[]): Collisions {
@@ -118,38 +104,26 @@ export class Collisions {
 	}
 
 	/**
-	 * Draws the bodies within the system to a `CanvasRenderingContext2D`'s current path
-	 * 		context: The context to draw to
-	 */
-	draw(context: CanvasRenderingContext2D): void {
-		this._bvh.draw(context);
-	}
-
-	/**
-	 * Draws the system's BVH to a `CanvasRenderingContext2D`'s current path.
-	 * This is useful for testing out different padding values for bodies.
-	 * 		context: The context to draw to
-	 */
-	drawBVH(context: CanvasRenderingContext2D): void {
-		this._bvh.drawBVH(context);
-	}
-
-	/**
 	 * Returns a list of potential collisions for a body
 	 * 		body: The body to test for potential collisions against
 	 */
-	potentials(body: SomeBody): Body[] {
-		return this._bvh.potentials(body);
+	potentials(body: SomeBody, filter?: FilterPotentials, results?: SomeBody[]): SomeBody[] {
+		return this._bvh.potentials(body, filter, results);
 	}
 
 	/**
 	 * Determines if two bodies are colliding
 	 * 		source: The source body
 	 * 		target: The target body to test against
-	 * 		result: A Result object on which to store information about the collision
+	 * 		result: A `CollisionResult` object on which to store information about the collision
 	 * 		aabb: Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 */
-	collides(source: SomeBody, target: SomeBody, result: Result | null = null, aabb = true): boolean {
+	collides(
+		source: SomeBody,
+		target: SomeBody,
+		result: CollisionResult | null = null,
+		aabb = true,
+	): boolean {
 		return SAT(source, target, result, aabb);
 	}
 }

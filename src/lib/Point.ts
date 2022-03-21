@@ -3,10 +3,10 @@ import {Polygon} from './Polygon.js';
 /**
  * A point used to detect collisions
  */
-export class Point extends Polygon {
-	// TODO should this set `_polygon` to `false`?
-	override _point = true;
-
+export class Point extends Polygon<true> {
+	override readonly _polygon = true as const;
+	override readonly _circle = false as const;
+	override readonly _point = true as const;
 	/**
 	 * x: The starting X coordinate
 	 * y: The starting Y coordinate

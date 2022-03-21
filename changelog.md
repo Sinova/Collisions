@@ -1,5 +1,22 @@
 # changelog
 
+## 3.0.0
+
+- **break**: remove `draw` and `drawBVH` helpers from the classes and
+  export equivalent plain functions from the index and `draw.js` module:
+  `drawBodies`, `drawCircle`, `drawPolygon`, and `drawBVH`
+  ([#4](https://github.com/ryanatkn/collisions/pull/4))
+- **break**: remove `createResult` helpers from the classes and rename `Result` to `CollisionResult`
+  ([#4](https://github.com/ryanatkn/collisions/pull/4))
+- add optional `filter` and `results` params to the `potentials` functions
+  ([#4](https://github.com/ryanatkn/collisions/pull/4))
+- export `SomeBody` type and `aabbAABB` collision helper
+  ([#4](https://github.com/ryanatkn/collisions/pull/4))
+- fix type narrowing
+  ([#4](https://github.com/ryanatkn/collisions/pull/4))
+- don't bundle the published lib
+  ([#4](https://github.com/ryanatkn/collisions/pull/4))
+
 ## 2.0.27
 
 - upgrade `@feltcoop/gro@0.48.0`

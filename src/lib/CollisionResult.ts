@@ -5,7 +5,7 @@ import type {SomeBody} from './Body';
  *
  * > **Note:** It is highly recommended you recycle the same Result object if possible in order to avoid wasting memory
  */
-export class Result {
+export class CollisionResult {
 	// True if a collision was detected
 	collision = false;
 
