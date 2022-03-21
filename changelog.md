@@ -1,5 +1,9 @@
 # changelog
 
+## 3.0.1
+
+- fix published build
+
 ## 3.0.0
 
 - **break**: remove `draw` and `drawBVH` helpers from the classes and
