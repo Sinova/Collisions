@@ -40,7 +40,7 @@ export class Polygon<TPoint extends boolean = false> extends Body {
 	constructor(
 		x = 0,
 		y = 0,
-		points: number[][] = [],
+		points: Array<[number, number]> = [],
 		angle = 0,
 		scale_x = 1,
 		scale_y = 1,
@@ -65,7 +65,7 @@ export class Polygon<TPoint extends boolean = false> extends Body {
 	 * Sets the points making up the polygon. It's important to use this function when changing the polygon's shape to ensure internal data is also updated.
 	 * 		new_points: An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
 	 */
-	setPoints(new_points: number[][]): void {
+	setPoints(new_points: Array<[number, number]>): void {
 		const count = new_points.length;
 
 		this._points = new Float64Array(count * 2);

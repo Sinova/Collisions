@@ -45,7 +45,7 @@ export class Collisions {
 	createPolygon(
 		x = 0,
 		y = 0,
-		points = [[0, 0]],
+		points: Array<[number, number]> = [[0, 0]],
 		angle = 0,
 		scale_x = 1,
 		scale_y = 1,
