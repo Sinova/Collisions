@@ -89,13 +89,13 @@
       "default": "./dist/Body.js",
       "types": "./dist/Body.d.ts"
     },
-    "./Bvh.js": {
-      "default": "./dist/Bvh.js",
-      "types": "./dist/Bvh.d.ts"
-    },
     "./Bvh_Branch.js": {
       "default": "./dist/Bvh_Branch.js",
       "types": "./dist/Bvh_Branch.d.ts"
+    },
+    "./Bvh.js": {
+      "default": "./dist/Bvh.js",
+      "types": "./dist/Bvh.d.ts"
     },
     "./Circle.js": {
       "default": "./dist/Circle.js",
