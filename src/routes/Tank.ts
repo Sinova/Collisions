@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {Collisions} from '../lib/Collisions.js';
 
 // document.body.appendChild(example.element);

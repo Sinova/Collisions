@@ -46,6 +46,7 @@
     "url": "https://github.com/ryanatkn/collisions/issues"
   },
   "devDependencies": {
+    "@changesets/changelog-git": "^0.1.14",
     "@feltjs/eslint-config": "^0.4.1",
     "@grogarden/gro": "^0.100.1",
     "@sveltejs/adapter-static": "^2.0.3",
