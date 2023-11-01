@@ -18,5 +18,5 @@ export class Point extends Polygon<true> {
 
 	// Remove the `Polygon` method that doesn't apply to points.
 	// Is there a better pattern for this? Throwing in the function body seems worse.
-	override setPoints = undefined as any;
+	override set_points = undefined as any;
 }

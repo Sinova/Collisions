@@ -1,25 +1,25 @@
-import {BVHBranch} from './BVHBranch.js';
-import type {SomeBody} from './Body.js';
+import {Bvh_Branch} from './Bvh_Branch.js';
+import type {Some_Body} from './Body.js';
 import type {Polygon} from './Polygon.js';
 
-export interface FilterPotentials {
-	(bodyA: SomeBody, bodyB: SomeBody): boolean;
+export interface Filter_Potentials {
+	(bodyA: Some_Body, bodyB: Some_Body): boolean;
 }
 
 /**
- * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly
+ * A Bounding Volume Hierarchy (Bvh) used to find potential collisions quickly
  */
-export class BVH {
-	_hierarchy: BVHBranch | SomeBody | null = null;
-	_bodies: SomeBody[] = [];
-	_dirty_branches: BVHBranch[] = [];
+export class Bvh {
+	_hierarchy: Bvh_Branch | Some_Body | null = null;
+	_bodies: Some_Body[] = [];
+	_dirty_branches: Bvh_Branch[] = [];
 
 	/**
-	 * Inserts a body into the BVH
+	 * Inserts a body into the Bvh
 	 * 		body: The body to insert
-	 * 		updating: Set to true if the body already exists in the BVH (used internally when updating the body's position)
+	 * 		updating: Set to true if the body already exists in the Bvh (used internally when updating the body's position)
 	 */
-	insert(body: SomeBody, updating = false): void {
+	insert(body: Some_Body, updating = false): void {
 		if (!updating) {
 			const bvh = body._bvh;
 
@@ -44,7 +44,7 @@ export class BVH {
 				body.scale_x !== body._scale_x ||
 				body.scale_y !== body._scale_y
 			) {
-				body._calculateCoords();
+				body._calculate_coords();
 			}
 		}
 
@@ -69,7 +69,7 @@ export class BVH {
 			while (true) {
 				// Branch
 				if (current._bvh_branch) {
-					const left: BVHBranch = current._bvh_left as any;
+					const left: Bvh_Branch = current._bvh_left as any;
 					const left_min_y = left._bvh_min_y;
 					const left_max_x = left._bvh_max_x;
 					const left_max_y = left._bvh_max_y;
@@ -82,7 +82,7 @@ export class BVH {
 						(left_new_max_x - left_new_min_x) * (left_new_max_y - left_new_min_y);
 					const left_difference = left_new_volume - left_volume;
 
-					const right: BVHBranch = current._bvh_right as any;
+					const right: Bvh_Branch = current._bvh_right as any;
 					const right_min_x = right._bvh_min_x;
 					const right_min_y = right._bvh_min_y;
 					const right_max_x = right._bvh_max_x;
@@ -111,7 +111,7 @@ export class BVH {
 					const parent_min_y = current._bvh_min_y;
 					const parent_max_x = current._bvh_max_x;
 					const parent_max_y = current._bvh_max_y;
-					const new_parent = (current._bvh_parent = body._bvh_parent = BVHBranch.getBranch());
+					const new_parent = (current._bvh_parent = body._bvh_parent = Bvh_Branch.getBranch());
 
 					new_parent._bvh_parent = grandparent;
 					new_parent._bvh_left = current;
@@ -137,11 +137,11 @@ export class BVH {
 	}
 
 	/**
-	 * Removes a body from the BVH
+	 * Removes a body from the Bvh
 	 * 		body: The body to remove
 	 * 		updating: Set to true if this is a temporary removal (used internally when updating the body's position)
 	 */
-	remove(body: SomeBody, updating = false): void {
+	remove(body: Some_Body, updating = false): void {
 		if (!updating) {
 			const bvh = body._bvh;
 
@@ -203,11 +203,11 @@ export class BVH {
 			this._hierarchy = sibling;
 		}
 
-		BVHBranch.releaseBranch(parent);
+		Bvh_Branch.releaseBranch(parent);
 	}
 
 	/**
-	 * Updates the BVH. Moved bodies are removed/inserted.
+	 * Updates the Bvh. Moved bodies are removed/inserted.
 	 */
 	update(): void {
 		const bodies = this._bodies;
@@ -236,7 +236,7 @@ export class BVH {
 						body.scale_x !== body._scale_x ||
 						body.scale_y !== body._scale_y
 					) {
-						body._calculateCoords();
+						body._calculate_coords();
 					}
 				}
 
@@ -266,13 +266,13 @@ export class BVH {
 	 * Returns a list of potential collisions for a body
 	 * 		body: The body to test
 	 */
-	potentials(body: SomeBody, filter?: FilterPotentials, results: SomeBody[] = []): SomeBody[] {
+	potentials(body: Some_Body, filter?: Filter_Potentials, results: Some_Body[] = []): Some_Body[] {
 		const min_x = body._bvh_min_x;
 		const min_y = body._bvh_min_y;
 		const max_x = body._bvh_max_x;
 		const max_y = body._bvh_max_y;
 
-		let current: SomeBody | BVHBranch | null = this._hierarchy;
+		let current: Some_Body | Bvh_Branch | null = this._hierarchy;
 		let traverse_left = true;
 
 		if (!current || !current._bvh_branch) {
@@ -283,7 +283,7 @@ export class BVH {
 			if (traverse_left) {
 				traverse_left = false;
 
-				let left: SomeBody | BVHBranch | null = current._bvh_branch ? current._bvh_left : null;
+				let left: Some_Body | Bvh_Branch | null = current._bvh_branch ? current._bvh_left : null;
 
 				while (
 					left &&
@@ -297,7 +297,7 @@ export class BVH {
 				}
 			}
 
-			const right: SomeBody | BVHBranch | null = current._bvh_branch ? current._bvh_right : null;
+			const right: Some_Body | Bvh_Branch | null = current._bvh_branch ? current._bvh_right : null;
 
 			if (
 				right &&
@@ -313,7 +313,7 @@ export class BVH {
 					results.push(current);
 				}
 
-				let parent: BVHBranch | null = current._bvh_parent;
+				let parent: Bvh_Branch | null = current._bvh_parent;
 
 				if (parent) {
 					while (parent && parent._bvh_right === current) {

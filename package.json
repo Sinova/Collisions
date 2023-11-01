@@ -25,8 +25,8 @@
     "Collision",
     "Separating Axis Theorem",
     "Bounding Volume Hierarchy",
-    "SAT",
-    "BVH",
+    "sat",
+    "Bvh",
     "Circle",
     "Polygon",
     "Line",
@@ -89,21 +89,21 @@
       "default": "./dist/Body.js",
       "types": "./dist/Body.d.ts"
     },
-    "./BVH.js": {
-      "default": "./dist/BVH.js",
-      "types": "./dist/BVH.d.ts"
+    "./Bvh.js": {
+      "default": "./dist/Bvh.js",
+      "types": "./dist/Bvh.d.ts"
     },
-    "./BVHBranch.js": {
-      "default": "./dist/BVHBranch.js",
-      "types": "./dist/BVHBranch.d.ts"
+    "./Bvh_Branch.js": {
+      "default": "./dist/Bvh_Branch.js",
+      "types": "./dist/Bvh_Branch.d.ts"
     },
     "./Circle.js": {
       "default": "./dist/Circle.js",
       "types": "./dist/Circle.d.ts"
     },
-    "./CollisionResult.js": {
-      "default": "./dist/CollisionResult.js",
-      "types": "./dist/CollisionResult.d.ts"
+    "./Collision_Result.js": {
+      "default": "./dist/Collision_Result.js",
+      "types": "./dist/Collision_Result.d.ts"
     },
     "./Collisions.js": {
       "default": "./dist/Collisions.js",
@@ -121,9 +121,9 @@
       "default": "./dist/Polygon.js",
       "types": "./dist/Polygon.d.ts"
     },
-    "./SAT.js": {
-      "default": "./dist/SAT.js",
-      "types": "./dist/SAT.d.ts"
+    "./sat.js": {
+      "default": "./dist/sat.js",
+      "types": "./dist/sat.d.ts"
     }
   }
 }

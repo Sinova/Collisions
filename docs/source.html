@@ -1,145 +1,259 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <base data-ice="baseUrl" href="">
-  <title data-ice="title">Source | @ryanatkn/collisions</title>
-  <link type="text/css" rel="stylesheet" href="css/style.css">
-  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
-  <script src="script/prettify/prettify.js"></script>
-  <script src="script/manual.js"></script>
-<meta name="description" content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@ryanatkn/collisions"><meta property="twitter:description" content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"></head>
-<body class="layout-container" data-ice="rootContainer">
+	<head>
+		<meta charset="utf-8" />
+		<base data-ice="baseUrl" href="" />
+		<title data-ice="title">Source | @ryanatkn/collisions</title>
+		<link type="text/css" rel="stylesheet" href="css/style.css" />
+		<link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css" />
+		<script src="script/prettify/prettify.js"></script>
+		<script src="script/manual.js"></script>
+		<meta
+			name="description"
+			content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"
+		/>
+		<meta property="twitter:card" content="summary" />
+		<meta property="twitter:title" content="@ryanatkn/collisions" />
+		<meta
+			property="twitter:description"
+			content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"
+		/>
+	</head>
+	<body class="layout-container" data-ice="rootContainer">
+		<header>
+			<a href="./">Home</a>
 
-<header>
-  <a href="./">Home</a>
-  
-  <a href="identifiers.html">Reference</a>
-  <a href="source.html">Source</a>
-  
-  <div class="search-box">
-  <span>
-    <img src="./image/search.png">
-    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
-  </span>
-    <ul class="search-result"></ul>
-  </div>
-<a style="position:relative; top:3px;" href="https://github.com/ryanatkn/collisions"><img width="20px" src="./image/github.png"></a></header>
+			<a href="identifiers.html">Reference</a>
+			<a href="source.html">Source</a>
 
-<nav class="navigation" data-ice="nav"><div>
-  <ul>
-    
-  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.mjs~Collisions.html">Collisions</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.mjs~Body.html">Body</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.mjs~Circle.html">Circle</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.mjs~Point.html">Point</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.mjs~Polygon.html">Polygon</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.mjs~Result.html">Result</a></span></span></li>
-</ul>
-</div>
-</nav>
+			<div class="search-box">
+				<span>
+					<img src="./image/search.png" />
+					<span class="search-input-edge"></span><input class="search-input" /><span
+						class="search-input-edge"
+					></span>
+				</span>
+				<ul class="search-result"></ul>
+			</div>
+			<a style="position: relative; top: 3px" href="https://github.com/ryanatkn/collisions"
+				><img width="20px" src="./image/github.png"
+			/></a>
+		</header>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">111/111</span></h1>
+		<nav class="navigation" data-ice="nav">
+			<div>
+				<ul>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/Collisions.mjs~Collisions.html">Collisions</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a
+						><span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Body.mjs~Body.html">Body</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Circle.mjs~Circle.html">Circle</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Point.mjs~Point.html">Point</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Polygon.mjs~Polygon.html">Polygon</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Result.mjs~Result.html">Result</a></span></span
+						>
+					</li>
+				</ul>
+			</div>
+		</nav>
 
-<table class="files-summary" data-ice="files" data-use-coverage="true">
-  <thead>
-    <tr>
-      <td>File</td>
-      <td>Identifier</td>
-      <td class="coverage">Document</td>
-      <td style="display: none;">Size</td>
-      <td style="display: none;">Lines</td>
-      <td style="display: none;">Updated</td>
-    </tr>
-  </thead>
-  <tbody>
-    
-  <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/Collisions.mjs.html">src/Collisions.mjs</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Collisions.mjs~Collisions.html">Collisions</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">15/15</span></td>
-      <td style="display: none;" data-ice="size">4552 byte</td>
-      <td style="display: none;" data-ice="lines">163</td>
-      <td style="display: none;" data-ice="updated">2021-05-02 03:49:24 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/BVH.mjs.html">src/modules/BVH.mjs</a></span></td>
-      <td data-ice="identifier" class="identifiers">-</td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">11/11</span></td>
-      <td style="display: none;" data-ice="size">11371 byte</td>
-      <td style="display: none;" data-ice="lines">410</td>
-      <td style="display: none;" data-ice="updated">2021-05-02 03:49:37 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/BVHBranch.mjs.html">src/modules/BVHBranch.mjs</a></span></td>
-      <td data-ice="identifier" class="identifiers">-</td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">15/15</span></td>
-      <td style="display: none;" data-ice="size">1205 byte</td>
-      <td style="display: none;" data-ice="lines">73</td>
-      <td style="display: none;" data-ice="updated">2021-05-02 03:41:28 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/Body.mjs.html">src/modules/Body.mjs</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Body.mjs~Body.html">Body</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">21/21</span></td>
-      <td style="display: none;" data-ice="size">2444 byte</td>
-      <td style="display: none;" data-ice="lines">118</td>
-      <td style="display: none;" data-ice="updated">2021-05-02 03:49:34 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/Circle.mjs.html">src/modules/Circle.mjs</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Circle.mjs~Circle.html">Circle</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">5/5</span></td>
-      <td style="display: none;" data-ice="size">1036 byte</td>
-      <td style="display: none;" data-ice="lines">44</td>
-      <td style="display: none;" data-ice="updated">2021-05-02 03:49:42 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/Point.mjs.html">src/modules/Point.mjs</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Point.mjs~Point.html">Point</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">3/3</span></td>
-      <td style="display: none;" data-ice="size">555 byte</td>
-      <td style="display: none;" data-ice="lines">22</td>
-      <td style="display: none;" data-ice="updated">2021-05-02 03:49:45 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/Polygon.mjs.html">src/modules/Polygon.mjs</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Polygon.mjs~Polygon.html">Polygon</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">25/25</span></td>
-      <td style="display: none;" data-ice="size">5619 byte</td>
-      <td style="display: none;" data-ice="lines">245</td>
-      <td style="display: none;" data-ice="updated">2021-05-02 03:49:48 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/Result.mjs.html">src/modules/Result.mjs</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/Result.mjs~Result.html">Result</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">10/10</span></td>
-      <td style="display: none;" data-ice="size">1158 byte</td>
-      <td style="display: none;" data-ice="lines">60</td>
-      <td style="display: none;" data-ice="updated">2021-05-02 03:41:55 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/SAT.mjs.html">src/modules/SAT.mjs</a></span></td>
-      <td data-ice="identifier" class="identifiers">-</td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">6/6</span></td>
-      <td style="display: none;" data-ice="size">11274 byte</td>
-      <td style="display: none;" data-ice="lines">411</td>
-      <td style="display: none;" data-ice="updated">2021-05-02 03:42:01 (UTC)</td>
-    </tr>
-</tbody>
-</table>
-</div>
+		<div class="content" data-ice="content">
+			<h1>
+				Source <img data-ice="coverageBadge" src="./badge.svg" /><span
+					data-ice="totalCoverageCount"
+					class="total-coverage-count"
+					>111/111</span
+				>
+			</h1>
 
-<footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
-</footer>
+			<table class="files-summary" data-ice="files" data-use-coverage="true">
+				<thead>
+					<tr>
+						<td>File</td>
+						<td>Identifier</td>
+						<td class="coverage">Document</td>
+						<td style="display: none">Size</td>
+						<td style="display: none">Lines</td>
+						<td style="display: none">Updated</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ice="file">
+						<td data-ice="filePath">
+							<span><a href="file/src/Collisions.mjs.html">src/Collisions.mjs</a></span>
+						</td>
+						<td data-ice="identifier" class="identifiers">
+							<span><a href="class/src/Collisions.mjs~Collisions.html">Collisions</a></span>
+						</td>
+						<td class="coverage">
+							<span data-ice="coverage">100 %</span
+							><span data-ice="coverageCount" class="coverage-count">15/15</span>
+						</td>
+						<td style="display: none" data-ice="size">4552 byte</td>
+						<td style="display: none" data-ice="lines">163</td>
+						<td style="display: none" data-ice="updated">2021-05-02 03:49:24 (UTC)</td>
+					</tr>
+					<tr data-ice="file">
+						<td data-ice="filePath">
+							<span><a href="file/src/modules/Bvh.mjs.html">src/modules/Bvh.mjs</a></span>
+						</td>
+						<td data-ice="identifier" class="identifiers">-</td>
+						<td class="coverage">
+							<span data-ice="coverage">100 %</span
+							><span data-ice="coverageCount" class="coverage-count">11/11</span>
+						</td>
+						<td style="display: none" data-ice="size">11371 byte</td>
+						<td style="display: none" data-ice="lines">410</td>
+						<td style="display: none" data-ice="updated">2021-05-02 03:49:37 (UTC)</td>
+					</tr>
+					<tr data-ice="file">
+						<td data-ice="filePath">
+							<span
+								><a href="file/src/modules/Bvh_Branch.mjs.html">src/modules/Bvh_Branch.mjs</a></span
+							>
+						</td>
+						<td data-ice="identifier" class="identifiers">-</td>
+						<td class="coverage">
+							<span data-ice="coverage">100 %</span
+							><span data-ice="coverageCount" class="coverage-count">15/15</span>
+						</td>
+						<td style="display: none" data-ice="size">1205 byte</td>
+						<td style="display: none" data-ice="lines">73</td>
+						<td style="display: none" data-ice="updated">2021-05-02 03:41:28 (UTC)</td>
+					</tr>
+					<tr data-ice="file">
+						<td data-ice="filePath">
+							<span><a href="file/src/modules/Body.mjs.html">src/modules/Body.mjs</a></span>
+						</td>
+						<td data-ice="identifier" class="identifiers">
+							<span><a href="class/src/modules/Body.mjs~Body.html">Body</a></span>
+						</td>
+						<td class="coverage">
+							<span data-ice="coverage">100 %</span
+							><span data-ice="coverageCount" class="coverage-count">21/21</span>
+						</td>
+						<td style="display: none" data-ice="size">2444 byte</td>
+						<td style="display: none" data-ice="lines">118</td>
+						<td style="display: none" data-ice="updated">2021-05-02 03:49:34 (UTC)</td>
+					</tr>
+					<tr data-ice="file">
+						<td data-ice="filePath">
+							<span><a href="file/src/modules/Circle.mjs.html">src/modules/Circle.mjs</a></span>
+						</td>
+						<td data-ice="identifier" class="identifiers">
+							<span><a href="class/src/modules/Circle.mjs~Circle.html">Circle</a></span>
+						</td>
+						<td class="coverage">
+							<span data-ice="coverage">100 %</span
+							><span data-ice="coverageCount" class="coverage-count">5/5</span>
+						</td>
+						<td style="display: none" data-ice="size">1036 byte</td>
+						<td style="display: none" data-ice="lines">44</td>
+						<td style="display: none" data-ice="updated">2021-05-02 03:49:42 (UTC)</td>
+					</tr>
+					<tr data-ice="file">
+						<td data-ice="filePath">
+							<span><a href="file/src/modules/Point.mjs.html">src/modules/Point.mjs</a></span>
+						</td>
+						<td data-ice="identifier" class="identifiers">
+							<span><a href="class/src/modules/Point.mjs~Point.html">Point</a></span>
+						</td>
+						<td class="coverage">
+							<span data-ice="coverage">100 %</span
+							><span data-ice="coverageCount" class="coverage-count">3/3</span>
+						</td>
+						<td style="display: none" data-ice="size">555 byte</td>
+						<td style="display: none" data-ice="lines">22</td>
+						<td style="display: none" data-ice="updated">2021-05-02 03:49:45 (UTC)</td>
+					</tr>
+					<tr data-ice="file">
+						<td data-ice="filePath">
+							<span><a href="file/src/modules/Polygon.mjs.html">src/modules/Polygon.mjs</a></span>
+						</td>
+						<td data-ice="identifier" class="identifiers">
+							<span><a href="class/src/modules/Polygon.mjs~Polygon.html">Polygon</a></span>
+						</td>
+						<td class="coverage">
+							<span data-ice="coverage">100 %</span
+							><span data-ice="coverageCount" class="coverage-count">25/25</span>
+						</td>
+						<td style="display: none" data-ice="size">5619 byte</td>
+						<td style="display: none" data-ice="lines">245</td>
+						<td style="display: none" data-ice="updated">2021-05-02 03:49:48 (UTC)</td>
+					</tr>
+					<tr data-ice="file">
+						<td data-ice="filePath">
+							<span><a href="file/src/modules/Result.mjs.html">src/modules/Result.mjs</a></span>
+						</td>
+						<td data-ice="identifier" class="identifiers">
+							<span><a href="class/src/modules/Result.mjs~Result.html">Result</a></span>
+						</td>
+						<td class="coverage">
+							<span data-ice="coverage">100 %</span
+							><span data-ice="coverageCount" class="coverage-count">10/10</span>
+						</td>
+						<td style="display: none" data-ice="size">1158 byte</td>
+						<td style="display: none" data-ice="lines">60</td>
+						<td style="display: none" data-ice="updated">2021-05-02 03:41:55 (UTC)</td>
+					</tr>
+					<tr data-ice="file">
+						<td data-ice="filePath">
+							<span><a href="file/src/modules/sat.mjs.html">src/modules/sat.mjs</a></span>
+						</td>
+						<td data-ice="identifier" class="identifiers">-</td>
+						<td class="coverage">
+							<span data-ice="coverage">100 %</span
+							><span data-ice="coverageCount" class="coverage-count">6/6</span>
+						</td>
+						<td style="display: none" data-ice="size">11274 byte</td>
+						<td style="display: none" data-ice="lines">411</td>
+						<td style="display: none" data-ice="updated">2021-05-02 03:42:01 (UTC)</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-<script src="script/search_index.js"></script>
-<script src="script/search.js"></script>
-<script src="script/pretty-print.js"></script>
-<script src="script/inherited-summary.js"></script>
-<script src="script/test-summary.js"></script>
-<script src="script/inner-link.js"></script>
-<script src="script/patch-for-local.js"></script>
-</body>
+		<footer class="footer">
+			Generated by
+			<a href="https://esdoc.org"
+				>ESDoc<span data-ice="esdocVersion">(1.0.4)</span
+				><img src="./image/esdoc-logo-mini-black.png"
+			/></a>
+		</footer>
+
+		<script src="script/search_index.js"></script>
+		<script src="script/search.js"></script>
+		<script src="script/pretty-print.js"></script>
+		<script src="script/inherited-summary.js"></script>
+		<script src="script/test-summary.js"></script>
+		<script src="script/inner-link.js"></script>
+		<script src="script/patch-for-local.js"></script>
+	</body>
 </html>

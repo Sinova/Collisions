@@ -1,13 +1,13 @@
-import type {BVH, FilterPotentials} from './BVH.js';
-import type {BVHBranch} from './BVHBranch.js';
+import type {Bvh, Filter_Potentials} from './Bvh.js';
+import type {Bvh_Branch} from './Bvh_Branch.js';
 import type {Circle} from './Circle.js';
 import type {Point} from './Point.js';
 import type {Polygon} from './Polygon.js';
-import type {CollisionResult} from './CollisionResult.js';
-import {SAT} from './SAT.js';
+import type {Collision_Result} from './Collision_Result.js';
+import {sat} from './sat.js';
 
 // TODO name? lol
-export type SomeBody = Circle | Polygon | Point;
+export type Some_Body = Circle | Polygon | Point;
 
 /**
  * The base class for bodies used to detect collisions
@@ -22,8 +22,8 @@ export abstract class Body {
 	padding: number; // The amount to pad the bounding volume when testing for potential collisions
 
 	readonly _bvh_branch = false as const;
-	_bvh: null | BVH = null;
-	_bvh_parent: null | BVHBranch = null;
+	_bvh: null | Bvh = null;
+	_bvh_parent: null | Bvh_Branch = null;
 	_bvh_padding: number;
 	_bvh_min_x = 0;
 	_bvh_min_y = 0;
@@ -45,17 +45,17 @@ export abstract class Body {
 	/**
 	 * Determines if the body is colliding with another body
 	 * 		target: The target body to test against
-	 * 		result: A `CollisionResult` object on which to store information about the collision
+	 * 		result: A `Collision_Result` object on which to store information about the collision
 	 * 		aabb: Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 */
-	collides(target: SomeBody, result: CollisionResult | null = null, aabb = true): boolean {
-		return SAT(this as any, target, result, aabb); // TODO type?
+	collides(target: Some_Body, result: Collision_Result | null = null, aabb = true): boolean {
+		return sat(this as any, target, result, aabb); // TODO type?
 	}
 
 	/**
 	 * Returns a list of potential collisions
 	 */
-	potentials(filter?: FilterPotentials, results?: SomeBody[]): SomeBody[] {
+	potentials(filter?: Filter_Potentials, results?: Some_Body[]): Some_Body[] {
 		const bvh = this._bvh;
 
 		if (bvh === null) {

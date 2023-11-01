@@ -1,19 +1,19 @@
-import type {SomeBody} from './Body.js';
+import type {Some_Body} from './Body.js';
 import type {Circle} from './Circle.js';
 import type {Polygon} from './Polygon.js';
-import type {CollisionResult} from './CollisionResult.js';
+import type {Collision_Result} from './Collision_Result.js';
 
 /**
  * Determines if two bodies are colliding using the Separating Axis Theorem
  * 		a: The source body to test
  * 		b: The target body to test against
- * 		result: A `CollisionResult` object on which to store information about the collision
+ * 		result: A `Collision_Result` object on which to store information about the collision
  * 		aabb: Set to false to skip the AABB test (useful if you use your own collision heuristic)
  */
-export function SAT(
-	a: SomeBody,
-	b: SomeBody,
-	result: CollisionResult | null = null,
+export function sat(
+	a: Some_Body,
+	b: Some_Body,
+	result: Collision_Result | null = null,
 	aabb = true,
 ): boolean {
 	const a_polygon = a._polygon;
@@ -40,7 +40,7 @@ export function SAT(
 			a.scale_x !== a._scale_x ||
 			a.scale_y !== a._scale_y
 		) {
-			a._calculateCoords();
+			a._calculate_coords();
 		}
 	}
 
@@ -53,27 +53,27 @@ export function SAT(
 			b.scale_x !== b._scale_x ||
 			b.scale_y !== b._scale_y
 		) {
-			b._calculateCoords();
+			b._calculate_coords();
 		}
 	}
 
-	if (!aabb || aabbAABB(a, b)) {
+	if (!aabb || aabb_aabb(a, b)) {
 		if (a_polygon && a._dirty_normals) {
-			a._calculateNormals();
+			a._calculate_normals();
 		}
 
 		if (b_polygon && b._dirty_normals) {
-			b._calculateNormals();
+			b._calculate_normals();
 		}
 
 		collision =
 			a_polygon && b_polygon
-				? polygonPolygon(a, b, result)
+				? polygon_polygon(a, b, result)
 				: a_polygon
-				? polygonCircle(a, b as any, result, false)
+				? polygon_circle(a, b as any, result, false)
 				: b_polygon
-				? polygonCircle(b, a, result, true)
-				: circleCircle(a, b, result);
+				? polygon_circle(b, a, result, true)
+				: circle_circle(a, b, result);
 	}
 
 	if (result) {
@@ -88,7 +88,7 @@ export function SAT(
  * 		a: The source body to test
  * 		b: The target body to test against
  */
-export const aabbAABB = (a: SomeBody, b: SomeBody): boolean => {
+export const aabb_aabb = (a: Some_Body, b: Some_Body): boolean => {
 	const a_polygon = a._polygon;
 	const a_x = a_polygon ? 0 : a.x;
 	const a_y = a_polygon ? 0 : a.y;
@@ -114,12 +114,12 @@ export const aabbAABB = (a: SomeBody, b: SomeBody): boolean => {
  * Determines if two polygons are colliding
  * 		a: The source polygon to test
  * 		b: The target polygon to test against
- * 		result: A `CollisionResult` object on which to store information about the collision
+ * 		result: A `Collision_Result` object on which to store information about the collision
  */
-const polygonPolygon = (
+const polygon_polygon = (
 	a: Polygon<boolean>,
 	b: Polygon<boolean>,
-	result: CollisionResult | null = null,
+	result: Collision_Result | null = null,
 ): boolean => {
 	const a_count = a._coords!.length;
 	const b_count = b._coords!.length;
@@ -143,7 +143,7 @@ const polygonPolygon = (
 
 	if (a_count > 2) {
 		for (let ix = 0, iy = 1; ix < a_count; ix += 2, iy += 2) {
-			if (separatingAxis(a_coords, b_coords, a_normals[ix], a_normals[iy], result)) {
+			if (separating_axis(a_coords, b_coords, a_normals[ix], a_normals[iy], result)) {
 				return false;
 			}
 		}
@@ -151,7 +151,7 @@ const polygonPolygon = (
 
 	if (b_count > 2) {
 		for (let ix = 0, iy = 1; ix < b_count; ix += 2, iy += 2) {
-			if (separatingAxis(a_coords, b_coords, b_normals[ix], b_normals[iy], result)) {
+			if (separating_axis(a_coords, b_coords, b_normals[ix], b_normals[iy], result)) {
 				return false;
 			}
 		}
@@ -164,13 +164,13 @@ const polygonPolygon = (
  * Determines if a polygon and a circle are colliding
  * 		a: The source polygon to test
  * 		b: The target circle to test against
- * 		result: A `CollisionResult` object on which to store information about the collision
+ * 		result: A `Collision_Result` object on which to store information about the collision
  * 		reverse: Set to true to reverse a and b in the result parameter when testing circle->polygon instead of polygon->circle
  */
-const polygonCircle = (
+const polygon_circle = (
 	a: Polygon<boolean>,
 	b: Circle,
-	result: CollisionResult | null = null,
+	result: Collision_Result | null = null,
 	reverse = false,
 ): boolean => {
 	const a_coords = a._coords!;
@@ -300,9 +300,9 @@ const polygonCircle = (
  * Determines if two circles are colliding
  * 		a: The source circle to test
  * 		b: The target circle to test against
- * 		result: A `CollisionResult` object on which to store information about the collision
+ * 		result: A `Collision_Result` object on which to store information about the collision
  */
-const circleCircle = (a: Circle, b: Circle, result: CollisionResult | null = null): boolean => {
+const circle_circle = (a: Circle, b: Circle, result: Collision_Result | null = null): boolean => {
 	const a_radius = a.radius * a.scale;
 	const b_radius = b.radius * b.scale;
 	const difference_x = b.x - a.x;
@@ -333,14 +333,14 @@ const circleCircle = (a: Circle, b: Circle, result: CollisionResult | null = nul
  * 		b_coords: The coordinates of the polygon to test against
  * 		x: The X direction of the axis
  * 		y: The Y direction of the axis
- * 		result: A `CollisionResult` object on which to store information about the collision
+ * 		result: A `Collision_Result` object on which to store information about the collision
  */
-const separatingAxis = (
+const separating_axis = (
 	a_coords: Float64Array,
 	b_coords: Float64Array,
 	x: number,
 	y: number,
-	result: CollisionResult | null = null,
+	result: Collision_Result | null = null,
 ): boolean => {
 	const a_count = a_coords.length;
 	const b_count = b_coords.length;

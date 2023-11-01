@@ -58,14 +58,14 @@ export class Polygon<TPoint extends boolean = false> extends Body {
 		this._scale_x = scale_x;
 		this._scale_y = scale_y;
 
-		this.setPoints(points);
+		this.set_points(points);
 	}
 
 	/**
 	 * Sets the points making up the polygon. It's important to use this function when changing the polygon's shape to ensure internal data is also updated.
 	 * 		new_points: An array of coordinate pairs making up the polygon - [[x1, y1], [x2, y2], ...]
 	 */
-	setPoints(new_points: Array<[number, number]>): void {
+	set_points(new_points: Array<[number, number]>): void {
 		const count = new_points.length;
 
 		this._points = new Float64Array(count * 2);
@@ -88,7 +88,7 @@ export class Polygon<TPoint extends boolean = false> extends Body {
 	/**
 	 * Calculates and caches the polygon's world coordinates based on its points, angle, and scale
 	 */
-	_calculateCoords(): void {
+	_calculate_coords(): void {
 		const {x, y, angle, scale_x, scale_y, _points, _coords} = this;
 		const count = _points!.length;
 
@@ -151,7 +151,7 @@ export class Polygon<TPoint extends boolean = false> extends Body {
 	/**
 	 * Calculates the normals and edges of the polygon's sides
 	 */
-	_calculateNormals(): void {
+	_calculate_normals(): void {
 		const {_coords, _edges, _normals} = this;
 		const count = _coords!.length;
 

@@ -6,15 +6,15 @@
 
 ## 3.0.0
 
-- **break**: remove `draw` and `drawBVH` helpers from the classes and
+- **break**: remove `draw` and `draw_bvh` helpers from the classes and
   export equivalent plain functions from the index and `draw.js` module:
-  `drawBodies`, `drawCircle`, `drawPolygon`, and `drawBVH`
+  `draw_bodies`, `draw_circle`, `draw_polygon`, and `draw_bvh`
   ([#4](https://github.com/ryanatkn/collisions/pull/4))
-- **break**: remove `createResult` helpers from the classes and rename `Result` to `CollisionResult`
+- **break**: remove `create_result` helpers from the classes and rename `Result` to `Collision_Result`
   ([#4](https://github.com/ryanatkn/collisions/pull/4))
 - add optional `filter` and `results` params to the `potentials` functions
   ([#4](https://github.com/ryanatkn/collisions/pull/4))
-- export `SomeBody` type and `aabbAABB` collision helper
+- export `Some_Body` type and `aabb_aabb` collision helper
   ([#4](https://github.com/ryanatkn/collisions/pull/4))
 - fix type narrowing
   ([#4](https://github.com/ryanatkn/collisions/pull/4))
@@ -48,7 +48,7 @@
 
 ## 2.0.21
 
-- fix types with missing static `Collisions.createResult`
+- fix types with missing static `Collisions.create_result`
 
 ## 2.0.20
 

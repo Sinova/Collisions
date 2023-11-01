@@ -1,36 +1,50 @@
-import Collisions from '../../src/Collisions.mjs';
+import {Collisions} from '$lib/Collisions.js';
 
-const result = Collisions.createResult();
-const width  = 800;
+// document.body.appendChild(example.element);
+
+const result = Collisions.create_result();
+const width = 800;
 const height = 600;
-const count  = 500
-const speed  = 1;
-const size   = 5;
+const count = 500;
+const speed = 1;
+const size = 5;
 
-let frame     = 0;
+let frame = 0;
 let fps_total = 0;
 
 export default class Stress {
 	constructor() {
-		this.element    = document.createElement('div');
-		this.canvas     = document.createElement('canvas');
-		this.context    = this.canvas.getContext('2d');
+		this.element = document.createElement('div');
+		this.canvas = document.createElement('canvas');
+		this.context = this.canvas.getContext('2d');
 		this.collisions = new Collisions();
-		this.bodies     = [];
-		this.polygons   = 0;
-		this.circles    = 0;
+		this.bodies = [];
+		this.polygons = 0;
+		this.circles = 0;
 
-		this.canvas.width  = width;
+		this.canvas.width = width;
 		this.canvas.height = height;
-		this.context.font  = '24px Arial';
+		this.context.font = '24px Arial';
 
 		// World bounds
-		this.collisions.createPolygon(0, 0, [[0, 0], [width, 0]]);
-		this.collisions.createPolygon(0, 0, [[width, 0], [width, height]]);
-		this.collisions.createPolygon(0, 0, [[width, height], [0, height]]);
-		this.collisions.createPolygon(0, 0, [[0, height], [0, 0]]);
+		this.collisions.create_polygon(0, 0, [
+			[0, 0],
+			[width, 0],
+		]);
+		this.collisions.create_polygon(0, 0, [
+			[width, 0],
+			[width, height],
+		]);
+		this.collisions.create_polygon(0, 0, [
+			[width, height],
+			[0, height],
+		]);
+		this.collisions.create_polygon(0, 0, [
+			[0, height],
+			[0, 0],
+		]);
 
-		for(let i = 0; i < count; ++i) {
+		for (let i = 0; i < count; ++i) {
 			this.createShape(!random(0, 49));
 		}
 
@@ -66,12 +80,12 @@ export default class Stress {
 
 		const average_fps = Math.round(fps_total / frame);
 
-		if(frame > 100) {
-			frame     = 1;
+		if (frame > 100) {
+			frame = 1;
 			fps_total = average_fps;
 		}
 
-		for(let i = 0; i < this.bodies.length; ++i) {
+		for (let i = 0; i < this.bodies.length; ++i) {
 			const body = this.bodies[i];
 
 			body.x += body.direction_x * speed;
@@ -79,8 +93,8 @@ export default class Stress {
 
 			const potentials = body.potentials();
 
-			for(const body2 of potentials) {
-				if(body.collides(body2, result)) {
+			for (const body2 of potentials) {
+				if (body.collides(body2, result)) {
 					body.x -= result.overlap * result.overlap_x;
 					body.y -= result.overlap * result.overlap_y;
 
@@ -107,11 +121,11 @@ export default class Stress {
 		this.collisions.draw(this.context);
 		this.context.stroke();
 
-		// Render the BVH
-		if(this.bvh_checkbox.checked) {
+		// Render the Bvh
+		if (this.bvh_checkbox.checked) {
 			this.context.strokeStyle = '#00FF00';
 			this.context.beginPath();
-			this.collisions.drawBVH(this.context);
+			this.collisions.draw_bvh(this.context);
 			this.context.stroke();
 		}
 
@@ -121,26 +135,30 @@ export default class Stress {
 	}
 
 	createShape(large) {
-		const min_size  = size * 0.75 * (large ? 3 : 1);
-		const max_size  = size * 1.25 * (large ? 5 : 1);
-		const x         = random(0, width);
-		const y         = random(0, height);
-		const direction = random(0, 360) * Math.PI / 180;
+		const min_size = size * 0.75 * (large ? 3 : 1);
+		const max_size = size * 1.25 * (large ? 5 : 1);
+		const x = random(0, width);
+		const y = random(0, height);
+		const direction = (random(0, 360) * Math.PI) / 180;
 
 		let body;
 
-		if(random(0, 2)) {
-			body = this.collisions.createCircle(x, y, random(min_size, max_size));
+		if (random(0, 2)) {
+			body = this.collisions.create_circle(x, y, random(min_size, max_size));
 
 			++this.circles;
-		}
-		else {
-			body = this.collisions.createPolygon(x, y, [
-				[-random(min_size, max_size), -random(min_size, max_size)],
-				[random(min_size, max_size), -random(min_size, max_size)],
-				[random(min_size, max_size), random(min_size, max_size)],
-				[-random(min_size, max_size), random(3, size)],
-			], random(0, 360) * Math.PI / 180);
+		} else {
+			body = this.collisions.create_polygon(
+				x,
+				y,
+				[
+					[-random(min_size, max_size), -random(min_size, max_size)],
+					[random(min_size, max_size), -random(min_size, max_size)],
+					[random(min_size, max_size), random(min_size, max_size)],
+					[-random(min_size, max_size), random(3, size)],
+				],
+				(random(0, 360) * Math.PI) / 180,
+			);
 
 			++this.polygons;
 		}

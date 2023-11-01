@@ -26,7 +26,7 @@
 
 <hr/>
 
-**Collisions** is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for broad-phase searching and the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for narrow-phase collision testing.
+**Collisions** is a JavaScript library for quickly and accurately detecting collisions between Polygons, Circles, and Points. It combines the efficiency of a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (Bvh) for broad-phase searching and the accuracy of the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (sat) for narrow-phase collision testing.
 
 - [Installation](#anchor-installation)
 - [Documentation](#anchor-documentation)
@@ -43,7 +43,7 @@
 - [Concave Polygons](#anchor-concave-polygons)
 - [Rendering](#anchor-rendering)
 - [Bounding Volume Padding](#anchor-bounding-volume-padding)
-- [Only using SAT](#anchor-only-using-sat)
+- [Only using sat](#anchor-only-using-sat)
 - [FAQ](#anchor-faq)
 
 <a name="anchor-installation"></a>
@@ -85,15 +85,15 @@ import Collisions from 'collisions';
 const system = new Collisions();
 
 // Create a Result object for collecting information about the collisions
-const result = system.createResult();
+const result = system.create_result();
 
 // Create the player (represented by a Circle)
-const player = system.createCircle(100, 100, 10);
+const player = system.create_circle(100, 100, 10);
 
 // Create some walls (represented by Polygons)
-const wall1 = system.createPolygon(400, 500, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 1.7);
-const wall2 = system.createPolygon(200, 100, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 2.2);
-const wall3 = system.createPolygon(400, 50, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 0.7);
+const wall1 = system.create_polygon(400, 500, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 1.7);
+const wall2 = system.create_polygon(200, 100, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 2.2);
+const wall3 = system.create_polygon(400, 50, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 0.7);
 
 // Update the collision system
 system.update();
@@ -163,10 +163,10 @@ import Collisions from 'collisions';
 
 const system = new Collisions();
 
-const circle  = system.createCircle(100, 100, 10);
-const polygon = system.createPolygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
-const line    = system.createPolygon(200, 5, [[-30, 0], [10, 20]]);
-const point   = system.createPoint(10, 10);
+const circle  = system.create_circle(100, 100, 10);
+const polygon = system.create_polygon(50, 50, [[0, 0], [20, 20], [-10, 10]]);
+const line    = system.create_polygon(200, 5, [[-30, 0], [10, 20]]);
+const point   = system.create_point(10, 10);
 ```
 
 All bodies have `x` and `y` properties that can be manipulated. Additionally, `Circle` bodies have a `scale` property that can be used to scale their overall size. `Polygon` bodies have `scale_x` and `scale_y` properties to scale their points along a particular axis and an `angle` property to rotate their points around their current position (using radians).
@@ -204,12 +204,12 @@ The optimal time for updating a collision system is **after** its bodies have ch
 
 ```JavaScript
 function gameLoop() {
-	handleInput();
-	processGameLogic();
+	handle_input();
+	process_game_logic();
 
 	system.update();
 
-	handleCollisions();
+	handle_collisions();
 	render();
 }
 ```
@@ -218,13 +218,13 @@ function gameLoop() {
 
 ## 4. Testing for Collisions
 
-When testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling `potentials()` in order to quickly rule out bodies that are too far away to collide. **Collisions** uses a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (BVH) for its broad-phase search. Calling `potentials()` on a body traverses the BVH and builds a list of potential collision candidates.
+When testing for collisions on a body, it is generally recommended that a broad-phase search be performed first by calling `potentials()` in order to quickly rule out bodies that are too far away to collide. **Collisions** uses a [Bounding Volume Hierarchy](https://en.wikipedia.org/wiki/Bounding_volume_hierarchy) (Bvh) for its broad-phase search. Calling `potentials()` on a body traverses the Bvh and builds a list of potential collision candidates.
 
 ```JavaScript
 const potentials = polygon.potentials();
 ```
 
-Once a list of potential collisions is acquired, loop through them and perform a narrow-phase collision test using `collides()`. **Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests.
+Once a list of potential collisions is acquired, loop through them and perform a narrow-phase collision test using `collides()`. **Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (sat) for its narrow-phase collision tests.
 
 ```JavaScript
 const potentials = polygon.potentials();
@@ -238,7 +238,7 @@ for(const body of potentials) {
 
 It is also possible to skip the broad-phase search entirely and call `collides()` directly on two bodies.
 
-> **Note:** Skipping the broad-phase search is not recommended. When testing for collisions against large numbers of bodies, performing a broad-phase search using a BVH is _much_ more efficient.
+> **Note:** Skipping the broad-phase search is not recommended. When testing for collisions against large numbers of bodies, performing a broad-phase search using a Bvh is _much_ more efficient.
 
 ```JavaScript
 if(polygon.collides(line)) {
@@ -263,16 +263,16 @@ const system     = new Collisions();
 const my_polygon = new Polygon(100, 100, 10);
 
 const result1 = new Result();
-const result2 = Collisions.createResult();
-const result3 = system.createResult();
-const result4 = Polygon.createResult();
-const result5 = my_polygon.createResult();
+const result2 = Collisions.create_result();
+const result3 = system.create_result();
+const result4 = Polygon.create_result();
+const result5 = my_polygon.create_result();
 ```
 
 To use a `Result` object, pass it into `collides()`. If a collision occurs, it will be populated with information about the collision. Take note in the following example that the same `Result` object is being reused each iteration.
 
 ```JavaScript
-const result     = system.createResult();
+const result     = system.create_result();
 const potentials = point.potentials();
 
 for(const body of potentials) {
@@ -313,7 +313,7 @@ const line = new Polygon(200, 5, [[-30, 0], [10, 20]]);
 Concave Polygons
 ===============================================================================
 
-**Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (SAT) for its narrow-phase collision tests. One caveat to SAT is that it only works properly on convex bodies. However, concave polygons can be "faked" by using a series of [Lines](#anchor-lines). Keep in mind that a polygon drawn using [Lines](#anchor-lines) is "hollow".
+**Collisions** uses the [Separating Axis Theorem](https://en.wikipedia.org/wiki/Separating_axis_theorem) (sat) for its narrow-phase collision tests. One caveat to sat is that it only works properly on convex bodies. However, concave polygons can be "faked" by using a series of [Lines](#anchor-lines). Keep in mind that a polygon drawn using [Lines](#anchor-lines) is "hollow".
 
 Handling true concave polygons requires breaking them down into their component convex polygons (Convex Decomposition) and testing them for collisions individually. There are plans to integrate this functionality into the library in the future, but for now, check out [poly-decomp.js](https://github.com/schteppe/poly-decomp.js).
 
@@ -348,13 +348,13 @@ circle.draw(context);
 context.stroke();
 ```
 
-The BVH can also be drawn to help test [Bounding Volume Padding](#anchor-bounding-volume-padding).
+The Bvh can also be drawn to help test [Bounding Volume Padding](#anchor-bounding-volume-padding).
 
 ```JavaScript
 context.strokeStyle = '#FFFFFF';
 context.beginPath();
 
-system.drawBVH(context);
+system.draw_bvh(context);
 
 context.stroke();
 ```
@@ -363,7 +363,7 @@ context.stroke();
 Bounding Volume Padding
 ===============================================================================
 
-When bodies move around within a collision system, the internal BVH has to remove and reinsert the body in order to determine where it belongs in the hierarchy. This is one of the most costly operations in maintaining a BVH. In general, most projects will never see a performance issue from this unless they are dealing with thousands of moving bodies at once. In these cases, it can _sometimes_ be beneficial to "pad" the bounding volumes of each body so that the BVH doesn't need to remove and reinsert bodies that haven't changed position too much. In other words, padding the bounding volume allows "breathing room" for the body within it to move around without being flagged for an update.
+When bodies move around within a collision system, the internal Bvh has to remove and reinsert the body in order to determine where it belongs in the hierarchy. This is one of the most costly operations in maintaining a Bvh. In general, most projects will never see a performance issue from this unless they are dealing with thousands of moving bodies at once. In these cases, it can _sometimes_ be beneficial to "pad" the bounding volumes of each body so that the Bvh doesn't need to remove and reinsert bodies that haven't changed position too much. In other words, padding the bounding volume allows "breathing room" for the body within it to move around without being flagged for an update.
 
 The tradeoff is that the slightly larger bounding volumes can trigger more false-positives during the broad-phase `potentials()` search. While the narrow phase will ultimately rule these out using Axis Aligned Bounding Box tests, putting too much padding on bodies that are crowded can lead to too many false positives and a diminishing return in performance. It is up to the developer to determine how much padding each body will need based on how much it can move within a single frame and how crowded the bodies in the system are.
 
@@ -379,10 +379,10 @@ circle.padding = 10;
 ```
 
 <a name="anchor-only-using-sat"></a>
-Only using SAT
+Only using sat
 ===============================================================================
 
-Some projects may only have a need to perform SAT collision tests without broad-phase searching. This can be achieved by avoiding collision systems altogether and only using the `collides()` function.
+Some projects may only have a need to perform sat collision tests without broad-phase searching. This can be achieved by avoiding collision systems altogether and only using the `collides()` function.
 
 ```JavaScript
 import {Circle, Polygon, Result} from 'collisions';

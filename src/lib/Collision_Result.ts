@@ -1,19 +1,19 @@
-import type {SomeBody} from './Body';
+import type {Some_Body} from './Body';
 
 /**
  * An object used to collect the detailed results of a collision test
  *
  * > **Note:** It is highly recommended you recycle the same Result object if possible in order to avoid wasting memory
  */
-export class CollisionResult {
+export class Collision_Result {
 	// True if a collision was detected
 	collision = false;
 
 	// The source body tested
-	a: SomeBody | null = null;
+	a: Some_Body | null = null;
 
 	// The target body tested against
-	b: SomeBody | null = null;
+	b: Some_Body | null = null;
 
 	// True if A is completely contained within B
 	a_in_b = false;

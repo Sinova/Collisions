@@ -1,19 +1,19 @@
-import {BVH, type FilterPotentials} from './BVH.js';
+import {Bvh, type Filter_Potentials} from './Bvh.js';
 import {Circle} from './Circle.js';
 import {Point} from './Point.js';
 import {Polygon} from './Polygon.js';
-import type {CollisionResult} from './CollisionResult.js';
-import type {SomeBody} from './Body.js';
-import {SAT} from './SAT.js';
+import type {Collision_Result} from './Collision_Result.js';
+import type {Some_Body} from './Body.js';
+import {sat} from './sat.js';
 
 /**
  * A collision system used to track bodies in order to improve collision detection performance
  */
 export class Collisions {
-	_bvh: BVH;
+	_bvh: Bvh;
 
 	constructor() {
-		this._bvh = new BVH();
+		this._bvh = new Bvh();
 	}
 
 	/**
@@ -24,7 +24,7 @@ export class Collisions {
 	 * 		scale
 	 * 		padding: The amount to pad the bounding volume when testing for potential collisions
 	 */
-	createCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0): Circle {
+	create_circle(x = 0, y = 0, radius = 0, scale = 1, padding = 0): Circle {
 		const body = new Circle(x, y, radius, scale, padding);
 
 		this._bvh.insert(body);
@@ -42,7 +42,7 @@ export class Collisions {
 	 * 		scale_y: The starting scale long the Y axis
 	 * 		padding: The amount to pad the bounding volume when testing for potential collisions
 	 */
-	createPolygon(
+	create_polygon(
 		x = 0,
 		y = 0,
 		points: Array<[number, number]> = [[0, 0]],
@@ -64,7 +64,7 @@ export class Collisions {
 	 * 		y: The starting Y coordinate
 	 * 		padding: The amount to pad the bounding volume when testing for potential collisions
 	 */
-	createPoint(x = 0, y = 0, padding = 0): Point {
+	create_point(x = 0, y = 0, padding = 0): Point {
 		const body = new Point(x, y, padding);
 
 		this._bvh.insert(body);
@@ -75,7 +75,7 @@ export class Collisions {
 	/**
 	 * Inserts bodies into the collision system
 	 */
-	insert(...bodies: SomeBody[]): Collisions {
+	insert(...bodies: Some_Body[]): Collisions {
 		for (const body of bodies) {
 			this._bvh.insert(body, false);
 		}
@@ -86,7 +86,7 @@ export class Collisions {
 	/**
 	 * Removes bodies from the collision system
 	 */
-	remove(...bodies: SomeBody[]): Collisions {
+	remove(...bodies: Some_Body[]): Collisions {
 		for (const body of bodies) {
 			this._bvh.remove(body, false);
 		}
@@ -107,7 +107,7 @@ export class Collisions {
 	 * Returns a list of potential collisions for a body
 	 * 		body: The body to test for potential collisions against
 	 */
-	potentials(body: SomeBody, filter?: FilterPotentials, results?: SomeBody[]): SomeBody[] {
+	potentials(body: Some_Body, filter?: Filter_Potentials, results?: Some_Body[]): Some_Body[] {
 		return this._bvh.potentials(body, filter, results);
 	}
 
@@ -115,15 +115,15 @@ export class Collisions {
 	 * Determines if two bodies are colliding
 	 * 		source: The source body
 	 * 		target: The target body to test against
-	 * 		result: A `CollisionResult` object on which to store information about the collision
+	 * 		result: A `Collision_Result` object on which to store information about the collision
 	 * 		aabb: Set to false to skip the AABB test (useful if you use your own potential collision heuristic)
 	 */
 	collides(
-		source: SomeBody,
-		target: SomeBody,
-		result: CollisionResult | null = null,
+		source: Some_Body,
+		target: Some_Body,
+		result: Collision_Result | null = null,
 		aabb = true,
 	): boolean {
-		return SAT(source, target, result, aabb);
+		return sat(source, target, result, aabb);
 	}
 }

@@ -1,15 +1,15 @@
-import type {SomeBody} from './Body';
+import type {Some_Body} from './Body';
 
-const branch_pool: BVHBranch[] = [];
+const branch_pool: Bvh_Branch[] = [];
 
 /**
- * A branch within a BVH
+ * A branch within a Bvh
  */
-export class BVHBranch {
+export class Bvh_Branch {
 	readonly _bvh_branch = true as const;
-	_bvh_parent: null | BVHBranch = null;
-	_bvh_left: null | BVHBranch | SomeBody = null;
-	_bvh_right: null | BVHBranch | SomeBody = null;
+	_bvh_parent: null | Bvh_Branch = null;
+	_bvh_left: null | Bvh_Branch | Some_Body = null;
+	_bvh_right: null | Bvh_Branch | Some_Body = null;
 	_bvh_sort = 0;
 	_bvh_min_x = 0;
 	_bvh_min_y = 0;
@@ -19,19 +19,19 @@ export class BVHBranch {
 	/**
 	 * Returns a branch from the branch pool or creates a new branch
 	 */
-	static getBranch(): BVHBranch {
+	static getBranch(): Bvh_Branch {
 		if (branch_pool.length) {
 			return branch_pool.pop()!;
 		}
 
-		return new BVHBranch();
+		return new Bvh_Branch();
 	}
 
 	/**
 	 * Releases a branch back into the branch pool
 	 * 		branch: The branch to release
 	 */
-	static releaseBranch(branch: BVHBranch): void {
+	static releaseBranch(branch: Bvh_Branch): void {
 		branch_pool.push(branch);
 	}
 
@@ -40,7 +40,7 @@ export class BVHBranch {
 	 * 		a: The first branch
 	 * 		b: The second branch
 	 */
-	static sortBranches(a: BVHBranch, b: BVHBranch): number {
+	static sortBranches(a: Bvh_Branch, b: Bvh_Branch): number {
 		return a._bvh_sort > b._bvh_sort ? -1 : 1;
 	}
 }

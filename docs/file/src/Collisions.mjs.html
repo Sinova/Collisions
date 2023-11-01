@@ -1,51 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../">
-  <title data-ice="title">src/Collisions.mjs | @ryanatkn/collisions</title>
-  <link type="text/css" rel="stylesheet" href="css/style.css">
-  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
-  <script src="script/prettify/prettify.js"></script>
-  <script src="script/manual.js"></script>
-<meta name="description" content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@ryanatkn/collisions"><meta property="twitter:description" content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"></head>
-<body class="layout-container" data-ice="rootContainer">
+	<head>
+		<meta charset="utf-8" />
+		<base data-ice="baseUrl" href="../../" />
+		<title data-ice="title">src/Collisions.mjs | @ryanatkn/collisions</title>
+		<link type="text/css" rel="stylesheet" href="css/style.css" />
+		<link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css" />
+		<script src="script/prettify/prettify.js"></script>
+		<script src="script/manual.js"></script>
+		<meta
+			name="description"
+			content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"
+		/>
+		<meta property="twitter:card" content="summary" />
+		<meta property="twitter:title" content="@ryanatkn/collisions" />
+		<meta
+			property="twitter:description"
+			content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"
+		/>
+	</head>
+	<body class="layout-container" data-ice="rootContainer">
+		<header>
+			<a href="./">Home</a>
 
-<header>
-  <a href="./">Home</a>
-  
-  <a href="identifiers.html">Reference</a>
-  <a href="source.html">Source</a>
-  
-  <div class="search-box">
-  <span>
-    <img src="./image/search.png">
-    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
-  </span>
-    <ul class="search-result"></ul>
-  </div>
-<a style="position:relative; top:3px;" href="https://github.com/ryanatkn/collisions"><img width="20px" src="./image/github.png"></a></header>
+			<a href="identifiers.html">Reference</a>
+			<a href="source.html">Source</a>
 
-<nav class="navigation" data-ice="nav"><div>
-  <ul>
-    
-  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.mjs~Collisions.html">Collisions</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.mjs~Body.html">Body</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.mjs~Circle.html">Circle</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.mjs~Point.html">Point</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.mjs~Polygon.html">Polygon</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.mjs~Result.html">Result</a></span></span></li>
-</ul>
-</div>
-</nav>
+			<div class="search-box">
+				<span>
+					<img src="./image/search.png" />
+					<span class="search-input-edge"></span><input class="search-input" /><span
+						class="search-input-edge"
+					></span>
+				</span>
+				<ul class="search-result"></ul>
+			</div>
+			<a style="position: relative; top: 3px" href="https://github.com/ryanatkn/collisions"
+				><img width="20px" src="./image/github.png"
+			/></a>
+		</header>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/Collisions.mjs</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import BVH     from &apos;./modules/BVH.mjs&apos;;
+		<nav class="navigation" data-ice="nav">
+			<div>
+				<ul>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/Collisions.mjs~Collisions.html">Collisions</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a
+						><span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Body.mjs~Body.html">Body</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Circle.mjs~Circle.html">Circle</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Point.mjs~Point.html">Point</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Polygon.mjs~Polygon.html">Polygon</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Result.mjs~Result.html">Result</a></span></span
+						>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="content" data-ice="content">
+			<h1 data-ice="title">src/Collisions.mjs</h1>
+			<pre
+				class="source-code line-number raw-source-code"
+			><code class="prettyprint linenums" data-ice="content">import Bvh     from &apos;./modules/Bvh.mjs&apos;;
 import Circle  from &apos;./modules/Circle.mjs&apos;;
 import Polygon from &apos;./modules/Polygon.mjs&apos;;
 import Point   from &apos;./modules/Point.mjs&apos;;
 import Result  from &apos;./modules/Result.mjs&apos;;
-import SAT     from &apos;./modules/SAT.mjs&apos;;
+import sat     from &apos;./modules/sat.mjs&apos;;
 
 /**
  * A collision system used to track bodies in order to improve collision detection performance
@@ -57,7 +105,7 @@ class Collisions {
 	 */
 	constructor() {
 		/** @private */
-		this._bvh = new BVH();
+		this._bvh = new Bvh();
 	}
 
 	/**
@@ -69,7 +117,7 @@ class Collisions {
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 * @returns {Circle}
 	 */
-	createCircle(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
+	create_circle(x = 0, y = 0, radius = 0, scale = 1, padding = 0) {
 		const body = new Circle(x, y, radius, scale, padding);
 
 		this._bvh.insert(body);
@@ -88,7 +136,7 @@ class Collisions {
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 * @returns {Polygon}
 	 */
-	createPolygon(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
+	create_polygon(x = 0, y = 0, points = [[0, 0]], angle = 0, scale_x = 1, scale_y = 1, padding = 0) {
 		const body = new Polygon(x, y, points, angle, scale_x, scale_y, padding);
 
 		this._bvh.insert(body);
@@ -103,7 +151,7 @@ class Collisions {
 	 * @param {Number} [padding = 0] The amount to pad the bounding volume when testing for potential collisions
 	 * @returns {Point}
 	 */
-	createPoint(x = 0, y = 0, padding = 0) {
+	create_point(x = 0, y = 0, padding = 0) {
 		const body = new Point(x, y, padding);
 
 		this._bvh.insert(body);
@@ -114,14 +162,14 @@ class Collisions {
 	/**
 	 * Creates a {@link Result} used to collect the detailed results of a collision test
 	 */
-	createResult() {
+	create_result() {
 		return new Result();
 	}
 
 	/**
 	 * Creates a Result used to collect the detailed results of a collision test
 	 */
-	static createResult() {
+	static create_result() {
 		return new Result();
 	}
 
@@ -167,11 +215,11 @@ class Collisions {
 	}
 
 	/**
-	 * Draws the system&apos;s BVH to a CanvasRenderingContext2D&apos;s current path. This is useful for testing out different padding values for bodies.
+	 * Draws the system&apos;s Bvh to a CanvasRenderingContext2D&apos;s current path. This is useful for testing out different padding values for bodies.
 	 * @param {CanvasRenderingContext2D} context The context to draw to
 	 */
-	drawBVH(context) {
-		return this._bvh.drawBVH(context);
+	draw_bvh(context) {
+		return this._bvh.draw_bvh(context);
 	}
 
 	/**
@@ -191,7 +239,7 @@ class Collisions {
 	 * @returns {Boolean}
 	 */
 	collides(source, target, result = null, aabb = true) {
-		return SAT(source, target, result, aabb);
+		return sat(source, target, result, aabb);
 	}
 };
 
@@ -204,19 +252,22 @@ export {
 	Point,
 };
 </code></pre>
+		</div>
 
-</div>
+		<footer class="footer">
+			Generated by
+			<a href="https://esdoc.org"
+				>ESDoc<span data-ice="esdocVersion">(1.0.4)</span
+				><img src="./image/esdoc-logo-mini-black.png"
+			/></a>
+		</footer>
 
-<footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
-</footer>
-
-<script src="script/search_index.js"></script>
-<script src="script/search.js"></script>
-<script src="script/pretty-print.js"></script>
-<script src="script/inherited-summary.js"></script>
-<script src="script/test-summary.js"></script>
-<script src="script/inner-link.js"></script>
-<script src="script/patch-for-local.js"></script>
-</body>
+		<script src="script/search_index.js"></script>
+		<script src="script/search.js"></script>
+		<script src="script/pretty-print.js"></script>
+		<script src="script/inherited-summary.js"></script>
+		<script src="script/test-summary.js"></script>
+		<script src="script/inner-link.js"></script>
+		<script src="script/patch-for-local.js"></script>
+	</body>
 </html>

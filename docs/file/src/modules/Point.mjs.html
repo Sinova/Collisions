@@ -1,46 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/modules/Point.mjs | @ryanatkn/collisions</title>
-  <link type="text/css" rel="stylesheet" href="css/style.css">
-  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
-  <script src="script/prettify/prettify.js"></script>
-  <script src="script/manual.js"></script>
-<meta name="description" content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@ryanatkn/collisions"><meta property="twitter:description" content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"></head>
-<body class="layout-container" data-ice="rootContainer">
+	<head>
+		<meta charset="utf-8" />
+		<base data-ice="baseUrl" href="../../../" />
+		<title data-ice="title">src/modules/Point.mjs | @ryanatkn/collisions</title>
+		<link type="text/css" rel="stylesheet" href="css/style.css" />
+		<link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css" />
+		<script src="script/prettify/prettify.js"></script>
+		<script src="script/manual.js"></script>
+		<meta
+			name="description"
+			content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"
+		/>
+		<meta property="twitter:card" content="summary" />
+		<meta property="twitter:title" content="@ryanatkn/collisions" />
+		<meta
+			property="twitter:description"
+			content="collision detection for circles, polygons, and points &#x2014; fork of github.com/Sinova/Collisions"
+		/>
+	</head>
+	<body class="layout-container" data-ice="rootContainer">
+		<header>
+			<a href="./">Home</a>
 
-<header>
-  <a href="./">Home</a>
-  
-  <a href="identifiers.html">Reference</a>
-  <a href="source.html">Source</a>
-  
-  <div class="search-box">
-  <span>
-    <img src="./image/search.png">
-    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
-  </span>
-    <ul class="search-result"></ul>
-  </div>
-<a style="position:relative; top:3px;" href="https://github.com/ryanatkn/collisions"><img width="20px" src="./image/github.png"></a></header>
+			<a href="identifiers.html">Reference</a>
+			<a href="source.html">Source</a>
 
-<nav class="navigation" data-ice="nav"><div>
-  <ul>
-    
-  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Collisions.mjs~Collisions.html">Collisions</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Body.mjs~Body.html">Body</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Circle.mjs~Circle.html">Circle</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Point.mjs~Point.html">Point</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Polygon.mjs~Polygon.html">Polygon</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/Result.mjs~Result.html">Result</a></span></span></li>
-</ul>
-</div>
-</nav>
+			<div class="search-box">
+				<span>
+					<img src="./image/search.png" />
+					<span class="search-input-edge"></span><input class="search-input" /><span
+						class="search-input-edge"
+					></span>
+				</span>
+				<ul class="search-result"></ul>
+			</div>
+			<a style="position: relative; top: 3px" href="https://github.com/ryanatkn/collisions"
+				><img width="20px" src="./image/github.png"
+			/></a>
+		</header>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/modules/Point.mjs</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Polygon from &apos;./Polygon.mjs&apos;;
+		<nav class="navigation" data-ice="nav">
+			<div>
+				<ul>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/Collisions.mjs~Collisions.html">Collisions</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a
+						><span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Body.mjs~Body.html">Body</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Circle.mjs~Circle.html">Circle</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Point.mjs~Point.html">Point</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Polygon.mjs~Polygon.html">Polygon</a></span></span
+						>
+					</li>
+					<li data-ice="doc">
+						<span data-ice="kind" class="kind-class">C</span
+						><span data-ice="name"
+							><span><a href="class/src/modules/Result.mjs~Result.html">Result</a></span></span
+						>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="content" data-ice="content">
+			<h1 data-ice="title">src/modules/Point.mjs</h1>
+			<pre
+				class="source-code line-number raw-source-code"
+			><code class="prettyprint linenums" data-ice="content">import Polygon from &apos;./Polygon.mjs&apos;;
 
 /**
  * A point used to detect collisions
@@ -61,21 +109,24 @@ export default class Point extends Polygon {
 	}
 };
 
-Point.prototype.setPoints = undefined;
+Point.prototype.set_points = undefined;
 </code></pre>
+		</div>
 
-</div>
+		<footer class="footer">
+			Generated by
+			<a href="https://esdoc.org"
+				>ESDoc<span data-ice="esdocVersion">(1.0.4)</span
+				><img src="./image/esdoc-logo-mini-black.png"
+			/></a>
+		</footer>
 
-<footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
-</footer>
-
-<script src="script/search_index.js"></script>
-<script src="script/search.js"></script>
-<script src="script/pretty-print.js"></script>
-<script src="script/inherited-summary.js"></script>
-<script src="script/test-summary.js"></script>
-<script src="script/inner-link.js"></script>
-<script src="script/patch-for-local.js"></script>
-</body>
+		<script src="script/search_index.js"></script>
+		<script src="script/search.js"></script>
+		<script src="script/pretty-print.js"></script>
+		<script src="script/inherited-summary.js"></script>
+		<script src="script/test-summary.js"></script>
+		<script src="script/inner-link.js"></script>
+		<script src="script/patch-for-local.js"></script>
+	</body>
 </html>
